@@ -35,6 +35,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/KICK-IT-master/KICK-IT-master" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -49,10 +50,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1616684124580">
+    <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1616685752936">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616684124580" />
+    <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616685752936" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1616684126591">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
