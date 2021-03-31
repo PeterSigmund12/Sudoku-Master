@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72671996-8db4-4475-aa73-d948e4100408" name="Default Changelist" comment="" />
+    <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="module-info" />
       </list>
     </option>
   </component>
@@ -27,7 +29,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="1qFm8tKsBaf3RnTRn81qyI00eZo" />
+  <component name="ProjectId" id="1qWzUcRGEQQcE2Bm6UoNxzoHSAu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -35,28 +37,59 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/KICK-IT-master/KICK-IT-master" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="SudokuMaster" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.sudokuMaster.SudokuMaster" />
+      <module name="Sudoku_Master" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.jku.se.sudokuMaster.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SudokuMaster" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="72671996-8db4-4475-aa73-d948e4100408" name="Default Changelist" comment="" />
-      <created>1616683557382</created>
+      <changelist id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="" />
+      <created>1617210152628</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1616683557382</updated>
+      <updated>1617210152628</updated>
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="105" key="FileChooserDialogImpl" timestamp="1616685752936">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1617211797696">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state x="463" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616685752936" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1616684126591">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797696" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1617211797695">
+      <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1616684126591" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797695" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1617211797695">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797695" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1617211797695">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797695" />
+    <state x="1708" y="181" key="new project wizard" timestamp="1617211348765">
+      <screen x="1366" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1708" y="181" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211348765" />
   </component>
 </project>
