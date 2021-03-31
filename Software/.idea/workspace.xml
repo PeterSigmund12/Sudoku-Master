@@ -13,9 +13,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="module-info" />
         <option value="FxmlFile" />
         <option value="Class" />
-        <option value="module-info" />
       </list>
     </option>
   </component>
@@ -38,6 +38,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources\fxml" />
+      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="SudokuMaster" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -71,22 +77,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1617211797696">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1617216091797">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797696" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1617211797695">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1617216091797">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797695" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1617211797695">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1617216091797">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797695" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1617211797695">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1617216091797">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211797695" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
     <state x="1708" y="181" key="new project wizard" timestamp="1617211348765">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
