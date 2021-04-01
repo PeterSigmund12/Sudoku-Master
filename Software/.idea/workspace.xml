@@ -77,25 +77,47 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1617216091797">
-      <screen x="1366" y="0" width="1920" height="1040" />
+    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1617276090286">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1617276090286" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1617276100250">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1617216091797">
-      <screen x="1366" y="0" width="1920" height="1040" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617276100250" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1617276100250">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1617216091797">
-      <screen x="1366" y="0" width="1920" height="1040" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1617276100250" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1617276100250">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1617216091797">
-      <screen x="1366" y="0" width="1920" height="1040" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1617276100250" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1617276100250">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617216091797" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1617276100250" />
+    <state x="228" y="99" width="909" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1617275762240">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="228" y="99" width="909" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.728@0.0.1366.728" timestamp="1617275762240" />
     <state x="1708" y="181" key="new project wizard" timestamp="1617211348765">
       <screen x="1366" y="0" width="1920" height="1040" />
     </state>
     <state x="1708" y="181" key="new project wizard/0.0.1366.728/1366.0.1920.1040@1366.0.1920.1040" timestamp="1617211348765" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
