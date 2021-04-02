@@ -34,9 +34,7 @@ public class MainMenue_Controller implements Initializable {
 
     @FXML
     public void handleButton_LoadGame(ActionEvent event) throws IOException {
-        //Platform.exit();
         Node node = (Node) event.getSource();
-      //  Platform.runLater();
         Stage oldStage = (Stage)node.getScene().getWindow();;
 
 
@@ -46,7 +44,6 @@ public class MainMenue_Controller implements Initializable {
         try {
             root2 = (Parent) fxmlLoader.load();
         } catch (IOException ex) {
-          //  Logger.getLogger(Mainmenu_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         Stage stage = new Stage();
         stage.setTitle("Load game");
