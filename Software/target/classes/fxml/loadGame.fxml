@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.LoadGame_Controller">
    <children>
       <ListView fx:id="lv_SaveGames" layoutX="60.0" layoutY="71.0" prefHeight="272.0" prefWidth="330.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="71.0" />
@@ -18,5 +17,6 @@
       <Button fx:id="btn_Import" layoutX="60.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Import" />
       <Button fx:id="btn_Export" layoutX="175.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Export" />
       <Button fx:id="btn_Continue" layoutX="290.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Weiter" />
+      <Button fx:id="btn_backSavedMainMen" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleButton_backSavedMainMen" text="Zuruek ins Hauptmenue " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
    </children>
 </AnchorPane>

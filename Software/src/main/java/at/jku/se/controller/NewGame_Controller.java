@@ -1,33 +1,50 @@
 package at.jku.se.controller;
 
 import at.jku.se.utility.NewScreen;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoadGame_Controller {
 
+
+public class NewGame_Controller  implements Initializable {
 
     @FXML
     private AnchorPane root;
 
     @FXML
-    ListView lv_SaveGames;
+    private Button btn_autoNewGame, btn_selfNewGame, btn_backNewMainMen;
 
     @FXML
-    private Button btn_Import, btn_Export, btn_Continue, btn_backSavedMainMen;
+    public void handleButton_autoNewGame(ActionEvent actionEvent)  { // aufgerufen wenn auf diesen Button geklicked wird
+        Platform.exit();
+    }
+
+    @FXML
+    public void handleButton_selfNewGame(ActionEvent actionEvent) {
+        Platform.exit();
+    }
 
 
-    public void handleButton_backSavedMainMen(ActionEvent event) throws IOException {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+    public void handleButton_backNewMainMen(ActionEvent event) throws IOException{
 
         NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
 
@@ -54,10 +71,4 @@ public class LoadGame_Controller {
          */
 
     }
-
-
-
-
-
-
 }
