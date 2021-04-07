@@ -28,8 +28,26 @@ public class NewGame_Controller  implements Initializable {
     private Button btn_autoNewGame, btn_selfNewGame, btn_backNewMainMen;
 
     @FXML
-    public void handleButton_autoNewGame(ActionEvent actionEvent)  { // aufgerufen wenn auf diesen Button geklicked wird
-        Platform.exit();
+    public void handleButton_autoNewGame(ActionEvent event)  { // aufgerufen wenn auf diesen Button geklicked wird
+        Node node = (Node) event.getSource();
+        Stage oldStage = (Stage)node.getScene().getWindow();
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/fxml/spielfeld.fxml"));
+        Parent root2 = null;
+        try {
+            root2 = (Parent) fxmlLoader.load();
+        } catch (IOException ex) {
+        }
+        Stage stage = new Stage();
+        stage.setTitle("old game");
+        stage.sizeToScene();
+        stage.setScene(new Scene(root2));
+        stage.show();
+        stage.setMinHeight(600);
+        stage.setMinWidth(1000);
+        oldStage.close();
+
     }
 
     @FXML
