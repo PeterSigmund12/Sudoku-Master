@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -32,7 +33,13 @@ public class Playfield_Controller {
     @FXML
     private Button btn_Solve;
 
+
+    String version ="";
+    String generateType="";
+    String diffculty ="false";
+
     public void initialize() {
+
         TextField[][]textFields =  new TextField[9][9];
         playfield.setGridLinesVisible(false);
         playfield.setAlignment(Pos.CENTER);
@@ -75,4 +82,13 @@ public class Playfield_Controller {
 
     }
 
+
+
+    public void initData(String version, String generateType, String diffculty) {
+        this.generateType = generateType;
+        this.diffculty = diffculty;
+        this.version = version;
+
+
+    }
 }

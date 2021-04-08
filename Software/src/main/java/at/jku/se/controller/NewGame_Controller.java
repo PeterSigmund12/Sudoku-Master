@@ -2,14 +2,17 @@ package at.jku.se.controller;
 
 import at.jku.se.utility.NewScreen;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -25,18 +28,34 @@ public class NewGame_Controller  implements Initializable {
     private AnchorPane root;
 
     @FXML
-    private Button btn_autoNewGame, btn_selfNewGame, btn_backNewMainMen;
+    private Button btn_continue;
 
     @FXML
-    public void handleButton_autoNewGame(ActionEvent event)  { // aufgerufen wenn auf diesen Button geklicked wird
+    private RadioButton rb_Sa_regulär,rb_Sa_samurai,rb_Sa_freiform,rb_Sg_manuell,rb_Sg_auto,rb_Sk_easy,rb_Sk_medium,rb_Sk_hard;
+
+    @FXML
+    private Label lb_difficulty;
+
+    String version ="";
+    String generateType="";
+    String diffculty ="";
+
+    @FXML
+    public void handleButton_Continue(ActionEvent event) throws IOException { // aufgerufen wenn auf diesen Button geklicked wird
+
+        //NewScreen.openNewScreen(event,"/fxml/spielfeld.fxml");
         Node node = (Node) event.getSource();
         Stage oldStage = (Stage)node.getScene().getWindow();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/fxml/spielfeld.fxml"));
+
+
         Parent root2 = null;
         try {
             root2 = (Parent) fxmlLoader.load();
+            Playfield_Controller controller = fxmlLoader.getController();
+            controller.initData(version, generateType, diffculty);
         } catch (IOException ex) {
         }
         Stage stage = new Stage();
@@ -58,6 +77,65 @@ public class NewGame_Controller  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ToggleGroup sudokuVersion = new ToggleGroup();
+        rb_Sa_freiform.setToggleGroup(sudokuVersion);
+        rb_Sa_regulär.setToggleGroup(sudokuVersion);
+        rb_Sa_samurai.setToggleGroup(sudokuVersion);
+
+        sudokuVersion.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                version = ((RadioButton)sudokuVersion.getSelectedToggle()).getText();
+
+            }
+        });
+        ToggleGroup sudokuGenerate = new ToggleGroup();
+        rb_Sg_auto.setToggleGroup(sudokuGenerate);
+        rb_Sg_manuell.setToggleGroup(sudokuGenerate);
+
+        sudokuGenerate.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                generateType = ((RadioButton)sudokuGenerate.getSelectedToggle()).getText();
+            }
+        });
+
+        ToggleGroup sudokuDifficulty = new ToggleGroup();
+        rb_Sk_medium.setToggleGroup(sudokuDifficulty);
+        rb_Sk_easy.setToggleGroup(sudokuDifficulty);
+        rb_Sk_hard.setToggleGroup(sudokuDifficulty);
+
+
+        sudokuDifficulty.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                diffculty = ((RadioButton)sudokuDifficulty.getSelectedToggle()).getText();
+            }
+        });
+        rb_Sg_manuell.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(rb_Sg_manuell.isSelected()){
+                    rb_Sk_easy.setDisable(true);
+                    rb_Sk_medium.setDisable(true);
+                    rb_Sk_hard.setDisable(true);
+                    lb_difficulty.setDisable(true);
+                }
+            }
+        });
+        rb_Sg_auto.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(rb_Sg_auto.isSelected()){
+                    rb_Sk_easy.setDisable(false);
+                    rb_Sk_medium.setDisable(false);
+                    rb_Sk_hard.setDisable(false);
+                    lb_difficulty.setDisable(false);
+                }
+
+            }
+        });
+
 
     }
 
