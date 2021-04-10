@@ -31,14 +31,14 @@ public class NewGame_Controller  implements Initializable {
     private Button btn_continue;
 
     @FXML
-    private RadioButton rb_Sa_regulär,rb_Sa_samurai,rb_Sa_freiform,rb_Sg_manuell,rb_Sg_auto,rb_Sk_easy,rb_Sk_medium,rb_Sk_hard;
+    private RadioButton rb_Sa_regulaer,rb_Sa_samurai,rb_Sa_freiform,rb_Sg_manuell,rb_Sg_auto,rb_Sk_easy,rb_Sk_medium,rb_Sk_hard;
 
     @FXML
     private Label lb_difficulty;
 
     String version ="";
     String generateType="";
-    String diffculty ="";
+    String difficulty ="";
 
     @FXML
     public void handleButton_Continue(ActionEvent event) throws IOException { // aufgerufen wenn auf diesen Button geklicked wird
@@ -55,7 +55,7 @@ public class NewGame_Controller  implements Initializable {
         try {
             root2 = (Parent) fxmlLoader.load();
             Playfield_Controller controller = fxmlLoader.getController();
-            controller.initData(version, generateType, diffculty);
+            controller.initData(version, generateType, difficulty);
         } catch (IOException ex) {
         }
         Stage stage = new Stage();
@@ -79,14 +79,13 @@ public class NewGame_Controller  implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ToggleGroup sudokuVersion = new ToggleGroup();
         rb_Sa_freiform.setToggleGroup(sudokuVersion);
-        rb_Sa_regulär.setToggleGroup(sudokuVersion);
+        rb_Sa_regulaer.setToggleGroup(sudokuVersion);
         rb_Sa_samurai.setToggleGroup(sudokuVersion);
 
         sudokuVersion.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 version = ((RadioButton)sudokuVersion.getSelectedToggle()).getText();
-
             }
         });
         ToggleGroup sudokuGenerate = new ToggleGroup();
@@ -109,7 +108,7 @@ public class NewGame_Controller  implements Initializable {
         sudokuDifficulty.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                diffculty = ((RadioButton)sudokuDifficulty.getSelectedToggle()).getText();
+                difficulty = ((RadioButton)sudokuDifficulty.getSelectedToggle()).getText();
             }
         });
         rb_Sg_manuell.setOnAction(new EventHandler<ActionEvent>() {
