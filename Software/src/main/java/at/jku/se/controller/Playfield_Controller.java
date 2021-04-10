@@ -48,7 +48,7 @@ public class Playfield_Controller {
                         t.setText(newValue.replaceAll("[^\\d]", ""));
                     }
                     try {
-                        if (Integer.parseInt(newValue) > 9 && Integer.parseInt(newValue) == 0) {
+                        if (Integer.parseInt(newValue) > 9 || Integer.parseInt(newValue) == 0) {
                             t.setText(newValue.replaceAll(newValue, oldValue));
                         }
                     }
@@ -84,7 +84,7 @@ public class Playfield_Controller {
                     if (solution == null){
                         textFields[c][r].setStyle("-fx-background-color:rgb(255,200,200)");
                     }else {
-                        textFields[c][r].setStyle("-fx-background-color:rgb(200,255,200)");
+                        textFields[c][r].setStyle("-fx-text-fill: green");
                         textFields[c][r].setText(""+solution.get(c,r).getValue());
                     }
                 }//else {
