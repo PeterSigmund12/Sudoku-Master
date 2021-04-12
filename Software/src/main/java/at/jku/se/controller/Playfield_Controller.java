@@ -7,12 +7,18 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.json.simple.JSONObject;
 
+
+import javax.swing.text.html.Option;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Optional;
 
 public class Playfield_Controller {
     TextField[][]textFields =  new TextField[9][9];
@@ -94,6 +100,53 @@ public class Playfield_Controller {
         }
         System.out.println(version +"v "+diffculty+" d "+ generateType);
         btn_Solve.setDisable(true);
+    }
+
+
+
+    @FXML
+    public void handleButton_SaveGame(ActionEvent event) {
+        JSONObject saveGame = new JSONObject();
+        String file ="";
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Save Game");
+        dialog.setContentText("Filename: ");
+
+        Optional<String> fileName = dialog.showAndWait();
+        if(fileName.isPresent()){
+
+            file = fileName.get();
+        }
+        saveGame.put("FileName", file);
+        saveGame.put("version", version);
+        saveGame.put("generateType", generateType);
+        saveGame.put("difficulty",diffculty);
+        String row="";
+        for (int r = 0; r<9;r++){
+            row="";
+            for (int c=0;c<9;c++) {
+                try{
+                    Integer i = Integer.valueOf(textFields[c][r].getText());
+                    row+= i.toString() + ";";
+                }catch (NumberFormatException e){
+                    row+=  " ;";
+
+                }
+            }
+            saveGame.put(""+r,row);
+        }
+
+        FileWriter saveFile = null;
+        try {
+            saveFile = new FileWriter("savegames/"+file+".json");
+            saveFile.write(saveGame.toJSONString());
+            saveFile.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
 
