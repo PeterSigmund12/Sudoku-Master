@@ -1,6 +1,5 @@
-at\jku\se\controller\NewGame_Controller$5.class
-at\jku\se\controller\Playfield_Controller.class
-at\jku\se\controller\NewGame_Controller$1.class
-at\jku\se\controller\NewGame_Controller$4.class
-at\jku\se\controller\NewGame_Controller$3.class
-at\jku\se\controller\NewGame_Controller$2.class
+at\jku\se\controller\MainMenue_Controller.class
+at\jku\se\sudokuMaster\SimpleBoard.class
+at\jku\se\sudokuMaster\SudokuMaster.class
+at\jku\se\sudokuMaster\Cell.class
+at\jku\se\sudokuMaster\SimpleSolver.class
