@@ -1,4 +1,6 @@
 at\jku\se\controller\MainMenue_Controller.class
+at\jku\se\controller\LoadGame_Controller.class
+at\jku\se\controller\LoadGame_Controller$1.class
 at\jku\se\sudokuMaster\SimpleBoard.class
 at\jku\se\sudokuMaster\SudokuMaster.class
 at\jku\se\sudokuMaster\Cell.class
