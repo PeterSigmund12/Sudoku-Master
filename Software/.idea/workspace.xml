@@ -6,22 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sudoku-Master.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/NewGame_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/NewGame_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/Playfield_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/Playfield_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/newGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/newGame.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/spielfeld.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/spielfeld.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGame_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGame_Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/controller/LoadGame_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/controller/LoadGame_Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/controller/MainMenue_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/controller/MainMenue_Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-cli/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-cli/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,6 +31,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectId" id="1qWzUcRGEQQcE2Bm6UoNxzoHSAu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -45,7 +44,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -93,5 +92,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
