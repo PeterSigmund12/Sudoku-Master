@@ -8,6 +8,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <sonar.projectKey>sudoku_team_01</sonar.projectKey>
+        <sonar.projectName>pSudoku App (Team 1)</sonar.projectName>
+        <sonar.projectVersion>R2</sonar.projectVersion>
+        <sonar.language>java</sonar.language>
+        <sonar.profile>dev-java</sonar.profile>
+
     </properties>
     <dependencies>
         <dependency>
@@ -37,6 +43,11 @@
                     <release>11</release>
                 </configuration>
             </plugin>
+                        <plugin>
+                            <groupId>org.sonarsource.scanner.maven</groupId>
+                            <artifactId>sonar-maven-plugin</artifactId>
+                            <version>3.4.0.905</version>
+                        </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>

@@ -1,6 +1,10 @@
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\LoadGame_Controller.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokuMaster\SudokuMaster.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\MainMenue_Controller.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\utility\NewScreen.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\NewGame_Controller.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\Playfield_Controller.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokuMaster/SimpleBoard.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokuMaster/SimpleSolver.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/MainMenue_Controller.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokuMaster/SimpleSolverTest.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokuMaster/Cell.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokuMaster/SudokuMaster.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/utility/NewScreen.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/NewGame_Controller.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/LoadGame_Controller.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/Playfield_Controller.java
