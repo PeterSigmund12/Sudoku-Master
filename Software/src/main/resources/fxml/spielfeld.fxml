@@ -9,7 +9,7 @@
    <children>
       <SplitPane dividerPositions="0.8253731343283582" layoutX="13.0" layoutY="15.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <items>
-            <GridPane fx:id="playfield" gridLinesVisible="true" minHeight="40.0" minWidth="40.0" prefHeight="224.0" prefWidth="404.0">
+            <GridPane fx:id="playfield" minHeight="40.0" minWidth="40.0" prefHeight="224.0" prefWidth="404.0">
             </GridPane>
           <AnchorPane minHeight="0.0" minWidth="0.0">
                <children>

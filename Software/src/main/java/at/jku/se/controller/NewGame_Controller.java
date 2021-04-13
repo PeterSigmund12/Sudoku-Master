@@ -46,16 +46,24 @@ public class NewGame_Controller  implements Initializable {
         //NewScreen.openNewScreen(event,"/fxml/spielfeld.fxml");
         Node node = (Node) event.getSource();
         Stage oldStage = (Stage)node.getScene().getWindow();
-
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/fxml/spielfeld.fxml"));
-
-
+        if(version.equals("rb_Sa_regulaer")) {
+            fxmlLoader.setLocation(getClass().getResource("/fxml/spielfeld.fxml"));
+        }else {
+        fxmlLoader.setLocation(getClass().getResource("/fxml/samurai.fxml"));
+        }
         Parent root2 = null;
         try {
             root2 = (Parent) fxmlLoader.load();
-            Playfield_Controller controller = fxmlLoader.getController();
+
+            if(version.equals("rb_Sa_regulaer")) {
+
+                Playfield_Controller controller = fxmlLoader.getController();
+                controller.initData(version, generateType, difficulty);
+            } else {
+            Samurai_Controller controller = fxmlLoader.getController();
             controller.initData(version, generateType, difficulty);
+            }
         } catch (IOException ex) {
         }
         Stage stage = new Stage();
@@ -63,8 +71,9 @@ public class NewGame_Controller  implements Initializable {
         stage.sizeToScene();
         stage.setScene(new Scene(root2));
         stage.show();
-        stage.setMinHeight(600);
-        stage.setMinWidth(1000);
+        stage.setMaximized(true);
+        //stage.setMinHeight(1200);
+        //stage.setMinWidth(1600);
         oldStage.close();
 
     }
@@ -85,7 +94,7 @@ public class NewGame_Controller  implements Initializable {
         sudokuVersion.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-                version = ((RadioButton)sudokuVersion.getSelectedToggle()).getText();
+                version = ((RadioButton)sudokuVersion.getSelectedToggle()).getId();
             }
         });
         ToggleGroup sudokuGenerate = new ToggleGroup();
