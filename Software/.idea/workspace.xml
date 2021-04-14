@@ -6,10 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/savegames/firstTEst.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/savegames/help.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/savegames/test.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGame_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGame_Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/Playfield_Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/Playfield_Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/controller/LoadGame_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/controller/LoadGame_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/controller/MainMenue_Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/controller/MainMenue_Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +49,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/UE03_k12005548_Herzog/blocks" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">

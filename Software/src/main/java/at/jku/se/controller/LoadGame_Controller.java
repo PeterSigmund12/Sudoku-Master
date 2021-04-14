@@ -83,7 +83,7 @@ public class LoadGame_Controller implements Initializable {
         if(f.getName().substring(f.getName().length()-5).equals(".json")){
 
 
-                File newFile = new File("savegames/"+ f.getName());
+                File newFile = new File("savegames/JSON/"+ f.getName());
             try {
                 Files.copy(f.toPath(),newFile.toPath());
             } catch (FileAlreadyExistsException e) {
@@ -140,7 +140,7 @@ public class LoadGame_Controller implements Initializable {
 
     public void FillListView(){
         saveGameList = FXCollections.observableArrayList();
-        File file = new File(Paths.get("./savegames").toString());
+        File file = new File(Paths.get("./savegames/JSON").toString());
         File[] files = file.listFiles();
         if(files != null){
             for(File f : files){

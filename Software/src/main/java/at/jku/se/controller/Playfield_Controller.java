@@ -10,6 +10,10 @@ import javafx.scene.layout.*;
 import org.json.simple.JSONObject;
 
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
@@ -57,7 +61,7 @@ public class Playfield_Controller {
 
 
     @FXML
-    public void handleButton_SaveGame(ActionEvent event) {
+    public void handleButton_SaveGame(ActionEvent event) throws AWTException{
         JSONObject saveGame = new JSONObject();
         String file ="";
         TextInputDialog dialog = new TextInputDialog();
@@ -88,12 +92,17 @@ public class Playfield_Controller {
             saveGame.put(""+r,row);
         }
 
+
+
         FileWriter saveFile = null;
         try {
-            saveFile = new FileWriter("savegames/"+file+".json");
+            saveFile = new FileWriter("savegames/JSON/"+file+".json");
             saveFile.write(saveGame.toJSONString());
             saveFile.close();
-        } catch (IOException e) {
+            Thread.sleep(500);
+            BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+            ImageIO.write(image, "png", new File("savegames/img/"+file+".png"));
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
