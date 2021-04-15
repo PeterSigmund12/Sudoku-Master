@@ -14,12 +14,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -45,31 +53,15 @@ public class LoadGame_Controller implements Initializable {
     private Button btn_Import, btn_Export, btn_Continue, btn_backSavedMainMen;
 
     @FXML
+    private Label lb_gameName,lb_generate,lb_difficulty,lb_version;
+
+    @FXML
+    private ImageView iv_savegame;
+
+    @FXML
     public void handleButton_backSavedMainMen(ActionEvent event) throws IOException {
 
         NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
-
-        /*
-        Node node = (Node) event.getSource();
-        Stage oldStage = (Stage)node.getScene().getWindow();;
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/fxml/mainmenue.fxml"));
-        Parent root2 = null;
-
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-
-        Stage stage = new Stage();
-        stage.setTitle("Start new game");
-        stage.setScene(new Scene(root2));
-
-        stage.show();
-        oldStage.close();
-
-         */
 
     }
 
@@ -107,28 +99,15 @@ public class LoadGame_Controller implements Initializable {
             alert.showAndWait();
         }
 
-        /*
-        Node node = (Node) event.getSource();
-        Stage oldStage = (Stage)node.getScene().getWindow();;
+    }
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/fxml/mainmenue.fxml"));
-        Parent root2 = null;
-
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-
-        Stage stage = new Stage();
-        stage.setTitle("Start new game");
-        stage.setScene(new Scene(root2));
-
-        stage.show();
-        oldStage.close();
-
-         */
-
+    @FXML
+    public void handleButton_DeleteGame(ActionEvent event) throws IOException {
+        File file = new File("./savegames/img/"+selected+".png");
+        file.delete();
+        file = new File("./savegames/JSON/"+selected+".json");
+        file.delete();
+        FillListView();
     }
 
 
@@ -148,12 +127,36 @@ public class LoadGame_Controller implements Initializable {
             }
         }
 
+        JSONParser jsonparser = new JSONParser();
+
+
         lv_SaveGames.setItems(saveGameList);
         lv_SaveGames.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 btn_Continue.setDisable(false);
                 selected = newValue;
+
+                    try {
+                        Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+newValue+".json"));
+                        JSONObject gameinfos = (JSONObject) obj;
+                      String name = (String)gameinfos.get("FileName");
+
+
+                            File imgfile = new File("./savegames/img/"+name+".png");
+                            Image image = new Image(imgfile.toURI().toString());
+                            lb_gameName.setText(name);
+                            lb_version.setText((String)gameinfos.get("version"));
+                            lb_generate.setText((String)gameinfos.get("generateType"));
+                            lb_difficulty.setText((String)gameinfos.get("difficulty"));
+                        iv_savegame.setImage(image);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+
+                } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
             }
         });
     }

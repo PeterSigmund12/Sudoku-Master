@@ -1,5 +1,6 @@
 package at.jku.se.controller;
 
+import at.jku.se.utility.NewScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -31,7 +32,7 @@ public class Playfield_Controller {
 
     String version ="";
     String generateType="";
-    String diffculty ="false";
+    String diffculty ="";
 
     public void initialize() {
         playfield.setGridLinesVisible(false);
@@ -56,6 +57,11 @@ public class Playfield_Controller {
         SudokuHelper h = new SudokuHelper();
         h.solveBoard(textFields,0,0);
         btn_Solve.setDisable(true);
+    }
+
+    @FXML
+    public void handleButton_BacktoMain(ActionEvent event) throws IOException {
+        NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
     }
 
 
@@ -100,7 +106,9 @@ public class Playfield_Controller {
             saveFile.write(saveGame.toJSONString());
             saveFile.close();
             Thread.sleep(500);
-            BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+            //BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            BufferedImage image = new Robot().createScreenCapture(new Rectangle(215,175,425,400));
             ImageIO.write(image, "png", new File("savegames/img/"+file+".png"));
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
