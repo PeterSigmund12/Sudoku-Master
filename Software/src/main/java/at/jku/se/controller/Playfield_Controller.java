@@ -67,7 +67,7 @@ public class Playfield_Controller {
 
 
     @FXML
-    public void handleButton_SaveGame(ActionEvent event) throws AWTException{
+    public void handleButton_SaveGame(ActionEvent event) throws AWTException, IOException {
         JSONObject saveGame = new JSONObject();
         String file ="";
         TextInputDialog dialog = new TextInputDialog();
@@ -104,14 +104,19 @@ public class Playfield_Controller {
         try {
             saveFile = new FileWriter("savegames/JSON/"+file+".json");
             saveFile.write(saveGame.toJSONString());
-            saveFile.close();
+
             Thread.sleep(500);
             //BufferedImage image = new Robot().createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             BufferedImage image = new Robot().createScreenCapture(new Rectangle(215,175,425,400));
             ImageIO.write(image, "png", new File("savegames/img/"+file+".png"));
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            saveFile.close();
         }
 
 

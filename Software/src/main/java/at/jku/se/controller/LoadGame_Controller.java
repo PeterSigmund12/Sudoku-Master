@@ -103,11 +103,13 @@ public class LoadGame_Controller implements Initializable {
 
     @FXML
     public void handleButton_DeleteGame(ActionEvent event) throws IOException {
+        /*
         File file = new File("./savegames/img/"+selected+".png");
         file.delete();
         file = new File("./savegames/JSON/"+selected+".json");
         file.delete();
         FillListView();
+         */
     }
 
 
