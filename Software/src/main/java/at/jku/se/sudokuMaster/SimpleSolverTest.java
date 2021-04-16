@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SimpleSolverTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void validRow() {
         SimpleSolver s = new SimpleSolver();
         SimpleBoard b = new SimpleBoard();
@@ -18,7 +18,7 @@ class SimpleSolverTest {
         assertTrue(!s.validRow(b,1));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void validColumn() {
         SimpleSolver s = new SimpleSolver();
         SimpleBoard b = new SimpleBoard();
