@@ -114,9 +114,13 @@ public class Playfield_Controller {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
         finally {
-            saveFile.close();
+            if(saveFile != null){
+                saveFile.close();
+            }
+
         }
 
 
