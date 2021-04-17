@@ -47,23 +47,13 @@ public class NewGame_Controller  implements Initializable {
         Node node = (Node) event.getSource();
         Stage oldStage = (Stage)node.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        if(version.equals("rb_Sa_regulaer")) {
-            fxmlLoader.setLocation(getClass().getResource("/fxml/spielfeld.fxml"));
-        }else {
-        fxmlLoader.setLocation(getClass().getResource("/fxml/samurai.fxml"));
-        }
+        fxmlLoader.setLocation(getClass().getResource("/fxml/spielfeld.fxml"));
         Parent root2 = null;
         try {
             root2 = (Parent) fxmlLoader.load();
-
-            if(version.equals("rb_Sa_regulaer")) {
-
-                Playfield_Controller controller = fxmlLoader.getController();
-                controller.initData(version, generateType, difficulty);
-            } else {
-            Samurai_Controller controller = fxmlLoader.getController();
+            Playfield_Controller controller = fxmlLoader.getController();
             controller.initData(version, generateType, difficulty);
-            }
+
         } catch (IOException ex) {
         }
         Stage stage = new Stage();
