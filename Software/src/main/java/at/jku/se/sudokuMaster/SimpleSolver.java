@@ -6,7 +6,7 @@ import java.util.Set;
 public class SimpleSolver {
     private Set<Integer> numbers;
     public SimpleSolver(){
-        numbers = new HashSet<Integer>();
+        numbers = new HashSet<>();
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
@@ -19,7 +19,7 @@ public class SimpleSolver {
     }
 
     boolean validRow(SimpleBoard b, int r){
-        Set<Integer>num = new HashSet<Integer>(numbers);
+        Set<Integer>num = new HashSet<>(numbers);
         for (int c = 0; c<9;c++){
                 Cell i = b.get(c,r);
                 if (i != null){
@@ -43,7 +43,7 @@ public class SimpleSolver {
     }
 
     boolean validColumn(SimpleBoard b, int c){
-        Set<Integer>num = new HashSet<Integer>(numbers);
+        Set<Integer>num = new HashSet<>(numbers);
         for (int r= 0; r<9;r++){
             Cell i = b.get(c,r);
             if (i != null){
@@ -67,7 +67,7 @@ public class SimpleSolver {
     }
 
     boolean validBox(SimpleBoard b, int anchorC, int anchorR){
-        Set<Integer>num = new HashSet<Integer>(numbers);
+        Set<Integer>num = new HashSet<>(numbers);
         for (int r = 0; r<3;r++){
             for (int c=0;c<3;c++){
                 Cell i = b.get(anchorC +c , anchorR +r);
@@ -103,7 +103,7 @@ public class SimpleSolver {
         return true;
     }
 
-    boolean validAndFull(SimpleBoard b){
+    public boolean validAndFull(SimpleBoard b){
         return valid(b) && full(b);
     }
 
@@ -119,7 +119,7 @@ public class SimpleSolver {
             for (int c=0;c<9;c++) {
                 Cell cell = b.get(c,r);
                 if (cell == null){
-                    Set<Integer> num = new HashSet<Integer>(numbers);
+                    Set<Integer> num = new HashSet<>(numbers);
                     for (Integer number:num){
                         b.setValue(c,r,number);
                         SimpleBoard solution = solve(b);

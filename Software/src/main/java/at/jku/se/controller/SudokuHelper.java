@@ -7,10 +7,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
+import java.util.Random;
+
 public class SudokuHelper {
-    public TextField invoke() {
+    public TextField defaultTextField() {
         TextField t = new TextField();
         t.setPrefSize(38,38);
         t.setAlignment(Pos.CENTER);
@@ -32,8 +35,49 @@ public class SudokuHelper {
         });
         return t;
     }
+
     public void solveBoard(TextField[][] fields,int anchorC,int anchorR) {
+        SimpleBoard solution = getBoardSolution(fields, anchorC, anchorR);
+        for (int r = 0; r<9;r++){
+            for (int c=0;c<9;c++) {
+                if (fields[c+anchorC][r+anchorR].getText().trim().equals("")){
+                    if (solution == null){
+                        // Empty Cells with no Solution
+                        fields[c+anchorC][r+anchorR].setStyle("-fx-background-color:rgb(255,200,200)");
+                    }else {
+                        // Empty Cells with Solution
+                        fields[c+anchorC][r+anchorR].setText(""+solution.get(c,r).getValue());
+                        fields[c+anchorC][r+anchorR].setStyle("-fx-background-color:rgb(160,240,130)");
+                    }
+                }//else {
+                //textFields[c][r].setStyle("-fx-background-color:rgb(255,255,255)");
+                //}
+            }
+        }
+    }
+    public void getHint(TextField[][] fields,int anchorC,int anchorR) {
+        SimpleBoard solution = getBoardSolution(fields, anchorC, anchorR);
         SimpleSolver s = new SimpleSolver();
+        SimpleBoard board = getCurrentBoard(fields, anchorC, anchorR);
+        if (solution != null && !s.validAndFull(board)){
+            while (true){
+                int randC = new Random().nextInt(9);
+                int randR = new Random().nextInt(9);
+                if (fields[randC+anchorC][randR +anchorR].getText().trim().equals("")){
+                    fields[randC+anchorC][randR+anchorR].setText(""+solution.get(randC,randR).getValue());
+                    fields[randC+anchorC][randR+anchorR].setStyle("-fx-background-color:rgb(160,240,130)");
+                    break;
+                }
+            }
+        }
+    }
+    private SimpleBoard getBoardSolution(TextField[][] fields, int anchorC, int anchorR) {
+        SimpleSolver s = new SimpleSolver();
+        SimpleBoard part = getCurrentBoard(fields, anchorC, anchorR);
+        return s.solve(part);
+    }
+
+    private SimpleBoard getCurrentBoard(TextField[][] fields, int anchorC, int anchorR) {
         SimpleBoard part = new SimpleBoard();
         for (int r = 0; r<9;r++){
             for (int c=0;c<9;c++) {
@@ -43,20 +87,6 @@ public class SudokuHelper {
                 }catch (NumberFormatException e){}
             }
         }
-        SimpleBoard solution = s.solve(part);
-        for (int r = 0; r<9;r++){
-            for (int c=0;c<9;c++) {
-                if (fields[c+anchorC][r+anchorR].getText().trim().equals("")){
-                    if (solution == null){
-                        fields[c+anchorC][r+anchorR].setStyle("-fx-background-color:rgb(255,200,200)");
-                    }else {
-                        fields[c+anchorC][r+anchorR].setStyle("-fx-text-fill: green");
-                        fields[c+anchorC][r+anchorR].setText(""+solution.get(c,r).getValue());
-                    }
-                }//else {
-                //textFields[c][r].setStyle("-fx-background-color:rgb(255,255,255)");
-                //}
-            }
-        }
+        return part;
     }
 }
