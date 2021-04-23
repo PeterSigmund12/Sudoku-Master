@@ -1,13 +1,12 @@
 package at.jku.se.controller;
 
-import at.jku.se.sudokuMaster.SimpleBoard;
-import at.jku.se.sudokuMaster.SimpleSolver;
+import at.jku.se.sudokumaster.SimpleBoard;
+import at.jku.se.sudokumaster.SimpleSolver;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
 import java.util.Random;

@@ -1,4 +1,4 @@
-package at.jku.se.sudokuMaster;
+package at.jku.se.sudokumaster;
 
 import java.util.HashSet;
 import java.util.Set;

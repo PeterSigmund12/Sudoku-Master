@@ -8,25 +8,25 @@
 
 <!-- Verbindung zu Java controller erstellen -->
 
-<AnchorPane id="root" prefHeight="400.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.NewGame_Controller">
+<AnchorPane id="root" prefHeight="400.0" prefWidth="313.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.NewGameController">
    <children>
-      <Button fx:id="btn_continue" layoutX="57.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleButton_Continue" prefHeight="25.0" prefWidth="156.0" text="Weiter" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="326.0" />
-      <RadioButton fx:id="rb_Sg_auto" layoutX="165.0" layoutY="176.0" mnemonicParsing="false" text="automatisch" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="170.0" />
-      <RadioButton fx:id="rb_Sg_manuell" layoutX="164.0" layoutY="149.0" mnemonicParsing="false" text="manuell" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="150.0" />
+      <Button fx:id="btnContinue" layoutX="57.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleButtonContinue" prefHeight="25.0" prefWidth="156.0" text="Weiter" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="57.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="326.0" />
+      <RadioButton fx:id="rbSgAuto" layoutX="165.0" layoutY="176.0" mnemonicParsing="false" text="automatisch" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="170.0" />
+      <RadioButton fx:id="rbSgManuell" layoutX="164.0" layoutY="149.0" mnemonicParsing="false" text="manuell" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="150.0" />
       <Label layoutX="36.0" layoutY="150.0" text="Sudoku generieren:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="150.0" />
       <Label layoutX="36.0" layoutY="60.0" text="Sudoku-Art:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="60.0" />
-      <RadioButton fx:id="rb_Sa_regulaer" layoutX="162.0" layoutY="60.0" mnemonicParsing="false" text="Regulär" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="60.0" />
-      <RadioButton fx:id="rb_Sa_samurai" layoutX="156.0" layoutY="85.0" mnemonicParsing="false" text="Samurai" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="80.0" />
-      <RadioButton fx:id="rb_Sa_freiform" layoutX="165.0" layoutY="115.0" mnemonicParsing="false" text="Freiform" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="100.0" />
-      <RadioButton fx:id="rb_Sk_easy" disable="true" layoutX="160.0" layoutY="208.0" mnemonicParsing="false" text="leicht " AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="210.0" />
-      <RadioButton fx:id="rb_Sk_medium" disable="true" layoutX="166.0" layoutY="225.0" mnemonicParsing="false" text="mittel" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="230.0" />
-      <RadioButton fx:id="rb_Sk_hard" disable="true" layoutX="175.0" layoutY="255.0" mnemonicParsing="false" text="schwer" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="250.0" />
-      <Label fx:id="lb_difficulty" disable="true" layoutX="36.0" layoutY="210.0" text="Schwierigkeitsgrad:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="210.0" />
+      <RadioButton fx:id="rbSaRegulaer" layoutX="162.0" layoutY="60.0" mnemonicParsing="false" text="Regulär" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="60.0" />
+      <RadioButton fx:id="rbSaSamurai" layoutX="156.0" layoutY="85.0" mnemonicParsing="false" text="Samurai" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="80.0" />
+      <RadioButton fx:id="rbSaFreiform" layoutX="165.0" layoutY="115.0" mnemonicParsing="false" text="Freiform" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="100.0" />
+      <RadioButton fx:id="rbSkEasy" disable="true" layoutX="160.0" layoutY="208.0" mnemonicParsing="false" text="leicht " AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="210.0" />
+      <RadioButton fx:id="rbSkMedium" disable="true" layoutX="166.0" layoutY="225.0" mnemonicParsing="false" text="mittel" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="230.0" />
+      <RadioButton fx:id="rbSkHard" disable="true" layoutX="175.0" layoutY="255.0" mnemonicParsing="false" text="schwer" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="250.0" />
+      <Label fx:id="lbDifficulty" disable="true" layoutX="36.0" layoutY="210.0" text="Schwierigkeitsgrad:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="210.0" />
       <Label alignment="CENTER" layoutX="65.0" layoutY="14.0" prefHeight="34.0" prefWidth="191.0" text="Neues Spiel Optionen" textAlignment="CENTER" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btn_back" layoutX="57.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleButton_backNewMainMen" prefHeight="25.0" prefWidth="207.0" text="Zurück" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btnBack" layoutX="57.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleButtonBackNewMainMen" prefHeight="25.0" prefWidth="207.0" text="Zurück" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

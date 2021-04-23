@@ -2,31 +2,31 @@ package at.jku.se.utility;
 import java.util.Comparator;
 
 public class HighScoreObject {
-    int HighScore;
-    String GameName;
+    int highScore;
+    String gameName;
     //Zeit
     //schwierigkeit
 
 
     public HighScoreObject(int highScore, String gameName) {
-        HighScore = highScore;
-        GameName = gameName;
+        this.highScore = highScore;
+        this.gameName = gameName;
     }
 
     public int getHighScore() {
-        return HighScore;
+        return highScore;
     }
 
     public void setHighScore(int highScore) {
-        HighScore = highScore;
+        this.highScore = highScore;
     }
 
     public String getGameName() {
-        return GameName;
+        return gameName;
     }
 
     public void setGameName(String gameName) {
-        GameName = gameName;
+        this.gameName = gameName;
     }
 
     public static Comparator<HighScoreObject> aHighScore = new Comparator<HighScoreObject>() {

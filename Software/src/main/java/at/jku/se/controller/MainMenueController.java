@@ -11,36 +11,40 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenue_Controller implements Initializable {
+public class MainMenueController implements Initializable {
 
 
     @FXML
     private AnchorPane root;
 
     @FXML
-    private Button btn_NewGame,btn_LoadGame,btn_Exit;
+    private Button btnNewGame;
+    @FXML
+    private Button btnLoadGame;
+    @FXML
+    private Button btnExit;
 
     // refractor into one methode, pass over String for fxml and for Action event
     @FXML
-    public void handleButton_NewGame(ActionEvent event) throws IOException{
+    public void handleButtonNewGame(ActionEvent event) throws IOException{
 
         NewScreen.openNewScreen(event,"/fxml/newGame.fxml");
     }
 
     @FXML
-    public void handleButton_LoadGame(ActionEvent event) throws IOException {
+    public void handleButtonLoadGame(ActionEvent event) throws IOException {
         NewScreen.openNewScreen(event,"/fxml/loadGame.fxml");
     }
 
     @FXML
-    public void handleButton_MainHighScores(ActionEvent event) throws IOException {
+    public void handleButtonMainHighScores(ActionEvent event) throws IOException {
         NewScreen.openNewScreen(event,"/fxml/highScore.fxml");
     }
 
 
 
     @FXML
-    public void handleButton_Exit(ActionEvent event){
+    public void handleButtonExit(ActionEvent event){
         Platform.exit();
     }
 

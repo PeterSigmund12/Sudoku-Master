@@ -17,17 +17,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
 
-public class Playfield_Controller {
+public class PlayfieldController {
     TextField[][]textFields;
+    private static final String BTN_REGULAR = "rbSaRegulaer";
+    private static final String BTN_SAMURAI = "rbSaSamurai";
     @FXML
     private AnchorPane root;
 
     @FXML
     private GridPane playfield;
     @FXML
-    private Button btn_Solve;
+    private Button btnSolve;
     @FXML
-    private Button btn_Hint;
+    private Button btnHint;
 
     //anchorpoints 0/0 , 12/0 , 0/12 , 6/6 , 12/12
     String version ="";
@@ -41,10 +43,10 @@ public class Playfield_Controller {
         playfield.setHgap(5);
         playfield.setVgap(5);
         switch (version){
-            case "rb_Sa_regulaer":
+            case BTN_REGULAR:
                 initRegularField();
                 break;
-            case "rb_Sa_samurai":
+            case BTN_SAMURAI:
                 initSamuraiField();
                 break;
             default:
@@ -63,19 +65,29 @@ public class Playfield_Controller {
                 TextField t = new SudokuHelper().defaultTextField();
                 //t.setPadding(new Insets(15,15,15,15));
                 textFields[c][r] = t;
-                //Corner Boxes
-                if ((c<=2||(c>=6 && c<=8)||(c>=12 && c<=14)|| c>=18) && ((r<=2||(r>=6 && r<=8))||(r>=12 && r<=14)||r>=18)) {
-                    t.setStyle("-fx-background-color:rgb(220,240,255)");
-                }
-                //Middle Boxes
-                if ((((c>2 && c<6)||(c>14 && c<18))&&((r>2 && r<6)||r>14 && r<18)||((c>8 && c<12)&&(r>8 && r<12)) )){
-                    t.setStyle("-fx-background-color:rgb(220,240,240)");
-                }
-                if(((c>=9 && c<12) && (r<6 || r>=15))||((c<6 || c>=15)&&(r>=9 && r<12))){
-                    t.setVisible(false);
-                }
+                setCornerBoxesStyle(c, r, t);
+                setMiddleBoxesStyle(c, r, t);
+                hideUnusedBoxes(c, r, t);
                 playfield.add(t,c,r);
             }
+        }
+    }
+
+    private static void hideUnusedBoxes(int c, int r, TextField t) {
+        if(((c>=9 && c<12) && (r<6 || r>=15))||((c<6 || c>=15)&&(r>=9 && r<12))){
+            t.setVisible(false);
+        }
+    }
+
+    private static void setMiddleBoxesStyle(int c, int r, TextField t) {
+        if ((((c>2 && c<6)||(c>14 && c<18))&&((r>2 && r<6)||r>14 && r<18)||((c>8 && c<12)&&(r>8 && r<12)) )){
+            t.setStyle("-fx-background-color:rgb(220,240,240)");
+        }
+    }
+
+    private static void setCornerBoxesStyle(int c, int r, TextField t) {
+        if ((c<=2||(c>=6 && c<=8)||(c>=12 && c<=14)|| c>=18) && ((r<=2||(r>=6 && r<=8))||(r>=12 && r<=14)||r>=18)) {
+            t.setStyle("-fx-background-color:rgb(220,240,255)");
         }
     }
 
@@ -95,13 +107,13 @@ public class Playfield_Controller {
     }
 
     @FXML
-    public void handleButton_Solve(ActionEvent event) throws IOException {
+    public void handleButtonSolve(ActionEvent event){
         SudokuHelper h = new SudokuHelper();
         switch (version) {
-            case "rb_Sa_regulaer":
+            case BTN_REGULAR:
                 h.solveBoard(textFields, 0, 0);
                 break;
-            case "rb_Sa_samurai":
+            case BTN_SAMURAI:
                 h.solveBoard(textFields, 6, 6);
                 h.solveBoard(textFields, 0, 0);
                 h.solveBoard(textFields, 12, 0);
@@ -111,34 +123,30 @@ public class Playfield_Controller {
             default:
                 break;
         }
-        btn_Solve.setDisable(true);
+        btnSolve.setDisable(true);
     }
-    public void handleButton_Hint(ActionEvent event) throws IOException {
+    public void handleButtonHint(ActionEvent event){
         SudokuHelper h = new SudokuHelper();
         switch (version) {
-            case "rb_Sa_regulaer":
+            case BTN_REGULAR:
                 h.getHint(textFields, 0, 0);
                 break;
-            case "rb_Sa_samurai":
+            case BTN_SAMURAI:
                 h.getHint(textFields, 6, 6);
                 //TODO: Choose Random Playfield, but check if solvable
-                //h.solveBoard(textFields, 0, 0);
-                //h.solveBoard(textFields, 12, 0);
-                //h.solveBoard(textFields, 0, 12);
-                //h.solveBoard(textFields, 12, 12);
                 break;
             default:
                 break;
         }
     }
     @FXML
-    public void handleButton_BacktoMain(ActionEvent event) throws IOException {
+    public void handleButtonBacktoMain(ActionEvent event) throws IOException {
         NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
     }
 
 
     @FXML
-    public void handleButton_SaveGame(ActionEvent event) throws AWTException, IOException {
+    public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
         JSONObject saveGame = new JSONObject();
         String file ="";
         TextInputDialog dialog = new TextInputDialog();
@@ -171,9 +179,9 @@ public class Playfield_Controller {
 
 
 
-        FileWriter saveFile = null;
-        try {
-            saveFile = new FileWriter("savegames/JSON/"+file+".json");
+        try(
+                FileWriter saveFile=new FileWriter("savegames/JSON/"+file+".json")
+        ) {
             saveFile.write(saveGame.toJSONString());
 
             Thread.sleep(500);
@@ -187,21 +195,10 @@ public class Playfield_Controller {
             e.printStackTrace();
             Thread.currentThread().interrupt();
         }
-        finally {
-            if(saveFile != null){
-                saveFile.close();
-            }
-
-        }
-
-
-
     }
 
 
-
     public void initData(String version, String generateType, String diffculty) {
-        System.out.println(version +"v "+diffculty+" d "+ generateType);
         this.generateType = generateType;
         this.diffculty = diffculty;
         this.version = version;

@@ -2,9 +2,7 @@ package at.jku.se.controller;
 
 import at.jku.se.utility.HighScoreObject;
 import at.jku.se.utility.NewScreen;
-
 import com.google.common.primitives.Ints;
-import com.google.gson.Gson;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,11 +13,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,39 +24,46 @@ import java.nio.file.Paths;
 import java.util.*;
 
 
-public class HighScoreBoard_Controller implements Initializable {
+public class HighScoreBoardController implements Initializable {
     @FXML
-    private Button btn_backHighMainMen;
+    private Button btnBackHighMainMen;
 
     @FXML
-    ListView lv_HighScoreGames;
+    ListView<String> lvHighScoreGames;
 
-    ObservableList<String> HighScoreGameList;
+    ObservableList<String> highScoreGameList;
 
     String selected;
 
     @FXML
-    private Label lb_gameName, lb_generate, lb_difficulty, lb_version;
+    private Label lbGameName;
+    @FXML
+    private Label lbGenerate;
+    @FXML
+    private Label lbDifficulty;
+    @FXML
+    private Label lbVersion;
+
 
 
     @FXML
-    public void handleButton_backHighMainMen(ActionEvent event) throws IOException {
+    public void handleButtonBackHighMainMen(ActionEvent event) throws IOException {
         NewScreen.openNewScreen(event, "/fxml/mainmenue.fxml");
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        FillListView();
+        fillListView();
     }
 
-    public void FillListView() {
-        HighScoreGameList = FXCollections.observableArrayList();
+    public void fillListView() {
+        highScoreGameList = FXCollections.observableArrayList();
 
         //get all the files on that path
         File file = new File(Paths.get("./savegames/JSON").toString());
         File[] files = file.listFiles();
 
-        List<HighScoreObject> higScoreList = new ArrayList<HighScoreObject>();
+        List<HighScoreObject> higScoreList = new ArrayList<>();
 
 
         String newValue;
@@ -97,11 +100,9 @@ public class HighScoreBoard_Controller implements Initializable {
                     //add value to the highscore list
                     higScoreList.add(hSObject);
 
-                } catch (IOException e) {
+                } catch (IOException|ParseException e) {
                     e.printStackTrace();
 
-                } catch (ParseException e) {
-                    e.printStackTrace();
                 }
 
 
@@ -111,12 +112,12 @@ public class HighScoreBoard_Controller implements Initializable {
         Collections.sort(higScoreList, HighScoreObject.aHighScore);
         for (HighScoreObject str : higScoreList) {
             System.out.println(str.getHighScore());
-            HighScoreGameList.add(str.getGameName() + ": " + str.getHighScore());
+            highScoreGameList.add(str.getGameName() + ": " + str.getHighScore());
         }
 
 
-        lv_HighScoreGames.setItems(HighScoreGameList);
-        lv_HighScoreGames.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        lvHighScoreGames.setItems(highScoreGameList);
+        lvHighScoreGames.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 

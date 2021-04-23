@@ -21,26 +21,39 @@ import java.util.ResourceBundle;
 
 
 
-public class NewGame_Controller  implements Initializable {
+public class NewGameController implements Initializable {
 
     @FXML
     private AnchorPane root;
 
     @FXML
-    private Button btn_continue;
+    private Button btnContinue;
 
     @FXML
-    private RadioButton rb_Sa_regulaer,rb_Sa_samurai,rb_Sa_freiform,rb_Sg_manuell,rb_Sg_auto,rb_Sk_easy,rb_Sk_medium,rb_Sk_hard;
-
+    private RadioButton rbSaRegulaer;
     @FXML
-    private Label lb_difficulty;
+    private RadioButton rbSaSamurai;
+    @FXML
+    private RadioButton rbSaFreiform;
+    @FXML
+    private RadioButton rbSgManuell;
+    @FXML
+    private RadioButton rbSgAuto;
+    @FXML
+    private RadioButton rbSkEasy;
+    @FXML
+    private RadioButton rbSkMedium;
+    @FXML
+    private RadioButton rbSkHard;
+    @FXML
+    private Label lbDifficulty;
 
     String version ="";
     String generateType="";
     String difficulty ="";
 
     @FXML
-    public void handleButton_Continue(ActionEvent event) throws IOException { // aufgerufen wenn auf diesen Button geklicked wird
+    public void handleButtonContinue(ActionEvent event) throws IOException { // aufgerufen wenn auf diesen Button geklicked wird
 
         //NewScreen.openNewScreen(event,"/fxml/spielfeld.fxml");
         Node node = (Node) event.getSource();
@@ -50,7 +63,7 @@ public class NewGame_Controller  implements Initializable {
         Parent root2 = null;
         try {
             root2 = (Parent) fxmlLoader.load();
-            Playfield_Controller controller = fxmlLoader.getController();
+            PlayfieldController controller = fxmlLoader.getController();
             controller.initData(version, generateType, difficulty);
 
         } catch (IOException ex) {
@@ -68,7 +81,7 @@ public class NewGame_Controller  implements Initializable {
     }
 
     @FXML
-    public void handleButton_selfNewGame(ActionEvent actionEvent) {
+    public void handleButtonSelfNewGame(ActionEvent actionEvent) {
         Platform.exit();
     }
 
@@ -76,9 +89,9 @@ public class NewGame_Controller  implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ToggleGroup sudokuVersion = new ToggleGroup();
-        rb_Sa_freiform.setToggleGroup(sudokuVersion);
-        rb_Sa_regulaer.setToggleGroup(sudokuVersion);
-        rb_Sa_samurai.setToggleGroup(sudokuVersion);
+        rbSaFreiform.setToggleGroup(sudokuVersion);
+        rbSaRegulaer.setToggleGroup(sudokuVersion);
+        rbSaSamurai.setToggleGroup(sudokuVersion);
 
         sudokuVersion.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -87,8 +100,8 @@ public class NewGame_Controller  implements Initializable {
             }
         });
         ToggleGroup sudokuGenerate = new ToggleGroup();
-        rb_Sg_auto.setToggleGroup(sudokuGenerate);
-        rb_Sg_manuell.setToggleGroup(sudokuGenerate);
+        rbSgAuto.setToggleGroup(sudokuGenerate);
+        rbSgManuell.setToggleGroup(sudokuGenerate);
 
         sudokuGenerate.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
@@ -98,9 +111,9 @@ public class NewGame_Controller  implements Initializable {
         });
 
         ToggleGroup sudokuDifficulty = new ToggleGroup();
-        rb_Sk_medium.setToggleGroup(sudokuDifficulty);
-        rb_Sk_easy.setToggleGroup(sudokuDifficulty);
-        rb_Sk_hard.setToggleGroup(sudokuDifficulty);
+        rbSkMedium.setToggleGroup(sudokuDifficulty);
+        rbSkEasy.setToggleGroup(sudokuDifficulty);
+        rbSkHard.setToggleGroup(sudokuDifficulty);
 
 
         sudokuDifficulty.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -109,25 +122,25 @@ public class NewGame_Controller  implements Initializable {
                 difficulty = ((RadioButton)sudokuDifficulty.getSelectedToggle()).getText();
             }
         });
-        rb_Sg_manuell.setOnAction(new EventHandler<ActionEvent>() {
+        rbSgManuell.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(rb_Sg_manuell.isSelected()){
-                    rb_Sk_easy.setDisable(true);
-                    rb_Sk_medium.setDisable(true);
-                    rb_Sk_hard.setDisable(true);
-                    lb_difficulty.setDisable(true);
+                if(rbSgManuell.isSelected()){
+                    rbSkEasy.setDisable(true);
+                    rbSkMedium.setDisable(true);
+                    rbSkHard.setDisable(true);
+                    lbDifficulty.setDisable(true);
                 }
             }
         });
-        rb_Sg_auto.setOnAction(new EventHandler<ActionEvent>() {
+        rbSgAuto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(rb_Sg_auto.isSelected()){
-                    rb_Sk_easy.setDisable(false);
-                    rb_Sk_medium.setDisable(false);
-                    rb_Sk_hard.setDisable(false);
-                    lb_difficulty.setDisable(false);
+                if(rbSgAuto.isSelected()){
+                    rbSkEasy.setDisable(false);
+                    rbSkMedium.setDisable(false);
+                    rbSkHard.setDisable(false);
+                    lbDifficulty.setDisable(false);
                 }
 
             }
@@ -137,7 +150,7 @@ public class NewGame_Controller  implements Initializable {
     }
 
 
-    public void handleButton_backNewMainMen(ActionEvent event) throws IOException{
+    public void handleButtonBackNewMainMen(ActionEvent event) throws IOException{
 
         NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
 

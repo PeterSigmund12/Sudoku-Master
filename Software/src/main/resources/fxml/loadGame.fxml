@@ -8,38 +8,38 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="480.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.LoadGame_Controller">
+<AnchorPane fx:id="root" prefHeight="480.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.LoadGameController">
    <children>
       <SplitPane dividerPositions="0.47540983606557374" prefHeight="400.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ListView fx:id="lv_SaveGames" layoutX="55.0" layoutY="69.0" prefHeight="333.0" prefWidth="158.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="70.0" />
+                  <ListView fx:id="lvSaveGames" layoutX="55.0" layoutY="69.0" prefHeight="333.0" prefWidth="158.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="70.0" />
                   <Label layoutX="21.0" layoutY="27.0" prefHeight="35.0" prefWidth="216.0" text="Gespeicherte Spiele">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btn_Import" layoutX="79.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleButton_importGame" prefHeight="25.0" prefWidth="100.0" text="Import" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="79.0" />
-                  <Button fx:id="btn_delete" layoutX="111.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleButton_DeleteGame" prefHeight="25.0" prefWidth="66.0" text="Löschen" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="79.0" />
+                  <Button fx:id="btnImport" layoutX="79.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleButtonImportGame" prefHeight="25.0" prefWidth="100.0" text="Import" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="79.0" />
+                  <Button fx:id="btnDelete" layoutX="111.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleButtonDeleteGame" prefHeight="25.0" prefWidth="66.0" text="Löschen" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="79.0" AnchorPane.rightAnchor="79.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="478.0" prefWidth="284.0">
                <children>
-                  <ImageView fx:id="iv_savegame" fitHeight="230.0" fitWidth="258.0" layoutX="14.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="68.0" />
-                  <Label fx:id="lb_gameName" alignment="CENTER" layoutX="53.0" layoutY="33.0" prefHeight="25.0" prefWidth="110.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                  <ImageView fx:id="ivSavegame" fitHeight="230.0" fitWidth="258.0" layoutX="14.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="68.0" />
+                  <Label fx:id="lbGameName" alignment="CENTER" layoutX="53.0" layoutY="33.0" prefHeight="25.0" prefWidth="110.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btn_Continue" disable="true" layoutX="93.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Weiter" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
-                  <Button fx:id="btn_backSavedMainMen" layoutX="70.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleButton_backSavedMainMen" text="Zurück ins Hauptmenü" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
+                  <Button fx:id="btnContinue" disable="true" layoutX="93.0" layoutY="394.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Weiter" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
+                  <Button fx:id="btnBackSavedMainMen" layoutX="70.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleButtonBackSavedMainMen" text="Zurück ins Hauptmenü" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
                   <Label layoutX="33.0" layoutY="316.0" text="Version:" />
-                  <Label fx:id="lb_version" layoutX="129.0" layoutY="316.0" prefHeight="17.0" prefWidth="100.0" />
+                  <Label fx:id="lbVersion" layoutX="129.0" layoutY="316.0" prefHeight="17.0" prefWidth="100.0" />
                   <Label layoutX="31.0" layoutY="341.0" text="Generierungstyp:" />
-                  <Label fx:id="lb_generate" layoutX="129.0" layoutY="341.0" />
+                  <Label fx:id="lbGenerate" layoutX="129.0" layoutY="341.0" />
                   <Label layoutX="31.0" layoutY="368.0" text="Schwierigkeit:" />
-                  <Label fx:id="lb_difficulty" layoutX="129.0" layoutY="368.0" />
+                  <Label fx:id="lbDifficulty" layoutX="129.0" layoutY="368.0" />
                </children>
             </AnchorPane>
         </items>

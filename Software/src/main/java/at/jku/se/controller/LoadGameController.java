@@ -29,36 +29,48 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
-public class LoadGame_Controller implements Initializable {
+public class LoadGameController implements Initializable {
 
 
     @FXML
     private AnchorPane root;
 
     @FXML
-    ListView lv_SaveGames;
+    ListView lvSaveGames;
 
     ObservableList<String> saveGameList;
 
     String selected;
     @FXML
-    private Button btn_Import, btn_Export, btn_Continue, btn_backSavedMainMen;
+    private Button btnImport;
+    @FXML
+    private Button btnExport;
+    @FXML
+    private Button btnContinue;
+    @FXML
+    private Button btnBackSavedMainMen;
 
     @FXML
-    private Label lb_gameName,lb_generate,lb_difficulty,lb_version;
+    private Label lbGameName;
+    @FXML
+    private Label lbGenerate;
+    @FXML
+    private Label lbDifficulty;
+    @FXML
+    private Label lbVersion;
 
     @FXML
-    private ImageView iv_savegame;
+    private ImageView ivSavegame;
 
     @FXML
-    public void handleButton_backSavedMainMen(ActionEvent event) throws IOException {
+    public void handleButtonBackSavedMainMen(ActionEvent event) throws IOException {
 
         NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
 
     }
 
     @FXML
-    public void handleButton_importGame(ActionEvent event) {
+    public void handleButtonImportGame(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Import Game");
         Stage stage = new Stage();
@@ -82,7 +94,7 @@ public class LoadGame_Controller implements Initializable {
             }
 
 
-            FillListView();
+            fillListView();
         }
         else {
 
@@ -94,7 +106,7 @@ public class LoadGame_Controller implements Initializable {
     }
 
     @FXML
-    public void handleButton_DeleteGame(ActionEvent event) throws IOException {
+    public void handleButtonDeleteGame(ActionEvent event) throws IOException {
         /*
         File file = new File("./savegames/img/"+selected+".png");
         file.delete();
@@ -107,11 +119,11 @@ public class LoadGame_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        FillListView();
+        fillListView();
     }
 
 
-    public void FillListView(){
+    public void fillListView(){
         saveGameList = FXCollections.observableArrayList();
         File file = new File(Paths.get("./savegames/JSON").toString());
         File[] files = file.listFiles();
@@ -124,11 +136,11 @@ public class LoadGame_Controller implements Initializable {
         JSONParser jsonparser = new JSONParser();
 
 
-        lv_SaveGames.setItems(saveGameList);
-        lv_SaveGames.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        lvSaveGames.setItems(saveGameList);
+        lvSaveGames.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                btn_Continue.setDisable(false);
+                btnContinue.setDisable(false);
                 selected = newValue;
 
                     try {
@@ -139,16 +151,13 @@ public class LoadGame_Controller implements Initializable {
 
                             File imgfile = new File("./savegames/img/"+name+".png");
                             Image image = new Image(imgfile.toURI().toString());
-                            lb_gameName.setText(name);
-                            lb_version.setText((String)gameinfos.get("version"));
-                            lb_generate.setText((String)gameinfos.get("generateType"));
-                            lb_difficulty.setText((String)gameinfos.get("difficulty"));
-                        iv_savegame.setImage(image);
+                            lbGameName.setText(name);
+                            lbVersion.setText((String)gameinfos.get("version"));
+                            lbGenerate.setText((String)gameinfos.get("generateType"));
+                            lbDifficulty.setText((String)gameinfos.get("difficulty"));
+                        ivSavegame.setImage(image);
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-
-                } catch (ParseException e) {
+                    } catch (IOException|ParseException e) {
                         e.printStackTrace();
                     }
             }

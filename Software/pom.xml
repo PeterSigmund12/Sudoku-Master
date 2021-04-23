@@ -69,7 +69,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.5</version>
                 <configuration>
-                    <mainClass>at.jku.se.sudokuMaster.SudokuMaster</mainClass>
+                    <mainClass>at.jku.se.sudokumaster.SudokuMaster</mainClass>
                 </configuration>            </plugin>
         </plugins>
     </build>
