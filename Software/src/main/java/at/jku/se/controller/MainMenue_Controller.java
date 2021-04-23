@@ -32,55 +32,18 @@ public class MainMenue_Controller implements Initializable {
     public void handleButton_NewGame(ActionEvent event) throws IOException{
 
         NewScreen.openNewScreen(event,"/fxml/newGame.fxml");
-
-        /* redundant aufgrund von neuer Klasse und Methode...
-        Node node = (Node) event.getSource();
-        Stage oldStage = (Stage)node.getScene().getWindow();;
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/fxml/newGame.fxml"));
-        Parent root2 = null;
-
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-
-        Stage stage = new Stage();
-        stage.setTitle("Start new game");
-        stage.setScene(new Scene(root2));
-
-        stage.show();
-        oldStage.close();
-         */
-
     }
 
     @FXML
     public void handleButton_LoadGame(ActionEvent event) throws IOException {
-
-
         NewScreen.openNewScreen(event,"/fxml/loadGame.fxml");
-
-        /*Node node = (Node) event.getSource();
-        Stage oldStage = (Stage)node.getScene().getWindow();;
-
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/fxml/loadGame.fxml"));
-        Parent root2 = null;
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Load game");
-        stage.setScene(new Scene(root2));
-
-        stage.show();
-        oldStage.close();*/
-
     }
+
+    @FXML
+    public void handleButton_MainHighScores(ActionEvent event) throws IOException {
+        NewScreen.openNewScreen(event,"/fxml/highScore.fxml");
+    }
+
 
 
     @FXML

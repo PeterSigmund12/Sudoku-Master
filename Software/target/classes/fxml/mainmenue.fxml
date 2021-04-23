@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="root" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.MainMenue_Controller">
+<AnchorPane id="root" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.MainMenue_Controller">
    <children>
       <ImageView fx:id="iv_" fitHeight="200.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -34,5 +34,6 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="btn_MainHighScores" layoutX="443.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButton_MainHighScores" text="High Scores" />
    </children>
 </AnchorPane>
