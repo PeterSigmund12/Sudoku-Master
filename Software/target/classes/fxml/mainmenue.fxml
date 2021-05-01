@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="root" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.MainMenue_Controller">
+<AnchorPane id="root" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.MainMenueController">
    <children>
       <ImageView fx:id="iv_" fitHeight="200.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/Sudoku_MainMenue.jpg" />
+            <Image url="@../img/SudokuMainMenue.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btn_NewGame" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#handleButton_NewGame" prefHeight="35.0" prefWidth="155.0" text="Neues Spiel" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
+      <Button fx:id="btnNewGame" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#handleButtonNewGame" prefHeight="35.0" prefWidth="155.0" text="Neues Spiel" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btn_LoadGame" layoutX="392.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleButton_LoadGame" prefHeight="35.0" prefWidth="155.0" text="Spiel laden" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+      <Button fx:id="btnLoadGame" layoutX="392.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleButtonLoadGame" prefHeight="35.0" prefWidth="155.0" text="Spiel laden" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btn_Exit" layoutX="392.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleButton_Exit" prefHeight="35.0" prefWidth="155.0" text="Beenden" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <Button fx:id="btnExit" layoutX="392.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="35.0" prefWidth="155.0" text="Beenden" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,6 +34,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btn_MainHighScores" layoutX="443.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButton_MainHighScores" text="High Scores" />
+      <Button fx:id="btnMainHighScores" layoutX="443.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonMainHighScores" text="High Scores" />
    </children>
 </AnchorPane>
