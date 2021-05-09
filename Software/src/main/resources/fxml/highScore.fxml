@@ -15,8 +15,8 @@
             <AnchorPane prefHeight="364.0" prefWidth="376.0">
                <children>
                   <ListView fx:id="lvHighScoreGames" prefHeight="283.0" prefWidth="325.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="60.0" />
-                  <Button fx:id="btnBackHighMainMen" mnemonicParsing="false" onAction="#handleButtonBackHighMainMen" text="Zurück ins Hauptmenü" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-                  <Label layoutX="155.0" layoutY="1.0" prefHeight="57.0" prefWidth="123.0" text="High Scores" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="98.0">
+                  <Button fx:id="btnBackHighMainMen" mnemonicParsing="false" onAction="#handleButtonBackHighMainMen" prefHeight="26.0" prefWidth="86.0" text="Hauptmenü" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                  <Label layoutX="124.0" layoutY="1.0" prefHeight="57.0" prefWidth="117.0" text="High Score" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="0.0">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -25,8 +25,8 @@
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="ivSavegame" fitHeight="150.0" fitWidth="200.0" layoutX="12.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
-                  <Label layoutX="42.0" layoutY="225.0" text="Version" AnchorPane.topAnchor="225.0" />
+                  <ImageView fx:id="ivSavegame" fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="31.0" />
+                  <Label layoutX="42.0" layoutY="225.0" text="Version:" AnchorPane.topAnchor="225.0" />
                   <Label text="Schwierigkeit:" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="275.0" />
                   <Label layoutX="43.0" layoutY="252.0" text="Generierrungstyp:" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="250.0" />
                   <Label fx:id="lbVersion" layoutX="100.0" layoutY="225.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="225.0" />
@@ -36,6 +36,8 @@
                   <Label fx:id="lbScore" layoutX="149.0" layoutY="300.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0" />
                   <Label fx:id="lbDiff" layoutX="150.0" layoutY="275.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="275.0" />
                   <Label fx:id="lbTime" layoutX="150.0" layoutY="325.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="325.0" />
+                  <Label layoutX="42.0" layoutY="201.0" text="Player:" AnchorPane.topAnchor="200.0" />
+                  <Label fx:id="lbPlayer" layoutX="150.0" layoutY="200.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0" />
                </children>
             </AnchorPane>
          </items>
