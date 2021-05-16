@@ -164,14 +164,38 @@ public class HighScoreBoardController implements Initializable {
                     // -Sicherstellen, dass alle werte existieren
                     // -Aufruf Methode
 
-                    int time;
-                     int clicks;
-                     int hints;
-                     String difficulty;
 
+                  Integer i =   Integer.parseInt(String.valueOf(gameinfos.get("Clicks")));
+
+                    int clicks;
+                    if (i != null ){
+                        clicks = i;
+                    } else {clicks = 0;}
+                     /*
+                  int i =   Integer.parseInt(String.valueOf(gameinfos.get("Zeit")));
+                    if ( i != 0){
+                         = (int) gameinfos.get("Zeit");
+                    } else {i = 0;}
+                    int hints;
+                    if (gameinfos.get("hints")!= null){
+                   //     hints = (int) gameinfos.get("hints");
+                    } {hints = 0;}
+                    int difficulty;
+                    if (gameinfos.get("difficulty")!= null){
+                      //  difficulty = (int) gameinfos.get("difficulty");
+                    }  {difficulty = 0;}
+                    System.out.println(time);
+                    System.out.println(clicks);
+                    System.out.println(hints);
+                    System.out.println(difficulty);
+
+
+ */
+         //           System.out.println(time);
+
+
+                  //  System.out.println(time);
                     int pointsInt=0;
-
-
 
                     //create a new HighScore Object to store value
                     HighScoreObject hSObject = new HighScoreObject(pointsInt, name);
@@ -220,17 +244,15 @@ public class HighScoreBoardController implements Initializable {
                    File imgfile = new File("./savegames/img/"+name+".png");
                    Image image = new Image(imgfile.toURI().toString());
                    // lbGameName.setText(name);
-                    lbVersion.setText((String)gameinfos.get("version"));
 
                     //TODO search in liste for namen und rufe dann in der liste den score auf.
 
+                    lbVersion.setText((String)gameinfos.get("version"));
                     lbScore.setText((String)gameinfos.get("Score"));
                     lbDiff.setText((String)gameinfos.get("difficulty"));
                     lbTime.setText((String)gameinfos.get("Zeit"));
                     lbGen.setText((String)gameinfos.get("generateType"));
                     lbPlayer.setText((String)gameinfos.get("Player"));
-
-                    //lbDiff.setText((String)gameinfos.get("difficulty"));
                     ivSavegame.setImage(image);
 
                 } catch (IOException|ParseException e) {
