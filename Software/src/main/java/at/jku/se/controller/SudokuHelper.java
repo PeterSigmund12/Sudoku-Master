@@ -42,11 +42,11 @@ public class SudokuHelper {
                 if (fields[c+anchorC][r+anchorR].getText().trim().equals("")){
                     if (solution == null){
                         // Empty Cells with no Solution
-                        fields[c+anchorC][r+anchorR].setStyle("-fx-background-color:rgb(255,200,200)");
+                        fields[c+anchorC][r+anchorR].setStyle("-fx-background-color:rgb(255,200,200);");
                     }else {
                         // Empty Cells with Solution
                         fields[c+anchorC][r+anchorR].setText(""+solution.get(c,r).getValue());
-                        fields[c+anchorC][r+anchorR].setStyle("-fx-background-color:rgb(160,240,130)");
+                        fields[c+anchorC][r+anchorR].setStyle("-fx-background-color:rgb(160,240,130);");
                     }
                 }//else {
                 //textFields[c][r].setStyle("-fx-background-color:rgb(255,255,255)");
@@ -70,13 +70,13 @@ public class SudokuHelper {
             }
         }
     }
-    private SimpleBoard getBoardSolution(TextField[][] fields, int anchorC, int anchorR) {
+    public SimpleBoard getBoardSolution(TextField[][] fields, int anchorC, int anchorR) {
         SimpleSolver s = new SimpleSolver();
         SimpleBoard part = getCurrentBoard(fields, anchorC, anchorR);
         return s.solve(part);
     }
 
-    private SimpleBoard getCurrentBoard(TextField[][] fields, int anchorC, int anchorR) {
+    public SimpleBoard getCurrentBoard(TextField[][] fields, int anchorC, int anchorR) {
         SimpleBoard part = new SimpleBoard();
         for (int r = 0; r<9;r++){
             for (int c=0;c<9;c++) {
@@ -87,5 +87,24 @@ public class SudokuHelper {
             }
         }
         return part;
+    }
+
+
+
+    public static void hideUnusedBoxes(int c, int r, TextField t) {
+        if(((c>=9 && c<12) && (r<6 || r>=15))||((c<6 || c>=15)&&(r>=9 && r<12))){
+            t.setVisible(false);
+        }
+    }
+
+    public void setNormalBoxesStyle(int c, int r, TextField t, String style) {
+        if ((((c > 2 && c < 6) || (c > 14 && c < 18)) && ((r > 2 && r < 6) || r > 14 && r < 18) || ((c > 8 && c < 12) && (r > 8 && r < 12)))) {
+            t.setStyle("-fx-opacity: 1;-fx-background-color:rgb(220,240,240);"+style);
+        }else if((c <= 2 || (c >= 6 && c <= 8) || (c >= 12 && c <= 14) || c >= 18) && ((r <= 2 || (r >= 6 && r <= 8)) || (r >= 12 && r <= 14) || r >= 18)){
+            t.setStyle("-fx-opacity: 1;-fx-background-color:rgb(220,240,255);"+style);
+        }else {
+            t.setStyle("-fx-opacity: 1;"+style);
+
+        }
     }
 }

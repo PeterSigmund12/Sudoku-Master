@@ -18,7 +18,7 @@
       <RadioButton fx:id="rbSaRegulaer" layoutX="162.0" layoutY="60.0" mnemonicParsing="false" text="Regulär" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="60.0" />
       <RadioButton fx:id="rbSaSamurai" layoutX="156.0" layoutY="85.0" mnemonicParsing="false" text="Samurai" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="80.0" />
       <RadioButton fx:id="rbSaFreiform" layoutX="165.0" layoutY="115.0" mnemonicParsing="false" text="Freiform" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="100.0" />
-      <RadioButton fx:id="rbSkEasy" disable="true" layoutX="160.0" layoutY="208.0" mnemonicParsing="false" text="leicht " AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="210.0" />
+      <RadioButton fx:id="rbSkEasy" disable="true" layoutX="160.0" layoutY="208.0" mnemonicParsing="false" text="leicht" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="210.0" />
       <RadioButton fx:id="rbSkMedium" disable="true" layoutX="166.0" layoutY="225.0" mnemonicParsing="false" text="mittel" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="230.0" />
       <RadioButton fx:id="rbSkHard" disable="true" layoutX="175.0" layoutY="255.0" mnemonicParsing="false" text="schwer" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="250.0" />
       <Label fx:id="lbDifficulty" disable="true" layoutX="36.0" layoutY="210.0" text="Schwierigkeitsgrad:" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="210.0" />

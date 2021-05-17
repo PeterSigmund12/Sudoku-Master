@@ -1,5 +1,7 @@
 package at.jku.se.controller;
 
+import at.jku.se.sudokumaster.SimpleBoard;
+import at.jku.se.sudokumaster.SimpleSolver;
 import at.jku.se.utility.NewScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,12 +17,21 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class PlayfieldController {
     TextField[][]textFields;
     private static final String BTN_REGULAR = "rbSaRegulaer";
     private static final String BTN_SAMURAI = "rbSaSamurai";
+    private static final String BTN_FREIFORM = "rbSaFreiform";
+    private static final String BTN_EASY = "leicht";
+    private static final String BTN_MEDIUM = "mittel";
+    private static final String BTN_HARD = "schwer";
     @FXML
     private AnchorPane root;
 
@@ -35,19 +46,36 @@ public class PlayfieldController {
     String version ="";
     String generateType="";
     String diffculty ="";
+    SudokuHelper h = new SudokuHelper();
 
     public void initializePlayfield() {
-        System.out.println("Version: "+version);
         playfield.setGridLinesVisible(false);
         playfield.setAlignment(Pos.CENTER);
         playfield.setHgap(5);
         playfield.setVgap(5);
+        int initPerc = 0;
+        if (generateType.equals("automatisch")){
+            switch (diffculty){
+                case BTN_EASY:
+                    initPerc = 40;
+                    break;
+                case BTN_MEDIUM:
+                    initPerc = 25;
+                    break;
+                case BTN_HARD:
+                    initPerc = 15;
+                    break;
+            }
+        }
         switch (version){
             case BTN_REGULAR:
-                initRegularField();
+                initRegularField(initPerc);
                 break;
             case BTN_SAMURAI:
-                initSamuraiField();
+                initSamuraiField(initPerc);
+                break;
+            case BTN_FREIFORM:
+                initFreiformField(initPerc);
                 break;
             default:
                 System.err.println("No valid Fieldtype selected");
@@ -55,60 +83,152 @@ public class PlayfieldController {
         }
 
     }
+    private void initRegularField( int initPerc) {
+        textFields=new TextField[9][9];
+        for (int c=0; c<9;c++){
+            for (int r=0; r<9;r++){
+                TextField t = h.defaultTextField();
+                textFields[c][r] = t;
+                setStyle(c,r,t,"");
+                playfield.add(t,c,r);
+            }
+        }
+        textFields=initFields(textFields,initPerc);
+    }
+    public SimpleBoard initFirstNumbers(int anchorC, int anchorR, TextField[][] initField) {
+        for (int i = 0; i<5;i++){
+            int randC = new Random().nextInt(9);
+            int randR = new Random().nextInt(9);
+            int randNum = new Random().nextInt(9);
+            initField[randC][randR].setText(randNum+"");
+            initField[randC][randR].setDisable(true);
+            setStyle(randC+anchorC,randR+anchorR,initField[randC+anchorC][randR+anchorR],"-fx-text-inner-color: darkblue;");
+        }
+        return h.getBoardSolution(initField, anchorC, anchorR);
+    }
+    public void setStyle(int c, int r, TextField t,String style) {
+        if (version!=BTN_FREIFORM) {
+            h.setNormalBoxesStyle(c, r, t,style);
+        }else {
+            System.out.println("Freiform");
+            //TODO: Freiform Styling
+        }
+    }
 
-    private void initSamuraiField() {
+    private TextField[][] initFields(TextField[][] textFields, int initPerc) {
+        if (initPerc==0)return textFields;
+        int anchorC = 0;
+        int anchorR = 0;
+        double size = textFields.length * textFields.length;
+        size=(size*(initPerc+new Random().nextInt(9)))/100;
+        int value = Math.toIntExact(Math.round(size));
+        TextField[][]initField = textFields;
+        SimpleBoard solution = initFirstNumbers(anchorC, anchorR, initField);
+        while (solution==null){
+            try{
+                initFields(textFields,initPerc);
+            }catch (StackOverflowError e){
+
+            }
+        }
+        textFields = initField;
+        SimpleSolver s = new SimpleSolver();
+        SimpleBoard board = h.getCurrentBoard(textFields, anchorC, anchorR);
+        if (solution != null && !s.validAndFull(board)){
+            while (value > 0){
+                int randC = new Random().nextInt(9);
+                int randR = new Random().nextInt(9);
+                if (textFields[randC+anchorC][randR +anchorR].getText().trim().equals("")){
+                    textFields[randC+anchorC][randR+anchorR].setText(""+solution.get(randC+anchorC,randR+anchorR).getValue());
+                    textFields[randC+anchorC][randR+anchorR].setDisable(true);
+                    setStyle(randC+anchorC,randR+anchorR,textFields[randC+anchorC][randR+anchorR],"-fx-text-inner-color: darkblue;");
+                    value--;
+                }
+            }
+        }
+        return textFields;
+    }
+
+
+    private void initSamuraiField(int initPerc) {
         textFields=new TextField[21][21];
         for (int c=0; c<21;c++){
             for (int r=0; r<21;r++){
                 //show coordinates
                 //t.setText(c+" "+r);
-                TextField t = new SudokuHelper().defaultTextField();
+                TextField t = h.defaultTextField();
                 //t.setPadding(new Insets(15,15,15,15));
                 textFields[c][r] = t;
-                setCornerBoxesStyle(c, r, t);
-                setMiddleBoxesStyle(c, r, t);
-                hideUnusedBoxes(c, r, t);
+                setStyle(c,r,t,"");
+                h.hideUnusedBoxes(c, r, t);
                 playfield.add(t,c,r);
             }
         }
+        textFields=initFields(textFields,initPerc);
+
     }
 
-    private static void hideUnusedBoxes(int c, int r, TextField t) {
-        if(((c>=9 && c<12) && (r<6 || r>=15))||((c<6 || c>=15)&&(r>=9 && r<12))){
-            t.setVisible(false);
-        }
-    }
 
-    private static void setMiddleBoxesStyle(int c, int r, TextField t) {
-        if ((((c>2 && c<6)||(c>14 && c<18))&&((r>2 && r<6)||r>14 && r<18)||((c>8 && c<12)&&(r>8 && r<12)) )){
-            t.setStyle("-fx-background-color:rgb(220,240,240)");
-        }
-    }
-
-    private static void setCornerBoxesStyle(int c, int r, TextField t) {
-        if ((c<=2||(c>=6 && c<=8)||(c>=12 && c<=14)|| c>=18) && ((r<=2||(r>=6 && r<=8))||(r>=12 && r<=14)||r>=18)) {
-            t.setStyle("-fx-background-color:rgb(220,240,255)");
-        }
-    }
-
-    private void initRegularField() {
+    private void initFreiformField(int initPerc) {
         textFields=new TextField[9][9];
+        int[][] x =createGroups();
         for (int c=0; c<9;c++){
             for (int r=0; r<9;r++){
-                TextField t = new SudokuHelper().defaultTextField();
-                //t.setPadding(new Insets(15,15,15,15));
+                TextField t = h.defaultTextField();
                 textFields[c][r] = t;
-                if ((c<3||c>=6) && (r<3||r>=6) || (r>=3 && r<6) && (c>=3 && c<6)) {
-                    t.setStyle("-fx-background-color:rgb(220,240,255)");
-                }
                 playfield.add(t,c,r);
             }
         }
+        textFields=initFields(textFields,initPerc);
     }
-
+    private int[][] createGroups() {
+        int[][]groups=new int[9][9];
+        int x = 0;
+        int y = 0;
+        int cnt = 0;
+        int num = 1;
+        while (true) {
+            List<String> list = new ArrayList();
+            groups[y][x]=num;
+            try {
+                if (y > 0 && groups[y - 1][x] == 0) {
+                    list.add("topFree");
+                }
+                if (y < 9 && groups[y + 1][x] == 0) {
+                    list.add("botFree");
+                }
+                if (x > 0 && groups[y][x - 1] == 0) {
+                    list.add("leftFree");
+                }
+                if (x < 9 && groups[y][x + 1] == 0) {
+                    list.add("rightFree");
+                }
+                Random rand = new Random();
+                String pick = list.get(rand.nextInt(list.size()));
+                if (pick == "topFree")y=y-1;
+                if (pick == "botFree")y=y+1;
+                if (pick == "leftFree")x=x-1;
+                if (pick == "rightFree")x=x+1;
+                cnt++;
+                //if (cnt==9)break;
+                if (cnt==9){
+                    num++;
+                    cnt=0;
+                }
+                groups[y][x] = num;
+                System.out.println(list.toString() + "\t " + pick + "\t " + num + "\ty:"+y+"\tx:"+x);
+            } catch (IndexOutOfBoundsException e) {
+            } catch (IllegalArgumentException e) {
+            }
+            if (cnt==9 && num == 1){
+                break;
+            }
+        }
+        //groups[y][x] = x+1;
+        return groups;
+    }
     @FXML
     public void handleButtonSolve(ActionEvent event){
-        SudokuHelper h = new SudokuHelper();
         switch (version) {
             case BTN_REGULAR:
                 h.solveBoard(textFields, 0, 0);
@@ -126,7 +246,6 @@ public class PlayfieldController {
         btnSolve.setDisable(true);
     }
     public void handleButtonHint(ActionEvent event){
-        SudokuHelper h = new SudokuHelper();
         switch (version) {
             case BTN_REGULAR:
                 h.getHint(textFields, 0, 0);
@@ -171,14 +290,10 @@ public class PlayfieldController {
                     row+= i.toString() + ";";
                 }catch (NumberFormatException e){
                     row+=  " ;";
-
                 }
             }
             saveGame.put(""+r,row);
         }
-
-
-
         try(
                 FileWriter saveFile=new FileWriter("savegames/JSON/"+file+".json")
         ) {
