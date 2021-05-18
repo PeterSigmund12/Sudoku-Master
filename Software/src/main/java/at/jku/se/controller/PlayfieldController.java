@@ -1,5 +1,6 @@
 package at.jku.se.controller;
 
+import at.jku.se.sudokumaster.AnchorPoint;
 import at.jku.se.sudokumaster.SimpleBoard;
 import at.jku.se.sudokumaster.SimpleSolver;
 import at.jku.se.utility.NewScreen;
@@ -17,10 +18,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -46,6 +46,7 @@ public class PlayfieldController {
     String version ="";
     String generateType="";
     String diffculty ="";
+    int fieldSize;
     SudokuHelper h = new SudokuHelper();
 
     public void initializePlayfield() {
@@ -69,12 +70,15 @@ public class PlayfieldController {
         }
         switch (version){
             case BTN_REGULAR:
+                fieldSize=9;
                 initRegularField(initPerc);
                 break;
             case BTN_SAMURAI:
+                fieldSize=21;
                 initSamuraiField(initPerc);
                 break;
             case BTN_FREIFORM:
+                fieldSize=9;
                 initFreiformField(initPerc);
                 break;
             default:
@@ -132,10 +136,14 @@ public class PlayfieldController {
             }
         }
         textFields = initField;
-        SimpleSolver s = new SimpleSolver();
-        SimpleBoard board = h.getCurrentBoard(textFields, anchorC, anchorR);
+        SimpleSolver s = new SimpleSolver(textFields.length);
+        SimpleBoard board = h.getCurrentBoard(textFields);
+        AnchorPoint[] points = s.getAnchorpoints();
         if (solution != null && !s.validAndFull(board)){
             while (value > 0){
+                AnchorPoint point = points[new Random().nextInt(points.length)];
+                anchorC = point.getCol();
+                anchorR = point.getRow();
                 int randC = new Random().nextInt(9);
                 int randR = new Random().nextInt(9);
                 if (textFields[randC+anchorC][randR +anchorR].getText().trim().equals("")){
@@ -234,11 +242,12 @@ public class PlayfieldController {
                 h.solveBoard(textFields, 0, 0);
                 break;
             case BTN_SAMURAI:
-                h.solveBoard(textFields, 6, 6);
-                h.solveBoard(textFields, 0, 0);
-                h.solveBoard(textFields, 12, 0);
-                h.solveBoard(textFields, 0, 12);
-                h.solveBoard(textFields, 12, 12);
+                h.solveBoard(textFields);
+                //h.solveBoard(textFields, 6, 6);
+                //h.solveBoard(textFields, 0, 0);
+                //h.solveBoard(textFields, 12, 0);
+                //h.solveBoard(textFields, 0, 12);
+                //h.solveBoard(textFields, 12, 12);
                 break;
             default:
                 break;

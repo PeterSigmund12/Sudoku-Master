@@ -34,7 +34,43 @@ public class SudokuHelper {
         });
         return t;
     }
+    public void solveBoard(TextField[][] fields) {
+        SimpleBoard solution = getBoardSolution(fields);
+        for (int r = 0; r<fields.length;r++){
+            for (int c=0;c<fields.length;c++) {
+                if (fields[c][r].getText().trim().equals("") && fields[c][r].isVisible()){
+                    if (solution == null){
+                        // Empty Cells with no Solution
+                        fields[c][r].setStyle("-fx-background-color:rgb(255,200,200);");
+                    }else {
+                        // Empty Cells with Solution
+                        fields[c][r].setText(""+solution.get(c,r).getValue());
+                        fields[c][r].setStyle("-fx-background-color:rgb(160,240,130);");
+                    }
+                }//else {
+                //textFields[c][r].setStyle("-fx-background-color:rgb(255,255,255)");
+                //}
+            }
+        }
+    }
+    public SimpleBoard getBoardSolution(TextField[][] fields) {
+        SimpleSolver s = new SimpleSolver(fields.length);
+        SimpleBoard part = getCurrentBoard(fields);
+        return s.solve(part);
+    }
 
+    public SimpleBoard getCurrentBoard(TextField[][] fields) {
+        SimpleBoard part = new SimpleBoard(fields.length);
+        for (int r = 0; r< fields.length;r++){
+            for (int c=0;c<fields.length;c++) {
+                try{
+                    Integer i = Integer.valueOf(fields[c][r].getText());
+                    part.setValue(c,r,i);
+                }catch (NumberFormatException e){}
+            }
+        }
+        return part;
+    }
     public void solveBoard(TextField[][] fields,int anchorC,int anchorR) {
         SimpleBoard solution = getBoardSolution(fields, anchorC, anchorR);
         for (int r = 0; r<9;r++){
@@ -56,7 +92,7 @@ public class SudokuHelper {
     }
     public void getHint(TextField[][] fields,int anchorC,int anchorR) {
         SimpleBoard solution = getBoardSolution(fields, anchorC, anchorR);
-        SimpleSolver s = new SimpleSolver();
+        SimpleSolver s = new SimpleSolver(fields.length);
         SimpleBoard board = getCurrentBoard(fields, anchorC, anchorR);
         if (solution != null && !s.validAndFull(board)){
             while (true){
@@ -71,13 +107,13 @@ public class SudokuHelper {
         }
     }
     public SimpleBoard getBoardSolution(TextField[][] fields, int anchorC, int anchorR) {
-        SimpleSolver s = new SimpleSolver();
+        SimpleSolver s = new SimpleSolver(fields.length);
         SimpleBoard part = getCurrentBoard(fields, anchorC, anchorR);
         return s.solve(part);
     }
 
     public SimpleBoard getCurrentBoard(TextField[][] fields, int anchorC, int anchorR) {
-        SimpleBoard part = new SimpleBoard();
+        SimpleBoard part = new SimpleBoard(fields.length);
         for (int r = 0; r<9;r++){
             for (int c=0;c<9;c++) {
                 try{

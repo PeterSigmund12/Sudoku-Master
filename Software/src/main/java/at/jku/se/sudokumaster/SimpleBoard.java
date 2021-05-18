@@ -2,16 +2,18 @@ package at.jku.se.sudokumaster;
 
 public class SimpleBoard {
 
-    private Cell[][] board =  new Cell[9][9];
+    private Cell[][] board;
+    //private Cell[][] board =  new Cell[21][21];
     //private String generateType = "";
 
 
-    public SimpleBoard(){
-
+    public SimpleBoard(int size){
+        board = new Cell[size][size];
     }
-    public SimpleBoard(SimpleBoard init){
-        for (int c=0; c<9;c++){
-            for (int r=0; r<9;r++){
+    public SimpleBoard(SimpleBoard init,int size){
+        board = new Cell[size][size];
+        for (int c=0; c<size;c++){
+            for (int r=0; r<size;r++){
                 board[c][r] =  init.get(c,r);
             }
         }
