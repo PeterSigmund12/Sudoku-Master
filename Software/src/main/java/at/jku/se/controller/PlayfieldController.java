@@ -71,11 +71,11 @@ public class PlayfieldController {
         switch (version){
             case BTN_REGULAR:
                 fieldSize=9;
-                initRegularField(initPerc);
+                initField(initPerc);
                 break;
             case BTN_SAMURAI:
                 fieldSize=21;
-                initSamuraiField(initPerc);
+                initField(initPerc);
                 break;
             case BTN_FREIFORM:
                 fieldSize=9;
@@ -87,13 +87,15 @@ public class PlayfieldController {
         }
 
     }
-    private void initRegularField( int initPerc) {
-        textFields=new TextField[9][9];
-        for (int c=0; c<9;c++){
-            for (int r=0; r<9;r++){
+
+    private void initField( int initPerc) {
+        textFields=new TextField[fieldSize][fieldSize];
+        for (int c=0; c<fieldSize;c++){
+            for (int r=0; r<fieldSize;r++){
                 TextField t = h.defaultTextField();
                 textFields[c][r] = t;
                 setStyle(c,r,t,"");
+                h.hideUnusedBoxes(c, r, t);
                 playfield.add(t,c,r);
             }
         }
@@ -108,7 +110,7 @@ public class PlayfieldController {
             initField[randC][randR].setDisable(true);
             setStyle(randC+anchorC,randR+anchorR,initField[randC+anchorC][randR+anchorR],"-fx-text-inner-color: darkblue;");
         }
-        return h.getBoardSolution(initField, anchorC, anchorR);
+        return h.getBoardSolution(initField);
     }
     public void setStyle(int c, int r, TextField t,String style) {
         if (version!=BTN_FREIFORM) {
@@ -157,24 +159,6 @@ public class PlayfieldController {
         return textFields;
     }
 
-
-    private void initSamuraiField(int initPerc) {
-        textFields=new TextField[21][21];
-        for (int c=0; c<21;c++){
-            for (int r=0; r<21;r++){
-                //show coordinates
-                //t.setText(c+" "+r);
-                TextField t = h.defaultTextField();
-                //t.setPadding(new Insets(15,15,15,15));
-                textFields[c][r] = t;
-                setStyle(c,r,t,"");
-                h.hideUnusedBoxes(c, r, t);
-                playfield.add(t,c,r);
-            }
-        }
-        textFields=initFields(textFields,initPerc);
-
-    }
 
 
     private void initFreiformField(int initPerc) {
@@ -238,16 +222,8 @@ public class PlayfieldController {
     @FXML
     public void handleButtonSolve(ActionEvent event){
         switch (version) {
-            case BTN_REGULAR:
-                h.solveBoard(textFields, 0, 0);
-                break;
-            case BTN_SAMURAI:
+            case BTN_REGULAR: case BTN_SAMURAI:
                 h.solveBoard(textFields);
-                //h.solveBoard(textFields, 6, 6);
-                //h.solveBoard(textFields, 0, 0);
-                //h.solveBoard(textFields, 12, 0);
-                //h.solveBoard(textFields, 0, 12);
-                //h.solveBoard(textFields, 12, 12);
                 break;
             default:
                 break;
@@ -256,13 +232,10 @@ public class PlayfieldController {
     }
     public void handleButtonHint(ActionEvent event){
         switch (version) {
-            case BTN_REGULAR:
-                h.getHint(textFields, 0, 0);
+            case BTN_REGULAR: case BTN_SAMURAI:
+                h.getHint(textFields);
                 break;
-            case BTN_SAMURAI:
-                h.getHint(textFields, 6, 6);
                 //TODO: Choose Random Playfield, but check if solvable
-                break;
             default:
                 break;
         }

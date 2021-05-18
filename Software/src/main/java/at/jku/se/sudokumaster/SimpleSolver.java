@@ -7,27 +7,7 @@ public class SimpleSolver {
     private Set<Integer> numbers;
     private Set<AnchorPoint> anchorpoints;
     public int fieldSize;
-    /*
-    public SimpleSolver(){
-        numbers = new HashSet<>();
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(4);
-        numbers.add(5);
-        numbers.add(6);
-        numbers.add(7);
-        numbers.add(8);
-        numbers.add(9);
-        anchorpoints = new HashSet<>();
-        anchorpoints.add(new AnchorPoint(0,0));
-        anchorpoints.add(new AnchorPoint(12,0));
-        anchorpoints.add(new AnchorPoint(0,12));
-        anchorpoints.add(new AnchorPoint(6,6));
-        anchorpoints.add(new AnchorPoint(12,12));
-    }
 
-     */
     public SimpleSolver(int size){
         numbers = new HashSet<>();
         numbers.add(1);
@@ -49,6 +29,7 @@ public class SimpleSolver {
             anchorpoints.add(new AnchorPoint(0,12));
             anchorpoints.add(new AnchorPoint(6,6));
             anchorpoints.add(new AnchorPoint(12,12));
+
         }
     }
     public AnchorPoint[] getAnchorpoints(){

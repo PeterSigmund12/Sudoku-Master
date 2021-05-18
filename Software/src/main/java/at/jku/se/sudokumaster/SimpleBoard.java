@@ -3,9 +3,6 @@ package at.jku.se.sudokumaster;
 public class SimpleBoard {
 
     private Cell[][] board;
-    //private Cell[][] board =  new Cell[21][21];
-    //private String generateType = "";
-
 
     public SimpleBoard(int size){
         board = new Cell[size][size];
