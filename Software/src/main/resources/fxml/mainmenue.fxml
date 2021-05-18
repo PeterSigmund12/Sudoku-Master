@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="root" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.MainMenueController">
+<AnchorPane id="root" prefHeight="235.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.MainMenueController">
    <children>
-      <ImageView fx:id="iv_" fitHeight="200.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iv_" fitHeight="280.0" fitWidth="755.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/SudokuMainMenue.jpg" />
          </image>
@@ -24,7 +24,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="btnExit" layoutX="392.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="35.0" prefWidth="155.0" text="Beenden" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <Button fx:id="btnExit" layoutX="200.0" layoutY="196.0" mnemonicParsing="false" onAction="#handleButtonExit" prefHeight="35.0" prefWidth="155.0" text="Beenden" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,6 +34,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnMainHighScores" layoutX="443.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleButtonMainHighScores" text="High Scores" />
+      <Button fx:id="btnMainHighScores" layoutX="200.0" layoutY="154.0" mnemonicParsing="false" onAction="#handleButtonMainHighScores" prefHeight="35.0" prefWidth="288.0" text="High Scores" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>
