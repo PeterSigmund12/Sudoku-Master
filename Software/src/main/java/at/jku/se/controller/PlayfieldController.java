@@ -309,7 +309,7 @@ public class PlayfieldController {
             JSONObject gameinfos = (JSONObject) obj;
 
             for(int i = 0; i<fieldSize;i++){
-                String row
+         
                 row = (String)gameinfos.get(""+i);
                 splitRow =row.split(";");
                 for(int j = 0; j<splitRow.length;j++){
