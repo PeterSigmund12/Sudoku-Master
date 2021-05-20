@@ -22,8 +22,10 @@ public class SudokuMaster extends Application {
        // scene.getStylesheets().add("/styles/mainmenu.css");
 
         stage.setTitle("Sudoku-Master");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {

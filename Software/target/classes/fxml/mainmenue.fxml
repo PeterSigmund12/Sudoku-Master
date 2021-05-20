@@ -9,7 +9,7 @@
 
 <AnchorPane id="root" prefHeight="235.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.MainMenueController">
    <children>
-      <ImageView fx:id="iv_" fitHeight="280.0" fitWidth="755.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="iv_" fitHeight="280.0" fitWidth="755.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../img/SudokuMainMenue.jpg" />
          </image>

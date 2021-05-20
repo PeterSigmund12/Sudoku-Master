@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/PlayfieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/PlayfieldController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SudokuMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SudokuMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/mainmenue.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/mainmenue.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fxml/mainmenue.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/mainmenue.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

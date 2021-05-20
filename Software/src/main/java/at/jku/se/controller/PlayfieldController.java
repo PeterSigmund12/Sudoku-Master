@@ -10,12 +10,14 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import org.json.simple.JSONObject;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -23,6 +25,8 @@ import java.util.List;
 
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class PlayfieldController {
     TextField[][]textFields;
@@ -47,6 +51,8 @@ public class PlayfieldController {
     String generateType="";
     String diffculty ="";
     int fieldSize;
+    String fileName="";
+    boolean isNew = true;
     SudokuHelper h = new SudokuHelper();
 
     public void initializePlayfield() {
@@ -55,7 +61,7 @@ public class PlayfieldController {
         playfield.setHgap(5);
         playfield.setVgap(5);
         int initPerc = 0;
-        if (generateType.equals("automatisch")){
+        if (generateType.equals("automatisch") && isNew){
             switch (diffculty){
                 case BTN_EASY:
                     initPerc = 40;
@@ -294,6 +300,29 @@ public class PlayfieldController {
         }
     }
 
+    public void LoadGameInfos(){
+        String row = "";
+        JSONParser jsonparser = new JSONParser();
+        String[] splitRow;
+        try {
+            Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+fileName+".json"));
+            JSONObject gameinfos = (JSONObject) obj;
+
+            for(int i = 0; i<fieldSize;i++){
+                String row
+                row = (String)gameinfos.get(""+i);
+                splitRow =row.split(";");
+                for(int j = 0; j<splitRow.length;j++){
+                    textFields[j][i].setText(splitRow[j]);
+                }
+            }
+
+        } catch (IOException| ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void initData(String version, String generateType, String diffculty) {
         this.generateType = generateType;
@@ -301,4 +330,16 @@ public class PlayfieldController {
         this.version = version;
         initializePlayfield();
     }
+
+    public void loadInitData(String version, String generateType, String diffculty, String fileName) {
+        this.generateType = generateType;
+        this.diffculty = diffculty;
+        this.version = version;
+        this.fileName = fileName;
+        this.isNew = false;
+        initializePlayfield();
+        LoadGameInfos();
+    }
+
+
 }

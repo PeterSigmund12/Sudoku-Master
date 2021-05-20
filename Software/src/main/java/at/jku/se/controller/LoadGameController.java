@@ -7,7 +7,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -61,6 +65,11 @@ public class LoadGameController implements Initializable {
 
     @FXML
     private ImageView ivSavegame;
+
+    String version ="";
+    String generateType="";
+    String difficulty ="";
+    String fileName = "";
 
     @FXML
     public void handleButtonBackSavedMainMen(ActionEvent event) throws IOException {
@@ -116,6 +125,34 @@ public class LoadGameController implements Initializable {
          */
     }
 
+    @FXML
+    public void handleButtonLoadGame(ActionEvent event) throws IOException {
+
+        //NewScreen.openNewScreen(event,"/fxml/spielfeld.fxml");
+        Node node = (Node) event.getSource();
+        Stage oldStage = (Stage)node.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/fxml/spielfeld.fxml"));
+        Parent root2 = null;
+        try {
+            root2 = (Parent) fxmlLoader.load();
+            PlayfieldController controller = fxmlLoader.getController();
+            controller.loadInitData(version, generateType, difficulty,fileName);
+
+        } catch (IOException ex) {
+        }
+        Stage stage = new Stage();
+        stage.setTitle("old game");
+        stage.sizeToScene();
+        stage.setScene(new Scene(root2));
+        stage.show();
+        stage.setMaximized(true);
+        //stage.setMinHeight(1200);
+        //stage.setMinWidth(1600);
+        oldStage.close();
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -146,15 +183,18 @@ public class LoadGameController implements Initializable {
                     try {
                         Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+newValue+".json"));
                         JSONObject gameinfos = (JSONObject) obj;
-                      String name = (String)gameinfos.get("FileName");
+                         fileName = (String)gameinfos.get("FileName");
 
 
-                            File imgfile = new File("./savegames/img/"+name+".png");
+                            File imgfile = new File("./savegames/img/"+fileName+".png");
                             Image image = new Image(imgfile.toURI().toString());
-                            lbGameName.setText(name);
+                            lbGameName.setText(fileName);
                             lbVersion.setText((String)gameinfos.get("version"));
                             lbGenerate.setText((String)gameinfos.get("generateType"));
                             lbDifficulty.setText((String)gameinfos.get("difficulty"));
+                            difficulty = (String)gameinfos.get("difficulty");
+                            version = (String)gameinfos.get("version");
+                            generateType = (String)gameinfos.get("generateType");
                         ivSavegame.setImage(image);
 
                     } catch (IOException|ParseException e) {
