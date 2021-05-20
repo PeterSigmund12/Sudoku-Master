@@ -270,9 +270,9 @@ public class PlayfieldController {
         saveGame.put("generateType", generateType);
         saveGame.put("difficulty",diffculty);
         String row="";
-        for (int r = 0; r<9;r++){
+        for (int r = 0; r<fieldSize;r++){
             row="";
-            for (int c=0;c<9;c++) {
+            for (int c=0;c<fieldSize;c++) {
                 try{
                     Integer i = Integer.valueOf(textFields[c][r].getText());
                     row+= i.toString() + ";";
@@ -309,7 +309,7 @@ public class PlayfieldController {
             JSONObject gameinfos = (JSONObject) obj;
 
             for(int i = 0; i<fieldSize;i++){
-         
+
                 row = (String)gameinfos.get(""+i);
                 splitRow =row.split(";");
                 for(int j = 0; j<splitRow.length;j++){
