@@ -4,12 +4,14 @@ import at.jku.se.sudokumaster.AnchorPoint;
 import at.jku.se.sudokumaster.SimpleBoard;
 import at.jku.se.sudokumaster.SimpleSolver;
 import at.jku.se.utility.NewScreen;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import org.json.simple.JSONObject;
@@ -20,6 +22,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -43,8 +47,9 @@ public class PlayfieldController {
     private GridPane playfield;
     @FXML
     private Button btnSolve;
+
     @FXML
-    private Button btnHint;
+    private Label lbClock;
 
     //anchorpoints 0/0 , 12/0 , 0/12 , 6/6 , 12/12
     String version ="";
@@ -54,6 +59,8 @@ public class PlayfieldController {
     String fileName="";
     boolean isNew = true;
     SudokuHelper h = new SudokuHelper();
+    Thread timerThread;
+    String time ="";
 
     public void initializePlayfield() {
         playfield.setGridLinesVisible(false);
@@ -90,6 +97,10 @@ public class PlayfieldController {
             default:
                 System.err.println("No valid Fieldtype selected");
                 break;
+        }
+
+        if(isNew){
+            startTimer();
         }
 
     }
@@ -248,12 +259,19 @@ public class PlayfieldController {
     }
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
+        if(isNew){
+            stopTimer();
+        }
         NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
     }
 
 
     @FXML
     public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
+
+        if(isNew){
+            stopTimer();
+        }
         JSONObject saveGame = new JSONObject();
         String file ="";
         TextInputDialog dialog = new TextInputDialog();
@@ -269,6 +287,7 @@ public class PlayfieldController {
         saveGame.put("version", version);
         saveGame.put("generateType", generateType);
         saveGame.put("difficulty",diffculty);
+        saveGame.put("time",time);
         String row="";
         for (int r = 0; r<fieldSize;r++){
             row="";
@@ -321,6 +340,38 @@ public class PlayfieldController {
             e.printStackTrace();
         }
 
+    }
+
+    public void startTimer(){
+
+        final Date timerStart = new Date();
+        System.out.println(timerStart);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.HOUR_OF_DAY, 1);
+
+        timerThread = new Thread(() -> {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+
+            while (true) {
+                try {
+                    Thread.sleep(1000); //1 second
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                time = simpleDateFormat.format(new Date().getTime() - cal.getTime().getTime());
+                System.out.println(new Date());
+                Platform.runLater(() -> {
+                    lbClock.setText(time);
+                });
+            }
+        });
+        timerThread.start();//start the thread and its ok
+    }
+    public void stopTimer(){
+        timerThread.stop();
     }
 
 
