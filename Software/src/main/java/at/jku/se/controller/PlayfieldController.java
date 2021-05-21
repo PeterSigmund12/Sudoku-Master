@@ -61,6 +61,8 @@ public class PlayfieldController {
     SudokuHelper h = new SudokuHelper();
     Thread timerThread;
     String time ="";
+    long loadtime = 0;
+    long longtimer = 0;
 
     public void initializePlayfield() {
         playfield.setGridLinesVisible(false);
@@ -270,6 +272,8 @@ public class PlayfieldController {
     public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
 
         if(isNew){
+            loadtime = longtimer*-1;
+            isNew = false;
             stopTimer();
         }
         JSONObject saveGame = new JSONObject();
@@ -287,7 +291,8 @@ public class PlayfieldController {
         saveGame.put("version", version);
         saveGame.put("generateType", generateType);
         saveGame.put("difficulty",diffculty);
-        saveGame.put("time",time);
+        saveGame.put("time","" + (longtimer*-1));
+        startTimer();
         String row="";
         for (int r = 0; r<fieldSize;r++){
             row="";
@@ -317,6 +322,7 @@ public class PlayfieldController {
             e.printStackTrace();
             Thread.currentThread().interrupt();
         }
+
     }
 
     public void LoadGameInfos(){
@@ -326,6 +332,7 @@ public class PlayfieldController {
         try {
             Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+fileName+".json"));
             JSONObject gameinfos = (JSONObject) obj;
+             loadtime = Long.parseLong((String)gameinfos.get("time"));
 
             for(int i = 0; i<fieldSize;i++){
 
@@ -336,6 +343,9 @@ public class PlayfieldController {
                 }
             }
 
+            startTimer();
+
+
         } catch (IOException| ParseException e) {
             e.printStackTrace();
         }
@@ -345,23 +355,25 @@ public class PlayfieldController {
     public void startTimer(){
 
         final Date timerStart = new Date();
-        System.out.println(timerStart);
+        final Date timertesten = new Date(loadtime);
+        System.out.println(timertesten);
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.HOUR_OF_DAY, 1);
-
+        if(isNew) {
+            cal.add(Calendar.HOUR_OF_DAY, 1);
+        }
         timerThread = new Thread(() -> {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-
+            time = simpleDateFormat.format(timertesten.getTime());
             while (true) {
                 try {
                     Thread.sleep(1000); //1 second
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-                time = simpleDateFormat.format(new Date().getTime() - cal.getTime().getTime());
+                 longtimer = new Date().getTime() - cal.getTime().getTime()-timertesten.getTime();
+                time = simpleDateFormat.format(longtimer);
                 System.out.println(new Date());
                 Platform.runLater(() -> {
                     lbClock.setText(time);
