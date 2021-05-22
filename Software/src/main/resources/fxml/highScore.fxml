@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="368.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.HighScoreBoardController">
    <children>
-      <SplitPane dividerPositions="0.5" prefHeight="363.0" prefWidth="500.0">
+      <SplitPane dividerPositions="0.5" prefHeight="363.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane prefHeight="364.0" prefWidth="376.0">
                <children>
