@@ -5,15 +5,25 @@ import at.jku.se.sudokumaster.SimpleBoard;
 import at.jku.se.sudokumaster.SimpleSolver;
 import at.jku.se.utility.NewScreen;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import javafx.util.Callback;
 import org.json.simple.JSONObject;
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -40,6 +50,8 @@ public class PlayfieldController {
     private static final String BTN_EASY = "leicht";
     private static final String BTN_MEDIUM = "mittel";
     private static final String BTN_HARD = "schwer";
+    private Set<Color> colors;
+
     @FXML
     private AnchorPane root;
 
@@ -50,26 +62,45 @@ public class PlayfieldController {
 
     @FXML
     private Label lbClock;
+    private Button btnHint;
+    @FXML
+    private GridPane colorList;
+    @FXML
+    private ListView colorListNew;
 
     //anchorpoints 0/0 , 12/0 , 0/12 , 6/6 , 12/12
     String version ="";
     String generateType="";
     String diffculty ="";
     int fieldSize;
+    int initPerc = 0;
     String fileName="";
     boolean isNew = true;
     SudokuHelper h = new SudokuHelper();
+    ObservableList<String> data= FXCollections.observableArrayList(
+            "chocolate", "salmon", "gold", "coral", "darkorchid",
+            "darkgoldenrod", "lightsalmon", "black", "rosybrown"
+    );
     Thread timerThread;
     String time ="";
     long loadtime = 0;
     long longtimer = 0;
 
     public void initializePlayfield() {
+        colors = new HashSet<>();
+        colors.add(Color.AQUA);
+        colors.add(Color.AZURE);
+        colors.add(Color.LIME);
+        colors.add(Color.OLIVE);
+        colors.add(Color.PURPLE);
+        colors.add(Color.DARKGRAY);
+        colors.add(Color.HONEYDEW);
+        colors.add(Color.TOMATO);
+        colors.add(Color.LAVENDER);
         playfield.setGridLinesVisible(false);
         playfield.setAlignment(Pos.CENTER);
         playfield.setHgap(5);
         playfield.setVgap(5);
-        int initPerc = 0;
         if (generateType.equals("automatisch") && isNew){
             switch (diffculty){
                 case BTN_EASY:
@@ -86,15 +117,15 @@ public class PlayfieldController {
         switch (version){
             case BTN_REGULAR:
                 fieldSize=9;
-                initField(initPerc);
+                initField();
                 break;
             case BTN_SAMURAI:
                 fieldSize=21;
-                initField(initPerc);
+                initField();
                 break;
             case BTN_FREIFORM:
                 fieldSize=9;
-                initFreiformField(initPerc);
+                initFreiformField();
                 break;
             default:
                 System.err.println("No valid Fieldtype selected");
@@ -107,7 +138,7 @@ public class PlayfieldController {
 
     }
 
-    private void initField( int initPerc) {
+    private void initField() {
         textFields=new TextField[fieldSize][fieldSize];
         for (int c=0; c<fieldSize;c++){
             for (int r=0; r<fieldSize;r++){
@@ -120,19 +151,64 @@ public class PlayfieldController {
         }
         textFields=initFields(textFields,initPerc);
     }
-    public SimpleBoard initFirstNumbers(int anchorC, int anchorR, TextField[][] initField) {
+    private void initFreiformField() {
+        textFields=new TextField[fieldSize][fieldSize];
+        Set<Color>col = new HashSet<>(colors);
+        colorListNew.setItems(data);
+        for (int c=0; c<fieldSize;c++){
+            //Label l = new Label();
+            Color cl = col.iterator().next();
+            Circle circle = new Circle(20,20,20);
+            circle.setFill(cl);
+            //l.setText(""+c);
+            //l.setStyle("-fx-text-inner-color:"+cl+" ;");
+            col.remove(cl);
+            //colorListNew.getItems().add(new ListCell<>(c,circle));
+            colorList.add(circle,0,c);
+            for (int r=0; r<fieldSize;r++){
+                TextField t = h.defaultTextField();
+                textFields[c][r] = t;
+                t.setDisable(true);
+                //setStyle(c,r,t,"");
+                h.hideUnusedBoxes(c, r, t);
+                playfield.add(t,c,r);
+            }
+        }
+        /*
+        colorList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println("ListView selection changed from oldValue = "
+                        + oldValue + " to newValue = " + newValue);
+            }
+        });
+
+         */
+        textFields=initFields(textFields,initPerc);
+    }
+    public SimpleBoard initFirstNumbers(TextField[][] initField) {
+        SimpleSolver s = new SimpleSolver(initField.length);
+        AnchorPoint[] points = s.getAnchorpoints();
         for (int i = 0; i<5;i++){
-            int randC = new Random().nextInt(9);
-            int randR = new Random().nextInt(9);
+            AnchorPoint point = points[new Random().nextInt(points.length)];
+            int randC = new Random().nextInt(9)+point.getCol();
+            int randR = new Random().nextInt(9)+point.getRow();
             int randNum = new Random().nextInt(9);
             initField[randC][randR].setText(randNum+"");
-            initField[randC][randR].setDisable(true);
-            setStyle(randC+anchorC,randR+anchorR,initField[randC+anchorC][randR+anchorR],"-fx-text-inner-color: darkblue;");
+            if(h.getBoardSolution(initField)!=null){
+                initField[randC][randR].setDisable(true);
+                setStyle(randC,randR,initField[randC][randR],"-fx-text-inner-color: darkblue;");
+            }else {
+                initField[randC][randR] = new TextField();
+                i--;
+            }
+
         }
+
         return h.getBoardSolution(initField);
     }
     public void setStyle(int c, int r, TextField t,String style) {
-        if (version!=BTN_FREIFORM) {
+        if (!version.equals(BTN_FREIFORM)) {
             h.setNormalBoxesStyle(c, r, t,style);
         }else {
             System.out.println("Freiform");
@@ -147,19 +223,10 @@ public class PlayfieldController {
         double size = textFields.length * textFields.length;
         size=(size*(initPerc+new Random().nextInt(9)))/100;
         int value = Math.toIntExact(Math.round(size));
-        TextField[][]initField = textFields;
-        SimpleBoard solution = initFirstNumbers(anchorC, anchorR, initField);
-        while (solution==null){
-            try{
-                initFields(textFields,initPerc);
-            }catch (StackOverflowError e){
-
-            }
-        }
-        textFields = initField;
+        SimpleBoard solution = initFirstNumbers(textFields);
         SimpleSolver s = new SimpleSolver(textFields.length);
-        SimpleBoard board = h.getCurrentBoard(textFields);
         AnchorPoint[] points = s.getAnchorpoints();
+        SimpleBoard board = h.getCurrentBoard(textFields);
         if (solution != null && !s.validAndFull(board)){
             while (value > 0){
                 AnchorPoint point = points[new Random().nextInt(points.length)];
@@ -403,6 +470,7 @@ public class PlayfieldController {
         initializePlayfield();
         LoadGameInfos();
     }
+
 
 
 }

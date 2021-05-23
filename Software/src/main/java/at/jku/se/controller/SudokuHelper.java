@@ -102,7 +102,7 @@ public class SudokuHelper {
         if ((((c > 2 && c < 6) || (c > 14 && c < 18)) && ((r > 2 && r < 6) || r > 14 && r < 18) || ((c > 8 && c < 12) && (r > 8 && r < 12)))) {
             t.setStyle("-fx-opacity: 1;-fx-background-color:rgb(220,240,240);"+style);
         }else if((c <= 2 || (c >= 6 && c <= 8) || (c >= 12 && c <= 14) || c >= 18) && ((r <= 2 || (r >= 6 && r <= 8)) || (r >= 12 && r <= 14) || r >= 18)){
-            t.setStyle("-fx-opacity: 1;-fx-background-color:rgb(220,240,255);"+style);
+            t.setStyle("-fx-opacity: 1;-fx-background-color:rgb(220,240,240);"+style);
         }else {
             t.setStyle("-fx-opacity: 1;"+style);
 

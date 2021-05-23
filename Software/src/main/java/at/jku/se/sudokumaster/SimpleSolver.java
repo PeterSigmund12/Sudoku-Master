@@ -7,6 +7,7 @@ public class SimpleSolver {
     private Set<Integer> numbers;
     private Set<AnchorPoint> anchorpoints;
     public int fieldSize;
+    private int cnt = 0;
 
     public SimpleSolver(int size){
         numbers = new HashSet<>();
@@ -35,7 +36,6 @@ public class SimpleSolver {
     public AnchorPoint[] getAnchorpoints(){
         return anchorpoints.toArray(new AnchorPoint[anchorpoints.size()]);
     }
-    //anchorpoints 0/0 , 12/0 , 0/12 , 6/6 , 12/12
 
     boolean validRow(SimpleBoard b, int r,int anchorC, int anchorR){
         Set<Integer>num = new HashSet<>(numbers);
@@ -117,7 +117,7 @@ public class SimpleSolver {
         }
         return true;
     }
-    boolean valid(SimpleBoard b){
+    public boolean valid(SimpleBoard b){
         return allColumnsValid(b) && allRowsValid(b) && allBoxesValid(b);
     }
     boolean full(SimpleBoard b){
@@ -136,6 +136,12 @@ public class SimpleSolver {
     }
 
     public SimpleBoard solve(SimpleBoard part){
+        cnt++;
+        if (cnt > 150000){
+            cnt=0;
+            return null;
+        }
+
         if (!valid(part)){
             return null;
         }
@@ -143,27 +149,28 @@ public class SimpleSolver {
             return part;
         }
         SimpleBoard b = new SimpleBoard(part,fieldSize);
-        for (AnchorPoint ap : anchorpoints) {
-            int apC = ap.getCol();
-            int apR = ap.getRow();
-            for (int r = 0; r < 9; r++) {
-                for (int c = 0; c < 9; c++) {
-                    Cell cell = b.get(c+apC, r+apR);
-                    if (cell == null) {
-                        Set<Integer> num = new HashSet<>(numbers);
-                        for (Integer number : num) {
-                            b.setValue(c+apC, r+apR, number);
-                            SimpleBoard solution = solve(b);
-                            if (solution != null) {
-                                return solution;
+        if(cnt < 100000){
+            for (AnchorPoint ap : anchorpoints) {
+                int apC = ap.getCol();
+                int apR = ap.getRow();
+                for (int r = 0; r < 9; r++) {
+                    for (int c = 0; c < 9; c++) {
+                        Cell cell = b.get(c+apC, r+apR);
+                        if (cell == null) {
+                            Set<Integer> num = new HashSet<>(numbers);
+                            for (Integer number : num) {
+                                b.setValue(c+apC, r+apR, number);
+                                SimpleBoard solution = solve(b);
+                                if (solution != null) {
+                                    return solution;
+                                }
                             }
+                            return null;
                         }
-                        return null;
                     }
                 }
             }
         }
         return null;
     }
-    //TODO: getHint
 }
