@@ -37,13 +37,25 @@ public class HighScoreBoardController implements Initializable {
 
     String selected;
 
-
+    //Initiale Punkte
+    //Punkte für schwierigkeit
     static final int SCORE_LEICHT = 3000;
     static final int SCORE_MITTEL = 6000;
     static final int SCORE_SCHWER = 9000;
+    //Punkte für Komplexität
+    static final int MULTIP_FREI = 1;
+    static final int MULTIP_SAM = 2;
+    static final int MULTIP_FREIF = 3;
+
+    //Abzüge
+    //Wieviel abzug pro Minute (Sekunde/60)
     static final int POINTS_MINUS_TIME = 5;
+    //Abzüge für clicks
     static final int POINTS_MINUS_CLICKS = 10;
+    //Abzüge für Hints
     static final int POINTS_MINUS_HINTS = 250;
+
+
 
     @FXML
     private Label lbGameName;
@@ -83,9 +95,9 @@ public class HighScoreBoardController implements Initializable {
      * @param clicks Contains how many moves the player has made
      * @param hints Contains how many hints the player has used
      * @param difficulty Contains the difficulty level of the game
-     * @return
+     * @return the high score a user achieved
      */
-    public int calculateScore( int time, int clicks, int hints, String difficulty) {
+    public int calculateScore( int time, int clicks, int hints, String difficulty, String version) {
         int availablePoints;
 
         //Points for each difficulty
@@ -103,25 +115,53 @@ public class HighScoreBoardController implements Initializable {
                 System.out.println("schwer");
                 availablePoints =  SCORE_SCHWER;
                 break;
+                default:
+                System.out.println("no match");
+                availablePoints = 0;
+        }
+        System.out.println(availablePoints + " 4");
+        switch(version)
+        {
+            case "rb_Sa_regulaer":
+                System.out.println("rb_Sa_regulaer");
+                availablePoints =  availablePoints*MULTIP_FREI;
+                break;
+            case "rb_Sa_Freiform":
+                System.out.println("rb_Sa_Freiform");
+                availablePoints =  availablePoints*MULTIP_FREIF;
+                break;
+            case "rb_Sa_Samurai":
+                System.out.println("rb_Sa_Samurai");
+                availablePoints =  availablePoints * MULTIP_SAM;
+                break;
             default:
                 System.out.println("no match");
                 availablePoints = 0;
         }
 
-        availablePoints = availablePoints - clicks* POINTS_MINUS_CLICKS;
-
-        //TODO -Zeit
-        availablePoints = availablePoints - time* POINTS_MINUS_TIME;
-
+        System.out.println(availablePoints + " 1");
+        //Reduction of points
+        //Reduction
+        availablePoints = availablePoints - clicks * POINTS_MINUS_CLICKS;
+        System.out.println(availablePoints+ " 2");
+        //points deducted for time played
+        availablePoints = availablePoints - (time/60) * POINTS_MINUS_TIME;
+        System.out.println(availablePoints + " 3");
+        //reduction for hints that were used in the game
         availablePoints = availablePoints - hints* POINTS_MINUS_HINTS;
-
+        System.out.println(availablePoints + " 4");
         // TODO verify if ok
         if (availablePoints < 0) {
             availablePoints = 0;
         }
+        System.out.println(availablePoints + " total points");
         return availablePoints;
     }
 
+
+    /**
+     *
+     */
     public void fillListView() {
         highScoreGameList = FXCollections.observableArrayList();
 
@@ -147,56 +187,59 @@ public class HighScoreBoardController implements Initializable {
                     //read in the current document
                     Object obj = jsonparser.parse(new FileReader("./savegames/JSON/" + newValue + ".json"));
                     JSONObject gameinfos = (JSONObject) obj;
-
                     //access the file name of the document
                     String name = (String) gameinfos.get("FileName");
 
-                    //make sure strring exists
-                    /*String points = "0";
-                    points = (String) gameinfos.get("Score");
-
-                    int pointsInt = Optional.ofNullable(points)
-                            .map(Ints::tryParse)
-                            .orElse(0);
-                     */
-                    //FIXME
-                    // -Remove points
-                    // -Sicherstellen, dass alle werte existieren
-                    // -Aufruf Methode
-
-
-                  Integer i =   Integer.parseInt(String.valueOf(gameinfos.get("Clicks")));
-
                     int clicks;
-                    if (i != null ){
-                        clicks = i;
-                    } else {clicks = 0;}
-                     /*
-                  int i =   Integer.parseInt(String.valueOf(gameinfos.get("Zeit")));
-                    if ( i != 0){
-                         = (int) gameinfos.get("Zeit");
-                    } else {i = 0;}
+                    if(gameinfos.containsKey("Clicks")){
+                        //wenn existiert
+                        clicks =   Integer.parseInt(String.valueOf(gameinfos.get("Clicks")));
+                    } else {
+                        // If doesn't exist, do nothing
+                        clicks = 0;
+                    }
+
+                    //long
+                    int zeit;
+                    if(gameinfos.containsKey("Zeit")){
+                        //wenn existiert
+                         zeit =   Integer.parseInt(String.valueOf(gameinfos.get("Zeit")));
+                    } else {
+                        // If doesn't exist, do nothing
+                         zeit = 0;
+                        System.out.println("doesnt exist");
+                    }
                     int hints;
-                    if (gameinfos.get("hints")!= null){
-                   //     hints = (int) gameinfos.get("hints");
-                    } {hints = 0;}
-                    int difficulty;
-                    if (gameinfos.get("difficulty")!= null){
-                      //  difficulty = (int) gameinfos.get("difficulty");
-                    }  {difficulty = 0;}
-                    System.out.println(time);
-                    System.out.println(clicks);
-                    System.out.println(hints);
-                    System.out.println(difficulty);
+                    if(gameinfos.containsKey("hints")){
+                        //wenn existiert
+                        hints =   Integer.parseInt(String.valueOf(gameinfos.get("hints")));
+                    } else {
+                        // If doesn't exist, do nothing
+                        hints = 0;
+                        System.out.println("doesnt exist");
+                    }
+                    String difficulty;
+                    if(gameinfos.containsKey("difficulty")){
+                        //wenn existiert
+                        difficulty =   String.valueOf(gameinfos.get("difficulty"));
+                    } else {
+                        // If doesn't exist, do nothing
+                        difficulty = "na";
+                        System.out.println("doesnt exist");
+                    }
+                    String version;
+                    if(gameinfos.containsKey("version")){
+                        //wenn existiert
+                        version =   String.valueOf(gameinfos.get("version"));
+                    } else {
+                        // If doesn't exist, do nothing
+                        version = "na";
+                        System.out.println("doesnt exist");
+                    }
 
+                   int pointsInt = calculateScore( zeit,  clicks,  hints,  difficulty, version);
 
- */
-         //           System.out.println(time);
-
-
-                  //  System.out.println(time);
-                    int pointsInt=0;
-
+                    System.out.println(pointsInt + "total points");
                     //create a new HighScore Object to store value
                     HighScoreObject hSObject = new HighScoreObject(pointsInt, name);
                     //add value to the highscore list
@@ -237,6 +280,8 @@ public class HighScoreBoardController implements Initializable {
                             .findAny()
                             .orElse(null);
 
+                            System.out.println(test.getGameName());
+                            System.out.println(test.getHighScore());
 
                     System.out.println(test.getGameName());
 
@@ -246,9 +291,8 @@ public class HighScoreBoardController implements Initializable {
                    // lbGameName.setText(name);
 
                     //TODO search in liste for namen und rufe dann in der liste den score auf.
-
                     lbVersion.setText((String)gameinfos.get("version"));
-                    lbScore.setText((String)gameinfos.get("Score"));
+                    lbScore.setText(String.valueOf(test.getHighScore()));
                     lbDiff.setText((String)gameinfos.get("difficulty"));
                     lbTime.setText((String)gameinfos.get("Zeit"));
                     lbGen.setText((String)gameinfos.get("generateType"));
@@ -258,14 +302,6 @@ public class HighScoreBoardController implements Initializable {
                 } catch (IOException|ParseException e) {
                     e.printStackTrace();
                 }
-
-
-
-
-
-
-
-
 
 
                 selected = newValue;
