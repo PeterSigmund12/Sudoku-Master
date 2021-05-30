@@ -2,22 +2,22 @@ package at.jku.se.utility;
 import java.util.Comparator;
 
 public class HighScoreObject {
-    int highScore;
+    Long highScore;
     String gameName;
     //Zeit
     //schwierigkeit
 
 
-    public HighScoreObject(int highScore, String gameName) {
+    public HighScoreObject(Long highScore, String gameName) {
         this.highScore = highScore;
         this.gameName = gameName;
     }
 
-    public int getHighScore() {
+    public Long getHighScore() {
         return highScore;
     }
 
-    public void setHighScore(int highScore) {
+    public void setHighScore(Long highScore) {
         this.highScore = highScore;
     }
 
@@ -31,14 +31,14 @@ public class HighScoreObject {
 
     public static Comparator<HighScoreObject> aHighScore = new Comparator<HighScoreObject>() {
         public int compare(HighScoreObject o1, HighScoreObject o2) {
-            int highScore1 = o1.getHighScore();
-            int highScore2 = o2.getHighScore();
+            Long highScore1 = o1.getHighScore();
+            Long highScore2 = o2.getHighScore();
 
             /*For ascending order*/
             // return highScore1-highScore2;
 
             /*For descending order*/
-            return highScore2 - highScore1;
+            return Math.toIntExact(highScore2 - highScore1);
 
         }
     };
