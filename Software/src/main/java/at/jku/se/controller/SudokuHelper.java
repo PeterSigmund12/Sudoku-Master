@@ -54,6 +54,7 @@ public class SudokuHelper {
             }
         }
     }
+
     public SimpleBoard getBoardSolution(TextField[][] fields) {
         SimpleSolver s = new SimpleSolver(fields.length);
         SimpleBoard part = getCurrentBoard(fields);
