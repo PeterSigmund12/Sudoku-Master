@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,11 +13,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="568.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.PlayfieldController">
+<AnchorPane fx:id="root" prefHeight="566.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.PlayfieldController">
    <children>
-      <SplitPane dividerPositions="0.766612641815235" layoutX="13.0" layoutY="15.0" prefHeight="226.0" prefWidth="654.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <SplitPane dividerPositions="0.766612641815235" layoutX="13.0" layoutY="35.0" prefHeight="517.0" prefWidth="785.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="35.0">
          <items>
-            <GridPane fx:id="playfield" minHeight="40.0" minWidth="40.0" prefHeight="224.0" prefWidth="404.0">
+            <GridPane fx:id="playfield" minHeight="40.0" minWidth="40.0" prefHeight="539.0" prefWidth="597.0">
             </GridPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="155.0">
                <children>
@@ -43,5 +46,24 @@
             </AnchorPane>
          </items>
       </SplitPane>
+      <MenuBar fx:id="menuBar" layoutX="14.0" layoutY="10.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleButtonSaveGame" text="Save" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleButtonHint" onMenuValidation="#handleButtonBacktoMain" text="Hint" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleButtonSolve" text="Solve" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Back" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

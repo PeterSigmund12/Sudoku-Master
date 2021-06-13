@@ -12,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -53,6 +50,8 @@ public class LoadGameController implements Initializable {
     private Button btnContinue;
     @FXML
     private Button btnBackSavedMainMen;
+    @FXML
+    private MenuBar menuBar;
 
     @FXML
     private Label lbGameName;
@@ -74,8 +73,23 @@ public class LoadGameController implements Initializable {
     @FXML
     public void handleButtonBackSavedMainMen(ActionEvent event) throws IOException {
 
-        NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
 
+        Stage oldStage = (Stage)menuBar.getScene().getWindow();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(NewScreen.class.getResource("/fxml/mainmenue.fxml"));
+        Parent root2 = null;
+        try {
+            root2 = (Parent) fxmlLoader.load();
+        } catch (IOException ex) {
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Load game");
+        stage.setScene(new Scene(root2));
+
+        stage.show();
+        oldStage.close();
     }
 
     @FXML
@@ -116,13 +130,15 @@ public class LoadGameController implements Initializable {
 
     @FXML
     public void handleButtonDeleteGame(ActionEvent event) throws IOException {
-        /*
+       /* ivSavegame.setImage(null);
         File file = new File("./savegames/img/"+selected+".png");
         file.delete();
-        file = new File("./savegames/JSON/"+selected+".json");
-        file.delete();
-        FillListView();
-         */
+        System.out.println(selected);
+        File jfile = new File("./savegames/JSON/"+selected+".json");
+        selected = "";
+        jfile.delete();
+        fillListView();*/
+
     }
 
     @FXML
