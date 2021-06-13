@@ -2,6 +2,7 @@ package at.jku.se.controller;
 
 import at.jku.se.utility.HighScoreObject;
 import at.jku.se.utility.NewScreen;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,7 +23,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.*;
+
 
 
 public class HighScoreBoardController implements Initializable {
@@ -99,6 +102,7 @@ public class HighScoreBoardController implements Initializable {
     public Long calculateScore(Long time, int clicks, int hints, String difficulty, String version) {
         Long availablePoints;
 
+        System.out.println(difficulty);
         //Points for each difficulty
         switch(difficulty)
         {
@@ -114,6 +118,7 @@ public class HighScoreBoardController implements Initializable {
                 System.out.println("schwer");
                 availablePoints = Long.valueOf(SCORE_SCHWER);
                 break;
+
                 default:
                 System.out.println("no match");
                 availablePoints = Long.valueOf(0);
@@ -121,16 +126,16 @@ public class HighScoreBoardController implements Initializable {
         System.out.println(availablePoints + " 4");
         switch(version)
         {
-            case "rb_Sa_regulaer":
-                System.out.println("rb_Sa_regulaer");
+            case "rbSaRegulaer":
+                System.out.println("rbSaregulaer");
                 availablePoints =  availablePoints*MULTIP_FREI;
                 break;
-            case "rb_Sa_Freiform":
-                System.out.println("rb_Sa_Freiform");
+            case "rbSaFreiform":
+                System.out.println("rbSaFreiform");
                 availablePoints =  availablePoints*MULTIP_FREIF;
                 break;
-            case "rb_Sa_Samurai":
-                System.out.println("rb_Sa_Samurai");
+            case "rbSaSamurai":
+                System.out.println("rbSaSamurai");
                 availablePoints =  availablePoints * MULTIP_SAM;
                 break;
             default:
@@ -144,7 +149,23 @@ public class HighScoreBoardController implements Initializable {
         availablePoints = availablePoints - clicks * POINTS_MINUS_CLICKS;
         System.out.println(availablePoints+ " 2");
         //points deducted for time played
-        availablePoints = availablePoints - (time/60) * POINTS_MINUS_TIME;
+
+
+        final Date timerCurrent = new Date(0);
+        final Date timerData = new Date(time);
+
+        Date diff = new Date(timerCurrent.getTime() - timerData.getTime());
+
+
+        System.out.println(diff);
+
+        System.out.println(time);
+        System.out.println("sollte auslesen" + time);
+
+
+        availablePoints = availablePoints - time * POINTS_MINUS_TIME;
+
+
         System.out.println(availablePoints + " 3");
         //reduction for hints that were used in the game
         availablePoints = availablePoints - hints* POINTS_MINUS_HINTS;
@@ -179,7 +200,7 @@ public class HighScoreBoardController implements Initializable {
             //as long as file exists
             for (File f : files) {
                 newValue = f.getName().substring(0, f.getName().length() - 5);
-                System.out.println(newValue);
+
 
                 try {
                     // get values string and get points,
@@ -197,17 +218,21 @@ public class HighScoreBoardController implements Initializable {
                         // If doesn't exist, do nothing
                         clicks = 0;
                     }
+                    System.out.println(clicks);
 
                     //long
                     Long zeit;
-                    if(gameinfos.containsKey("Zeit")){
+                    if(gameinfos.containsKey("time")){
                         //wenn existiert
-                         zeit =   Long.valueOf(String.valueOf(gameinfos.get("Zeit")));
+                         zeit =   Long.valueOf(String.valueOf(gameinfos.get("time")));
                     } else {
                         // If doesn't exist, do nothing
                          zeit = Long.valueOf(0);
-                        System.out.println("doesnt exist");
+                        System.out.println("doesnt exist t");
                     }
+                    System.out.println(zeit);
+
+
                     int hints;
                     if(gameinfos.containsKey("hints")){
                         //wenn existiert
@@ -215,8 +240,10 @@ public class HighScoreBoardController implements Initializable {
                     } else {
                         // If doesn't exist, do nothing
                         hints = 0;
-                        System.out.println("doesnt exist");
+                        System.out.println("doesnt exist h");
                     }
+                    System.out.println(hints);
+
                     String difficulty;
                     if(gameinfos.containsKey("difficulty")){
                         //wenn existiert
@@ -224,8 +251,9 @@ public class HighScoreBoardController implements Initializable {
                     } else {
                         // If doesn't exist, do nothing
                         difficulty = "na";
-                        System.out.println("doesnt exist");
+                        System.out.println("doesnt exist d");
                     }
+
                     String version;
                     if(gameinfos.containsKey("version")){
                         //wenn existiert
@@ -233,12 +261,11 @@ public class HighScoreBoardController implements Initializable {
                     } else {
                         // If doesn't exist, do nothing
                         version = "na";
-                        System.out.println("doesnt exist");
+                        System.out.println("doesnt exist v");
                     }
 
                    Long pointsInt = calculateScore( zeit,  clicks,  hints,  difficulty, version);
 
-                    System.out.println(pointsInt + "total points");
                     //create a new HighScore Object to store value
                     HighScoreObject hSObject = new HighScoreObject(pointsInt, name);
                     //add value to the highscore list
@@ -248,7 +275,6 @@ public class HighScoreBoardController implements Initializable {
                     e.printStackTrace();
 
                 }
-
 
             }
         }
@@ -300,15 +326,15 @@ public class HighScoreBoardController implements Initializable {
                     //zeit
 
                     Long timestamp;
-                    if(gameinfos.containsKey("Zeit")){
+                    if(gameinfos.containsKey("time")){
                         //wenn existiert
-                        timestamp =   Long.valueOf(String.valueOf(gameinfos.get("Zeit")));
+                        timestamp =   Long.valueOf(String.valueOf(gameinfos.get("time")));
                     } else {
                         // If doesn't exist, do nothing
                         timestamp = Long.valueOf(0);
                     }
 
-                    //long millis = timestamp % 1000;
+                    long millis = timestamp % 1000;
                     long second = (timestamp / 1000) % 60;
                     long minute = (timestamp / (1000 * 60)) % 60;
                     long hour = (timestamp / (1000 * 60 * 60)) % 24;
