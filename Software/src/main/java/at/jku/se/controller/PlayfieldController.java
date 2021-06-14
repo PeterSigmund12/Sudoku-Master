@@ -11,10 +11,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Label;
@@ -23,6 +28,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.json.simple.JSONObject;
 import javax.imageio.ImageIO;
@@ -60,6 +66,8 @@ public class PlayfieldController {
     @FXML
     private Button btnSolve;
 
+    @FXML
+    private MenuBar menuBar;
     @FXML
     private Label lbClock;
     private Button btnHint;
@@ -328,10 +336,24 @@ public class PlayfieldController {
     }
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
-        if(isNew){
+
             stopTimer();
+        Stage oldStage = (Stage)menuBar.getScene().getWindow();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(NewScreen.class.getResource("/fxml/mainmenue.fxml"));
+        Parent root2 = null;
+        try {
+            root2 = (Parent) fxmlLoader.load();
+        } catch (IOException ex) {
         }
-        NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
+        Stage stage = new Stage();
+        stage.setTitle("Load game");
+        stage.setScene(new Scene(root2));
+
+        stage.show();
+        oldStage.close();
     }
 
 
