@@ -1,8 +1,8 @@
 package at.jku.se.controller;
 
+import at.jku.se.controller.HighScore.CalculateScore;
 import at.jku.se.utility.HighScoreObject;
 import at.jku.se.utility.NewScreen;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,7 +23,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -38,25 +37,6 @@ public class HighScoreBoardController implements Initializable {
     ObservableList<String> highScoreGameList;
 
     String selected;
-
-    //Initiale Punkte
-    //Punkte für schwierigkeit
-    static final int SCORE_LEICHT = 3000;
-    static final int SCORE_MITTEL = 6000;
-    static final int SCORE_SCHWER = 9000;
-    //Punkte für Komplexität
-    static final int MULTIP_FREI = 1;
-    static final int MULTIP_SAM = 2;
-    static final int MULTIP_FREIF = 3;
-
-    //Abzüge
-    //Wieviel abzug pro Minute (Sekunde/60)
-    static final int POINTS_MINUS_TIME = 5;
-    //Abzüge für clicks
-    static final int POINTS_MINUS_CLICKS = 10;
-    //Abzüge für Hints
-    static final int POINTS_MINUS_HINTS = 250;
-
 
 
     @FXML
@@ -90,94 +70,6 @@ public class HighScoreBoardController implements Initializable {
         fillListView();
     }
 
-    /**
-     *
-     *
-     * @param time Conveys how much time the player has spend on the Game
-     * @param clicks Contains how many moves the player has made
-     * @param hints Contains how many hints the player has used
-     * @param difficulty Contains the difficulty level of the game
-     * @return the high score a user achieved
-     */
-    public Long calculateScore(Long time, int clicks, int hints, String difficulty, String version) {
-        Long availablePoints;
-
-        System.out.println(difficulty);
-        //Points for each difficulty
-        switch(difficulty)
-        {
-            case "leicht":
-                System.out.println("leicht");
-              availablePoints = Long.valueOf(SCORE_LEICHT);
-                break;
-            case "mittel":
-                System.out.println("mittel");
-                availablePoints = Long.valueOf(SCORE_MITTEL);
-                break;
-            case "schwer":
-                System.out.println("schwer");
-                availablePoints = Long.valueOf(SCORE_SCHWER);
-                break;
-
-                default:
-                System.out.println("no match");
-                availablePoints = Long.valueOf(0);
-        }
-        System.out.println(availablePoints + " 4");
-        switch(version)
-        {
-            case "rbSaRegulaer":
-                System.out.println("rbSaregulaer");
-                availablePoints =  availablePoints*MULTIP_FREI;
-                break;
-            case "rbSaFreiform":
-                System.out.println("rbSaFreiform");
-                availablePoints =  availablePoints*MULTIP_FREIF;
-                break;
-            case "rbSaSamurai":
-                System.out.println("rbSaSamurai");
-                availablePoints =  availablePoints * MULTIP_SAM;
-                break;
-            default:
-                System.out.println("no match");
-                availablePoints = Long.valueOf(0);
-        }
-
-        System.out.println(availablePoints + " 1");
-        //Reduction of points
-        //Reduction
-        availablePoints = availablePoints - clicks * POINTS_MINUS_CLICKS;
-        System.out.println(availablePoints+ " 2");
-        //points deducted for time played
-
-
-        final Date timerCurrent = new Date(0);
-        final Date timerData = new Date(time);
-
-        Date diff = new Date(timerCurrent.getTime() - timerData.getTime());
-
-
-        System.out.println(diff);
-
-        System.out.println(time);
-        System.out.println("sollte auslesen" + time);
-
-
-        availablePoints = availablePoints - time * POINTS_MINUS_TIME;
-
-
-        System.out.println(availablePoints + " 3");
-        //reduction for hints that were used in the game
-        availablePoints = availablePoints - hints* POINTS_MINUS_HINTS;
-        System.out.println(availablePoints + " 4");
-        // TODO verify if ok
-        if (availablePoints < 0) {
-            availablePoints = Long.valueOf(0);
-        }
-        System.out.println(availablePoints + " total points");
-        return availablePoints;
-    }
-
 
     /**
      *
@@ -201,7 +93,7 @@ public class HighScoreBoardController implements Initializable {
             for (File f : files) {
                 newValue = f.getName().substring(0, f.getName().length() - 5);
 
-
+                //einlesen von werten
                 try {
                     // get values string and get points,
                     //read in the current document
@@ -264,7 +156,7 @@ public class HighScoreBoardController implements Initializable {
                         System.out.println("doesnt exist v");
                     }
 
-                   Long pointsInt = calculateScore( zeit,  clicks,  hints,  difficulty, version);
+                   Long pointsInt = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
 
                     //create a new HighScore Object to store value
                     HighScoreObject hSObject = new HighScoreObject(pointsInt, name);
