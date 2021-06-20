@@ -9,12 +9,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -58,12 +63,42 @@ public class HighScoreBoardController implements Initializable {
     @FXML
     private ImageView ivSavegame;
 
+    @FXML
+    private MenuBar menuBar;
+
+
 
 
     @FXML
     public void handleButtonBackHighMainMen(ActionEvent event) throws IOException {
         NewScreen.openNewScreen(event, "/fxml/mainmenue.fxml");
     }
+
+    @FXML
+    public void handleButtonBacktoMain(ActionEvent event) throws IOException {
+
+        Stage oldStage = (Stage)menuBar.getScene().getWindow();
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(NewScreen.class.getResource("/fxml/mainmenue.fxml"));
+        Parent root2 = null;
+        try {
+            root2 = (Parent) fxmlLoader.load();
+        } catch (IOException ex) {
+        }
+        Stage stage = new Stage();
+        stage.setTitle("Load game");
+        stage.setScene(new Scene(root2));
+
+        stage.show();
+        oldStage.close();
+
+
+    }
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -95,6 +130,9 @@ public class HighScoreBoardController implements Initializable {
 
                 //einlesen von werten
                 try {
+
+
+
                     // get values string and get points,
                     //read in the current document
                     Object obj = jsonparser.parse(new FileReader("./savegames/JSON/" + newValue + ".json"));
@@ -191,6 +229,7 @@ public class HighScoreBoardController implements Initializable {
                     JSONObject gameinfos = (JSONObject) obj;
                     String name = (String)gameinfos.get("FileName");
 
+                    //das passende Highscore object für die Liste
                     HighScoreObject customer;
                             HighScoreObject test = higScoreList.stream()
                             .filter(HighScoreObject -> name.equals(HighScoreObject.getGameName()))
@@ -202,7 +241,7 @@ public class HighScoreBoardController implements Initializable {
 
                     System.out.println(test.getGameName());
 
-
+                    //display game image
                    File imgfile = new File("./savegames/img/"+name+".png");
                    Image image = new Image(imgfile.toURI().toString());
                    // lbGameName.setText(name);
@@ -215,8 +254,9 @@ public class HighScoreBoardController implements Initializable {
 
 
 
-                    //zeit
+                    //Time
 
+                    //time read in
                     Long timestamp;
                     if(gameinfos.containsKey("time")){
                         //wenn existiert
@@ -226,10 +266,16 @@ public class HighScoreBoardController implements Initializable {
                         timestamp = Long.valueOf(0);
                     }
 
-                    long millis = timestamp % 1000;
-                    long second = (timestamp / 1000) % 60;
-                    long minute = (timestamp / (1000 * 60)) % 60;
-                    long hour = (timestamp / (1000 * 60 * 60)) % 24;
+                    /*
+                    Date output,
+                     */
+                    final Date timerCurrent = new Date(0);
+                    final Date timerData = new Date(timestamp);
+                    Date diff2 = new Date( timerCurrent.getTime() -timerData.getTime() );
+                    //Formating and priting
+                    long second = ((diff2.getSeconds()));
+                    long minute = ((diff2.getMinutes()));
+                    long hour = ((diff2.getHours()));
                     String time = String.format("%02d:%02d:%02d", hour, minute, second);
 
                     lbTime.setText(time);
@@ -246,6 +292,7 @@ public class HighScoreBoardController implements Initializable {
 
 
     }
+
 
 
 }

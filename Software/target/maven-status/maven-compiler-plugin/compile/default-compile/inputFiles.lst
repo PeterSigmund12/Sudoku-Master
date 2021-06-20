@@ -4,6 +4,7 @@
 /Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/Cell.java
 /Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/LoadGameController.java
 /Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/utility/NewScreen.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/HighScore/CalculateScore.java
 /Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/HighScoreBoardController.java
 /Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SimpleBoard.java
 /Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/utility/HighScoreObject.java
