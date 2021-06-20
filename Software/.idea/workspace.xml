@@ -6,16 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/JSON/Spiel6.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/img/Spiel 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/img/Spiel5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/img/Spiel6.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/savegames/JSON/help.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/PlayfieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/PlayfieldController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loadGame.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/spielfeld.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/spielfeld.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/jku/se/sudokuMaster/SudokuMaster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
