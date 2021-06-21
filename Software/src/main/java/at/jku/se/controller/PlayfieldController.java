@@ -366,6 +366,7 @@ public class PlayfieldController {
             stopTimer();
         }
         JSONObject saveGame = new JSONObject();
+        JSONObject newFreiform = new JSONObject();
         String file ="";
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Save Game");
@@ -376,13 +377,43 @@ public class PlayfieldController {
 
             file = fileName.get();
         }
+        String row="";
+        SimpleBoard board = h.getCurrentBoard(textFields);
+        int groupID = 0;
+        System.out.println(generateType);
+       /* if( generateType.equals("manuell") && version.equals(BTN_FREIFORM)) {
+            System.out.println("testen");
+            for (int rows = 0; rows < fieldSize; rows++) {
+                row = "";
+                for (int col = 0; col < fieldSize; col++) {
+                    System.out.println(""+board.get(col, rows).getGroupId());
+                    if(board.get(col, rows).getGroupId() != null) {
+                        groupID = board.get(col, rows).getGroupId();
+
+                    }
+                    else{
+                        groupID = 0;
+                    }
+                    row += groupID + ";";
+                }
+                newFreiform.put("" + rows, row);
+            }
+
+            Random random = new Random();
+            try(
+            FileWriter saveFreiform = new FileWriter("freiform/Freiformtyp" + random.nextInt(100) + ".json");
+            ){
+                saveFreiform.write(newFreiform.toJSONString());
+            }
+
+        }*/
         saveGame.put("FileName", file);
         saveGame.put("version", version);
         saveGame.put("generateType", generateType);
         saveGame.put("difficulty",diffculty);
         saveGame.put("time","" + (longtimer*-1));
         startTimer();
-        String row="";
+
         for (int r = 0; r<fieldSize;r++){
             row="";
             for (int c=0;c<fieldSize;c++) {
@@ -395,6 +426,8 @@ public class PlayfieldController {
             }
             saveGame.put(""+r,row);
         }
+
+
         try(
                 FileWriter saveFile=new FileWriter("savegames/JSON/"+file+".json")
         ) {

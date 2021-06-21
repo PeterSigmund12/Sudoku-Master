@@ -1,20 +1,26 @@
 package at.jku.se.controller;
 
+import at.jku.se.controller.HighScore.CalculateScore;
 import at.jku.se.utility.HighScoreObject;
 import at.jku.se.utility.NewScreen;
-import javafx.application.Platform;
+import at.jku.se.utility.NewScreenDropDown;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -23,14 +29,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 
 public class HighScoreBoardController implements Initializable {
-    @FXML
-    private Button btnBackHighMainMen;
+   
 
     @FXML
     ListView<String> lvHighScoreGames;
@@ -38,25 +42,6 @@ public class HighScoreBoardController implements Initializable {
     ObservableList<String> highScoreGameList;
 
     String selected;
-
-    //Initiale Punkte
-    //Punkte für schwierigkeit
-    static final int SCORE_LEICHT = 3000;
-    static final int SCORE_MITTEL = 6000;
-    static final int SCORE_SCHWER = 9000;
-    //Punkte für Komplexität
-    static final int MULTIP_FREI = 1;
-    static final int MULTIP_SAM = 2;
-    static final int MULTIP_FREIF = 3;
-
-    //Abzüge
-    //Wieviel abzug pro Minute (Sekunde/60)
-    static final int POINTS_MINUS_TIME = 5;
-    //Abzüge für clicks
-    static final int POINTS_MINUS_CLICKS = 10;
-    //Abzüge für Hints
-    static final int POINTS_MINUS_HINTS = 250;
-
 
 
     @FXML
@@ -78,6 +63,10 @@ public class HighScoreBoardController implements Initializable {
     @FXML
     private ImageView ivSavegame;
 
+    @FXML
+    private MenuBar menuBar;
+
+
 
 
     @FXML
@@ -85,97 +74,21 @@ public class HighScoreBoardController implements Initializable {
         NewScreen.openNewScreen(event, "/fxml/mainmenue.fxml");
     }
 
+    @FXML
+    public void handleButtonBacktoMain(ActionEvent event) throws IOException {
+
+        Stage oldStage = (Stage)menuBar.getScene().getWindow();
+
+        NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
+
+    }
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fillListView();
-    }
-
-    /**
-     *
-     *
-     * @param time Conveys how much time the player has spend on the Game
-     * @param clicks Contains how many moves the player has made
-     * @param hints Contains how many hints the player has used
-     * @param difficulty Contains the difficulty level of the game
-     * @return the high score a user achieved
-     */
-    public Long calculateScore(Long time, int clicks, int hints, String difficulty, String version) {
-        Long availablePoints;
-
-        System.out.println(difficulty);
-        //Points for each difficulty
-        switch(difficulty)
-        {
-            case "leicht":
-                System.out.println("leicht");
-              availablePoints = Long.valueOf(SCORE_LEICHT);
-                break;
-            case "mittel":
-                System.out.println("mittel");
-                availablePoints = Long.valueOf(SCORE_MITTEL);
-                break;
-            case "schwer":
-                System.out.println("schwer");
-                availablePoints = Long.valueOf(SCORE_SCHWER);
-                break;
-
-                default:
-                System.out.println("no match");
-                availablePoints = Long.valueOf(0);
-        }
-        System.out.println(availablePoints + " 4");
-        switch(version)
-        {
-            case "rbSaRegulaer":
-                System.out.println("rbSaregulaer");
-                availablePoints =  availablePoints*MULTIP_FREI;
-                break;
-            case "rbSaFreiform":
-                System.out.println("rbSaFreiform");
-                availablePoints =  availablePoints*MULTIP_FREIF;
-                break;
-            case "rbSaSamurai":
-                System.out.println("rbSaSamurai");
-                availablePoints =  availablePoints * MULTIP_SAM;
-                break;
-            default:
-                System.out.println("no match");
-                availablePoints = Long.valueOf(0);
-        }
-
-        System.out.println(availablePoints + " 1");
-        //Reduction of points
-        //Reduction
-        availablePoints = availablePoints - clicks * POINTS_MINUS_CLICKS;
-        System.out.println(availablePoints+ " 2");
-        //points deducted for time played
-
-
-        final Date timerCurrent = new Date(0);
-        final Date timerData = new Date(time);
-
-        Date diff = new Date(timerCurrent.getTime() - timerData.getTime());
-
-
-        System.out.println(diff);
-
-        System.out.println(time);
-        System.out.println("sollte auslesen" + time);
-
-
-        availablePoints = availablePoints - time * POINTS_MINUS_TIME;
-
-
-        System.out.println(availablePoints + " 3");
-        //reduction for hints that were used in the game
-        availablePoints = availablePoints - hints* POINTS_MINUS_HINTS;
-        System.out.println(availablePoints + " 4");
-        // TODO verify if ok
-        if (availablePoints < 0) {
-            availablePoints = Long.valueOf(0);
-        }
-        System.out.println(availablePoints + " total points");
-        return availablePoints;
     }
 
 
@@ -201,12 +114,32 @@ public class HighScoreBoardController implements Initializable {
             for (File f : files) {
                 newValue = f.getName().substring(0, f.getName().length() - 5);
 
-
+                //einlesen von werten
                 try {
+
+
+
                     // get values string and get points,
                     //read in the current document
                     Object obj = jsonparser.parse(new FileReader("./savegames/JSON/" + newValue + ".json"));
                     JSONObject gameinfos = (JSONObject) obj;
+
+                    //decide if game is already finished
+                    /*
+                    Strinng gameFinished;
+                    if(gameinfos.containsKey("GameFinished")){
+                        //wenn existiert
+                        gameFinished =   Integer.parseInt(String.valueOf(gameinfos.get("GameFinished")));
+                    } else {
+                        // If doesn't exist, do nothing
+                        //defnine in accordance with collegues
+                        gameFinished = 0;}
+
+                     If (gamefinisehd != 0){
+
+                     */
+
+
                     //access the file name of the document
                     String name = (String) gameinfos.get("FileName");
 
@@ -264,12 +197,15 @@ public class HighScoreBoardController implements Initializable {
                         System.out.println("doesnt exist v");
                     }
 
-                   Long pointsInt = calculateScore( zeit,  clicks,  hints,  difficulty, version);
+                   Long pointsInt = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
 
                     //create a new HighScore Object to store value
                     HighScoreObject hSObject = new HighScoreObject(pointsInt, name);
                     //add value to the highscore list
                     higScoreList.add(hSObject);
+
+                    /* }
+                     */
 
                 } catch (IOException|ParseException e) {
                     e.printStackTrace();
@@ -299,6 +235,7 @@ public class HighScoreBoardController implements Initializable {
                     JSONObject gameinfos = (JSONObject) obj;
                     String name = (String)gameinfos.get("FileName");
 
+                    //das passende Highscore object für die Liste
                     HighScoreObject customer;
                             HighScoreObject test = higScoreList.stream()
                             .filter(HighScoreObject -> name.equals(HighScoreObject.getGameName()))
@@ -310,7 +247,7 @@ public class HighScoreBoardController implements Initializable {
 
                     System.out.println(test.getGameName());
 
-
+                    //display game image
                    File imgfile = new File("./savegames/img/"+name+".png");
                    Image image = new Image(imgfile.toURI().toString());
                    // lbGameName.setText(name);
@@ -323,8 +260,9 @@ public class HighScoreBoardController implements Initializable {
 
 
 
-                    //zeit
+                    //Time
 
+                    //time read in
                     Long timestamp;
                     if(gameinfos.containsKey("time")){
                         //wenn existiert
@@ -334,10 +272,16 @@ public class HighScoreBoardController implements Initializable {
                         timestamp = Long.valueOf(0);
                     }
 
-                    long millis = timestamp % 1000;
-                    long second = (timestamp / 1000) % 60;
-                    long minute = (timestamp / (1000 * 60)) % 60;
-                    long hour = (timestamp / (1000 * 60 * 60)) % 24;
+                    /*
+                    Date output,
+                     */
+                    final Date timerCurrent = new Date(0);
+                    final Date timerData = new Date(timestamp);
+                    Date diff2 = new Date( timerCurrent.getTime() -timerData.getTime() );
+                    //Formating and priting
+                    long second = ((diff2.getSeconds()));
+                    long minute = ((diff2.getMinutes()));
+                    long hour = ((diff2.getHours()));
                     String time = String.format("%02d:%02d:%02d", hour, minute, second);
 
                     lbTime.setText(time);
@@ -354,6 +298,7 @@ public class HighScoreBoardController implements Initializable {
 
 
     }
+
 
 
 }

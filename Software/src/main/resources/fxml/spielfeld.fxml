@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -15,16 +14,12 @@
 
 <AnchorPane fx:id="root" prefHeight="566.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.PlayfieldController">
    <children>
-      <SplitPane dividerPositions="0.766612641815235" layoutX="13.0" layoutY="35.0" prefHeight="517.0" prefWidth="785.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="35.0">
+      <SplitPane dividerPositions="0.8212005108556832" layoutX="13.0" layoutY="35.0" prefHeight="517.0" prefWidth="785.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="35.0">
          <items>
             <GridPane fx:id="playfield" minHeight="40.0" minWidth="40.0" prefHeight="539.0" prefWidth="597.0">
             </GridPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="155.0">
                <children>
-                  <Button fx:id="btnSolve" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleButtonSolve" prefHeight="25.0" prefWidth="58.0" text="Solve" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="14.0" />
-                  <Button fx:id="btnSave" layoutX="14.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleButtonSaveGame" prefHeight="25.0" prefWidth="57.0" text="Save" AnchorPane.bottomAnchor="44.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="11.0" />
-                  <Button fx:id="btnSave1" layoutX="13.0" layoutY="185.0" mnemonicParsing="false" onAction="#handleButtonBacktoMain" prefHeight="25.0" prefWidth="57.0" text="Back" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="11.0" />
-                  <Button fx:id="btnHint" layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#handleButtonHint" prefHeight="25.0" prefWidth="58.0" text="Hint" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="45.0" />
                   <AnchorPane layoutY="97.0" prefHeight="200.0" prefWidth="168.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                      <children>
                         <GridPane fx:id="colorList" minHeight="40.0" minWidth="40.0" prefHeight="224.0" prefWidth="404.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -38,10 +33,16 @@
                         <ListView fx:id="colorListNew" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
-                  <Label fx:id="lbClock" alignment="CENTER" layoutX="28.0" layoutY="104.0" prefHeight="17.0" prefWidth="35.0" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="104.0">
+                  <Label fx:id="lbClock" alignment="CENTER" layoutX="82.0" prefHeight="32.0" prefWidth="91.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Arial" size="18.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="8.0" prefHeight="20.0" prefWidth="50.0" text="Time:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="116.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </items>
