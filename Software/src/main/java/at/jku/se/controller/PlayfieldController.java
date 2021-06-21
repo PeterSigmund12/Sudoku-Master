@@ -28,6 +28,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.json.simple.JSONObject;
@@ -47,6 +48,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.platform.commons.util.StringUtils;
 
 public class PlayfieldController {
     TextField[][]textFields;
@@ -56,7 +58,6 @@ public class PlayfieldController {
     private static final String BTN_EASY = "leicht";
     private static final String BTN_MEDIUM = "mittel";
     private static final String BTN_HARD = "schwer";
-    private Set<Color> colors;
 
     @FXML
     private AnchorPane root;
@@ -75,36 +76,28 @@ public class PlayfieldController {
     private GridPane colorList;
     @FXML
     private ListView colorListNew;
-
+    int [] groupCount;
     //anchorpoints 0/0 , 12/0 , 0/12 , 6/6 , 12/12
     String version ="";
     String generateType="";
     String diffculty ="";
     int fieldSize;
     int initPerc = 0;
+    int colorindex = 0;
     String fileName="";
     boolean isNew = true;
     SudokuHelper h = new SudokuHelper();
-    ObservableList<String> data= FXCollections.observableArrayList(
-            "chocolate", "salmon", "gold", "coral", "darkorchid",
-            "darkgoldenrod", "lightsalmon", "black", "rosybrown"
+    ObservableList<String> colors = FXCollections.observableArrayList(
+            "orange", "aquamarine", "bisque", "darkseagreen", "khaki",
+            "lightgreen", "lightsalmon", "lightsteelblue", "tan"
     );
+    String currentColor = colors.get(0);
     Thread timerThread;
     String time ="";
     long loadtime = 0;
     long longtimer = 0;
 
     public void initializePlayfield() {
-        colors = new HashSet<>();
-        colors.add(Color.AQUA);
-        colors.add(Color.AZURE);
-        colors.add(Color.LIME);
-        colors.add(Color.OLIVE);
-        colors.add(Color.PURPLE);
-        colors.add(Color.DARKGRAY);
-        colors.add(Color.HONEYDEW);
-        colors.add(Color.TOMATO);
-        colors.add(Color.LAVENDER);
         playfield.setGridLinesVisible(false);
         playfield.setAlignment(Pos.CENTER);
         playfield.setHgap(5);
@@ -159,39 +152,94 @@ public class PlayfieldController {
         }
         textFields=initFields(textFields,initPerc);
     }
-    private void initFreiformField() {
-        textFields=new TextField[fieldSize][fieldSize];
-        Set<Color>col = new HashSet<>(colors);
-        colorListNew.setItems(data);
-        for (int c=0; c<fieldSize;c++){
-            //Label l = new Label();
-            Color cl = col.iterator().next();
+    class  ColorCell extends ListCell<String>{
+        @Override
+        protected void updateItem(String item, boolean b) {
+            super.updateItem(item, b);
+
+
+            HBox stack = new HBox();
+            stack.setAlignment(Pos.CENTER_LEFT);
             Circle circle = new Circle(20,20,20);
-            circle.setFill(cl);
-            //l.setText(""+c);
-            //l.setStyle("-fx-text-inner-color:"+cl+" ;");
-            col.remove(cl);
-            //colorListNew.getItems().add(new ListCell<>(c,circle));
-            colorList.add(circle,0,c);
+
+            if (item!=null){
+                //System.out.println(item + "Index "+groupCount[colors.indexOf(item)]+ " IndexNumber "+ colorindex +""+colors.indexOf(item));
+                Text text = new Text("\t"+"Color  "+ item.substring(0, 1).toUpperCase() + item.substring(1)+" " + groupCount[colors.indexOf(item)] + " / 9");
+
+                circle.setFill(Color.web(item));
+
+                stack.getChildren().addAll(circle,text);
+                setGraphic(stack);
+            }
+        }
+    }
+    private void initFreiformField() {
+        groupCount = new int[9];
+        textFields=new TextField[fieldSize][fieldSize];
+        colorListNew.setItems(colors);
+        colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
+            @Override
+            public ListCell call(ListView listView) {
+                return new ColorCell();
+            }
+        });
+        if (!colorListNew.getItems().isEmpty()){
+            colorListNew.getSelectionModel().select(0);
+        }
+        colorListNew.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println("ListView selection changed from oldValue = "
+                        + oldValue + " to newValue = " + newValue);
+                currentColor = newValue;
+                colorindex = colors.indexOf(currentColor);
+                //Aktuelle Farbe in Variable Speichern
+            }
+        });
+        for (int c=0; c<fieldSize;c++){
             for (int r=0; r<fieldSize;r++){
                 TextField t = h.defaultTextField();
+                t.setOnMouseClicked(e -> {
+                    System.out.println("Clicked Row: " +GridPane.getRowIndex(t)+ " Column: "+ GridPane.getColumnIndex(t));
+                    if (t.getStyle().contains("-fx-background-color:")){
+                        String [] styles = t.getStyle().split(";");
+                        for (int i =0; i<styles.length;i++){
+                            if (styles[i].contains("-fx-background-color:")){
+                                String color = styles[i].split(":")[1];
+                                if (color.equals(currentColor)){
+                                    groupCount[colorindex]--;
+                                    styles[i]="";
+                                    t.setStyle(String.join(";",styles));
+                                }else if (groupCount[colorindex] <9) {
+                                    int oldColor = colors.indexOf(color);
+                                    groupCount[oldColor]--;
+                                    groupCount[colorindex]++;
+                                    styles[i]="-fx-background-color:"+currentColor;
+                                    t.setStyle(String.join(";",styles));
+                                }
+                            }
+                        }
+                    }else if (groupCount[colorindex] <9){
+                        t.setStyle(t.getStyle()+" -fx-background-color:"+currentColor);
+                        groupCount[colorindex]++;
+                        System.out.println(groupCount[colorindex]);
+                    }
+                    colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
+                        @Override
+                        public ListCell call(ListView listView) {
+                            return new ColorCell();
+                        }
+                    });
+                });
+                t.setEditable(false);
                 textFields[c][r] = t;
-                t.setDisable(true);
+                //t.setDisable(true);
+
                 //setStyle(c,r,t,"");
                 h.hideUnusedBoxes(c, r, t);
                 playfield.add(t,c,r);
             }
         }
-        /*
-        colorList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println("ListView selection changed from oldValue = "
-                        + oldValue + " to newValue = " + newValue);
-            }
-        });
-
-         */
         textFields=initFields(textFields,initPerc);
     }
     public SimpleBoard initFirstNumbers(TextField[][] initField) {
@@ -478,7 +526,7 @@ public class PlayfieldController {
 
         final Date timerStart = new Date();
         final Date timertesten = new Date(loadtime);
-        System.out.println(timertesten);
+        //System.out.println(timertesten);
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -496,7 +544,7 @@ public class PlayfieldController {
                 }
                  longtimer = new Date().getTime() - cal.getTime().getTime()-timertesten.getTime();
                 time = simpleDateFormat.format(longtimer);
-                System.out.println(new Date());
+                //System.out.println(new Date());
                 Platform.runLater(() -> {
                     lbClock.setText(time);
                 });

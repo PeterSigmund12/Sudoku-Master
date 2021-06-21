@@ -22,7 +22,7 @@ public class SimpleBoard {
         try{
         board[c][r].setValue(x);
         }catch (NullPointerException e){
-            board[c][r] = new Cell(x,"",1);
+            board[c][r] = new Cell(x,"",0);
         }
     }
     public void setGroup(int c, int r, Integer x){
