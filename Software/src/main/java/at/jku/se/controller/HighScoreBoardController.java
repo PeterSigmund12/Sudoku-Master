@@ -3,6 +3,7 @@ package at.jku.se.controller;
 import at.jku.se.controller.HighScore.CalculateScore;
 import at.jku.se.utility.HighScoreObject;
 import at.jku.se.utility.NewScreen;
+import at.jku.se.utility.NewScreenDropDown;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -33,8 +34,7 @@ import java.util.*;
 
 
 public class HighScoreBoardController implements Initializable {
-    @FXML
-    private Button btnBackHighMainMen;
+   
 
     @FXML
     ListView<String> lvHighScoreGames;
@@ -79,21 +79,7 @@ public class HighScoreBoardController implements Initializable {
 
         Stage oldStage = (Stage)menuBar.getScene().getWindow();
 
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(NewScreen.class.getResource("/fxml/mainmenue.fxml"));
-        Parent root2 = null;
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Load game");
-        stage.setScene(new Scene(root2));
-
-        stage.show();
-        oldStage.close();
-
+        NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
 
     }
 
@@ -137,6 +123,23 @@ public class HighScoreBoardController implements Initializable {
                     //read in the current document
                     Object obj = jsonparser.parse(new FileReader("./savegames/JSON/" + newValue + ".json"));
                     JSONObject gameinfos = (JSONObject) obj;
+
+                    //decide if game is already finished
+                    /*
+                    Strinng gameFinished;
+                    if(gameinfos.containsKey("GameFinished")){
+                        //wenn existiert
+                        gameFinished =   Integer.parseInt(String.valueOf(gameinfos.get("GameFinished")));
+                    } else {
+                        // If doesn't exist, do nothing
+                        //defnine in accordance with collegues
+                        gameFinished = 0;}
+
+                     If (gamefinisehd != 0){
+
+                     */
+
+
                     //access the file name of the document
                     String name = (String) gameinfos.get("FileName");
 
@@ -200,6 +203,9 @@ public class HighScoreBoardController implements Initializable {
                     HighScoreObject hSObject = new HighScoreObject(pointsInt, name);
                     //add value to the highscore list
                     higScoreList.add(hSObject);
+
+                    /* }
+                     */
 
                 } catch (IOException|ParseException e) {
                     e.printStackTrace();
