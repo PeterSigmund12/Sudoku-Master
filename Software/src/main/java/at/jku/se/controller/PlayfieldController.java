@@ -20,7 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Label;
@@ -66,17 +68,23 @@ public class PlayfieldController {
     @FXML
     private GridPane playfield;
     @FXML
+    private SplitPane splitPane;
+    @FXML
     private Button btnSolve;
 
     @FXML
     private MenuBar menuBar;
     @FXML
     private Label lbClock;
-    private Button btnHint;
+    @FXML
+    private Button btnHint, btnStartGame;
     @FXML
     private GridPane colorList;
     @FXML
     private ListView colorListNew;
+    @FXML
+    private MenuItem miSave;
+
     int [] groupCount;
     //anchorpoints 0/0 , 12/0 , 0/12 , 6/6 , 12/12
     String version ="";
@@ -87,6 +95,7 @@ public class PlayfieldController {
     int colorindex = 0;
     String fileName="";
     boolean isNew = true;
+    Stage stage;
     SudokuHelper h = new SudokuHelper();
     ObservableList<String> colors = FXCollections.observableArrayList(
             "orange", "aquamarine", "bisque", "darkseagreen", "khaki",
@@ -134,10 +143,55 @@ public class PlayfieldController {
                 break;
         }
 
-        if(isNew){
+        if(isNew && !generateType.equals("manuell")){
             startTimer();
+            btnStartGame.setVisible(false);
+
+        }else{
+            miSave.setDisable(true);
         }
 
+
+
+        root.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if(version.equals(BTN_REGULAR) || version.equals(BTN_FREIFORM)){
+                    for (int row = 0; row < fieldSize; row++){
+                        for (int col = 0; col < fieldSize; col++){
+                            textFields[row][col].setPrefWidth(playfield.getWidth()/fieldSize);
+                            textFields[row][col].setFont(Font.font((playfield.getHeight()/fieldSize)/4));
+                        }
+                    }
+                }
+            }
+        });
+
+        root.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+                    for (int row = 0; row < fieldSize; row++){
+                        for (int col = 0; col < fieldSize; col++){
+                            textFields[row][col].setPrefHeight(playfield.getHeight()/fieldSize);
+                            textFields[row][col].setFont(Font.font((playfield.getHeight()/fieldSize)/4));
+                        }
+                    }
+
+
+            }
+        });
+
+       /* splitPane.getDividers().get(0).positionProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                for (int row = 0; row < fieldSize; row++){
+                    for (int col = 0; col < fieldSize; col++){
+                        textFields[row][col].setPrefWidth(playfield.getWidth()/fieldSize);
+                    }
+                }
+            }
+        });*/
     }
 
     private void initField() {
@@ -149,6 +203,7 @@ public class PlayfieldController {
                 setStyle(c,r,t,"");
                 h.hideUnusedBoxes(c, r, t);
                 playfield.add(t,c,r);
+
             }
         }
         textFields=initFields(textFields,initPerc);
@@ -371,7 +426,16 @@ public class PlayfieldController {
             default:
                 break;
         }
-        btnSolve.setDisable(true);
+        //btnSolve.setDisable(true);
+    }
+
+    @FXML
+    public void handleButtonStartGame(ActionEvent event){
+
+
+        startTimer();
+        miSave.setDisable(false);
+        btnStartGame.setVisible(false);
     }
     public void handleButtonHint(ActionEvent event){
         switch (version) {
@@ -433,7 +497,7 @@ public class PlayfieldController {
         SimpleBoard board = h.getCurrentBoard(textFields);
         int groupID = 0;
         System.out.println(generateType);
-       /* if( generateType.equals("manuell") && version.equals(BTN_FREIFORM)) {
+        if( generateType.equals("manuell") && version.equals(BTN_FREIFORM)) {
             System.out.println("testen");
             for (int rows = 0; rows < fieldSize; rows++) {
                 row = "";
@@ -458,7 +522,7 @@ public class PlayfieldController {
                 saveFreiform.write(newFreiform.toJSONString());
             }
 
-        }*/
+        }
         saveGame.put("FileName", file);
         saveGame.put("version", version);
         saveGame.put("generateType", generateType);
