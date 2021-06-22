@@ -4,6 +4,7 @@ import at.jku.se.sudokumaster.AnchorPoint;
 import at.jku.se.sudokumaster.SimpleBoard;
 import at.jku.se.sudokumaster.SimpleSolver;
 import at.jku.se.utility.NewScreen;
+import at.jku.se.utility.NewScreenDropDown;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -385,10 +386,11 @@ public class PlayfieldController {
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
 
-            stopTimer();
+        stopTimer();
         Stage oldStage = (Stage)menuBar.getScene().getWindow();
+        NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
 
-
+        /*
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(NewScreen.class.getResource("/fxml/mainmenue.fxml"));
         Parent root2 = null;
@@ -402,6 +404,8 @@ public class PlayfieldController {
 
         stage.show();
         oldStage.close();
+
+         */
     }
 
 

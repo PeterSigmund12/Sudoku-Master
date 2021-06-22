@@ -34,7 +34,7 @@ import java.util.*;
 
 
 public class HighScoreBoardController implements Initializable {
-   
+
 
     @FXML
     ListView<String> lvHighScoreGames;
@@ -197,7 +197,9 @@ public class HighScoreBoardController implements Initializable {
                         System.out.println("doesnt exist v");
                     }
 
+
                    Long pointsInt = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
+
 
                     //create a new HighScore Object to store value
                     HighScoreObject hSObject = new HighScoreObject(pointsInt, name);
