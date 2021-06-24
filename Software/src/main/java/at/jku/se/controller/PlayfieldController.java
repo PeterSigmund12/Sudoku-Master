@@ -37,6 +37,7 @@ import javafx.util.Callback;
 import org.json.simple.JSONObject;
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileReader;
@@ -217,13 +218,9 @@ public class PlayfieldController {
             HBox stack = new HBox();
             stack.setAlignment(Pos.CENTER_LEFT);
             Circle circle = new Circle(20,20,20);
-
             if (item!=null){
-                //System.out.println(item + "Index "+groupCount[colors.indexOf(item)]+ " IndexNumber "+ colorindex +""+colors.indexOf(item));
                 Text text = new Text("\t"+"Color  "+ item.substring(0, 1).toUpperCase() + item.substring(1)+" " + groupCount[colors.indexOf(item)] + " / 9");
-
                 circle.setFill(Color.web(item));
-
                 stack.getChildren().addAll(circle,text);
                 setGraphic(stack);
             }
@@ -249,14 +246,12 @@ public class PlayfieldController {
                         + oldValue + " to newValue = " + newValue);
                 currentColor = newValue;
                 colorindex = colors.indexOf(currentColor);
-                //Aktuelle Farbe in Variable Speichern
             }
         });
         for (int c=0; c<fieldSize;c++){
             for (int r=0; r<fieldSize;r++){
                 TextField t = h.defaultTextField();
                 t.setOnMouseClicked(e -> {
-                    System.out.println("Clicked Row: " +GridPane.getRowIndex(t)+ " Column: "+ GridPane.getColumnIndex(t));
                     if (t.getStyle().contains("-fx-background-color:")){
                         String [] styles = t.getStyle().split(";");
                         for (int i =0; i<styles.length;i++){
@@ -266,20 +261,24 @@ public class PlayfieldController {
                                     groupCount[colorindex]--;
                                     styles[i]="";
                                     t.setStyle(String.join(";",styles));
+                                    t.setId(colorindex+"");
                                 }else if (groupCount[colorindex] <9) {
                                     int oldColor = colors.indexOf(color);
                                     groupCount[oldColor]--;
                                     groupCount[colorindex]++;
                                     styles[i]="-fx-background-color:"+currentColor;
                                     t.setStyle(String.join(";",styles));
+                                    t.setId(colorindex+"");
                                 }
                             }
                         }
                     }else if (groupCount[colorindex] <9){
                         t.setStyle(t.getStyle()+" -fx-background-color:"+currentColor);
+                        t.setId(colorindex+"");
                         groupCount[colorindex]++;
                         System.out.println(groupCount[colorindex]);
                     }
+                    System.out.println("Clicked Row: " +GridPane.getRowIndex(t)+ " Column: "+ GridPane.getColumnIndex(t) + t.getId());
                     colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
                         @Override
                         public ListCell call(ListView listView) {
@@ -357,70 +356,10 @@ public class PlayfieldController {
         return textFields;
     }
 
-
-
-    private void initFreiformField(int initPerc) {
-        textFields=new TextField[9][9];
-        int[][] x =createGroups();
-        for (int c=0; c<9;c++){
-            for (int r=0; r<9;r++){
-                TextField t = h.defaultTextField();
-                textFields[c][r] = t;
-                playfield.add(t,c,r);
-            }
-        }
-        textFields=initFields(textFields,initPerc);
-    }
-    private int[][] createGroups() {
-        int[][]groups=new int[9][9];
-        int x = 0;
-        int y = 0;
-        int cnt = 0;
-        int num = 1;
-        while (true) {
-            List<String> list = new ArrayList();
-            groups[y][x]=num;
-            try {
-                if (y > 0 && groups[y - 1][x] == 0) {
-                    list.add("topFree");
-                }
-                if (y < 9 && groups[y + 1][x] == 0) {
-                    list.add("botFree");
-                }
-                if (x > 0 && groups[y][x - 1] == 0) {
-                    list.add("leftFree");
-                }
-                if (x < 9 && groups[y][x + 1] == 0) {
-                    list.add("rightFree");
-                }
-                Random rand = new Random();
-                String pick = list.get(rand.nextInt(list.size()));
-                if (pick == "topFree")y=y-1;
-                if (pick == "botFree")y=y+1;
-                if (pick == "leftFree")x=x-1;
-                if (pick == "rightFree")x=x+1;
-                cnt++;
-                //if (cnt==9)break;
-                if (cnt==9){
-                    num++;
-                    cnt=0;
-                }
-                groups[y][x] = num;
-                System.out.println(list.toString() + "\t " + pick + "\t " + num + "\ty:"+y+"\tx:"+x);
-            } catch (IndexOutOfBoundsException e) {
-            } catch (IllegalArgumentException e) {
-            }
-            if (cnt==9 && num == 1){
-                break;
-            }
-        }
-        //groups[y][x] = x+1;
-        return groups;
-    }
     @FXML
     public void handleButtonSolve(ActionEvent event){
         switch (version) {
-            case BTN_REGULAR: case BTN_SAMURAI:
+            case BTN_REGULAR: case BTN_SAMURAI: case BTN_FREIFORM:
                 h.solveBoard(textFields);
                 break;
             default:
@@ -432,10 +371,22 @@ public class PlayfieldController {
     @FXML
     public void handleButtonStartGame(ActionEvent event){
 
-
         startTimer();
         miSave.setDisable(false);
         btnStartGame.setVisible(false);
+        //TODO: Move if Freeform Numbers entered
+        if (version.equals(BTN_FREIFORM)){
+            for (int c=0; c<fieldSize;c++){
+                for (int r=0; r<fieldSize;r++){
+                    TextField t = textFields[c][r];
+                    textFields[c][r].setEditable(true);
+                    textFields[c][r].setOnMouseClicked(null);
+                    textFields[c][r].setOnMouseClicked(e -> {
+                        System.out.println(t.getId());
+                    });
+                }
+            }
+        }
     }
     public void handleButtonHint(ActionEvent event){
         switch (version) {

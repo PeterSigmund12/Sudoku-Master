@@ -68,7 +68,11 @@ public class SudokuHelper {
                 try{
                     Integer i = Integer.valueOf(fields[c][r].getText());
                     part.setValue(c,r,i);
-                }catch (NumberFormatException e){}
+                }catch (NumberFormatException  e){}
+                try {
+                    Integer j = Integer.valueOf(fields[c][r].getId());
+                    part.setGroup(c,r,j);
+                }catch (NullPointerException | NumberFormatException e){}
             }
         }
         return part;
