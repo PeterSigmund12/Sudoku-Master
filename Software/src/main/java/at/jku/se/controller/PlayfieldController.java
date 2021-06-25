@@ -374,6 +374,16 @@ public class PlayfieldController {
         startTimer();
         miSave.setDisable(false);
         btnStartGame.setVisible(false);
+        if(h.getBoardSolution(textFields)!=null){
+            for (int row = 0; row < fieldSize; row++){
+                for (int col = 0; col < fieldSize; col++){
+                    if(!textFields[col][row].getText().equals("")) {
+                        textFields[col][row].setDisable(true);
+                        setStyle(col, row, textFields[col][row], "-fx-text-inner-color: darkblue;");
+                    }
+                }
+            }
+        }
         //TODO: Move if Freeform Numbers entered
         if (version.equals(BTN_FREIFORM)){
             for (int c=0; c<fieldSize;c++){
