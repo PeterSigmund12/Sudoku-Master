@@ -458,20 +458,15 @@ public class PlayfieldController {
         SimpleBoard board = h.getCurrentBoard(textFields);
         int groupID = 0;
         System.out.println(generateType);
-        if( generateType.equals("manuell") && version.equals(BTN_FREIFORM)) {
-            System.out.println("testen");
+        if(generateType.equals("manuell") && version.equals(BTN_FREIFORM)) {
+
             for (int rows = 0; rows < fieldSize; rows++) {
                 row = "";
                 for (int col = 0; col < fieldSize; col++) {
                     System.out.println(""+board.get(col, rows).getGroupId());
-                    if(board.get(col, rows).getGroupId() != null) {
-                        groupID = board.get(col, rows).getGroupId();
 
-                    }
-                    else{
-                        groupID = 0;
-                    }
-                    row += groupID + ";";
+                    row += textFields[col][rows].getId() +";";
+
                 }
                 newFreiform.put("" + rows, row);
             }
@@ -494,12 +489,23 @@ public class PlayfieldController {
         for (int r = 0; r<fieldSize;r++){
             row="";
             for (int c=0;c<fieldSize;c++) {
-                try{
-                    Integer i = Integer.valueOf(textFields[c][r].getText());
-                    row+= i.toString() + ";";
-                }catch (NumberFormatException e){
-                    row+=  " ;";
+                if(!version.equals(BTN_FREIFORM)){
+                    try{
+                        Integer i = Integer.valueOf(textFields[c][r].getText());
+                        row+= i.toString() + ";";
+                    }catch (NumberFormatException e){
+                        row+=  " ;";
+                    }
+                }else{
+                    try{
+                        Integer i = Integer.valueOf(textFields[c][r].getText());
+                        row+= i.toString()+ "," + textFields[c][r].getId() + ";";
+                    }catch (NumberFormatException e){
+                        row+= " ," + textFields[c][r].getId() + ";";
+
+                    }
                 }
+
             }
             saveGame.put(""+r,row);
         }
