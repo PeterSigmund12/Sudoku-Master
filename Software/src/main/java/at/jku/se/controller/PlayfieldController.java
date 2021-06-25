@@ -458,7 +458,7 @@ public class PlayfieldController {
         SimpleBoard board = h.getCurrentBoard(textFields);
         int groupID = 0;
         System.out.println(generateType);
-        if(generateType.equals("manuell") && version.equals(BTN_FREIFORM)) {
+        if(generateType.equals("manuell") && version.equals(BTN_FREIFORM) && isNew) {
 
             for (int rows = 0; rows < fieldSize; rows++) {
                 row = "";
@@ -531,20 +531,33 @@ public class PlayfieldController {
     }
 
     public void LoadGameInfos(){
+        btnStartGame.setVisible(false);
         String row = "";
         JSONParser jsonparser = new JSONParser();
         String[] splitRow;
+        String[] splitCell;
         try {
             Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+fileName+".json"));
             JSONObject gameinfos = (JSONObject) obj;
              loadtime = Long.parseLong((String)gameinfos.get("time"));
-
+            version = (String) gameinfos.get("version");
             for(int i = 0; i<fieldSize;i++){
 
                 row = (String)gameinfos.get(""+i);
                 splitRow =row.split(";");
                 for(int j = 0; j<splitRow.length;j++){
-                    textFields[j][i].setText(splitRow[j]);
+                    splitCell = splitRow[j].split(",");
+                    textFields[j][i].setText(splitCell[0]);
+                    /*if(version.equals(BTN_FREIFORM)){
+                        String [] styles = textFields[j][i].getStyle().split(";");
+                        for (int z =0; z<styles.length;z++) {
+                            if (styles[z].contains("-fx-background-color:")) {
+                                styles[z] = "-fx-background-color:" + colors.indexOf(splitCell[1]);
+                                textFields[j][i].setStyle(String.join(";", styles));
+                                textFields[j][i].setId(splitCell[1]);
+                            }
+                        }
+                    }*/
                 }
             }
 
