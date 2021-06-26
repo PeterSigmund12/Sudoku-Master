@@ -536,6 +536,7 @@ public class PlayfieldController {
         JSONParser jsonparser = new JSONParser();
         String[] splitRow;
         String[] splitCell;
+
         try {
             Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+fileName+".json"));
             JSONObject gameinfos = (JSONObject) obj;
@@ -547,17 +548,16 @@ public class PlayfieldController {
                 splitRow =row.split(";");
                 for(int j = 0; j<splitRow.length;j++){
                     splitCell = splitRow[j].split(",");
+                    if (splitCell[0].equals(" ")){
+                        textFields[j][i].setEditable(true);
+                    }
                     textFields[j][i].setText(splitCell[0]);
-                    /*if(version.equals(BTN_FREIFORM)){
-                        String [] styles = textFields[j][i].getStyle().split(";");
-                        for (int z =0; z<styles.length;z++) {
-                            if (styles[z].contains("-fx-background-color:")) {
-                                styles[z] = "-fx-background-color:" + colors.indexOf(splitCell[1]);
-                                textFields[j][i].setStyle(String.join(";", styles));
-                                textFields[j][i].setId(splitCell[1]);
-                            }
-                        }
-                    }*/
+                    if(version.equals(BTN_FREIFORM)){
+                        currentColor = colors.get(Integer.parseInt(splitCell[1]));
+                        textFields[j][i].setStyle("-fx-background-color: " + currentColor+";");
+
+
+                    }
                 }
             }
 
