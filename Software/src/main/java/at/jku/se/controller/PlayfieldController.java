@@ -328,7 +328,7 @@ public class PlayfieldController {
             int randNum = new Random().nextInt(9);
             initField[randC][randR].setText(randNum+"");
             if(h.getBoardSolution(initField)!=null){
-                initField[randC][randR].setEditable(true);
+                initField[randC][randR].setEditable(false);
                 setStyle(randC,randR,initField[randC][randR],"-fx-text-inner-color: darkblue;");
             }else {
                 initField[randC][randR] = new TextField();
@@ -365,7 +365,7 @@ public class PlayfieldController {
                 int randR = new Random().nextInt(9);
                 if (textFields[randC+anchorC][randR +anchorR].getText().trim().equals("")){
                     textFields[randC+anchorC][randR+anchorR].setText(""+solution.get(randC+anchorC,randR+anchorR).getValue());
-                    textFields[randC+anchorC][randR+anchorR].setEditable(true);
+                    textFields[randC+anchorC][randR+anchorR].setEditable(false);
                     setStyle(randC+anchorC,randR+anchorR,textFields[randC+anchorC][randR+anchorR],"-fx-text-inner-color: darkblue;");
                     value--;
                 }
