@@ -10,7 +10,6 @@ public class SimpleSolver {
     private Set<AnchorPoint> anchorpoints;
     public int fieldSize;
     private int cnt = 0;
-    private String type = "";
 
     public SimpleSolver(int size){
         numbers = new HashSet<>();
@@ -146,17 +145,14 @@ public class SimpleSolver {
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
-                //System.out.println(y.getValue() +" id:"+ y.getGroupId());
             }catch (NullPointerException e){}
             if(i<0) {
-                if (type.equals(""))type = "normal";
                 for (int r = 0; r < 9; r += 3) {
                     for (int c = 0; c < 9; c += 3) {
                         if (!validBox(b, c + ap.getCol(), r + ap.getRow())) return false;
                     }
                 }
             }else {
-                if (type.equals(""))type = "free";
                 for (int j = 0; j < 9; j++){
                     if (!validBox(b,j))return false;
                 }
@@ -165,7 +161,7 @@ public class SimpleSolver {
         return true;
     }
     public boolean valid(SimpleBoard b){
-        System.out.println("Boxes: "+allBoxesValid(b) +" Columns: "+ allColumnsValid(b) +" Rows: "+ allRowsValid(b));
+        //System.out.println("Boxes: "+allBoxesValid(b) +" Columns: "+ allColumnsValid(b) +" Rows: "+ allRowsValid(b));
         return  allBoxesValid(b) && allColumnsValid(b) && allRowsValid(b) ;
     }
     boolean full(SimpleBoard b){
@@ -195,19 +191,16 @@ public class SimpleSolver {
         }
 
         if (!valid(part)){
-            System.out.println("Error");
+            //System.out.println("Error");
 
             return null;
 
         }
-        System.out.println("Freestuff2");
-
         if (validAndFull(part)){
-            System.out.println("Continue");
+            //System.out.println("Continue");
 
             return part;
         }
-        System.out.println(type+ " Typ");
         SimpleBoard b = new SimpleBoard(part,fieldSize);
         if(cnt < 100000){
             for (AnchorPoint ap : anchorpoints) {
@@ -231,55 +224,6 @@ public class SimpleSolver {
                 }
             }
         }
-        /*
-        if(cnt < 100000 && type.equals("normal")){
-            for (AnchorPoint ap : anchorpoints) {
-                int apC = ap.getCol();
-                int apR = ap.getRow();
-                for (int r = 0; r < 9; r++) {
-                    for (int c = 0; c < 9; c++) {
-                        Cell cell = b.get(c+apC, r+apR);
-                        if (cell == null) {
-                            Set<Integer> num = new HashSet<>(numbers);
-                            for (Integer number : num) {
-                                b.setValue(c+apC, r+apR, number);
-                                SimpleBoard solution = solve(b);
-                                if (solution != null) {
-                                    return solution;
-                                }
-                            }
-                            return null;
-                        }
-                    }
-                }
-            }
-        }
-        if(cnt < 100000 && type.equals("free")){
-            for (AnchorPoint ap : anchorpoints) {
-                int apC = ap.getCol();
-                int apR = ap.getRow();
-                for (int r = 0; r < 9; r++) {
-                    for (int c = 0; c < 9; c++) {
-                        Cell cell = b.get(c+apC, r+apR);
-                        System.out.println("Col: "+ c+ " Row: "+r +"  Val: "+cell.getValue());
-                        if (cell.getValue() == 0) {
-                            Set<Integer> num = new HashSet<>(numbers);
-                            for (Integer number : num) {
-                                //System.out.println(b.get(c+apC, r+apR).getGroupId()+" Group " + number);
-                                b.setValue(c+apC, r+apR, number);
-                                SimpleBoard solution = solve(b);
-                                if (solution != null) {
-                                    return solution;
-                                }
-                            }
-                            return null;
-                        }
-                    }
-                }
-            }
-        }
-
-         */
         return null;
     }
 }
