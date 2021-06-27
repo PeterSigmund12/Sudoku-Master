@@ -391,6 +391,16 @@ public class PlayfieldController {
         startTimer();
         miSave.setDisable(false);
         btnStartGame.setVisible(false);
+        if(h.getBoardSolution(textFields)!=null){
+            for (int row = 0; row < fieldSize; row++){
+                for (int col = 0; col < fieldSize; col++){
+                    if(!textFields[col][row].getText().equals("")) {
+                        textFields[col][row].setDisable(true);
+                        setStyle(col, row, textFields[col][row], "-fx-text-inner-color: darkblue;");
+                    }
+                }
+            }
+        }
         //TODO: Move if Freeform Numbers entered
     }
     public void handleButtonHint(ActionEvent event){
@@ -446,20 +456,15 @@ public class PlayfieldController {
         SimpleBoard board = h.getCurrentBoard(textFields);
         int groupID = 0;
         System.out.println(generateType);
-        if( generateType.equals("manuell") && version.equals(BTN_FREIFORM)) {
-            System.out.println("testen");
+        if(generateType.equals("manuell") && version.equals(BTN_FREIFORM) && isNew) {
+
             for (int rows = 0; rows < fieldSize; rows++) {
                 row = "";
                 for (int col = 0; col < fieldSize; col++) {
                     System.out.println(""+board.get(col, rows).getGroupId());
-                    if(board.get(col, rows).getGroupId() != null) {
-                        groupID = board.get(col, rows).getGroupId();
 
-                    }
-                    else{
-                        groupID = 0;
-                    }
-                    row += groupID + ";";
+                    row += textFields[col][rows].getId() +";";
+
                 }
                 newFreiform.put("" + rows, row);
             }
@@ -482,12 +487,23 @@ public class PlayfieldController {
         for (int r = 0; r<fieldSize;r++){
             row="";
             for (int c=0;c<fieldSize;c++) {
-                try{
-                    Integer i = Integer.valueOf(textFields[c][r].getText());
-                    row+= i.toString() + ";";
-                }catch (NumberFormatException e){
-                    row+=  " ;";
+                if(!version.equals(BTN_FREIFORM)){
+                    try{
+                        Integer i = Integer.valueOf(textFields[c][r].getText());
+                        row+= i.toString() + ";";
+                    }catch (NumberFormatException e){
+                        row+=  " ;";
+                    }
+                }else{
+                    try{
+                        Integer i = Integer.valueOf(textFields[c][r].getText());
+                        row+= i.toString()+ "," + textFields[c][r].getId() + ";";
+                    }catch (NumberFormatException e){
+                        row+= " ," + textFields[c][r].getId() + ";";
+
+                    }
                 }
+
             }
             saveGame.put(""+r,row);
         }
@@ -513,20 +529,33 @@ public class PlayfieldController {
     }
 
     public void LoadGameInfos(){
+        btnStartGame.setVisible(false);
         String row = "";
         JSONParser jsonparser = new JSONParser();
         String[] splitRow;
+        String[] splitCell;
+
         try {
             Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+fileName+".json"));
             JSONObject gameinfos = (JSONObject) obj;
              loadtime = Long.parseLong((String)gameinfos.get("time"));
-
+            version = (String) gameinfos.get("version");
             for(int i = 0; i<fieldSize;i++){
 
                 row = (String)gameinfos.get(""+i);
                 splitRow =row.split(";");
                 for(int j = 0; j<splitRow.length;j++){
-                    textFields[j][i].setText(splitRow[j]);
+                    splitCell = splitRow[j].split(",");
+                    if (splitCell[0].equals(" ")){
+                        textFields[j][i].setEditable(true);
+                    }
+                    textFields[j][i].setText(splitCell[0]);
+                    if(version.equals(BTN_FREIFORM)){
+                        currentColor = colors.get(Integer.parseInt(splitCell[1]));
+                        textFields[j][i].setStyle("-fx-background-color: " + currentColor+";");
+
+
+                    }
                 }
             }
 
