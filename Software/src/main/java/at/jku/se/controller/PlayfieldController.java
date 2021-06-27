@@ -11,6 +11,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -71,14 +72,13 @@ public class PlayfieldController {
     @FXML
     private SplitPane splitPane;
     @FXML
-    private Button btnSolve;
-
+    private Button btnAddNumbers;
     @FXML
     private MenuBar menuBar;
     @FXML
     private Label lbClock;
     @FXML
-    private Button btnHint, btnStartGame;
+    private Button btnStartGame;
     @FXML
     private GridPane colorList;
     @FXML
@@ -242,8 +242,7 @@ public class PlayfieldController {
         colorListNew.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println("ListView selection changed from oldValue = "
-                        + oldValue + " to newValue = " + newValue);
+                //System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
                 currentColor = newValue;
                 colorindex = colors.indexOf(currentColor);
             }
@@ -276,9 +275,34 @@ public class PlayfieldController {
                         t.setStyle(t.getStyle()+" -fx-background-color:"+currentColor);
                         t.setId(colorindex+"");
                         groupCount[colorindex]++;
-                        System.out.println(groupCount[colorindex]);
                     }
-                    System.out.println("Clicked Row: " +GridPane.getRowIndex(t)+ " Column: "+ GridPane.getColumnIndex(t) + t.getId());
+                    int cnt = 0;
+                    for (int i = 0; i< groupCount.length; i++){
+                        cnt = cnt + groupCount[i];
+                    }
+                    if (cnt == fieldSize*fieldSize){
+                        btnAddNumbers.setVisible(true);
+                        btnAddNumbers.setDisable(false);
+                        btnAddNumbers.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override public void handle(ActionEvent e) {
+                                colorListNew.setVisible(false);
+                                colorListNew.setDisable(true);
+                                btnAddNumbers.setOnAction(null);
+                                btnAddNumbers.setDisable(true);
+                                btnAddNumbers.setVisible(false);
+                                for (int c=0; c<fieldSize;c++){
+                                    for (int r=0; r<fieldSize;r++){
+                                        TextField t = textFields[c][r];
+                                        textFields[c][r].setEditable(true);
+                                        textFields[c][r].setOnMouseClicked(null);
+                                    }
+                                }
+                            }
+                        });
+                    }else {
+                        btnAddNumbers.setVisible(false);
+                        btnAddNumbers.setDisable(true);
+                    }
                     colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
                         @Override
                         public ListCell call(ListView listView) {
@@ -288,9 +312,6 @@ public class PlayfieldController {
                 });
                 t.setEditable(false);
                 textFields[c][r] = t;
-                //t.setDisable(true);
-
-                //setStyle(c,r,t,"");
                 h.hideUnusedBoxes(c, r, t);
                 playfield.add(t,c,r);
             }
@@ -307,7 +328,7 @@ public class PlayfieldController {
             int randNum = new Random().nextInt(9);
             initField[randC][randR].setText(randNum+"");
             if(h.getBoardSolution(initField)!=null){
-                initField[randC][randR].setDisable(true);
+                initField[randC][randR].setEditable(true);
                 setStyle(randC,randR,initField[randC][randR],"-fx-text-inner-color: darkblue;");
             }else {
                 initField[randC][randR] = new TextField();
@@ -321,9 +342,6 @@ public class PlayfieldController {
     public void setStyle(int c, int r, TextField t,String style) {
         if (!version.equals(BTN_FREIFORM)) {
             h.setNormalBoxesStyle(c, r, t,style);
-        }else {
-            System.out.println("Freiform");
-            //TODO: Freiform Styling
         }
     }
 
@@ -347,7 +365,7 @@ public class PlayfieldController {
                 int randR = new Random().nextInt(9);
                 if (textFields[randC+anchorC][randR +anchorR].getText().trim().equals("")){
                     textFields[randC+anchorC][randR+anchorR].setText(""+solution.get(randC+anchorC,randR+anchorR).getValue());
-                    textFields[randC+anchorC][randR+anchorR].setDisable(true);
+                    textFields[randC+anchorC][randR+anchorR].setEditable(true);
                     setStyle(randC+anchorC,randR+anchorR,textFields[randC+anchorC][randR+anchorR],"-fx-text-inner-color: darkblue;");
                     value--;
                 }
@@ -370,33 +388,13 @@ public class PlayfieldController {
 
     @FXML
     public void handleButtonStartGame(ActionEvent event){
-
         startTimer();
         miSave.setDisable(false);
         btnStartGame.setVisible(false);
         //TODO: Move if Freeform Numbers entered
-        if (version.equals(BTN_FREIFORM)){
-            for (int c=0; c<fieldSize;c++){
-                for (int r=0; r<fieldSize;r++){
-                    TextField t = textFields[c][r];
-                    textFields[c][r].setEditable(true);
-                    textFields[c][r].setOnMouseClicked(null);
-                    textFields[c][r].setOnMouseClicked(e -> {
-                        System.out.println(t.getId());
-                    });
-                }
-            }
-        }
     }
     public void handleButtonHint(ActionEvent event){
-        switch (version) {
-            case BTN_REGULAR: case BTN_SAMURAI:
-                h.getHint(textFields);
-                break;
-                //TODO: Choose Random Playfield, but check if solvable
-            default:
-                break;
-        }
+        h.getHint(textFields);
     }
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {

@@ -34,8 +34,9 @@
                         </Label>
                      </children>
                   </Pane>
-                  <ListView fx:id="colorListNew" layoutY="125.0" prefHeight="390.0" prefWidth="125.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0" />
-                  <Button fx:id="btnStartGame" layoutX="23.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleButtonStartGame" prefHeight="25.0" prefWidth="80.0" text="Start Game" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="95.0" />
+                  <ListView fx:id="colorListNew" layoutY="167.0" prefHeight="348.0" prefWidth="127.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
+                  <Button fx:id="btnStartGame" layoutX="14.0" layoutY="83.0" mnemonicParsing="false" onAction="#handleButtonStartGame" prefHeight="25.0" prefWidth="104.0" text="Start Game" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="83.0" />
+                  <Button fx:id="btnAddNumbers" disable="true" layoutX="13.0" layoutY="115.0" maxHeight="50.0" maxWidth="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Add Numbers" visible="false" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="115.0" />
                </children>
             </AnchorPane>
          </items>
