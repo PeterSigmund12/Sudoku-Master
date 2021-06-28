@@ -69,7 +69,7 @@ public class NewGameController implements Initializable {
         } catch (IOException ex) {
         }
         Stage stage = new Stage();
-        stage.setTitle("old game");
+
         stage.sizeToScene();
         stage.setScene(new Scene(root2));
         stage.show();

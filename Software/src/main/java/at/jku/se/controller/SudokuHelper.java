@@ -39,12 +39,14 @@ public class SudokuHelper {
         SimpleBoard solution = getBoardSolution(fields);
         for (int r = 0; r<fields.length;r++){
             for (int c=0;c<fields.length;c++) {
+                fields[c][r].setEditable(false);
                 if (fields[c][r].getText().trim().equals("") && fields[c][r].isVisible()){
                     if (solution == null){
                         // Empty Cells with no Solution
                         fields[c][r].setStyle("-fx-background-color:rgb(255,200,200);");
                     }else {
                         // Empty Cells with Solution
+                        //System.out.println(solution.get(c,r)+"ERG");
                         fields[c][r].setText(""+solution.get(c,r).getValue());
                         fields[c][r].setStyle("-fx-background-color:rgb(160,240,130);");
                     }
@@ -68,7 +70,11 @@ public class SudokuHelper {
                 try{
                     Integer i = Integer.valueOf(fields[c][r].getText());
                     part.setValue(c,r,i);
-                }catch (NumberFormatException e){}
+                }catch (NumberFormatException  e){}
+                try {
+                    Integer j = Integer.valueOf(fields[c][r].getId());
+                    part.setGroup(c,r,j);
+                }catch (NullPointerException | NumberFormatException e){}
             }
         }
         return part;
@@ -87,6 +93,7 @@ public class SudokuHelper {
                 if (fields[randC][randR].getText().trim().equals("") && fields[randC][randR].isVisible()){
                     fields[randC][randR].setText(""+solution.get(randC,randR).getValue());
                     fields[randC][randR].setStyle("-fx-background-color:rgb(160,240,130)");
+                    fields[randC][randR].setEditable(false);
                     break;
                 }
             }
