@@ -33,6 +33,9 @@ import java.util.ResourceBundle;
 
 public class LoadGameController implements Initializable {
 
+    private static final String BTN_REGULAR = "rbSaRegulaer";
+    private static final String BTN_SAMURAI = "rbSaSamurai";
+    private static final String BTN_FREIFORM = "rbSaFreiform";
 
     @FXML
     private AnchorPane root;
@@ -162,7 +165,7 @@ public class LoadGameController implements Initializable {
         } catch (IOException ex) {
         }
         Stage stage = new Stage();
-        stage.setTitle("old game");
+        //stage.setTitle("old game");
         stage.sizeToScene();
         stage.setScene(new Scene(root2));
         stage.show();
@@ -181,6 +184,7 @@ public class LoadGameController implements Initializable {
 
 
     public void fillListView(){
+
         saveGameList = FXCollections.observableArrayList();
         File file = new File(Paths.get("./savegames/JSON").toString());
         File[] files = file.listFiles();
@@ -193,13 +197,14 @@ public class LoadGameController implements Initializable {
         JSONParser jsonparser = new JSONParser();
 
 
+
         lvSaveGames.setItems(saveGameList);
         lvSaveGames.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 btnContinue.setDisable(false);
                 selected = newValue;
-
+                String labelversion = "";
                     try {
                         FileReader fileReader = new FileReader("./savegames/JSON/"+newValue+".json");
                         Object obj =   jsonparser.parse(fileReader);
@@ -210,7 +215,18 @@ public class LoadGameController implements Initializable {
                             File imgfile = new File("./savegames/img/"+fileName+".png");
                             Image image = new Image(imgfile.toURI().toString());
                             lbGameName.setText(fileName);
-                            lbVersion.setText((String)gameinfos.get("version"));
+                            switch((String)gameinfos.get("version")){
+                                case BTN_REGULAR:
+                                    labelversion = "Regulär";
+                                    break;
+                                case BTN_SAMURAI:
+                                    labelversion = "Samurai";
+                                    break;
+                                case BTN_FREIFORM:
+                                    labelversion = "Freiform";
+                                    break;
+                            }
+                            lbVersion.setText(labelversion);
                             lbGenerate.setText((String)gameinfos.get("generateType"));
                             lbDifficulty.setText((String)gameinfos.get("difficulty"));
                             difficulty = (String)gameinfos.get("difficulty");

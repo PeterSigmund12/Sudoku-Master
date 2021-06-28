@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -28,6 +29,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Pair;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -35,7 +37,10 @@ import org.json.simple.parser.ParseException;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -464,7 +469,9 @@ public class PlayfieldController {
         JSONObject saveGame = new JSONObject();
         JSONObject newFreiform = new JSONObject();
         String file ="";
-        TextInputDialog dialog = new TextInputDialog();
+        String playerName="";
+        Pair<String,String> dialogResult = SaveDialog();
+        /*TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Save Game");
         dialog.setContentText("Filename: ");
 
@@ -472,7 +479,9 @@ public class PlayfieldController {
         if(fileName.isPresent()){
 
             file = fileName.get();
-        }
+        }*/
+        file = dialogResult.getKey();
+        playerName = dialogResult.getValue();
         String row="";
         SimpleBoard board = h.getCurrentBoard(textFields);
         int groupID = 0;
@@ -502,6 +511,7 @@ public class PlayfieldController {
         saveGame.put("version", version);
         saveGame.put("generateType", generateType);
         saveGame.put("difficulty",diffculty);
+        saveGame.put("player", playerName);
         saveGame.put("time","" + (longtimer*-1));
         startTimer();
 
@@ -626,6 +636,43 @@ public class PlayfieldController {
         timerThread.stop();
     }
 
+    private Pair<String,String> SaveDialog(){
+        Dialog<Pair<String,String>> dialog = new Dialog<>();
+        dialog.setTitle("Save Game");
+
+        dialog.setResizable(false);
+
+        Label lbFileName = new Label("Filename: ");
+        Label leer = new Label("");
+        Label lbPlayerName = new Label("Player: ");
+        TextField tfFileName = new TextField();
+        TextField tfPlayerName = new TextField();
+
+        GridPane grid = new GridPane();
+        grid.add(lbFileName, 1, 1);
+        grid.add(tfFileName, 2, 1);
+        grid.add(lbPlayerName, 1, 4);
+        grid.add(tfPlayerName, 2, 4);
+        dialog.getDialogPane().setContent(grid);
+
+        ButtonType buttonTypeOk = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == buttonTypeOk) {
+                return new Pair<>(tfFileName.getText(), tfPlayerName.getText());
+            }
+            return null;
+        });
+
+        Optional<Pair<String, String>> result = dialog.showAndWait();
+
+        if (result.isPresent()) {
+
+          return result.get();
+        }
+        return null;
+    }
 
     public void initData(String version, String generateType, String diffculty) {
         this.generateType = generateType;
