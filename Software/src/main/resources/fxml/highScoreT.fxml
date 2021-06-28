@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.HighScoreBoardControllerT">
    <children>
-      <TableView fx:id="highScore" layoutX="10.0" layoutY="120.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="581.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <TableView fx:id="highScore" layoutX="10.0" layoutY="120.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="581.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name of Game" />
           <TableColumn fx:id="scoreColumn" prefWidth="75.0" text="Points" />
@@ -22,7 +22,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="170.0" layoutY="21.0" prefHeight="57.0" prefWidth="261.0" text="Sudoku High Score Board" textAlignment="CENTER">
+      <Label layoutX="170.0" layoutY="42.0" prefHeight="57.0" prefWidth="261.0" text="Sudoku High Score Board" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
