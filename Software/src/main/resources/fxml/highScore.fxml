@@ -6,6 +6,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -22,6 +24,16 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <TableView fx:id="highScore" layoutX="14.0" layoutY="58.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="scoreColumn" prefWidth="75.0" text="Score" />
+                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Game Name" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Label fx:id="lable" layoutX="199.0" layoutY="284.0" text="Label" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -44,18 +56,18 @@
          </items>
       </SplitPane>
       <MenuBar fx:id="menuBar">
-        <menus>
-          <Menu mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Menu">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Main Menue" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
+         <menus>
+            <Menu mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Main Menue" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
    </children>
 </AnchorPane>

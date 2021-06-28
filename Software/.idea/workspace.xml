@@ -5,15 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScore/CreateHighScoreObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScoreBoardControllerT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/highScoreT.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/JSON/help.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/PlayfieldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/PlayfieldController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/spielfeld.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/spielfeld.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/savegames/JSON/.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScoreBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScoreBoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/MainMenueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/MainMenueController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/CalculateScoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/CalculateScoreTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/utility/HighScoreObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/utility/HighScoreObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/highScore.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/highScore.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="CompilerWorkspaceConfiguration">
     <option name="MAKE_PROJECT_ON_SAVE" value="true" />
@@ -30,8 +41,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1qWzUcRGEQQcE2Bm6UoNxzoHSAu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -42,7 +63,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/UE03_k12005548_Herzog/blocks" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -79,8 +102,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617210152628</updated>
+      <workItem from="1624871972280" duration="1121000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
