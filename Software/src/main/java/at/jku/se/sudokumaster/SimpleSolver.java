@@ -146,6 +146,7 @@ public class SimpleSolver {
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
             }catch (NullPointerException e){}
+            System.out.println(i + "Number");
             if(i<0) {
                 for (int r = 0; r < 9; r += 3) {
                     for (int c = 0; c < 9; c += 3) {
@@ -153,6 +154,7 @@ public class SimpleSolver {
                     }
                 }
             }else {
+                System.out.println("Freiform");
                 for (int j = 0; j < 9; j++){
                     if (!validBox(b,j))return false;
                 }

@@ -23,7 +23,7 @@ import java.io.IOException;
             } catch (IOException ex) {
             }
             Stage stage = new Stage();
-            stage.setTitle("Load game");
+            //stage.setTitle("Load game");
             stage.setScene(new Scene(root2));
 
             stage.show();

@@ -43,12 +43,12 @@ public class SudokuHelper {
                 if (fields[c][r].getText().trim().equals("") && fields[c][r].isVisible()){
                     if (solution == null){
                         // Empty Cells with no Solution
-                        fields[c][r].setStyle("-fx-background-color:rgb(255,200,200);");
+                        //fields[c][r].setStyle("-fx-background-color:rgb(255,200,200);");
                     }else {
                         // Empty Cells with Solution
                         //System.out.println(solution.get(c,r)+"ERG");
                         fields[c][r].setText(""+solution.get(c,r).getValue());
-                        fields[c][r].setStyle("-fx-background-color:rgb(160,240,130);");
+                        //fields[c][r].setStyle("-fx-background-color:rgb(160,240,130);");
                     }
                 }//else {
                 //textFields[c][r].setStyle("-fx-background-color:rgb(255,255,255)");
