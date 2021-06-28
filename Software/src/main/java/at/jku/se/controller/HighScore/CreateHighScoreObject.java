@@ -1,7 +1,6 @@
 package at.jku.se.controller.HighScore;
 
 import at.jku.se.utility.HighScoreObject;
-import com.google.gson.JsonObject;
 import org.json.simple.JSONObject;
 
 
@@ -69,10 +68,10 @@ public class CreateHighScoreObject {
             System.out.println("doesnt exist v");
         }
 
-        
+
         highScore = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
 
-       HighScoreObject hSO = new HighScoreObject( highScore,  gameName ,  zeit,  clicks,  hints,  difficulty, version );
+        HighScoreObject hSO = new HighScoreObject( highScore,  gameName ,  zeit,  clicks,  hints,  difficulty, version );
         return hSO;
 
     }
