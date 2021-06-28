@@ -3,6 +3,27 @@
 title __SUDOKUMASTER's Class Diagram__\n
 
   namespace at.jku.se.sudokumaster {
+    class at.jku.se.sudokumaster.AnchorPoint {
+        - col : int
+        - row : int
+        + AnchorPoint()
+        + getCol()
+        + getRow()
+        + setCol()
+        + setRow()
+    }
+  }
+  
+
+  namespace at.jku.se.sudokumaster {
+    class at.jku.se.sudokumaster.CalculateScoreTest {
+        ~ validHighScore()
+        ~ validHighScoreClicks()
+    }
+  }
+  
+
+  namespace at.jku.se.sudokumaster {
     class at.jku.se.sudokumaster.Cell {
         - groupId : Integer
         - type : String
@@ -35,17 +56,40 @@ title __SUDOKUMASTER's Class Diagram__\n
 
   namespace at.jku.se.sudokumaster {
     class at.jku.se.sudokumaster.SimpleSolver {
+        + fieldSize : int
+        - anchorpoints : Set<AnchorPoint>
+        - cnt : int
         - numbers : Set<Integer>
         + SimpleSolver()
+        + getAnchorpoints()
         + solve()
+        + valid()
         + validAndFull()
         ~ allBoxesValid()
         ~ allColumnsValid()
         ~ allRowsValid()
         ~ full()
-        ~ valid()
+        ~ validBox()
         ~ validBox()
         ~ validColumn()
+        ~ validRow()
+    }
+  }
+  
+
+  namespace at.jku.se.sudokumaster {
+    class at.jku.se.sudokumaster.SimpleSolverTest {
+        ~ ValidAllBox()
+        ~ ValidAllColumns()
+        ~ ValidAllRows()
+        ~ ValidBox()
+        ~ testSolve()
+        ~ testSolveSmall()
+        ~ validAndComplete()
+        ~ validColumn()
+        ~ validFreeFormBox()
+        ~ validFreeFormBoxEmpty()
+        ~ validFreeFormBoxRow()
         ~ validRow()
     }
   }
@@ -56,6 +100,7 @@ title __SUDOKUMASTER's Class Diagram__\n
         {static} - scene : Scene
         {static} + main()
         + start()
+        + stop()
     }
   }
   

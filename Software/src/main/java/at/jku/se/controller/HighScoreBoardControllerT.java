@@ -1,11 +1,8 @@
 package at.jku.se.controller;
 
 import at.jku.se.controller.HighScore.CreateHighScoreObject;
-
-
 import at.jku.se.utility.HighScoreObject;
 import at.jku.se.utility.NewScreenDropDown;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
@@ -25,7 +21,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class HighScoreBoardControllerT implements Initializable {
 
@@ -40,7 +39,8 @@ public class HighScoreBoardControllerT implements Initializable {
     @FXML
     TableColumn<HighScoreObject,String> nameColumn;
 
-
+    @FXML
+    TableColumn<HighScoreObject,String> playerColumn;
     @FXML
     TableColumn<HighScoreObject, String> timeplayed;
     @FXML
@@ -57,31 +57,6 @@ public class HighScoreBoardControllerT implements Initializable {
         NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
 
     }
-
-    @FXML
-    private Label lbGameName;
-    @FXML
-    private Label lbPlayer;
-    @FXML
-    private Label lbVersion;
-    @FXML
-    private Label lbGen;
-    @FXML
-    private Label lbScore;
-
-    @FXML
-    private Label lbDiff;
-    @FXML
-    private Label lbTime;
-
-    @FXML
-    private ImageView ivSavegame;
-
-
-
-
-
-
 
     //gets all the highscores
     public ObservableList<HighScoreObject> getHighscorer(){
@@ -102,8 +77,6 @@ public class HighScoreBoardControllerT implements Initializable {
             //as long as file exists
             for (File f : files) {
                 newValue = f.getName().substring(0, f.getName().length() - 5);
-
-                //einlesen von werten
                 try {
 
 
@@ -147,7 +120,6 @@ public class HighScoreBoardControllerT implements Initializable {
         }
 
 
-        // HighScoreObject test = new HighScoreObject( Long.valueOf(10000), "testgame", Long.valueOf(1000343230),23, 3, "lol", "thislast");
 
         ObservableList<HighScoreObject> higScore = FXCollections.observableArrayList(higScoreList); //FXCollections.observableArrayList(higScoreList);
 
@@ -158,27 +130,13 @@ public class HighScoreBoardControllerT implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //set up collumns
         nameColumn.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("gameName"));
         scoreColumn.setCellValueFactory(new PropertyValueFactory<HighScoreObject, Long>("highScore"));
-
-
-
-
-
         timeplayed.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("time"));
-        gameVersion.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("version"));
+        gameVersion.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("versionReadable"));
+        playerColumn.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("player"));
 
-        //load dummy datat
         highScore.setItems(getHighscorer());
-
-
-
-       // HighScoreObject higScoreTest = highScore.getSelectionModel().getSelectedItem();
-      //  System.out.println(higScoreTest.getGameName());
-
-
-        // fillListView();
     }
 
     /**
@@ -200,15 +158,17 @@ public class HighScoreBoardControllerT implements Initializable {
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("zeit"));
         TableColumn<HighScoreObject,Long> gameVersion= new TableColumn<>("Type of Playfield");
         //minimum with scoreColumn.setMinWidth(229)
-        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("gameVersion"));
-
+        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("versionReadable"));
+        TableColumn<HighScoreObject,Long> playerColumn= new TableColumn<>("Player");
+        //minimum with scoreColumn.setMinWidth(229)
+        scoreColumn.setCellValueFactory(new PropertyValueFactory<>("player"));
 
 
 
 
         highScore = new TableView<>();
         highScore.setItems(getHighscorer());
-        highScore.getColumns().addAll(nameColumn, scoreColumn, timeplayed, gameVersion);
+        highScore.getColumns().addAll(nameColumn, playerColumn, scoreColumn, timeplayed, gameVersion);
 
     }
 

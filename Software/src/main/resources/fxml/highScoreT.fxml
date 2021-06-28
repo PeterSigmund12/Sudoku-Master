@@ -14,6 +14,7 @@
       <TableView fx:id="highScore" layoutX="10.0" layoutY="120.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="581.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name of Game" />
+            <TableColumn fx:id="playerColumn" prefWidth="75.0" text="Player" />
           <TableColumn fx:id="scoreColumn" prefWidth="75.0" text="Points" />
             <TableColumn fx:id="timeplayed" prefWidth="75.0" text="Time Played" />
             <TableColumn fx:id="gameVersion" prefWidth="75.0" text="Type of Playfield" />

@@ -17,6 +17,7 @@ public class CreateHighScoreObject {
         int hints;
         String difficulty;
         String version;
+        String player;
 
         gameName = (String) gameinfos.get("FileName");
 
@@ -67,11 +68,19 @@ public class CreateHighScoreObject {
             version = "na";
             System.out.println("doesnt exist v");
         }
+        if(gameinfos.containsKey("player")){
+            //wenn existiert
+            player =   String.valueOf(gameinfos.get("player"));
+        } else {
+            // If doesn't exist, do nothing
+            player = "na";
+            System.out.println("player doesnt exist");
+        }
 
 
         highScore = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
 
-        HighScoreObject hSO = new HighScoreObject( highScore,  gameName ,  zeit,  clicks,  hints,  difficulty, version );
+        HighScoreObject hSO = new HighScoreObject( highScore,  gameName ,  zeit,  clicks,  hints,  difficulty, version, player);
         return hSO;
 
     }

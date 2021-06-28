@@ -11,15 +11,12 @@ public class HighScoreObject {
     String difficulty;
     String version;
     String time;
+    String versionReadable;
+    String player;
 
 
 
-
-    //Zeit
-    //schwierigkeit
-
-
-    public HighScoreObject(Long highScore, String gameName, Long zeit, int clicks, int hints, String difficulty, String version) {
+    public HighScoreObject(Long highScore, String gameName, Long zeit, int clicks, int hints, String difficulty, String version, String player) {
         this.highScore = highScore;
         this.gameName = gameName;
 
@@ -28,8 +25,27 @@ public class HighScoreObject {
         this.hints = hints;
         this.difficulty = difficulty;
         this.version = version;
+        this.player = player;
 
+String tt;
+        switch(version)
+        {
+            case "rbSaRegulaer":
+System.out.println("hellohello why");
+                tt =  "Regulaer";
+                break;
+            case "rbSaFreiform":
 
+                tt =  "Freiform";
+                break;
+            case "rbSaSamurai":
+
+                tt =  "Samurai";
+                break;
+            default:
+                tt = "N/A";
+        }
+        this.versionReadable=tt;
         final Date timerCurrent = new Date(0);
         final Date timerData = new Date(zeit);
         Date diff2 = new Date(timerCurrent.getTime() - timerData.getTime());
@@ -96,6 +112,21 @@ public class HighScoreObject {
     }
 
 
+    public String getVersionReadable() {
+        return versionReadable;
+    }
+
+    public void setVersionReadable(String versionReadable) {
+        this.versionReadable = versionReadable;
+    }
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
+    }
 
     public void setHighScore(Long highScore) {
         this.highScore = highScore;

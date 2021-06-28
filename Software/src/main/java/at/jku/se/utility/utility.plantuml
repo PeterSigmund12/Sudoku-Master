@@ -5,13 +5,37 @@ title __UTILITY's Class Diagram__\n
   namespace at.jku.se.utility {
     class at.jku.se.utility.HighScoreObject {
         {static} + aHighScore : Comparator<HighScoreObject>
+        ~ clicks : int
+        ~ difficulty : String
         ~ gameName : String
-        ~ highScore : int
+        ~ highScore : Long
+        ~ hints : int
+        ~ player : String
+        ~ time : String
+        ~ version : String
+        ~ versionReadable : String
+        ~ zeit : Long
         + HighScoreObject()
+        + getClicks()
+        + getDifficulty()
         + getGameName()
         + getHighScore()
+        + getHints()
+        + getPlayer()
+        + getTime()
+        + getVersion()
+        + getVersionReadable()
+        + getZeit()
+        + setClicks()
+        + setDifficulty()
         + setGameName()
         + setHighScore()
+        + setHints()
+        + setPlayer()
+        + setTime()
+        + setVersion()
+        + setVersionReadable()
+        + setZeit()
     }
   }
   
@@ -19,6 +43,13 @@ title __UTILITY's Class Diagram__\n
   namespace at.jku.se.utility {
     class at.jku.se.utility.NewScreen {
         {static} + openNewScreen()
+    }
+  }
+  
+
+  namespace at.jku.se.utility {
+    class at.jku.se.utility.NewScreenDropDown {
+        {static} + handleButtonBacktoMain()
     }
   }
   

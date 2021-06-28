@@ -4,20 +4,15 @@ title __CONTROLLER's Class Diagram__\n
 
   namespace at.jku.se.controller {
     class at.jku.se.controller.HighScoreBoardController {
-        {static} ~ MULTIP_FREI : int
-        {static} ~ MULTIP_FREIF : int
-        {static} ~ MULTIP_SAM : int
-        {static} ~ POINTS_MINUS_CLICKS : int
-        {static} ~ POINTS_MINUS_HINTS : int
-        {static} ~ POINTS_MINUS_TIME : int
-        {static} ~ SCORE_LEICHT : int
-        {static} ~ SCORE_MITTEL : int
-        {static} ~ SCORE_SCHWER : int
+        ~ higScoreList : List<HighScoreObject>
         ~ highScoreGameList : ObservableList<String>
         ~ lvHighScoreGames : ListView<String>
+        ~ nameColumn : TableColumn<HighScoreObject, String>
+        ~ scoreColumn : TableColumn<HighScoreObject, Long>
         ~ selected : String
-        - btnBackHighMainMen : Button
+        - highScore : TableView<HighScoreObject>
         - ivSavegame : ImageView
+        - label : Label
         - lbDiff : Label
         - lbGameName : Label
         - lbGen : Label
@@ -25,9 +20,32 @@ title __CONTROLLER's Class Diagram__\n
         - lbScore : Label
         - lbTime : Label
         - lbVersion : Label
-        + calculateScore()
+        - menuBar : MenuBar
+        + displaySelected()
         + fillListView()
         + handleButtonBackHighMainMen()
+        + handleButtonBacktoMain()
+        + initialize()
+        ~ getHighscorer()
+    }
+  }
+  
+
+  namespace at.jku.se.controller {
+    class at.jku.se.controller.HighScoreBoardControllerT {
+        + label : Label
+        + screen : TextField
+        ~ gameVersion : TableColumn<HighScoreObject, String>
+        ~ nameColumn : TableColumn<HighScoreObject, String>
+        ~ playerColumn : TableColumn<HighScoreObject, String>
+        ~ scoreColumn : TableColumn<HighScoreObject, Long>
+        ~ timeplayed : TableColumn<HighScoreObject, String>
+        - highScore : TableView<HighScoreObject>
+        - menuBar : MenuBar
+        + displaySelected()
+        + fillListView()
+        + getHighscorer()
+        + handleButtonBacktoMain()
         + initialize()
     }
   }
@@ -35,9 +53,16 @@ title __CONTROLLER's Class Diagram__\n
 
   namespace at.jku.se.controller {
     class at.jku.se.controller.LoadGameController {
+        ~ difficulty : String
+        ~ fileName : String
+        ~ generateType : String
         ~ lvSaveGames : ListView
         ~ saveGameList : ObservableList<String>
         ~ selected : String
+        ~ version : String
+        {static} - BTN_FREIFORM : String
+        {static} - BTN_REGULAR : String
+        {static} - BTN_SAMURAI : String
         - btnBackSavedMainMen : Button
         - btnContinue : Button
         - btnExport : Button
@@ -47,11 +72,13 @@ title __CONTROLLER's Class Diagram__\n
         - lbGameName : Label
         - lbGenerate : Label
         - lbVersion : Label
+        - menuBar : MenuBar
         - root : AnchorPane
         + fillListView()
         + handleButtonBackSavedMainMen()
         + handleButtonDeleteGame()
         + handleButtonImportGame()
+        + handleButtonLoadGame()
         + initialize()
     }
   }
@@ -98,9 +125,22 @@ title __CONTROLLER's Class Diagram__\n
 
   namespace at.jku.se.controller {
     class at.jku.se.controller.PlayfieldController {
+        ~ colorindex : int
+        ~ colors : ObservableList<String>
+        ~ currentColor : String
         ~ diffculty : String
+        ~ fieldSize : int
+        ~ fileName : String
         ~ generateType : String
+        ~ groupCount : int[]
+        ~ initPerc : int
+        ~ isNew : boolean
+        ~ loadtime : long
+        ~ longtimer : long
+        ~ stage : Stage
         ~ textFields : TextField[][]
+        ~ time : String
+        ~ timerThread : Thread
         ~ version : String
         {static} - BTN_EASY : String
         {static} - BTN_FREIFORM : String
@@ -108,23 +148,40 @@ title __CONTROLLER's Class Diagram__\n
         {static} - BTN_MEDIUM : String
         {static} - BTN_REGULAR : String
         {static} - BTN_SAMURAI : String
-        - btnHint : Button
-        - btnSolve : Button
+        - btnAddNumbers : Button
+        - btnStartGame : Button
+        - colorList : GridPane
+        - colorListNew : ListView
+        - lbClock : Label
+        - menuBar : MenuBar
+        - miSave : MenuItem
         - playfield : GridPane
         - root : AnchorPane
+        - splitPane : SplitPane
+        + LoadGameInfos()
         + handleButtonBacktoMain()
         + handleButtonHint()
         + handleButtonSaveGame()
         + handleButtonSolve()
+        + handleButtonStartGame()
         + initData()
         + initFirstNumbers()
         + initializePlayfield()
+        + loadInitData()
         + setStyle()
-        - createGroups()
+        + startTimer()
+        + stopTimer()
+        - SaveDialog()
+        - initField()
         - initFields()
         - initFreiformField()
-        - initRegularField()
-        - initSamuraiField()
+    }
+  }
+  
+
+  namespace at.jku.se.controller {
+    class at.jku.se.controller.PlayfieldController.ColorCell {
+        # updateItem()
     }
   }
   
@@ -143,10 +200,13 @@ title __CONTROLLER's Class Diagram__\n
   
 
   at.jku.se.controller.HighScoreBoardController .up.|> javafx.fxml.Initializable
+  at.jku.se.controller.HighScoreBoardControllerT .up.|> javafx.fxml.Initializable
   at.jku.se.controller.LoadGameController .up.|> javafx.fxml.Initializable
   at.jku.se.controller.MainMenueController .up.|> javafx.fxml.Initializable
   at.jku.se.controller.NewGameController .up.|> javafx.fxml.Initializable
   at.jku.se.controller.PlayfieldController o-- at.jku.se.controller.SudokuHelper : h
+  at.jku.se.controller.PlayfieldController +-down- at.jku.se.controller.PlayfieldController.ColorCell
+  at.jku.se.controller.PlayfieldController.ColorCell -up-|> javafx.scene.control.ListCell
 
 
 right footer

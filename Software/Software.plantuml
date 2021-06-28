@@ -1,9 +1,31 @@
 @startuml
 
-title __SUDOKU-MASTER's Class Diagram__\n
+title __SOFTWARE's Class Diagram__\n
+
+  namespace at.jku.se.controller {
+    namespace HighScore {
+      class at.jku.se.controller.HighScore.CalculateScore {
+      }
+    }
+  }
+  
+
+  namespace at.jku.se.controller {
+    namespace HighScore {
+      class at.jku.se.controller.HighScore.CreateHighScoreObject {
+      }
+    }
+  }
+  
 
   namespace at.jku.se.controller {
     class at.jku.se.controller.HighScoreBoardController {
+    }
+  }
+  
+
+  namespace at.jku.se.controller {
+    class at.jku.se.controller.HighScoreBoardControllerT {
     }
   }
   
@@ -39,6 +61,18 @@ title __SUDOKU-MASTER's Class Diagram__\n
   
 
   namespace at.jku.se.sudokumaster {
+    class at.jku.se.sudokumaster.AnchorPoint {
+    }
+  }
+  
+
+  namespace at.jku.se.sudokumaster {
+    class at.jku.se.sudokumaster.CalculateScoreTest {
+    }
+  }
+  
+
+  namespace at.jku.se.sudokumaster {
     class at.jku.se.sudokumaster.Cell {
     }
   }
@@ -52,6 +86,12 @@ title __SUDOKU-MASTER's Class Diagram__\n
 
   namespace at.jku.se.sudokumaster {
     class at.jku.se.sudokumaster.SimpleSolver {
+    }
+  }
+  
+
+  namespace at.jku.se.sudokumaster {
+    class at.jku.se.sudokumaster.SimpleSolverTest {
     }
   }
   
@@ -74,7 +114,14 @@ title __SUDOKU-MASTER's Class Diagram__\n
   }
   
 
+  namespace at.jku.se.utility {
+    class at.jku.se.utility.NewScreenDropDown {
+    }
+  }
+  
+
   at.jku.se.controller.HighScoreBoardController .up.|> javafx.fxml.Initializable
+  at.jku.se.controller.HighScoreBoardControllerT .up.|> javafx.fxml.Initializable
   at.jku.se.controller.LoadGameController .up.|> javafx.fxml.Initializable
   at.jku.se.controller.MainMenueController .up.|> javafx.fxml.Initializable
   at.jku.se.controller.NewGameController .up.|> javafx.fxml.Initializable
