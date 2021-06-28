@@ -32,7 +32,7 @@
         <menus>
           <Menu mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Menu">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" text="Main Menu" />
             </items>
           </Menu>
         </menus>
