@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -130,14 +131,17 @@ public class LoadGameController implements Initializable {
 
     @FXML
     public void handleButtonDeleteGame(ActionEvent event) throws IOException {
-       /* ivSavegame.setImage(null);
+        ivSavegame.setImage(null);
+        File jfile = new File("./savegames/JSON/"+selected+".json");
+        if (jfile.exists()){
+
+            Files.delete(jfile.toPath());
+        }
         File file = new File("./savegames/img/"+selected+".png");
         file.delete();
-        System.out.println(selected);
-        File jfile = new File("./savegames/JSON/"+selected+".json");
+        lvSaveGames.getItems().remove(selected);
         selected = "";
-        jfile.delete();
-        fillListView();*/
+
 
     }
 
@@ -197,7 +201,8 @@ public class LoadGameController implements Initializable {
                 selected = newValue;
 
                     try {
-                        Object obj =   jsonparser.parse(new FileReader("./savegames/JSON/"+newValue+".json"));
+                        FileReader fileReader = new FileReader("./savegames/JSON/"+newValue+".json");
+                        Object obj =   jsonparser.parse(fileReader);
                         JSONObject gameinfos = (JSONObject) obj;
                          fileName = (String)gameinfos.get("FileName");
 
@@ -211,8 +216,10 @@ public class LoadGameController implements Initializable {
                             difficulty = (String)gameinfos.get("difficulty");
                             version = (String)gameinfos.get("version");
                             generateType = (String)gameinfos.get("generateType");
-                        ivSavegame.setImage(image);
+                     //   ivSavegame.setImage(image);
 
+
+                        fileReader.close();
                     } catch (IOException|ParseException e) {
                         e.printStackTrace();
                     }
