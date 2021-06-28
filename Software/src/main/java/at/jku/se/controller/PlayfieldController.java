@@ -35,10 +35,8 @@ import org.json.simple.parser.ParseException;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -173,16 +171,7 @@ public class PlayfieldController {
             }
         });
 
-       /* splitPane.getDividers().get(0).positionProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                for (int row = 0; row < fieldSize; row++){
-                    for (int col = 0; col < fieldSize; col++){
-                        textFields[row][col].setPrefWidth(playfield.getWidth()/fieldSize);
-                    }
-                }
-            }
-        });*/
+
     }
 
     private void initField() {
@@ -217,96 +206,137 @@ public class PlayfieldController {
         }
     }
     private void initFreiformField() {
-        groupCount = new int[9];
-        textFields=new TextField[fieldSize][fieldSize];
-        colorListNew.setItems(colors);
-        colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
-            @Override
-            public ListCell call(ListView listView) {
-                return new ColorCell();
+
+
+            groupCount = new int[9];
+            textFields = new TextField[fieldSize][fieldSize];
+            colorListNew.setItems(colors);
+            colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
+                @Override
+                public ListCell call(ListView listView) {
+                    return new ColorCell();
+                }
+            });
+            if (!colorListNew.getItems().isEmpty()) {
+                colorListNew.getSelectionModel().select(0);
             }
-        });
-        if (!colorListNew.getItems().isEmpty()){
-            colorListNew.getSelectionModel().select(0);
-        }
-        colorListNew.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                //System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
-                currentColor = newValue;
-                colorindex = colors.indexOf(currentColor);
-            }
-        });
-        for (int c=0; c<fieldSize;c++){
-            for (int r=0; r<fieldSize;r++){
-                TextField t = h.defaultTextField();
-                t.setOnMouseClicked(e -> {
-                    if (t.getStyle().contains("-fx-background-color:")){
-                        String [] styles = t.getStyle().split(";");
-                        for (int i =0; i<styles.length;i++){
-                            if (styles[i].contains("-fx-background-color:")){
-                                String color = styles[i].split(":")[1];
-                                if (color.equals(currentColor)){
-                                    groupCount[colorindex]--;
-                                    styles[i]="";
-                                    t.setStyle(String.join(";",styles));
-                                    t.setId(colorindex+"");
-                                }else if (groupCount[colorindex] <9) {
-                                    int oldColor = colors.indexOf(color);
-                                    groupCount[oldColor]--;
-                                    groupCount[colorindex]++;
-                                    styles[i]="-fx-background-color:"+currentColor;
-                                    t.setStyle(String.join(";",styles));
-                                    t.setId(colorindex+"");
-                                }
-                            }
-                        }
-                    }else if (groupCount[colorindex] <9){
-                        t.setStyle(t.getStyle()+" -fx-background-color:"+currentColor);
-                        t.setId(colorindex+"");
-                        groupCount[colorindex]++;
-                    }
-                    int cnt = 0;
-                    for (int i = 0; i< groupCount.length; i++){
-                        cnt = cnt + groupCount[i];
-                    }
-                    if (cnt == fieldSize*fieldSize){
-                        btnAddNumbers.setVisible(true);
-                        btnAddNumbers.setDisable(false);
-                        btnAddNumbers.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override public void handle(ActionEvent e) {
-                                colorListNew.setVisible(false);
-                                colorListNew.setDisable(true);
-                                btnAddNumbers.setOnAction(null);
-                                btnAddNumbers.setDisable(true);
-                                btnAddNumbers.setVisible(false);
-                                for (int c=0; c<fieldSize;c++){
-                                    for (int r=0; r<fieldSize;r++){
-                                        TextField t = textFields[c][r];
-                                        textFields[c][r].setEditable(true);
-                                        textFields[c][r].setOnMouseClicked(null);
+            colorListNew.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    //System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
+                    currentColor = newValue;
+                    colorindex = colors.indexOf(currentColor);
+                }
+            });
+            for (int c = 0; c < fieldSize; c++) {
+                for (int r = 0; r < fieldSize; r++) {
+                    TextField t = h.defaultTextField();
+                    t.setOnMouseClicked(e -> {
+                        if (t.getStyle().contains("-fx-background-color:")) {
+                            String[] styles = t.getStyle().split(";");
+                            for (int i = 0; i < styles.length; i++) {
+                                if (styles[i].contains("-fx-background-color:")) {
+                                    String color = styles[i].split(":")[1];
+                                    if (color.equals(currentColor)) {
+                                        groupCount[colorindex]--;
+                                        styles[i] = "";
+                                        t.setStyle(String.join(";", styles));
+                                        t.setId(colorindex + "");
+                                    } else if (groupCount[colorindex] < 9) {
+                                        int oldColor = colors.indexOf(color);
+                                        groupCount[oldColor]--;
+                                        groupCount[colorindex]++;
+                                        styles[i] = "-fx-background-color:" + currentColor;
+                                        t.setStyle(String.join(";", styles));
+                                        t.setId(colorindex + "");
                                     }
                                 }
                             }
-                        });
-                    }else {
-                        btnAddNumbers.setVisible(false);
-                        btnAddNumbers.setDisable(true);
-                    }
-                    colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
-                        @Override
-                        public ListCell call(ListView listView) {
-                            return new ColorCell();
+                        } else if (groupCount[colorindex] < 9) {
+                            t.setStyle(t.getStyle() + " -fx-background-color:" + currentColor);
+                            t.setId(colorindex + "");
+                            groupCount[colorindex]++;
                         }
+                        int cnt = 0;
+                        for (int i = 0; i < groupCount.length; i++) {
+                            cnt = cnt + groupCount[i];
+                        }
+                        if (cnt == fieldSize * fieldSize) {
+                            btnAddNumbers.setVisible(true);
+                            btnAddNumbers.setDisable(false);
+                            btnAddNumbers.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent e) {
+                                    colorListNew.setVisible(false);
+                                    colorListNew.setDisable(true);
+                                    btnAddNumbers.setOnAction(null);
+                                    btnAddNumbers.setDisable(true);
+                                    btnAddNumbers.setVisible(false);
+                                    for (int c = 0; c < fieldSize; c++) {
+                                        for (int r = 0; r < fieldSize; r++) {
+                                            TextField t = textFields[c][r];
+                                            textFields[c][r].setEditable(true);
+                                            textFields[c][r].setOnMouseClicked(null);
+                                        }
+                                    }
+                                }
+                            });
+                        } else {
+                            btnAddNumbers.setVisible(false);
+                            btnAddNumbers.setDisable(true);
+                        }
+                        colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
+                            @Override
+                            public ListCell call(ListView listView) {
+                                return new ColorCell();
+                            }
+                        });
                     });
-                });
-                t.setEditable(false);
-                textFields[c][r] = t;
-                h.hideUnusedBoxes(c, r, t);
-                playfield.add(t,c,r);
+                    t.setEditable(false);
+                    textFields[c][r] = t;
+                    h.hideUnusedBoxes(c, r, t);
+                    playfield.add(t, c, r);
+                }
             }
+            textFields = initFields(textFields, initPerc);
+
+        if(generateType.equals("automatisch")) {
+
+            File file = new File(Paths.get("./freiform").toString());
+            File[] files = file.listFiles();
+            int random = new Random().nextInt(files.length);
+            String row = "";
+            JSONParser jsonparser = new JSONParser();
+            String[] splitRow;
+            String[] splitCell;
+
+            try {
+                Object obj =   jsonparser.parse(new FileReader(files[random]));
+                JSONObject gameinfos = (JSONObject) obj;
+                for(int i = 0; i<fieldSize;i++){
+
+                    row = (String)gameinfos.get(""+i);
+                    System.out.println(row);
+                    splitRow =row.split(";");
+                    for(int j = 0; j<splitRow.length;j++){
+                            currentColor = colors.get(Integer.parseInt(splitRow[j]));
+                            textFields[j][i].setStyle("-fx-background-color: " + currentColor+";");
+                            textFields[j][i].setId(splitRow[j]);
+
+
+                        }
+                    }
+
+
+                startTimer();
+
+
+            } catch (IOException| ParseException e) {
+                e.printStackTrace();
+            }
+
         }
-        textFields=initFields(textFields,initPerc);
+
     }
     public SimpleBoard initFirstNumbers(TextField[][] initField) {
         SimpleSolver s = new SimpleSolver(initField.length);
