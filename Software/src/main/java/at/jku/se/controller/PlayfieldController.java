@@ -553,6 +553,7 @@ public class PlayfieldController {
                     if(version.equals(BTN_FREIFORM)){
                         currentColor = colors.get(Integer.parseInt(splitCell[1]));
                         textFields[j][i].setStyle("-fx-background-color: " + currentColor+";");
+                        textFields[j][i].setId(splitCell[1]);
 
 
                     }
