@@ -461,11 +461,6 @@ public class PlayfieldController {
     @FXML
     public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
 
-        if(isNew){
-            loadtime = longtimer*-1;
-            isNew = false;
-            stopTimer();
-        }
         JSONObject saveGame = new JSONObject();
         JSONObject newFreiform = new JSONObject();
         String file ="";
@@ -486,8 +481,10 @@ public class PlayfieldController {
         SimpleBoard board = h.getCurrentBoard(textFields);
         int groupID = 0;
         System.out.println(generateType);
+        System.out.println(version);
+        System.out.println(isNew);
         if(generateType.equals("manuell") && version.equals(BTN_FREIFORM) && isNew) {
-
+            System.out.println("test");
             for (int rows = 0; rows < fieldSize; rows++) {
                 row = "";
                 for (int col = 0; col < fieldSize; col++) {
@@ -506,6 +503,11 @@ public class PlayfieldController {
                 saveFreiform.write(newFreiform.toJSONString());
             }
 
+        }
+        if(isNew){
+            loadtime = longtimer*-1;
+            isNew = false;
+            stopTimer();
         }
         saveGame.put("FileName", file);
         saveGame.put("version", version);
