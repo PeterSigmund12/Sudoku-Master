@@ -52,6 +52,14 @@ public class NewGameController implements Initializable {
     String generateType="";
     String difficulty ="";
 
+
+    /**
+     * Nachdem der Continue Button gedrückt wurde, werden die ausgewählten Radiobutton-IDs mithilfe der InitData Methode
+     * an den Playfield-Controller übergeben und ruft die neue fxml auf.
+     * @param event
+     * @throws IOException
+     *
+     */
     @FXML
     public void handleButtonContinue(ActionEvent event) throws IOException { // aufgerufen wenn auf diesen Button geklicked wird
 
@@ -74,8 +82,6 @@ public class NewGameController implements Initializable {
         stage.setScene(new Scene(root2));
         stage.show();
         stage.setMaximized(true);
-        //stage.setMinHeight(1200);
-        //stage.setMinWidth(1600);
         oldStage.close();
 
     }
@@ -86,6 +92,15 @@ public class NewGameController implements Initializable {
     }
 
 
+    /**
+     * Alle RadioButtons werden initialisiert und zu den entsprechenden Gruppen hinzugefügt.
+     * Außerdem werden zu den einzelnen Gruppen ChangeListener hinzugefügt, damit sobald ein anderer
+     * RadioButton ausgewählt wurde, abgespeichert wird.
+     * Ebenfalls werden die RadioButtons der Schwierigkeitsgruppe enabled, wenn bei dem Generierungstyp
+     * automatisch ausgewählt wurde.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ToggleGroup sudokuVersion = new ToggleGroup();
@@ -150,31 +165,16 @@ public class NewGameController implements Initializable {
     }
 
 
+    /**
+     * Diese Methode ruft die Klasse NewScreen auf, welche dafür sorgt, dass der MainMenü-Screen aufgerufen
+     * und angezeigt wird. Dabei wird das event und den Pfad wo die fxml-Datei liegt, übergeben.
+     * @param event
+     * @throws IOException
+     */
     public void handleButtonBackNewMainMen(ActionEvent event) throws IOException{
 
         NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
 
-        /*
-        Node node = (Node) event.getSource();
-        Stage oldStage = (Stage)node.getScene().getWindow();;
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/fxml/mainmenue.fxml"));
-        Parent root2 = null;
-
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-
-        Stage stage = new Stage();
-        stage.setTitle("Start new game");
-        stage.setScene(new Scene(root2));
-
-        stage.show();
-        oldStage.close();
-
-         */
 
     }
 }

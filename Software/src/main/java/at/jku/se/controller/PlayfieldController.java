@@ -466,15 +466,7 @@ public class PlayfieldController {
         String file ="";
         String playerName="";
         Pair<String,String> dialogResult = SaveDialog();
-        /*TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Save Game");
-        dialog.setContentText("Filename: ");
 
-        Optional<String> fileName = dialog.showAndWait();
-        if(fileName.isPresent()){
-
-            file = fileName.get();
-        }*/
         file = dialogResult.getKey();
         playerName = dialogResult.getValue();
         String row="";
@@ -604,6 +596,13 @@ public class PlayfieldController {
 
     }
 
+    /**
+     * Es wird die aktuelle Start Zeit gespeichert. Danach wird ein neuer Thread erstellt, welcher dafür zuständig
+     * ist, dass sich der Timer jede Sekunde aktualisiert. Damit die Sekunden richtig berechnet und angezeigt
+     * wird, muss man die aktuelle Zeit minus der Startzeit rechnen. Wenn eine Spiel geladen wird, muss zu dieser Zeit
+     * noch die schon benötigte Zeit addieren. Außerdem muss nach jeder Sekunde das Label, welche die Zeit anzeigt,
+     * aktualisiert werden. Am Ende wird der Timer-Thread gestartet.
+     */
     public void startTimer(){
 
         final Date timerStart = new Date();
@@ -634,10 +633,21 @@ public class PlayfieldController {
         });
         timerThread.start();//start the thread and its ok
     }
+
+    /**
+     * Stoppt den Timer-Thread
+     */
     public void stopTimer(){
         timerThread.stop();
     }
 
+    /**
+     * Öffnet, wenn der Butzer das Spiel speichern will einen Dialog, wo der Benutzer in zwei Textfields seinen Namen
+     * und den Filenamen eintragen kann. Mit Hilfe einer Button Aktion werden die beiden Informationen
+     * in einem Pair zurückgegebgen. Der Filename wird als Key und der PLayername als Value gespeichert.
+     *
+     * @return ein Pair mit Filename als Key und Playername als Value
+     */
     private Pair<String,String> SaveDialog(){
         Dialog<Pair<String,String>> dialog = new Dialog<>();
         dialog.setTitle("Save Game");
@@ -676,6 +686,15 @@ public class PlayfieldController {
         return null;
     }
 
+
+    /**
+     * Wird aufgerufen wenn ein neues Spiel erstellt wird und speichert Informationen in dieser Klasse.
+     * Ruft am Ende initializePlayfield auf.
+     *
+     * @param version  spezielle Sudoku Version (Regular,Samurai,Freiform)
+     * @param generateType GenerierungsTyp (manuell,automatisch)
+     * @param diffculty Schwierigkeit (leicht,mittel,schwer)
+     */
     public void initData(String version, String generateType, String diffculty) {
         this.generateType = generateType;
         this.diffculty = diffculty;
@@ -683,6 +702,15 @@ public class PlayfieldController {
         initializePlayfield();
     }
 
+    /**
+     * Wird aufgerufen wenn ein Spiel geladen wird und speichert Informationen in dieser Klasse.
+     * Ruft initializePlayfield auf und danach LoadgameInfos.
+     * 
+     * @param version spezielle Sudoku Version (Regular,Samurai,Freiform)
+     * @param generateType GenerierungsTyp (manuell,automatisch)
+     * @param diffculty Schwierigkeit (leicht,mittel,schwer)
+     * @param fileName ausgewählter Filename
+     */
     public void loadInitData(String version, String generateType, String diffculty, String fileName) {
         this.generateType = generateType;
         this.diffculty = diffculty;
