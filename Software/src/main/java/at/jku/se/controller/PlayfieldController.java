@@ -412,6 +412,11 @@ public class PlayfieldController {
         //btnSolve.setDisable(true);
     }
 
+    /**
+     * Der Timer wird gestartet. Die Speicheroption wir enabled. Die Manuell gesetzten Felder werden disabled
+     * damit die nicht mehr veränderbar sind.
+     * @param event
+     */
     @FXML
     public void handleButtonStartGame(ActionEvent event){
         startTimer();
@@ -432,6 +437,14 @@ public class PlayfieldController {
     public void handleButtonHint(ActionEvent event){
         h.getHint(textFields);
     }
+
+
+    /**
+     * Diese Methode ruft die Klasse NewScreen auf, welche dafür sorgt, dass der MainMenü-Screen aufgerufen
+     * und angezeigt wird. Dabei wird das event und den Pfad wo die fxml-Datei liegt, übergeben.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
 
@@ -439,25 +452,20 @@ public class PlayfieldController {
         Stage oldStage = (Stage)menuBar.getScene().getWindow();
         NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
 
-        /*
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(NewScreen.class.getResource("/fxml/mainmenue.fxml"));
-        Parent root2 = null;
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Load game");
-        stage.setScene(new Scene(root2));
-
-        stage.show();
-        oldStage.close();
-
-         */
     }
 
 
+    /**
+     * SaveDialog wird aufgerufen. Es wird geprüft ob es ein neues manuelles Freiform Sudoku ist.
+     * Wenn dies zutrifft, wird das Freiform Sudoku in ein JSONObjekt geschrieben und in einem JSON-File abgespeichert.
+     * Danach werden alle vorhandenen Informationen (Version,Schwierigkeit, Spielername, etc.) ebenfalls in ein neues JSONObjekt
+     * geschrieben. Dann werden die einzelen Zeilen ausgelesen und ebenfalls das JSONObjekt geschrieben (Format pro Zeile:
+     * Value,GroupID ; Value,GroupID ; ...).
+     * Am Ende wird alles in einem JSON-File gespeichert.
+     * @param event
+     * @throws AWTException
+     * @throws IOException tritt auf wenn ein Error beim schreiben entsteht
+     */
     @FXML
     public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
 
@@ -553,6 +561,12 @@ public class PlayfieldController {
 
     }
 
+
+    /**
+     * Ladet alle vorhandenen Informationen von einem vorgegbenen JSON-File.
+     * Danach werden den einzelen Sudoku Textfields die GroupID und der Value gesetzt.
+     * Am Schluss wird der Timer gestartet.
+     */
     public void LoadGameInfos(){
         colorListNew.setVisible(false);
         miSave.setDisable(false);
@@ -705,7 +719,7 @@ public class PlayfieldController {
     /**
      * Wird aufgerufen wenn ein Spiel geladen wird und speichert Informationen in dieser Klasse.
      * Ruft initializePlayfield auf und danach LoadgameInfos.
-     * 
+     *
      * @param version spezielle Sudoku Version (Regular,Samurai,Freiform)
      * @param generateType GenerierungsTyp (manuell,automatisch)
      * @param diffculty Schwierigkeit (leicht,mittel,schwer)
