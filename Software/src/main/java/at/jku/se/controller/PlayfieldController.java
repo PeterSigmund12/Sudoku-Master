@@ -540,12 +540,9 @@ public class PlayfieldController {
         stopTimer();
         Stage oldStage = (Stage)menuBar.getScene().getWindow();
         NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
-
-    }
-
         stage.show();
         oldStage.close();
-
+    }
     /**
      * SaveDialog wird aufgerufen. Es wird geprüft ob es ein neues manuelles Freiform Sudoku ist.
      * Wenn dies zutrifft, wird das Freiform Sudoku in ein JSONObjekt geschrieben und in einem JSON-File abgespeichert.
