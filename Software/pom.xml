@@ -75,5 +75,6 @@
                     <mainClass>at.jku.se.sudokumaster.SudokuMaster</mainClass>
                 </configuration>            </plugin>
         </plugins>
+        
     </build>
 </project>
