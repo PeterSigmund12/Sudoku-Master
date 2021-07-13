@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="root" prefHeight="566.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.PlayfieldController">
    <children>
-      <SplitPane fx:id="splitPane" dividerPositions="0.8456057007125891" layoutX="13.0" layoutY="35.0" prefHeight="517.0" prefWidth="785.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="35.0">
+      <SplitPane fx:id="splitPane" dividerPositions="0.9" layoutX="13.0" layoutY="35.0" prefHeight="517.0" prefWidth="785.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="35.0">
          <items>
             <GridPane fx:id="playfield" minHeight="40.0" minWidth="40.0" prefHeight="539.0" prefWidth="597.0">
             </GridPane>

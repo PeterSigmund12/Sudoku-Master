@@ -48,7 +48,13 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.Random;
 
+/**
+ * The type Playfield controller.
+ */
 public class PlayfieldController {
+    /**
+     * The Text fields.
+     */
     TextField[][]textFields;
     private static final String BTN_REGULAR = "rbSaRegulaer";
     private static final String BTN_SAMURAI = "rbSaSamurai";
@@ -59,7 +65,6 @@ public class PlayfieldController {
 
     @FXML
     private AnchorPane root;
-
     @FXML
     private GridPane playfield;
     @FXML
@@ -79,28 +84,81 @@ public class PlayfieldController {
     @FXML
     private MenuItem miSave;
 
+    /**
+     * The Group counter. Used for Freeform Sudokus
+     */
     int [] groupCount;
-    //anchorpoints 0/0 , 12/0 , 0/12 , 6/6 , 12/12
+    /**
+     * The Version.
+     */
     String version ="";
+    /**
+     * The Generate type.(Auto, Manual)
+     */
     String generateType="";
+    /**
+     * The Diffculty.
+     */
     String diffculty ="";
+    /**
+     * The Field size.
+     */
     int fieldSize;
+    /**
+     * The Init perc.
+     */
     int initPerc = 0;
+    /**
+     * The Colorindex.
+     */
     int colorindex = 0;
+    /**
+     * The File name.
+     */
     String fileName="";
+    /**
+     * The Is new.
+     */
     boolean isNew = true;
+    /**
+     * The Stage.
+     */
     Stage stage;
+    /**
+     * The Sudoku Helper Object
+     */
     SudokuHelper h = new SudokuHelper();
+    /**
+     * The Colors used for Freeform Sudokus.
+     */
     ObservableList<String> colors = FXCollections.observableArrayList(
             "orange", "aquamarine", "bisque", "darkseagreen", "khaki",
             "lightgreen", "lightsalmon", "lightsteelblue", "tan"
     );
+    /**
+     * The Current color.
+     */
     String currentColor = colors.get(0);
+    /**
+     * The Timer thread.
+     */
     Thread timerThread;
+    /**
+     * The Time.
+     */
     String time ="";
+    /**
+     * The Loadtime.
+     */
     long loadtime = 0;
+    /**
+     * The Longtimer.
+     */
     long longtimer = 0;
 
+    /**
+     * Initialize the playfield and set values retrieved from the user Interface.
+     */
     public void initializePlayfield() {
         playfield.setGridLinesVisible(false);
         playfield.setAlignment(Pos.CENTER);
@@ -179,6 +237,9 @@ public class PlayfieldController {
 
     }
 
+    /**
+     * Inizialize all default Textfields.
+     */
     private void initField() {
         textFields=new TextField[fieldSize][fieldSize];
         for (int c=0; c<fieldSize;c++){
@@ -193,12 +254,14 @@ public class PlayfieldController {
         }
         textFields=initFields(textFields,initPerc);
     }
+
+    /**
+     * The type Color cell used for the creation of the freefrom Sudoku
+     */
     class  ColorCell extends ListCell<String>{
         @Override
         protected void updateItem(String item, boolean b) {
             super.updateItem(item, b);
-
-
             HBox stack = new HBox();
             stack.setAlignment(Pos.CENTER_LEFT);
             Circle circle = new Circle(20,20,20);
@@ -210,9 +273,18 @@ public class PlayfieldController {
             }
         }
     }
+
+    /**
+     * Initialize the freeform Board.
+     *  1. Fill Listview with ColorCells. (ColorCells show the Color and current click Counter for each color)
+     *  2. Add Textfields to Gridpane and add onClick Listener to each TextField
+     *  3. If a Textfield is Clicked the current Color is applied to the textfield Background and the board sets the group ID corresponding to each color index.
+     *     If the colored Textfield is clicked again with the same color the color will be removed.
+     *     If the colored Textfield is clicked again with another color the color will be overwritten and the old color counter will be counted down.
+     *  4. If all Textfields are colored a button will be visible and allowes the player to start entering numbers.
+     *     After clicking the button the listview will be hidden and the current background colors will be locked.
+     */
     private void initFreiformField() {
-
-
             groupCount = new int[9];
             textFields = new TextField[fieldSize][fieldSize];
             colorListNew.setItems(colors);
@@ -228,7 +300,6 @@ public class PlayfieldController {
             colorListNew.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    //System.out.println("ListView selection changed from oldValue = " + oldValue + " to newValue = " + newValue);
                     currentColor = newValue;
                     colorindex = colors.indexOf(currentColor);
                 }
@@ -304,17 +375,13 @@ public class PlayfieldController {
                 }
             }
             textFields = initFields(textFields, initPerc);
-
         if(generateType.equals("automatisch")) {
-
             File file = new File(Paths.get("./freiform").toString());
             File[] files = file.listFiles();
             int random = new Random().nextInt(files.length);
             String row = "";
             JSONParser jsonparser = new JSONParser();
             String[] splitRow;
-            String[] splitCell;
-
             try {
                 Object obj =   jsonparser.parse(new FileReader(files[random]));
                 JSONObject gameinfos = (JSONObject) obj;
@@ -327,22 +394,22 @@ public class PlayfieldController {
                             currentColor = colors.get(Integer.parseInt(splitRow[j]));
                             textFields[j][i].setStyle("-fx-background-color: " + currentColor+";");
                             textFields[j][i].setId(splitRow[j]);
-
-
                         }
                     }
-
-
                 startTimer();
-
-
             } catch (IOException| ParseException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
+
+    /**
+     * Init the first numbers simple board to create a random Game.
+     * Add five Random Numbers and check if the board is solvable.
+     *
+     * @param initField the init field
+     * @return the simple board
+     */
     public SimpleBoard initFirstNumbers(TextField[][] initField) {
         SimpleSolver s = new SimpleSolver(initField.length);
         AnchorPoint[] points = s.getAnchorpoints();
@@ -357,6 +424,8 @@ public class PlayfieldController {
                 setStyle(randC,randR,initField[randC][randR],"-fx-text-inner-color: darkblue;");
             }else {
                 initField[randC][randR] = new TextField();
+                initField[randC][randR].setText("");
+                initField[randC][randR] = h.defaultTextField();
                 i--;
             }
 
@@ -364,12 +433,28 @@ public class PlayfieldController {
 
         return h.getBoardSolution(initField);
     }
+
+    /**
+     * Sets style.
+     *
+     * @param c     the column
+     * @param r     the row
+     * @param t     the textfield
+     * @param style the style
+     */
     public void setStyle(int c, int r, TextField t,String style) {
         if (!version.equals(BTN_FREIFORM)) {
             h.setNormalBoxesStyle(c, r, t,style);
         }
     }
 
+    /**
+     * If the board is solvable add the percentage of numbers set by initPerc add them to the current board.
+     *
+     * @param textFields
+     * @param initPerc
+     * @return
+     */
     private TextField[][] initFields(TextField[][] textFields, int initPerc) {
         if (initPerc==0)return textFields;
         int anchorC = 0;
@@ -399,19 +484,22 @@ public class PlayfieldController {
         return textFields;
     }
 
+    /**
+     * Handle button solve.
+     *
+     * @param event the event
+     */
     @FXML
     public void handleButtonSolve(ActionEvent event){
-        switch (version) {
-            case BTN_REGULAR: case BTN_SAMURAI: case BTN_FREIFORM:
-                h.solveBoard(textFields);
-                stopTimer();
-                break;
-            default:
-                break;
-        }
-        //btnSolve.setDisable(true);
+        h.solveBoard(textFields);
+        stopTimer();
     }
 
+    /**
+     * Handle button start game.
+     *
+     * @param event the event
+     */
     @FXML
     public void handleButtonStartGame(ActionEvent event){
         startTimer();
@@ -429,9 +517,22 @@ public class PlayfieldController {
         }
         //TODO: Move if Freeform Numbers entered
     }
+
+    /**
+     * Handle button hint.
+     *
+     * @param event the event
+     */
     public void handleButtonHint(ActionEvent event){
         h.getHint(textFields);
     }
+
+    /**
+     * Handle button backto main.
+     *
+     * @param event the event
+     * @throws IOException the io exception
+     */
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
 
@@ -458,6 +559,13 @@ public class PlayfieldController {
     }
 
 
+    /**
+     * Handle button save game.
+     *
+     * @param event the event
+     * @throws AWTException the awt exception
+     * @throws IOException  the io exception
+     */
     @FXML
     public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
 
@@ -561,6 +669,9 @@ public class PlayfieldController {
 
     }
 
+    /**
+     * Load game infos.
+     */
     public void LoadGameInfos(){
         colorListNew.setVisible(false);
         miSave.setDisable(false);
@@ -604,6 +715,9 @@ public class PlayfieldController {
 
     }
 
+    /**
+     * Start timer.
+     */
     public void startTimer(){
 
         final Date timerStart = new Date();
@@ -634,6 +748,10 @@ public class PlayfieldController {
         });
         timerThread.start();//start the thread and its ok
     }
+
+    /**
+     * Stop timer.
+     */
     public void stopTimer(){
         timerThread.stop();
     }
@@ -676,6 +794,13 @@ public class PlayfieldController {
         return null;
     }
 
+    /**
+     * Init data.
+     *
+     * @param version      the version
+     * @param generateType the generate type
+     * @param diffculty    the diffculty
+     */
     public void initData(String version, String generateType, String diffculty) {
         this.generateType = generateType;
         this.diffculty = diffculty;
@@ -683,6 +808,14 @@ public class PlayfieldController {
         initializePlayfield();
     }
 
+    /**
+     * Load init data.
+     *
+     * @param version      the version
+     * @param generateType the generate type
+     * @param diffculty    the diffculty
+     * @param fileName     the file name
+     */
     public void loadInitData(String version, String generateType, String diffculty, String fileName) {
         this.generateType = generateType;
         this.diffculty = diffculty;

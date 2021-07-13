@@ -5,12 +5,25 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
 
+/**
+ * The Simple solver class.
+ */
 public class SimpleSolver {
     private Set<Integer> numbers;
     private Set<AnchorPoint> anchorpoints;
-    public int fieldSize;
     private int cnt = 0;
+    /**
+     * The Sudoku Field size.
+     */
+    public int fieldSize;
 
+    /**
+     * Instantiates a new Simple solver.
+     *
+     * @param size the size of the Sudoku Array
+     *             eg. Normal Sudoku. Size = 9
+     *                 Samurai Sudoku. Size = 21
+     */
     public SimpleSolver(int size){
         numbers = new HashSet<>();
         numbers.add(1);
@@ -35,10 +48,25 @@ public class SimpleSolver {
 
         }
     }
+
+    /**
+     * Get all valid anchorpoints.
+     *
+     * @return the anchor point [ ]
+     */
     public AnchorPoint[] getAnchorpoints(){
         return anchorpoints.toArray(new AnchorPoint[anchorpoints.size()]);
     }
 
+    /**
+     * Valid row boolean.
+     *
+     * @param b       the current Board
+     * @param r       the row to check
+     * @param anchorC the anchor column
+     * @param anchorR the anchor row
+     * @return the boolean
+     */
     boolean validRow(SimpleBoard b, int r,int anchorC, int anchorR){
         Set<Integer>num = new HashSet<>(numbers);
         for (int c = 0; c<9;c++){
@@ -57,6 +85,12 @@ public class SimpleSolver {
         return true;
     }
 
+    /**
+     * Check if all rows are valid. Return boolean.
+     *
+     * @param b the current Board
+     * @return the boolean
+     */
     boolean allRowsValid(SimpleBoard b){
         for (AnchorPoint ap : anchorpoints) {
             for (int r = 0; r < 9; r++) {
@@ -68,6 +102,16 @@ public class SimpleSolver {
         return true;
     }
 
+
+    /**
+     * Check if a single column is valid. Return boolean.
+     *
+     * @param b       the current Board
+     * @param c       the column to check
+     * @param anchorC the anchor column
+     * @param anchorR the anchor row
+     * @return the boolean
+     */
     boolean validColumn(SimpleBoard b, int c,int anchorC, int anchorR){
         Set<Integer>num = new HashSet<>(numbers);
         for (int r= 0; r<9;r++){
@@ -86,6 +130,12 @@ public class SimpleSolver {
         return true;
     }
 
+    /**
+     * Check if all columns are valid. Return boolean.
+     *
+     * @param b the current board
+     * @return the boolean
+     */
     boolean allColumnsValid(SimpleBoard b){
         for (AnchorPoint ap : anchorpoints) {
             for (int c = 0; c < 9; c++) {
@@ -97,6 +147,14 @@ public class SimpleSolver {
         return true;
     }
 
+    /**
+     * Check if a default 3x3 box is valid. Return boolean.
+     *
+     * @param b       the current Board
+     * @param anchorC the anchor column
+     * @param anchorR the anchor row
+     * @return the boolean
+     */
     boolean validBox(SimpleBoard b, int anchorC, int anchorR){
         Set<Integer>num = new HashSet<>(numbers);
         for (int r = 0; r<3;r++){
@@ -116,6 +174,14 @@ public class SimpleSolver {
         }
         return true;
     }
+
+    /**
+     * Check if a freeform Sudoku Group is valid. Return boolean.
+     *
+     * @param b       the current Board
+     * @param groupId the group id
+     * @return the boolean
+     */
     boolean validBox(SimpleBoard b, int groupId){
         Set<Integer>num = new HashSet<>(numbers);
         for (int r = 0; r<fieldSize;r++){
@@ -137,6 +203,16 @@ public class SimpleSolver {
         }
         return true;
     }
+
+    /**
+     * Check if all boxes are valid. Return boolean.
+     *
+     * Differentiate between normal Sudokus (Normal, Samurai) and Freeform Sudokus.
+     * To do so get the groupID of three Random Positions from the board.
+     *
+     * @param b the b
+     * @return the boolean
+     */
     boolean allBoxesValid(SimpleBoard b){
         Random rand = new Random();
         for (AnchorPoint ap : anchorpoints) {
@@ -146,7 +222,6 @@ public class SimpleSolver {
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
             }catch (NullPointerException e){}
-            System.out.println(i + "Number");
             if(i<0) {
                 for (int r = 0; r < 9; r += 3) {
                     for (int c = 0; c < 9; c += 3) {
@@ -154,7 +229,6 @@ public class SimpleSolver {
                     }
                 }
             }else {
-                System.out.println("Freiform");
                 for (int j = 0; j < 9; j++){
                     if (!validBox(b,j))return false;
                 }
@@ -162,10 +236,23 @@ public class SimpleSolver {
         }
         return true;
     }
+
+    /**
+     * Check if a board is valid. Return boolean.
+     *
+     * @param b the current Board.
+     * @return the boolean
+     */
     public boolean valid(SimpleBoard b){
-        //System.out.println("Boxes: "+allBoxesValid(b) +" Columns: "+ allColumnsValid(b) +" Rows: "+ allRowsValid(b));
         return  allBoxesValid(b) && allColumnsValid(b) && allRowsValid(b) ;
     }
+
+    /**
+     * Check if the current board is full. Return boolean.
+     *
+     * @param b the current board
+     * @return the boolean
+     */
     boolean full(SimpleBoard b){
         for (AnchorPoint ap : anchorpoints) {
             for (int r = 0; r < 9; r++) {
@@ -181,10 +268,28 @@ public class SimpleSolver {
         return true;
     }
 
+    /**
+     * Check if the current board is valid and full (Game is completed and valid). Return boolean.
+     *
+     * @param b the current board
+     * @return the boolean
+     */
     public boolean validAndFull(SimpleBoard b){
         return valid(b) && full(b);
     }
 
+    /**
+     * Solver for all boards.
+     *  1. Use a counter to stop in case of an endless loop.
+     *  2. Return null if the current board isn't valid.
+     *  3. Return the board if the current board is valid and full.
+     *  4. Enter the solve algorithm.
+     *     Brute force attempt.
+     *     If a cell is empty add numbers from 1-9 and start recursion with the added cell.
+     *  TODO: Problem with Freeform Sudokus with a low number input. Solver cannot solve Freeform with less than ~40% of the cells filled.
+     * @param part the current board
+     * @return the simple board
+     */
     public SimpleBoard solve(SimpleBoard part){
         cnt++;
         if (cnt > 150000){
@@ -193,14 +298,10 @@ public class SimpleSolver {
         }
 
         if (!valid(part)){
-            //System.out.println("Error");
-
             return null;
 
         }
         if (validAndFull(part)){
-            //System.out.println("Continue");
-
             return part;
         }
         SimpleBoard b = new SimpleBoard(part,fieldSize);

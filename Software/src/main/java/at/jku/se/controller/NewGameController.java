@@ -73,9 +73,9 @@ public class NewGameController implements Initializable {
         stage.sizeToScene();
         stage.setScene(new Scene(root2));
         stage.show();
-        stage.setMaximized(true);
-        //stage.setMinHeight(1200);
-        //stage.setMinWidth(1600);
+        //stage.setMaximized(true);
+        stage.setMinHeight(960);
+        stage.setMinWidth(1280);
         oldStage.close();
 
     }

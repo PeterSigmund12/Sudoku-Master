@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * JavaFX App Main Method, Starts GUI Stage
  */
 public class SudokuMaster extends Application {
 
@@ -20,8 +20,6 @@ public class SudokuMaster extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainmenue.fxml"));
 
         Scene scene = new Scene(root);
-       // scene.getStylesheets().add("/styles/mainmenu.css");
-
         stage.setTitle("Sudoku-Master");
         stage.setResizable(false);
         stage.setScene(scene);
@@ -31,8 +29,6 @@ public class SudokuMaster extends Application {
     @Override
     public void stop() throws Exception
     {
-
-
         Platform.exit();
         System.exit(0);
     }

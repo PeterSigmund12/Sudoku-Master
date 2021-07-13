@@ -12,16 +12,28 @@ import javafx.scene.text.FontWeight;
 
 import java.util.Random;
 
+/**
+ * The type Sudoku helper.
+ */
 public class SudokuHelper {
+    /**
+     * Initialize the default Textfield.
+     *
+     * Set default style.
+     * Set default border.
+     * Add Listener and allow only the numbers 1-9 to be entered.
+     *
+     * @return the text field
+     */
     public TextField defaultTextField() {
         TextField t = new TextField();
         t.setPrefSize(38,38);
         t.setAlignment(Pos.CENTER);
-        t.setFont(Font.font("Calibri", FontWeight.EXTRA_BOLD,18));
+
+        //t.setFont(Font.font("Calibri", FontWeight.EXTRA_BOLD,18));
         t.setStyle("-fx-focus-color: -fx-control-inner-background ; -fx-faint-focus-color: -fx-control-inner-background ;");
         t.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         //allow only numbers in textfield from:
-        //https://stackoverflow.com/questions/7555564/what-is-the-recommended-way-to-make-a-numeric-textfield-in-javafx
         t.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^\\d{1}$")) {
                 t.setText(newValue.replaceAll("[^\\d]", ""));
@@ -35,6 +47,12 @@ public class SudokuHelper {
         });
         return t;
     }
+
+    /**
+     * Solve board and show solved Board
+     *
+     * @param fields the fields
+     */
     public void solveBoard(TextField[][] fields) {
         SimpleBoard solution = getBoardSolution(fields);
         for (int r = 0; r<fields.length;r++){
@@ -46,23 +64,32 @@ public class SudokuHelper {
                         //fields[c][r].setStyle("-fx-background-color:rgb(255,200,200);");
                     }else {
                         // Empty Cells with Solution
-                        //System.out.println(solution.get(c,r)+"ERG");
                         fields[c][r].setText(""+solution.get(c,r).getValue());
                         //fields[c][r].setStyle("-fx-background-color:rgb(160,240,130);");
                     }
-                }//else {
-                //textFields[c][r].setStyle("-fx-background-color:rgb(255,255,255)");
-                //}
+                }
             }
         }
     }
 
+    /**
+     * Gets board solution.
+     *
+     * @param fields the fields
+     * @return the board solution
+     */
     public SimpleBoard getBoardSolution(TextField[][] fields) {
         SimpleSolver s = new SimpleSolver(fields.length);
         SimpleBoard part = getCurrentBoard(fields);
         return s.solve(part);
     }
 
+    /**
+     * Gets current board.
+     *
+     * @param fields the fields
+     * @return the current board
+     */
     public SimpleBoard getCurrentBoard(TextField[][] fields) {
         SimpleBoard part = new SimpleBoard(fields.length);
         for (int r = 0; r< fields.length;r++){
@@ -80,6 +107,11 @@ public class SudokuHelper {
         return part;
     }
 
+    /**
+     * Gets a hint for the board on a random position.
+     *
+     * @param fields the fields
+     */
     public void getHint(TextField[][] fields) {
         SimpleBoard solution = getBoardSolution(fields);
         SimpleSolver s = new SimpleSolver(fields.length);
@@ -100,12 +132,28 @@ public class SudokuHelper {
         }
     }
 
+    /**
+     * Hide unused boxes.
+     *
+     * @param c the column
+     * @param r the row
+     * @param t the textfield
+     */
     public static void hideUnusedBoxes(int c, int r, TextField t) {
         if(((c>=9 && c<12) && (r<6 || r>=15))||((c<6 || c>=15)&&(r>=9 && r<12))){
             t.setVisible(false);
         }
     }
 
+    /**
+     * Sets normal boxes style.
+     * Used for Normal and Samurai Sudokus
+     *
+     * @param c     the column
+     * @param r     the row
+     * @param t     the textfield
+     * @param style the style
+     */
     public void setNormalBoxesStyle(int c, int r, TextField t, String style) {
         if ((((c > 2 && c < 6) || (c > 14 && c < 18)) && ((r > 2 && r < 6) || r > 14 && r < 18) || ((c > 8 && c < 12) && (r > 8 && r < 12)))) {
             t.setStyle("-fx-opacity: 1;-fx-background-color:rgb(220,240,240);"+style);
