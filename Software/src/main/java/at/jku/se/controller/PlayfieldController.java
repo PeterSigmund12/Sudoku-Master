@@ -496,9 +496,9 @@ public class PlayfieldController {
     }
 
     /**
-     * Handle button start game.
-     *
-     * @param event the event
+     * Der Timer wird gestartet. Die Speicheroption wir enabled. Die Manuell gesetzten Felder werden disabled
+     * damit die nicht mehr veränderbar sind.
+     * @param event
      */
     @FXML
     public void handleButtonStartGame(ActionEvent event){
@@ -527,11 +527,12 @@ public class PlayfieldController {
         h.getHint(textFields);
     }
 
+
     /**
-     * Handle button backto main.
-     *
-     * @param event the event
-     * @throws IOException the io exception
+     * Diese Methode ruft die Klasse NewScreen auf, welche dafür sorgt, dass der MainMenü-Screen aufgerufen
+     * und angezeigt wird. Dabei wird das event und den Pfad wo die fxml-Datei liegt, übergeben.
+     * @param event
+     * @throws IOException
      */
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
@@ -540,31 +541,21 @@ public class PlayfieldController {
         Stage oldStage = (Stage)menuBar.getScene().getWindow();
         NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
 
-        /*
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(NewScreen.class.getResource("/fxml/mainmenue.fxml"));
-        Parent root2 = null;
-        try {
-            root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Load game");
-        stage.setScene(new Scene(root2));
+    }
 
         stage.show();
         oldStage.close();
 
-         */
-    }
-
-
     /**
-     * Handle button save game.
-     *
-     * @param event the event
-     * @throws AWTException the awt exception
-     * @throws IOException  the io exception
+     * SaveDialog wird aufgerufen. Es wird geprüft ob es ein neues manuelles Freiform Sudoku ist.
+     * Wenn dies zutrifft, wird das Freiform Sudoku in ein JSONObjekt geschrieben und in einem JSON-File abgespeichert.
+     * Danach werden alle vorhandenen Informationen (Version,Schwierigkeit, Spielername, etc.) ebenfalls in ein neues JSONObjekt
+     * geschrieben. Dann werden die einzelen Zeilen ausgelesen und ebenfalls das JSONObjekt geschrieben (Format pro Zeile:
+     * Value,GroupID ; Value,GroupID ; ...).
+     * Am Ende wird alles in einem JSON-File gespeichert.
+     * @param event
+     * @throws AWTException
+     * @throws IOException tritt auf wenn ein Error beim schreiben entsteht
      */
     @FXML
     public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
@@ -574,15 +565,7 @@ public class PlayfieldController {
         String file ="";
         String playerName="";
         Pair<String,String> dialogResult = SaveDialog();
-        /*TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Save Game");
-        dialog.setContentText("Filename: ");
 
-        Optional<String> fileName = dialog.showAndWait();
-        if(fileName.isPresent()){
-
-            file = fileName.get();
-        }*/
         file = dialogResult.getKey();
         playerName = dialogResult.getValue();
         String row="";
@@ -669,8 +652,11 @@ public class PlayfieldController {
 
     }
 
+
     /**
-     * Load game infos.
+     * Ladet alle vorhandenen Informationen von einem vorgegbenen JSON-File.
+     * Danach werden den einzelen Sudoku Textfields die GroupID und der Value gesetzt.
+     * Am Schluss wird der Timer gestartet.
      */
     public void LoadGameInfos(){
         colorListNew.setVisible(false);
@@ -716,7 +702,11 @@ public class PlayfieldController {
     }
 
     /**
-     * Start timer.
+     * Es wird die aktuelle Start Zeit gespeichert. Danach wird ein neuer Thread erstellt, welcher dafür zuständig
+     * ist, dass sich der Timer jede Sekunde aktualisiert. Damit die Sekunden richtig berechnet und angezeigt
+     * wird, muss man die aktuelle Zeit minus der Startzeit rechnen. Wenn eine Spiel geladen wird, muss zu dieser Zeit
+     * noch die schon benötigte Zeit addieren. Außerdem muss nach jeder Sekunde das Label, welche die Zeit anzeigt,
+     * aktualisiert werden. Am Ende wird der Timer-Thread gestartet.
      */
     public void startTimer(){
 
@@ -748,14 +738,17 @@ public class PlayfieldController {
         });
         timerThread.start();//start the thread and its ok
     }
-
-    /**
-     * Stop timer.
-     */
     public void stopTimer(){
         timerThread.stop();
     }
 
+    /**
+     * Öffnet, wenn der Butzer das Spiel speichern will einen Dialog, wo der Benutzer in zwei Textfields seinen Namen
+     * und den Filenamen eintragen kann. Mit Hilfe einer Button Aktion werden die beiden Informationen
+     * in einem Pair zurückgegebgen. Der Filename wird als Key und der PLayername als Value gespeichert.
+     *
+     * @return ein Pair mit Filename als Key und Playername als Value
+     */
     private Pair<String,String> SaveDialog(){
         Dialog<Pair<String,String>> dialog = new Dialog<>();
         dialog.setTitle("Save Game");
@@ -794,12 +787,14 @@ public class PlayfieldController {
         return null;
     }
 
+
     /**
-     * Init data.
+     * Wird aufgerufen wenn ein neues Spiel erstellt wird und speichert Informationen in dieser Klasse.
+     * Ruft am Ende initializePlayfield auf.
      *
-     * @param version      the version
-     * @param generateType the generate type
-     * @param diffculty    the diffculty
+     * @param version  spezielle Sudoku Version (Regular,Samurai,Freiform)
+     * @param generateType GenerierungsTyp (manuell,automatisch)
+     * @param diffculty Schwierigkeit (leicht,mittel,schwer)
      */
     public void initData(String version, String generateType, String diffculty) {
         this.generateType = generateType;
@@ -809,12 +804,13 @@ public class PlayfieldController {
     }
 
     /**
-     * Load init data.
+     * Wird aufgerufen wenn ein Spiel geladen wird und speichert Informationen in dieser Klasse.
+     * Ruft initializePlayfield auf und danach LoadgameInfos.
      *
-     * @param version      the version
-     * @param generateType the generate type
-     * @param diffculty    the diffculty
-     * @param fileName     the file name
+     * @param version spezielle Sudoku Version (Regular,Samurai,Freiform)
+     * @param generateType GenerierungsTyp (manuell,automatisch)
+     * @param diffculty Schwierigkeit (leicht,mittel,schwer)
+     * @param fileName ausgewählter Filename
      */
     public void loadInitData(String version, String generateType, String diffculty, String fileName) {
         this.generateType = generateType;

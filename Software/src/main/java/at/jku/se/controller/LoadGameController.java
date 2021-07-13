@@ -74,6 +74,12 @@ public class LoadGameController implements Initializable {
     String difficulty ="";
     String fileName = "";
 
+    /**
+     * Diese Methode ruft die Klasse NewScreen auf, welche dafür sorgt, dass der MainMenü-Screen aufgerufen
+     * und angezeigt wird. Dabei wird das event und den Pfad wo die fxml-Datei liegt, übergeben.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonBackSavedMainMen(ActionEvent event) throws IOException {
 
@@ -96,6 +102,13 @@ public class LoadGameController implements Initializable {
         oldStage.close();
     }
 
+    /**
+     * Der FileChooser wird aufgerufen und danach gewartet bis der Benutzer eine Datei auswählt.
+     * Danach wird überprüft, ob es sich um eine JSON-Datei handelt. Ist dies der Fall wird die Datei zu den
+     * anderen gespeicherten Spielen in den Savegames Ordner gespeichert. Wenn der Filename schon vergeben ist
+     * wird ein Alert aufgerufen. der dem Benutzer mitteilt, dass der Filename schon vergeben ist.
+     * @param event
+     */
     @FXML
     public void handleButtonImportGame(ActionEvent event) {
         FileChooser fc = new FileChooser();
@@ -132,6 +145,12 @@ public class LoadGameController implements Initializable {
 
     }
 
+
+    /**
+     * Löscht die Dateien des ausgewählten Spiels und entfernt das Item aus der Listview.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonDeleteGame(ActionEvent event) throws IOException {
         ivSavegame.setImage(null);
@@ -148,6 +167,12 @@ public class LoadGameController implements Initializable {
 
     }
 
+    /**
+     * Ruft die Methode loadInitData auf. Übergibt dieser die Version, den Generatetyp,
+     * die SChwirigkeit und den Filenamen. Danach wird die Datei spielfeld.fxml aufgerufen und angezeigt
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonLoadGame(ActionEvent event) throws IOException {
 
@@ -177,12 +202,22 @@ public class LoadGameController implements Initializable {
     }
 
 
+    /**
+     * Ruft die Methode fillListView auf.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fillListView();
     }
 
 
+    /**
+     * Liest alle Filenamen von gespeicherten Spielen aus und zeigt sie in einer Listview an.
+     * Sobald ein Item ausgwählt wurde, werden weitere Informationen vom ausgewählten Spiel angezeigt.
+     * Aktuell werden die Version, den Generationtyp und die Schwierigkeit angezeigt.
+     */
     public void fillListView(){
 
         saveGameList = FXCollections.observableArrayList();

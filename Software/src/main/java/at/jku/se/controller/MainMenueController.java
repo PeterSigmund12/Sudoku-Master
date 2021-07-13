@@ -24,25 +24,45 @@ public class MainMenueController implements Initializable {
     @FXML
     private Button btnExit;
 
-    // refractor into one methode, pass over String for fxml and for Action event
+    /**
+     * Diese Methode ruft die Klasse NewScreen auf, welche dafür sorgt, dass der NewGame-Screen aufgerufen
+     * und angezeigt wird. Dabei wird das event und den Pfad wo die fxml-Datei liegt, übergeben.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonNewGame(ActionEvent event) throws IOException{
 
         NewScreen.openNewScreen(event,"/fxml/newGame.fxml");
     }
 
+    /**
+     * Diese Methode ruft die Klasse NewScreen auf, welche dafür sorgt, dass der LoadGame-Screen aufgerufen
+     * und angezeigt wird. Dabei wird das event und den Pfad wo die fxml-Datei liegt, übergeben.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonLoadGame(ActionEvent event) throws IOException {
         NewScreen.openNewScreen(event,"/fxml/loadGame.fxml");
     }
 
+    /**
+     * Diese Methode ruft die Klasse NewScreen auf, welche dafür sorgt, dass der Highscore-Screen aufgerufen
+     * und angezeigt wird. Dabei wird das event und den Pfad wo die fxml-Datei liegt, übergeben.
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonMainHighScores(ActionEvent event) throws IOException {
         NewScreen.openNewScreen(event,"/fxml/highScoreT.fxml");
     }
 
 
-
+    /**
+     * Schhließt sobald der Benutzer den Button drückt, die Platform und beendet das Programm.
+     * @param event
+     */
     @FXML
     public void handleButtonExit(ActionEvent event){
         Platform.exit();
