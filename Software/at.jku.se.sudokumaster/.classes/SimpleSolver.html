@@ -1,0 +1,415 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SimpleSolver</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">at.jku.se.sudokumaster</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SimpleSolver (at.jku.se.sudokumaster)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SimpleSolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92,3%
+  </span>
+  <span class="absValue">
+    (12/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97%
+  </span>
+  <span class="absValue">
+    (128/ 132)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package at.jku.se.sudokumaster;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import java.util.HashSet;
+<i>5</i>&nbsp;import java.util.Set;
+<i>6</i>&nbsp;import java.util.Random;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * The Simple solver class.
+<i>10</i>&nbsp; */
+<i>11</i>&nbsp;public class SimpleSolver {
+<i>12</i>&nbsp;    private Set&lt;Integer&gt; numbers;
+<i>13</i>&nbsp;    private Set&lt;AnchorPoint&gt; anchorpoints;
+<b class="fc"><i>14</i>&nbsp;    private int cnt = 0;</b>
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * The Sudoku Field size.
+<i>17</i>&nbsp;     */
+<i>18</i>&nbsp;    public int fieldSize;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * Instantiates a new Simple solver.
+<i>22</i>&nbsp;     *
+<i>23</i>&nbsp;     * @param size the size of the Sudoku Array
+<i>24</i>&nbsp;     *             eg. Normal Sudoku. Size = 9
+<i>25</i>&nbsp;     *                 Samurai Sudoku. Size = 21
+<i>26</i>&nbsp;     */
+<b class="fc"><i>27</i>&nbsp;    public SimpleSolver(int size){</b>
+<b class="fc"><i>28</i>&nbsp;        numbers = new HashSet&lt;&gt;();</b>
+<b class="fc"><i>29</i>&nbsp;        numbers.add(1);</b>
+<b class="fc"><i>30</i>&nbsp;        numbers.add(2);</b>
+<b class="fc"><i>31</i>&nbsp;        numbers.add(3);</b>
+<b class="fc"><i>32</i>&nbsp;        numbers.add(4);</b>
+<b class="fc"><i>33</i>&nbsp;        numbers.add(5);</b>
+<b class="fc"><i>34</i>&nbsp;        numbers.add(6);</b>
+<b class="fc"><i>35</i>&nbsp;        numbers.add(7);</b>
+<b class="fc"><i>36</i>&nbsp;        numbers.add(8);</b>
+<b class="fc"><i>37</i>&nbsp;        numbers.add(9);</b>
+<b class="fc"><i>38</i>&nbsp;        anchorpoints = new HashSet&lt;&gt;();</b>
+<b class="fc"><i>39</i>&nbsp;        fieldSize = size;</b>
+<b class="pc"><i>40</i>&nbsp;        if (size == 9){</b>
+<b class="fc"><i>41</i>&nbsp;            anchorpoints.add(new AnchorPoint(0,0));</b>
+<i>42</i>&nbsp;        }else {
+<b class="fc"><i>43</i>&nbsp;            anchorpoints.add(new AnchorPoint(0,0));</b>
+<b class="fc"><i>44</i>&nbsp;            anchorpoints.add(new AnchorPoint(12,0));</b>
+<b class="fc"><i>45</i>&nbsp;            anchorpoints.add(new AnchorPoint(0,12));</b>
+<b class="fc"><i>46</i>&nbsp;            anchorpoints.add(new AnchorPoint(6,6));</b>
+<b class="fc"><i>47</i>&nbsp;            anchorpoints.add(new AnchorPoint(12,12));</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;        }
+<b class="fc"><i>50</i>&nbsp;    }</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * Get all valid anchorpoints.
+<i>54</i>&nbsp;     *
+<i>55</i>&nbsp;     * @return the anchor point [ ]
+<i>56</i>&nbsp;     */
+<i>57</i>&nbsp;    public AnchorPoint[] getAnchorpoints(){
+<b class="nc"><i>58</i>&nbsp;        return anchorpoints.toArray(new AnchorPoint[anchorpoints.size()]);</b>
+<i>59</i>&nbsp;    }
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    /**
+<i>62</i>&nbsp;     * Valid row boolean.
+<i>63</i>&nbsp;     *
+<i>64</i>&nbsp;     * @param b       the current Board
+<i>65</i>&nbsp;     * @param r       the row to check
+<i>66</i>&nbsp;     * @param anchorC the anchor column
+<i>67</i>&nbsp;     * @param anchorR the anchor row
+<i>68</i>&nbsp;     * @return the boolean
+<i>69</i>&nbsp;     */
+<i>70</i>&nbsp;    boolean validRow(SimpleBoard b, int r,int anchorC, int anchorR){
+<b class="fc"><i>71</i>&nbsp;        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</b>
+<b class="fc"><i>72</i>&nbsp;        for (int c = 0; c&lt;9;c++){</b>
+<b class="fc"><i>73</i>&nbsp;            int i = 0;</b>
+<i>74</i>&nbsp;            try{
+<b class="fc"><i>75</i>&nbsp;                i = b.get(c+anchorC,r+anchorR).getValue();</b>
+<b class="fc"><i>76</i>&nbsp;            }catch (NullPointerException e){}</b>
+<b class="fc"><i>77</i>&nbsp;            if (i &gt; 0){</b>
+<b class="fc"><i>78</i>&nbsp;                if (!num.contains(i)){</b>
+<b class="fc"><i>79</i>&nbsp;                    return false;</b>
+<i>80</i>&nbsp;                }else {
+<b class="fc"><i>81</i>&nbsp;                    num.remove(i);</b>
+<i>82</i>&nbsp;                }
+<i>83</i>&nbsp;            }
+<i>84</i>&nbsp;        }
+<b class="fc"><i>85</i>&nbsp;        return true;</b>
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;    /**
+<i>89</i>&nbsp;     * Check if all rows are valid. Return boolean.
+<i>90</i>&nbsp;     *
+<i>91</i>&nbsp;     * @param b the current Board
+<i>92</i>&nbsp;     * @return the boolean
+<i>93</i>&nbsp;     */
+<i>94</i>&nbsp;    boolean allRowsValid(SimpleBoard b){
+<b class="fc"><i>95</i>&nbsp;        for (AnchorPoint ap : anchorpoints) {</b>
+<b class="fc"><i>96</i>&nbsp;            for (int r = 0; r &lt; 9; r++) {</b>
+<b class="fc"><i>97</i>&nbsp;                if (!validRow(b, r, ap.getCol(), ap.getRow())) {</b>
+<b class="fc"><i>98</i>&nbsp;                    return false;</b>
+<i>99</i>&nbsp;                }
+<i>100</i>&nbsp;            }
+<b class="fc"><i>101</i>&nbsp;        }</b>
+<b class="fc"><i>102</i>&nbsp;        return true;</b>
+<i>103</i>&nbsp;    }
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    /**
+<i>107</i>&nbsp;     * Check if a single column is valid. Return boolean.
+<i>108</i>&nbsp;     *
+<i>109</i>&nbsp;     * @param b       the current Board
+<i>110</i>&nbsp;     * @param c       the column to check
+<i>111</i>&nbsp;     * @param anchorC the anchor column
+<i>112</i>&nbsp;     * @param anchorR the anchor row
+<i>113</i>&nbsp;     * @return the boolean
+<i>114</i>&nbsp;     */
+<i>115</i>&nbsp;    boolean validColumn(SimpleBoard b, int c,int anchorC, int anchorR){
+<b class="fc"><i>116</i>&nbsp;        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</b>
+<b class="fc"><i>117</i>&nbsp;        for (int r= 0; r&lt;9;r++){</b>
+<b class="fc"><i>118</i>&nbsp;            int i = -1;</b>
+<i>119</i>&nbsp;            try{
+<b class="fc"><i>120</i>&nbsp;                i = b.get(c+anchorC,r+anchorR).getValue();</b>
+<b class="fc"><i>121</i>&nbsp;            }catch (NullPointerException e){}</b>
+<b class="fc"><i>122</i>&nbsp;            if (i &gt; 0){</b>
+<b class="fc"><i>123</i>&nbsp;                if (!num.contains(i)){</b>
+<b class="fc"><i>124</i>&nbsp;                    return false;</b>
+<i>125</i>&nbsp;                }else {
+<b class="fc"><i>126</i>&nbsp;                    num.remove(i);</b>
+<i>127</i>&nbsp;                }
+<i>128</i>&nbsp;            }
+<i>129</i>&nbsp;    }
+<b class="fc"><i>130</i>&nbsp;        return true;</b>
+<i>131</i>&nbsp;    }
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    /**
+<i>134</i>&nbsp;     * Check if all columns are valid. Return boolean.
+<i>135</i>&nbsp;     *
+<i>136</i>&nbsp;     * @param b the current board
+<i>137</i>&nbsp;     * @return the boolean
+<i>138</i>&nbsp;     */
+<i>139</i>&nbsp;    boolean allColumnsValid(SimpleBoard b){
+<b class="fc"><i>140</i>&nbsp;        for (AnchorPoint ap : anchorpoints) {</b>
+<b class="fc"><i>141</i>&nbsp;            for (int c = 0; c &lt; 9; c++) {</b>
+<b class="fc"><i>142</i>&nbsp;                if (!validColumn(b, c, ap.getCol(), ap.getRow())) {</b>
+<b class="fc"><i>143</i>&nbsp;                    return false;</b>
+<i>144</i>&nbsp;                }
+<i>145</i>&nbsp;            }
+<b class="fc"><i>146</i>&nbsp;        }</b>
+<b class="fc"><i>147</i>&nbsp;        return true;</b>
+<i>148</i>&nbsp;    }
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;    /**
+<i>151</i>&nbsp;     * Check if a default 3x3 box is valid. Return boolean.
+<i>152</i>&nbsp;     *
+<i>153</i>&nbsp;     * @param b       the current Board
+<i>154</i>&nbsp;     * @param anchorC the anchor column
+<i>155</i>&nbsp;     * @param anchorR the anchor row
+<i>156</i>&nbsp;     * @return the boolean
+<i>157</i>&nbsp;     */
+<i>158</i>&nbsp;    boolean validBox(SimpleBoard b, int anchorC, int anchorR){
+<b class="fc"><i>159</i>&nbsp;        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</b>
+<b class="fc"><i>160</i>&nbsp;        for (int r = 0; r&lt;3;r++){</b>
+<b class="fc"><i>161</i>&nbsp;            for (int c=0;c&lt;3;c++){</b>
+<b class="fc"><i>162</i>&nbsp;                int i = -1;</b>
+<i>163</i>&nbsp;                try{
+<b class="fc"><i>164</i>&nbsp;                    i = b.get(c+anchorC,r+anchorR).getValue();</b>
+<b class="fc"><i>165</i>&nbsp;                }catch (NullPointerException e){}</b>
+<b class="fc"><i>166</i>&nbsp;                if (i &gt; 0){</b>
+<b class="fc"><i>167</i>&nbsp;                    if (!num.contains(i)){</b>
+<b class="fc"><i>168</i>&nbsp;                        return false;</b>
+<i>169</i>&nbsp;                    }else {
+<b class="fc"><i>170</i>&nbsp;                        num.remove(i);</b>
+<i>171</i>&nbsp;                    }
+<i>172</i>&nbsp;                }
+<i>173</i>&nbsp;        }
+<i>174</i>&nbsp;        }
+<b class="fc"><i>175</i>&nbsp;        return true;</b>
+<i>176</i>&nbsp;    }
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    /**
+<i>179</i>&nbsp;     * Check if a freeform Sudoku Group is valid. Return boolean.
+<i>180</i>&nbsp;     *
+<i>181</i>&nbsp;     * @param b       the current Board
+<i>182</i>&nbsp;     * @param groupId the group id
+<i>183</i>&nbsp;     * @return the boolean
+<i>184</i>&nbsp;     */
+<i>185</i>&nbsp;    boolean validBox(SimpleBoard b, int groupId){
+<b class="fc"><i>186</i>&nbsp;        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</b>
+<b class="fc"><i>187</i>&nbsp;        for (int r = 0; r&lt;fieldSize;r++){</b>
+<b class="fc"><i>188</i>&nbsp;            for (int c=0;c&lt;fieldSize;c++){</b>
+<b class="fc"><i>189</i>&nbsp;                int val = 0;</b>
+<b class="fc"><i>190</i>&nbsp;                int group = -1;</b>
+<i>191</i>&nbsp;                try{
+<b class="fc"><i>192</i>&nbsp;                    val = b.get(c,r).getValue();</b>
+<b class="fc"><i>193</i>&nbsp;                    group = b.get(c,r).getGroupId();</b>
+<b class="fc"><i>194</i>&nbsp;                }catch (NullPointerException e){}</b>
+<b class="fc"><i>195</i>&nbsp;                if (val &gt; 0 &amp;&amp; group == groupId){</b>
+<b class="fc"><i>196</i>&nbsp;                    if (!num.contains(val)){</b>
+<b class="fc"><i>197</i>&nbsp;                        return false;</b>
+<i>198</i>&nbsp;                    }else {
+<b class="fc"><i>199</i>&nbsp;                        num.remove(val);</b>
+<i>200</i>&nbsp;                    }
+<i>201</i>&nbsp;                }
+<i>202</i>&nbsp;            }
+<i>203</i>&nbsp;        }
+<b class="fc"><i>204</i>&nbsp;        return true;</b>
+<i>205</i>&nbsp;    }
+<i>206</i>&nbsp;
+<i>207</i>&nbsp;    /**
+<i>208</i>&nbsp;     * Check if all boxes are valid. Return boolean.
+<i>209</i>&nbsp;     *
+<i>210</i>&nbsp;     * Differentiate between normal Sudokus (Normal, Samurai) and Freeform Sudokus.
+<i>211</i>&nbsp;     * To do so get the groupID of three Random Positions from the board.
+<i>212</i>&nbsp;     *
+<i>213</i>&nbsp;     * @param b the b
+<i>214</i>&nbsp;     * @return the boolean
+<i>215</i>&nbsp;     */
+<i>216</i>&nbsp;    boolean allBoxesValid(SimpleBoard b){
+<b class="fc"><i>217</i>&nbsp;        Random rand = new Random();</b>
+<b class="fc"><i>218</i>&nbsp;        for (AnchorPoint ap : anchorpoints) {</b>
+<b class="fc"><i>219</i>&nbsp;            int i = -1;</b>
+<i>220</i>&nbsp;            try{
+<b class="fc"><i>221</i>&nbsp;                i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();</b>
+<b class="fc"><i>222</i>&nbsp;                i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();</b>
+<b class="fc"><i>223</i>&nbsp;                i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();</b>
+<b class="fc"><i>224</i>&nbsp;            }catch (NullPointerException e){}</b>
+<b class="fc"><i>225</i>&nbsp;            if(i&lt;0) {</b>
+<b class="fc"><i>226</i>&nbsp;                for (int r = 0; r &lt; 9; r += 3) {</b>
+<b class="fc"><i>227</i>&nbsp;                    for (int c = 0; c &lt; 9; c += 3) {</b>
+<b class="fc"><i>228</i>&nbsp;                        if (!validBox(b, c + ap.getCol(), r + ap.getRow())) return false;</b>
+<i>229</i>&nbsp;                    }
+<i>230</i>&nbsp;                }
+<i>231</i>&nbsp;            }else {
+<b class="fc"><i>232</i>&nbsp;                for (int j = 0; j &lt; 9; j++){</b>
+<b class="fc"><i>233</i>&nbsp;                    if (!validBox(b,j))return false;</b>
+<i>234</i>&nbsp;                }
+<i>235</i>&nbsp;            }
+<b class="fc"><i>236</i>&nbsp;        }</b>
+<b class="fc"><i>237</i>&nbsp;        return true;</b>
+<i>238</i>&nbsp;    }
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;    /**
+<i>241</i>&nbsp;     * Check if a board is valid. Return boolean.
+<i>242</i>&nbsp;     *
+<i>243</i>&nbsp;     * @param b the current Board.
+<i>244</i>&nbsp;     * @return the boolean
+<i>245</i>&nbsp;     */
+<i>246</i>&nbsp;    public boolean valid(SimpleBoard b){
+<b class="fc"><i>247</i>&nbsp;        return  allBoxesValid(b) &amp;&amp; allColumnsValid(b) &amp;&amp; allRowsValid(b) ;</b>
+<i>248</i>&nbsp;    }
+<i>249</i>&nbsp;
+<i>250</i>&nbsp;    /**
+<i>251</i>&nbsp;     * Check if the current board is full. Return boolean.
+<i>252</i>&nbsp;     *
+<i>253</i>&nbsp;     * @param b the current board
+<i>254</i>&nbsp;     * @return the boolean
+<i>255</i>&nbsp;     */
+<i>256</i>&nbsp;    boolean full(SimpleBoard b){
+<b class="fc"><i>257</i>&nbsp;        for (AnchorPoint ap : anchorpoints) {</b>
+<b class="fc"><i>258</i>&nbsp;            for (int r = 0; r &lt; 9; r++) {</b>
+<b class="fc"><i>259</i>&nbsp;                for (int c = 0; c &lt; 9; c++) {</b>
+<b class="fc"><i>260</i>&nbsp;                    int val = 0;</b>
+<i>261</i>&nbsp;                    try{
+<b class="fc"><i>262</i>&nbsp;                        val = b.get(c+ap.getCol(), r+ap.getRow()).getValue();</b>
+<b class="fc"><i>263</i>&nbsp;                    }catch (NullPointerException e){}</b>
+<b class="fc"><i>264</i>&nbsp;                    if (b.get(c+ap.getCol(), r+ap.getRow()) == null || val == 0) return false;</b>
+<i>265</i>&nbsp;                }
+<i>266</i>&nbsp;            }
+<b class="fc"><i>267</i>&nbsp;        }</b>
+<b class="fc"><i>268</i>&nbsp;        return true;</b>
+<i>269</i>&nbsp;    }
+<i>270</i>&nbsp;
+<i>271</i>&nbsp;    /**
+<i>272</i>&nbsp;     * Check if the current board is valid and full (Game is completed and valid). Return boolean.
+<i>273</i>&nbsp;     *
+<i>274</i>&nbsp;     * @param b the current board
+<i>275</i>&nbsp;     * @return the boolean
+<i>276</i>&nbsp;     */
+<i>277</i>&nbsp;    public boolean validAndFull(SimpleBoard b){
+<b class="pc"><i>278</i>&nbsp;        return valid(b) &amp;&amp; full(b);</b>
+<i>279</i>&nbsp;    }
+<i>280</i>&nbsp;
+<i>281</i>&nbsp;    /**
+<i>282</i>&nbsp;     * Solver for all boards.
+<i>283</i>&nbsp;     *  1. Use a counter to stop in case of an endless loop.
+<i>284</i>&nbsp;     *  2. Return null if the current board isn&#39;t valid.
+<i>285</i>&nbsp;     *  3. Return the board if the current board is valid and full.
+<i>286</i>&nbsp;     *  4. Enter the solve algorithm.
+<i>287</i>&nbsp;     *     Brute force attempt.
+<i>288</i>&nbsp;     *     If a cell is empty add numbers from 1-9 and start recursion with the added cell.
+<i>289</i>&nbsp;     *  TODO: Problem with Freeform Sudokus with a low number input. Solver cannot solve Freeform with less than ~40% of the cells filled.
+<i>290</i>&nbsp;     * @param part the current board
+<i>291</i>&nbsp;     * @return the simple board
+<i>292</i>&nbsp;     */
+<i>293</i>&nbsp;    public SimpleBoard solve(SimpleBoard part){
+<b class="fc"><i>294</i>&nbsp;        cnt++;</b>
+<b class="pc"><i>295</i>&nbsp;        if (cnt &gt; 150000){</b>
+<b class="nc"><i>296</i>&nbsp;            cnt=0;</b>
+<b class="nc"><i>297</i>&nbsp;            return null;</b>
+<i>298</i>&nbsp;        }
+<i>299</i>&nbsp;
+<b class="fc"><i>300</i>&nbsp;        if (!valid(part)){</b>
+<b class="fc"><i>301</i>&nbsp;            return null;</b>
+<i>302</i>&nbsp;
+<i>303</i>&nbsp;        }
+<b class="fc"><i>304</i>&nbsp;        if (validAndFull(part)){</b>
+<b class="fc"><i>305</i>&nbsp;            return part;</b>
+<i>306</i>&nbsp;        }
+<b class="fc"><i>307</i>&nbsp;        SimpleBoard b = new SimpleBoard(part,fieldSize);</b>
+<b class="pc"><i>308</i>&nbsp;        if(cnt &lt; 100000){</b>
+<b class="pc"><i>309</i>&nbsp;            for (AnchorPoint ap : anchorpoints) {</b>
+<b class="fc"><i>310</i>&nbsp;                int apC = ap.getCol();</b>
+<b class="fc"><i>311</i>&nbsp;                int apR = ap.getRow();</b>
+<b class="fc"><i>312</i>&nbsp;                for (int r = 0; r &lt; 9; r++) {</b>
+<b class="fc"><i>313</i>&nbsp;                    for (int c = 0; c &lt; 9; c++) {</b>
+<b class="fc"><i>314</i>&nbsp;                        Cell cell = b.get(c+apC, r+apR);</b>
+<b class="fc"><i>315</i>&nbsp;                        if (cell == null || cell.getValue() == 0) {</b>
+<b class="fc"><i>316</i>&nbsp;                            Set&lt;Integer&gt; num = new HashSet&lt;&gt;(numbers);</b>
+<b class="fc"><i>317</i>&nbsp;                            for (Integer number : num) {</b>
+<b class="fc"><i>318</i>&nbsp;                                b.setValue(c+apC, r+apR, number);</b>
+<b class="fc"><i>319</i>&nbsp;                                SimpleBoard solution = solve(b);</b>
+<b class="fc"><i>320</i>&nbsp;                                if (solution != null) {</b>
+<b class="fc"><i>321</i>&nbsp;                                    return solution;</b>
+<i>322</i>&nbsp;                                }
+<b class="fc"><i>323</i>&nbsp;                            }</b>
+<b class="fc"><i>324</i>&nbsp;                            return null;</b>
+<i>325</i>&nbsp;                        }
+<i>326</i>&nbsp;                    }
+<i>327</i>&nbsp;                }
+<b class="fc"><i>328</i>&nbsp;            }</b>
+<i>329</i>&nbsp;        }
+<b class="nc"><i>330</i>&nbsp;        return null;</b>
+<i>331</i>&nbsp;    }
+<i>332</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-14 16:38</div>
+</div>
+</body>
+</html>
