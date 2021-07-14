@@ -403,7 +403,7 @@ public class PlayfieldController {
                     }
                 startTimer();
             } catch (IOException| ParseException e) {
-                e.printStackTrace();
+                logger.warning(""+e);
             }
         }
     }
@@ -641,9 +641,9 @@ public class PlayfieldController {
             BufferedImage image = new Robot().createScreenCapture(new Rectangle(215,175,425,400));
             ImageIO.write(image, "png", new File("savegames/img/"+file+".png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.warning(""+e);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.warning(""+e);
             Thread.currentThread().interrupt();
         }
 
@@ -693,7 +693,7 @@ public class PlayfieldController {
 
 
         } catch (IOException| ParseException e) {
-            e.printStackTrace();
+            logger.warning(""+e);
         }
 
     }
@@ -722,7 +722,7 @@ public class PlayfieldController {
                 try {
                     Thread.sleep(1000); //1 second
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    logger.warning(""+e);
                 }
                  longtimer = new Date().getTime() - cal.getTime().getTime()-timertesten.getTime();
                 time = simpleDateFormat.format(longtimer);

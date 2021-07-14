@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class NewScreen {
 
@@ -16,15 +17,16 @@ public class NewScreen {
 
 
         Node node = (Node) event.getSource();
-        Stage oldStage = (Stage)node.getScene().getWindow();;
-
-
+        Stage oldStage = (Stage)node.getScene().getWindow();
+        Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(NewScreen.class.getResource(source));
         Parent root2 = null;
         try {
             root2 = (Parent) fxmlLoader.load();
-        } catch (IOException ex) {
+        } catch (IOException e) {
+            logger.warning(""+e);
+
         }
         Stage stage = new Stage();
 

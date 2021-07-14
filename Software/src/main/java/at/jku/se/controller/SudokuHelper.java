@@ -9,11 +9,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * The type Sudoku helper.
  */
 public class SudokuHelper {
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     /**
      * Initialize the default Textfield.
      *
@@ -39,7 +42,7 @@ public class SudokuHelper {
                     t.setText(newValue.replaceAll(newValue, oldValue));
                 }
             }
-            catch (Exception e){}
+            catch (Exception e){logger.warning(""+e);}
         });
         return t;
     }
@@ -93,11 +96,11 @@ public class SudokuHelper {
                 try{
                     Integer i = Integer.valueOf(fields[c][r].getText());
                     part.setValue(c,r,i);
-                }catch (NumberFormatException  e){}
+                }catch (NumberFormatException  e){logger.warning(""+e);}
                 try {
                     Integer j = Integer.valueOf(fields[c][r].getId());
                     part.setGroup(c,r,j);
-                }catch (NullPointerException | NumberFormatException e){}
+                }catch (NullPointerException | NumberFormatException e){logger.warning(""+e);}
             }
         }
         return part;
