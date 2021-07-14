@@ -101,8 +101,6 @@ class SimpleSolverTestFreeformGame {
         b.setValue(1, 0, 3);
         b.setValue(2, 0, 4);
         b.setValue(3, 0, 6);
-        //b.setValue(4, 0, 7);
-        //b.setValue(5, 0, 8);
         b.setValue(6, 0, 9);
         b.setValue(7, 0, 1);
         b.setValue(8, 0, 2);
@@ -137,8 +135,6 @@ class SimpleSolverTestFreeformGame {
         b.setValue(1, 3, 5);
         b.setValue(2, 3, 9);
         b.setValue(3, 3, 7);
-        //b.setValue(4, 3, 6);
-        //b.setValue(5, 3, 1);
         b.setValue(6, 3, 4);
         b.setValue(7, 3, 2);
         b.setValue(8, 3, 3);
@@ -173,8 +169,6 @@ class SimpleSolverTestFreeformGame {
         b.setValue(1, 6, 6);
         b.setValue(2, 6, 1);
         b.setValue(3, 6, 5);
-        //b.setValue(4, 6, 3);
-        //b.setValue(5, 6, 7);
         b.setValue(6, 6, 2);
         b.setValue(7, 6, 8);
         b.setValue(8, 6, 4);
@@ -197,7 +191,6 @@ class SimpleSolverTestFreeformGame {
         b.setValue(1, 8, 4);
         b.setValue(2, 8, 5);
         b.setValue(3, 8, 2);
-        //b.setValue(4, 8, 8);
         b.setValue(5, 8, 6);
         b.setValue(6, 8, 1);
         b.setValue(7, 8, 7);
@@ -223,7 +216,6 @@ class SimpleSolverTestFreeformGame {
         b.setGroup(6, 1, 2);
         b.setGroup(7, 1, 2);
         b.setGroup(8, 1, 2);
-        //b.setValue(0, 1, 1);
         b.setValue(1, 1, 1);
         b.setValue(2, 1, 2);
         b.setValue(3, 1, 3);
@@ -379,8 +371,6 @@ class SimpleSolverTestFreeformGame {
         b.setValue(8, 3, 3);
         assertTrue(s.valid(b));
         assertTrue(!s.validAndFull(b));
-        //SimpleBoard sol = s.solve(b);
-        //assertTrue(sol != null);
 
     }
 }

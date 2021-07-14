@@ -7,8 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 import java.util.Random;
 
@@ -29,8 +27,6 @@ public class SudokuHelper {
         TextField t = new TextField();
         t.setPrefSize(38,38);
         t.setAlignment(Pos.CENTER);
-
-        //t.setFont(Font.font("Calibri", FontWeight.EXTRA_BOLD,18));
         t.setStyle("-fx-focus-color: -fx-control-inner-background ; -fx-faint-focus-color: -fx-control-inner-background ;");
         t.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         //allow only numbers in textfield from:

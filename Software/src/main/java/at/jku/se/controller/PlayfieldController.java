@@ -47,6 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * The type Playfield controller.
@@ -78,11 +79,11 @@ public class PlayfieldController {
     @FXML
     private Button btnStartGame;
     @FXML
-    private GridPane colorList;
-    @FXML
-    private ListView colorListNew;
+    private ListView colorList;
     @FXML
     private MenuItem miSave;
+
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * The Group counter. Used for Freeform Sudokus
@@ -175,6 +176,9 @@ public class PlayfieldController {
                 case BTN_HARD:
                     initPerc = 15;
                     break;
+                default:
+                    logger.warning("No valid Difficulty selected");
+                    break;
             }
         }
         switch (version){
@@ -191,7 +195,7 @@ public class PlayfieldController {
                 initFreiformField();
                 break;
             default:
-                System.err.println("No valid Fieldtype selected");
+                logger.warning("No valid Fieldtype selected");
                 break;
         }
 
@@ -285,19 +289,20 @@ public class PlayfieldController {
      *     After clicking the button the listview will be hidden and the current background colors will be locked.
      */
     private void initFreiformField() {
+            String emptyStyle = "-fx-background-color: ";
             groupCount = new int[9];
             textFields = new TextField[fieldSize][fieldSize];
-            colorListNew.setItems(colors);
-            colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
+            colorList.setItems(colors);
+            colorList.setCellFactory(new Callback<ListView, ListCell>() {
                 @Override
                 public ListCell call(ListView listView) {
                     return new ColorCell();
                 }
             });
-            if (!colorListNew.getItems().isEmpty()) {
-                colorListNew.getSelectionModel().select(0);
+            if (!colorList.getItems().isEmpty()) {
+                colorList.getSelectionModel().select(0);
             }
-            colorListNew.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            colorList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
                 @Override
                 public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                     currentColor = newValue;
@@ -308,10 +313,10 @@ public class PlayfieldController {
                 for (int r = 0; r < fieldSize; r++) {
                     TextField t = h.defaultTextField();
                     t.setOnMouseClicked(e -> {
-                        if (t.getStyle().contains("-fx-background-color:")) {
+                        if (t.getStyle().contains(emptyStyle)) {
                             String[] styles = t.getStyle().split(";");
                             for (int i = 0; i < styles.length; i++) {
-                                if (styles[i].contains("-fx-background-color:")) {
+                                if (styles[i].contains(emptyStyle)) {
                                     String color = styles[i].split(":")[1];
                                     if (color.equals(currentColor)) {
                                         groupCount[colorindex]--;
@@ -322,14 +327,14 @@ public class PlayfieldController {
                                         int oldColor = colors.indexOf(color);
                                         groupCount[oldColor]--;
                                         groupCount[colorindex]++;
-                                        styles[i] = "-fx-background-color:" + currentColor;
+                                        styles[i] = emptyStyle + currentColor;
                                         t.setStyle(String.join(";", styles));
                                         t.setId(colorindex + "");
                                     }
                                 }
                             }
                         } else if (groupCount[colorindex] < 9) {
-                            t.setStyle(t.getStyle() + " -fx-background-color:" + currentColor);
+                            t.setStyle(t.getStyle() + emptyStyle + currentColor);
                             t.setId(colorindex + "");
                             groupCount[colorindex]++;
                         }
@@ -343,8 +348,8 @@ public class PlayfieldController {
                             btnAddNumbers.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent e) {
-                                    colorListNew.setVisible(false);
-                                    colorListNew.setDisable(true);
+                                    colorList.setVisible(false);
+                                    colorList.setDisable(true);
                                     btnAddNumbers.setOnAction(null);
                                     btnAddNumbers.setDisable(true);
                                     btnAddNumbers.setVisible(false);
@@ -361,7 +366,7 @@ public class PlayfieldController {
                             btnAddNumbers.setVisible(false);
                             btnAddNumbers.setDisable(true);
                         }
-                        colorListNew.setCellFactory(new Callback<ListView, ListCell>() {
+                        colorList.setCellFactory(new Callback<ListView, ListCell>() {
                             @Override
                             public ListCell call(ListView listView) {
                                 return new ColorCell();
@@ -388,7 +393,7 @@ public class PlayfieldController {
                 for(int i = 0; i<fieldSize;i++){
 
                     row = (String)gameinfos.get(""+i);
-                    System.out.println(row);
+                    logger.info(row);
                     splitRow =row.split(";");
                     for(int j = 0; j<splitRow.length;j++){
                             currentColor = colors.get(Integer.parseInt(splitRow[j]));
@@ -567,16 +572,11 @@ public class PlayfieldController {
         playerName = dialogResult.getValue();
         String row="";
         SimpleBoard board = h.getCurrentBoard(textFields);
-        int groupID = 0;
-        System.out.println(generateType);
-        System.out.println(version);
-        System.out.println(isNew);
         if(generateType.equals("manuell") && version.equals(BTN_FREIFORM) && isNew) {
-            System.out.println("test");
             for (int rows = 0; rows < fieldSize; rows++) {
                 row = "";
                 for (int col = 0; col < fieldSize; col++) {
-                    System.out.println(""+board.get(col, rows).getGroupId());
+                    logger.info(""+board.get(col, rows).getGroupId());
 
                     row += textFields[col][rows].getId() +";";
 
@@ -656,7 +656,7 @@ public class PlayfieldController {
      * Am Schluss wird der Timer gestartet.
      */
     public void LoadGameInfos(){
-        colorListNew.setVisible(false);
+        colorList.setVisible(false);
         miSave.setDisable(false);
         btnStartGame.setVisible(false);
         String row = "";
@@ -709,7 +709,6 @@ public class PlayfieldController {
 
         final Date timerStart = new Date();
         final Date timertesten = new Date(loadtime);
-        //System.out.println(timertesten);
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -727,7 +726,6 @@ public class PlayfieldController {
                 }
                  longtimer = new Date().getTime() - cal.getTime().getTime()-timertesten.getTime();
                 time = simpleDateFormat.format(longtimer);
-                //System.out.println(new Date());
                 Platform.runLater(() -> {
                     lbClock.setText(time);
                 });
