@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleSolverTestNormalGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">time_manager$SimpleSolverTest.exec</a> &gt; <a href="index.source.html" class="el_package">at.jku.se.sudokumaster</a> &gt; <span class="el_source">SimpleSolverTestNormalGame.java</span></div><h1>SimpleSolverTestNormalGame.java</h1><pre class="source lang-java linenums">package at.jku.se.sudokumaster;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+<span class="nc" id="L7">class SimpleSolverTestNormalGame {</span>
+    /**
+     * Valid and complete.
+     */
+    @Test
+    void validAndComplete(){
+<span class="nc" id="L13">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L14">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="nc" id="L15">        b.setValue(0,0,5);</span>
+<span class="nc" id="L16">        b.setValue(1,0,3);</span>
+<span class="nc" id="L17">        b.setValue(2,0,4);</span>
+<span class="nc" id="L18">        b.setValue(3,0,6);</span>
+<span class="nc" id="L19">        b.setValue(4,0,7);</span>
+<span class="nc" id="L20">        b.setValue(5,0,8);</span>
+<span class="nc" id="L21">        b.setValue(6,0,9);</span>
+<span class="nc" id="L22">        b.setValue(7,0,1);</span>
+<span class="nc" id="L23">        b.setValue(8,0,2);</span>
+<span class="nc" id="L24">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L25" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L27">        b.setValue(0,1,6);</span>
+<span class="nc" id="L28">        b.setValue(1,1,7);</span>
+<span class="nc" id="L29">        b.setValue(2,1,2);</span>
+<span class="nc" id="L30">        b.setValue(3,1,1);</span>
+<span class="nc" id="L31">        b.setValue(4,1,9);</span>
+<span class="nc" id="L32">        b.setValue(5,1,5);</span>
+<span class="nc" id="L33">        b.setValue(6,1,3);</span>
+<span class="nc" id="L34">        b.setValue(7,1,4);</span>
+<span class="nc" id="L35">        b.setValue(8,1,8);</span>
+<span class="nc" id="L36">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L39">        b.setValue(0,2,1);</span>
+<span class="nc" id="L40">        b.setValue(1,2,9);</span>
+<span class="nc" id="L41">        b.setValue(2,2,8);</span>
+<span class="nc" id="L42">        b.setValue(3,2,3);</span>
+<span class="nc" id="L43">        b.setValue(4,2,4);</span>
+<span class="nc" id="L44">        b.setValue(5,2,2);</span>
+<span class="nc" id="L45">        b.setValue(6,2,5);</span>
+<span class="nc" id="L46">        b.setValue(7,2,6);</span>
+<span class="nc" id="L47">        b.setValue(8,2,7);</span>
+<span class="nc" id="L48">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L51">        b.setValue(0,3,8);</span>
+<span class="nc" id="L52">        b.setValue(1,3,5);</span>
+<span class="nc" id="L53">        b.setValue(2,3,9);</span>
+<span class="nc" id="L54">        b.setValue(3,3,7);</span>
+<span class="nc" id="L55">        b.setValue(4,3,6);</span>
+<span class="nc" id="L56">        b.setValue(5,3,1);</span>
+<span class="nc" id="L57">        b.setValue(6,3,4);</span>
+<span class="nc" id="L58">        b.setValue(7,3,2);</span>
+<span class="nc" id="L59">        b.setValue(8,3,3);</span>
+<span class="nc" id="L60">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L63">        b.setValue(0,4,4);</span>
+<span class="nc" id="L64">        b.setValue(1,4,2);</span>
+<span class="nc" id="L65">        b.setValue(2,4,6);</span>
+<span class="nc" id="L66">        b.setValue(3,4,8);</span>
+<span class="nc" id="L67">        b.setValue(4,4,5);</span>
+<span class="nc" id="L68">        b.setValue(5,4,3);</span>
+<span class="nc" id="L69">        b.setValue(6,4,7);</span>
+<span class="nc" id="L70">        b.setValue(7,4,9);</span>
+<span class="nc" id="L71">        b.setValue(8,4,1);</span>
+<span class="nc" id="L72">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L75">        b.setValue(0,5,7);</span>
+<span class="nc" id="L76">        b.setValue(1,5,1);</span>
+<span class="nc" id="L77">        b.setValue(2,5,3);</span>
+<span class="nc" id="L78">        b.setValue(3,5,9);</span>
+<span class="nc" id="L79">        b.setValue(4,5,2);</span>
+<span class="nc" id="L80">        b.setValue(5,5,4);</span>
+<span class="nc" id="L81">        b.setValue(6,5,8);</span>
+<span class="nc" id="L82">        b.setValue(7,5,5);</span>
+<span class="nc" id="L83">        b.setValue(8,5,6);</span>
+<span class="nc" id="L84">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L87">        b.setValue(0,6,9);</span>
+<span class="nc" id="L88">        b.setValue(1,6,6);</span>
+<span class="nc" id="L89">        b.setValue(2,6,1);</span>
+<span class="nc" id="L90">        b.setValue(3,6,5);</span>
+<span class="nc" id="L91">        b.setValue(4,6,3);</span>
+<span class="nc" id="L92">        b.setValue(5,6,7);</span>
+<span class="nc" id="L93">        b.setValue(6,6,2);</span>
+<span class="nc" id="L94">        b.setValue(7,6,8);</span>
+<span class="nc" id="L95">        b.setValue(8,6,4);</span>
+<span class="nc" id="L96">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L99">        b.setValue(0,7,2);</span>
+<span class="nc" id="L100">        b.setValue(1,7,8);</span>
+<span class="nc" id="L101">        b.setValue(2,7,7);</span>
+<span class="nc" id="L102">        b.setValue(3,7,4);</span>
+<span class="nc" id="L103">        b.setValue(4,7,1);</span>
+<span class="nc" id="L104">        b.setValue(5,7,9);</span>
+<span class="nc" id="L105">        b.setValue(6,7,6);</span>
+<span class="nc" id="L106">        b.setValue(7,7,3);</span>
+<span class="nc" id="L107">        b.setValue(8,7,5);</span>
+<span class="nc" id="L108">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L111">        b.setValue(0,8,3);</span>
+<span class="nc" id="L112">        b.setValue(1,8,4);</span>
+<span class="nc" id="L113">        b.setValue(2,8,5);</span>
+<span class="nc" id="L114">        b.setValue(3,8,2);</span>
+<span class="nc" id="L115">        b.setValue(4,8,8);</span>
+<span class="nc" id="L116">        b.setValue(5,8,6);</span>
+<span class="nc" id="L117">        b.setValue(6,8,1);</span>
+<span class="nc" id="L118">        b.setValue(7,8,7);</span>
+<span class="nc" id="L119">        b.setValue(8,8,9);</span>
+<span class="nc" id="L120">        assertTrue(s.valid(b));</span>
+<span class="nc" id="L121">        assertTrue(s.validAndFull(b));</span>
+<span class="nc" id="L122">    }</span>
+
+    /**
+     * Test solve.
+     */
+    @Test
+    void testSolve() {
+<span class="nc" id="L129">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L130">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="nc" id="L131">        b.setValue(0, 0, 5);</span>
+<span class="nc" id="L132">        b.setValue(1, 0, 3);</span>
+<span class="nc" id="L133">        b.setValue(2, 0, 4);</span>
+<span class="nc" id="L134">        b.setValue(3, 0, 6);</span>
+<span class="nc" id="L135">        b.setValue(4, 0, 7);</span>
+<span class="nc" id="L136">        b.setValue(5, 0, 8);</span>
+<span class="nc" id="L137">        b.setValue(6, 0, 9);</span>
+<span class="nc" id="L138">        b.setValue(7, 0, 1);</span>
+<span class="nc" id="L139">        b.setValue(8, 0, 2);</span>
+<span class="nc" id="L140">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L143">        b.setValue(0, 1, 6);</span>
+<span class="nc" id="L144">        b.setValue(1, 1, 7);</span>
+<span class="nc" id="L145">        b.setValue(2, 1, 2);</span>
+<span class="nc" id="L146">        b.setValue(3, 1, 1);</span>
+<span class="nc" id="L147">        b.setValue(4, 1, 9);</span>
+<span class="nc" id="L148">        b.setValue(5, 1, 5);</span>
+<span class="nc" id="L149">        b.setValue(6, 1, 3);</span>
+<span class="nc" id="L150">        b.setValue(7, 1, 4);</span>
+<span class="nc" id="L151">        b.setValue(8, 1, 8);</span>
+<span class="nc" id="L152">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L155">        b.setValue(0, 2, 1);</span>
+<span class="nc" id="L156">        b.setValue(1, 2, 9);</span>
+<span class="nc" id="L157">        b.setValue(2, 2, 8);</span>
+<span class="nc" id="L158">        b.setValue(3, 2, 3);</span>
+<span class="nc" id="L159">        b.setValue(4, 2, 4);</span>
+<span class="nc" id="L160">        b.setValue(5, 2, 2);</span>
+<span class="nc" id="L161">        b.setValue(6, 2, 5);</span>
+<span class="nc" id="L162">        b.setValue(7, 2, 6);</span>
+<span class="nc" id="L163">        b.setValue(8, 2, 7);</span>
+<span class="nc" id="L164">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L167">        b.setValue(0, 3, 8);</span>
+<span class="nc" id="L168">        b.setValue(1, 3, 5);</span>
+<span class="nc" id="L169">        b.setValue(2, 3, 9);</span>
+<span class="nc" id="L170">        b.setValue(3, 3, 7);</span>
+<span class="nc" id="L171">        b.setValue(4, 3, 6);</span>
+<span class="nc" id="L172">        b.setValue(5, 3, 1);</span>
+<span class="nc" id="L173">        b.setValue(6, 3, 4);</span>
+<span class="nc" id="L174">        b.setValue(7, 3, 2);</span>
+<span class="nc" id="L175">        b.setValue(8, 3, 3);</span>
+<span class="nc" id="L176">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L179">        b.setValue(0, 4, 4);</span>
+<span class="nc" id="L180">        b.setValue(1, 4, 2);</span>
+<span class="nc" id="L181">        b.setValue(2, 4, 6);</span>
+<span class="nc" id="L182">        b.setValue(3, 4, 8);</span>
+<span class="nc" id="L183">        b.setValue(4, 4, 5);</span>
+<span class="nc" id="L184">        b.setValue(5, 4, 3);</span>
+<span class="nc" id="L185">        b.setValue(6, 4, 7);</span>
+<span class="nc" id="L186">        b.setValue(7, 4, 9);</span>
+<span class="nc" id="L187">        b.setValue(8, 4, 1);</span>
+<span class="nc" id="L188">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L191">        b.setValue(0, 5, 7);</span>
+<span class="nc" id="L192">        b.setValue(1, 5, 1);</span>
+<span class="nc" id="L193">        b.setValue(2, 5, 3);</span>
+<span class="nc" id="L194">        b.setValue(3, 5, 9);</span>
+<span class="nc" id="L195">        b.setValue(4, 5, 2);</span>
+<span class="nc" id="L196">        b.setValue(5, 5, 4);</span>
+<span class="nc" id="L197">        b.setValue(6, 5, 8);</span>
+<span class="nc" id="L198">        b.setValue(7, 5, 5);</span>
+<span class="nc" id="L199">        b.setValue(8, 5, 6);</span>
+<span class="nc" id="L200">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L203">        b.setValue(0, 6, 9);</span>
+<span class="nc" id="L204">        b.setValue(1, 6, 6);</span>
+<span class="nc" id="L205">        b.setValue(2, 6, 1);</span>
+<span class="nc" id="L206">        b.setValue(3, 6, 5);</span>
+<span class="nc" id="L207">        b.setValue(4, 6, 3);</span>
+<span class="nc" id="L208">        b.setValue(5, 6, 7);</span>
+<span class="nc" id="L209">        b.setValue(6, 6, 2);</span>
+<span class="nc" id="L210">        b.setValue(7, 6, 8);</span>
+<span class="nc" id="L211">        b.setValue(8, 6, 4);</span>
+<span class="nc" id="L212">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L215">        b.setValue(0, 7, 2);</span>
+<span class="nc" id="L216">        b.setValue(1, 7, 8);</span>
+<span class="nc" id="L217">        b.setValue(2, 7, 7);</span>
+<span class="nc" id="L218">        b.setValue(3, 7, 4);</span>
+<span class="nc" id="L219">        b.setValue(4, 7, 1);</span>
+<span class="nc" id="L220">        b.setValue(5, 7, 9);</span>
+<span class="nc" id="L221">        b.setValue(6, 7, 6);</span>
+<span class="nc" id="L222">        b.setValue(7, 7, 3);</span>
+<span class="nc" id="L223">        b.setValue(8, 7, 5);</span>
+<span class="nc" id="L224">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L227">        b.setValue(0, 8, 3);</span>
+<span class="nc" id="L228">        b.setValue(1, 8, 4);</span>
+<span class="nc" id="L229">        b.setValue(2, 8, 5);</span>
+<span class="nc" id="L230">        b.setValue(3, 8, 2);</span>
+<span class="nc" id="L231">        b.setValue(4, 8, 8);</span>
+<span class="nc" id="L232">        b.setValue(5, 8, 6);</span>
+<span class="nc" id="L233">        b.setValue(6, 8, 1);</span>
+<span class="nc" id="L234">        b.setValue(7, 8, 7);</span>
+<span class="nc" id="L235">        assertTrue(s.valid(b));</span>
+<span class="nc" id="L236">        assertFalse(s.validAndFull(b));</span>
+<span class="nc" id="L237">        SimpleBoard sol = s.solve(b);</span>
+<span class="nc" id="L238">        assertEquals(9, (int) sol.get(8, 8).getValue());</span>
+<span class="nc" id="L239">    }</span>
+
+    /**
+     * Test solve small.
+     */
+    @Test
+    void testSolveSmall(){
+<span class="nc" id="L246">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L247">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="nc" id="L248">        b.setValue(0,0,5);</span>
+<span class="nc" id="L249">        b.setValue(1,0,3);</span>
+<span class="nc" id="L250">        b.setValue(2,0,4);</span>
+<span class="nc" id="L251">        b.setValue(3,0,6);</span>
+<span class="nc" id="L252">        b.setValue(4,0,7);</span>
+<span class="nc" id="L253">        b.setValue(5,0,8);</span>
+<span class="nc" id="L254">        b.setValue(6,0,9);</span>
+<span class="nc" id="L255">        b.setValue(7,0,1);</span>
+<span class="nc" id="L256">        b.setValue(8,0,2);</span>
+<span class="nc" id="L257">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L258" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L260">        b.setValue(0,8,3);</span>
+<span class="nc" id="L261">        b.setValue(1,8,4);</span>
+<span class="nc" id="L262">        b.setValue(2,8,5);</span>
+<span class="nc" id="L263">        b.setValue(3,8,2);</span>
+<span class="nc" id="L264">        b.setValue(4,8,8);</span>
+<span class="nc" id="L265">        b.setValue(5,8,6);</span>
+<span class="nc" id="L266">        b.setValue(6,8,1);</span>
+<span class="nc" id="L267">        b.setValue(7,8,7);</span>
+<span class="nc" id="L268">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+<span class="nc" id="L270">        SimpleBoard sol = s.solve(b);</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        assertTrue(sol.get(8,8).getValue() == 9);</span>
+<span class="nc" id="L272">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

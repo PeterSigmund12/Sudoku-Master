@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleSolverTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">time_manager$SimpleSolverTest.exec</a> &gt; <a href="index.source.html" class="el_package">at.jku.se.sudokumaster</a> &gt; <span class="el_source">SimpleSolverTest.java</span></div><h1>SimpleSolverTest.java</h1><pre class="source lang-java linenums">package at.jku.se.sudokumaster;
+
+import at.jku.se.sudokumaster.SimpleBoard;
+import at.jku.se.sudokumaster.SimpleSolver;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * The type Simple solver test.
+ */
+<span class="fc" id="L11">class SimpleSolverTest {</span>
+
+    /**
+     * Valid row.
+     */
+    @org.junit.jupiter.api.Test
+    void validRow() {
+<span class="fc" id="L18">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L19">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L20">        b.setValue(0,0,9);</span>
+<span class="fc" id="L21">        assertTrue(s.validRow(b,0,0,0));</span>
+
+<span class="fc" id="L23">        b.setValue(0,1,9);</span>
+<span class="fc" id="L24">        b.setValue(1,1,9);</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        assertTrue(!s.validRow(b,1,0,0));</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Valid column.
+     */
+    @org.junit.jupiter.api.Test
+    void validColumn() {
+<span class="fc" id="L33">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L34">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L35">        b.setValue(0,0,9);</span>
+<span class="fc" id="L36">        assertTrue(s.validColumn(b,0,0,0));</span>
+
+<span class="fc" id="L38">        b.setValue(1,0,9);</span>
+<span class="fc" id="L39">        b.setValue(1,1,9);</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        assertTrue(!s.validColumn(b,1,0,0));</span>
+<span class="fc" id="L41">    }</span>
+
+    /**
+     * Valid all rows.
+     */
+    @Test
+    void ValidAllRows() {
+<span class="fc" id="L48">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L49">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L50">        b.setValue(0,0,9);</span>
+<span class="fc" id="L51">        b.setValue(1,1,9);</span>
+<span class="fc" id="L52">        b.setValue(2,2,9);</span>
+<span class="fc" id="L53">        b.setValue(3,3,9);</span>
+<span class="fc" id="L54">        b.setValue(4,4,9);</span>
+<span class="fc" id="L55">        b.setValue(5,5,9);</span>
+<span class="fc" id="L56">        b.setValue(6,6,9);</span>
+<span class="fc" id="L57">        b.setValue(7,7,9);</span>
+<span class="fc" id="L58">        b.setValue(8,8,9);</span>
+<span class="fc" id="L59">        assertTrue(s.allRowsValid(b));</span>
+<span class="fc" id="L60">        b.setValue(7,8,9);</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        assertTrue(!s.allRowsValid(b));</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Valid all columns.
+     */
+    @Test
+    void ValidAllColumns() {
+<span class="fc" id="L69">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L70">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L71">        b.setValue(0,0,9);</span>
+<span class="fc" id="L72">        b.setValue(1,1,9);</span>
+<span class="fc" id="L73">        b.setValue(2,2,9);</span>
+<span class="fc" id="L74">        b.setValue(3,3,9);</span>
+<span class="fc" id="L75">        b.setValue(4,4,9);</span>
+<span class="fc" id="L76">        b.setValue(5,5,9);</span>
+<span class="fc" id="L77">        b.setValue(6,6,9);</span>
+<span class="fc" id="L78">        b.setValue(7,7,9);</span>
+<span class="fc" id="L79">        b.setValue(8,8,9);</span>
+<span class="fc" id="L80">        assertTrue(s.allColumnsValid(b));</span>
+<span class="fc" id="L81">        b.setValue(8,7,9);</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        assertTrue(!s.allColumnsValid(b));</span>
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Valid box.
+     */
+    @Test
+    void ValidBox(){
+<span class="fc" id="L90">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L91">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L92">        b.setValue(0,0,9);</span>
+<span class="fc" id="L93">        assertTrue(s.validBox(b,0,0));</span>
+<span class="fc" id="L94">        b.setValue(1,1,9);</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        assertTrue(!s.validBox(b,0,0));</span>
+
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * Valid all box.
+     */
+    @Test
+    void ValidAllBox(){
+<span class="fc" id="L104">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L105">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L106">        b.setValue(0,0,9);</span>
+<span class="fc" id="L107">        b.setValue(3,0,9);</span>
+<span class="fc" id="L108">        b.setValue(6,0,9);</span>
+<span class="fc" id="L109">        b.setValue(0,3,9);</span>
+<span class="fc" id="L110">        b.setValue(3,3,9);</span>
+<span class="fc" id="L111">        b.setValue(6,3,9);</span>
+<span class="fc" id="L112">        b.setValue(0,6,9);</span>
+<span class="fc" id="L113">        b.setValue(3,6,9);</span>
+<span class="fc" id="L114">        b.setValue(6,6,9);</span>
+<span class="fc" id="L115">        assertTrue(s.allBoxesValid(b));</span>
+<span class="fc" id="L116">        b.setValue(5,5,9);</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">        assertTrue(!s.allBoxesValid(b));</span>
+
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * Valid and complete.
+     */
+    @Test
+    void validAndComplete(){
+<span class="fc" id="L126">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L127">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L128">        b.setValue(0,0,5);</span>
+<span class="fc" id="L129">        b.setValue(1,0,3);</span>
+<span class="fc" id="L130">        b.setValue(2,0,4);</span>
+<span class="fc" id="L131">        b.setValue(3,0,6);</span>
+<span class="fc" id="L132">        b.setValue(4,0,7);</span>
+<span class="fc" id="L133">        b.setValue(5,0,8);</span>
+<span class="fc" id="L134">        b.setValue(6,0,9);</span>
+<span class="fc" id="L135">        b.setValue(7,0,1);</span>
+<span class="fc" id="L136">        b.setValue(8,0,2);</span>
+<span class="fc" id="L137">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L140">        b.setValue(0,1,6);</span>
+<span class="fc" id="L141">        b.setValue(1,1,7);</span>
+<span class="fc" id="L142">        b.setValue(2,1,2);</span>
+<span class="fc" id="L143">        b.setValue(3,1,1);</span>
+<span class="fc" id="L144">        b.setValue(4,1,9);</span>
+<span class="fc" id="L145">        b.setValue(5,1,5);</span>
+<span class="fc" id="L146">        b.setValue(6,1,3);</span>
+<span class="fc" id="L147">        b.setValue(7,1,4);</span>
+<span class="fc" id="L148">        b.setValue(8,1,8);</span>
+<span class="fc" id="L149">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L152">        b.setValue(0,2,1);</span>
+<span class="fc" id="L153">        b.setValue(1,2,9);</span>
+<span class="fc" id="L154">        b.setValue(2,2,8);</span>
+<span class="fc" id="L155">        b.setValue(3,2,3);</span>
+<span class="fc" id="L156">        b.setValue(4,2,4);</span>
+<span class="fc" id="L157">        b.setValue(5,2,2);</span>
+<span class="fc" id="L158">        b.setValue(6,2,5);</span>
+<span class="fc" id="L159">        b.setValue(7,2,6);</span>
+<span class="fc" id="L160">        b.setValue(8,2,7);</span>
+<span class="fc" id="L161">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L164">        b.setValue(0,3,8);</span>
+<span class="fc" id="L165">        b.setValue(1,3,5);</span>
+<span class="fc" id="L166">        b.setValue(2,3,9);</span>
+<span class="fc" id="L167">        b.setValue(3,3,7);</span>
+<span class="fc" id="L168">        b.setValue(4,3,6);</span>
+<span class="fc" id="L169">        b.setValue(5,3,1);</span>
+<span class="fc" id="L170">        b.setValue(6,3,4);</span>
+<span class="fc" id="L171">        b.setValue(7,3,2);</span>
+<span class="fc" id="L172">        b.setValue(8,3,3);</span>
+<span class="fc" id="L173">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L176">        b.setValue(0,4,4);</span>
+<span class="fc" id="L177">        b.setValue(1,4,2);</span>
+<span class="fc" id="L178">        b.setValue(2,4,6);</span>
+<span class="fc" id="L179">        b.setValue(3,4,8);</span>
+<span class="fc" id="L180">        b.setValue(4,4,5);</span>
+<span class="fc" id="L181">        b.setValue(5,4,3);</span>
+<span class="fc" id="L182">        b.setValue(6,4,7);</span>
+<span class="fc" id="L183">        b.setValue(7,4,9);</span>
+<span class="fc" id="L184">        b.setValue(8,4,1);</span>
+<span class="fc" id="L185">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L188">        b.setValue(0,5,7);</span>
+<span class="fc" id="L189">        b.setValue(1,5,1);</span>
+<span class="fc" id="L190">        b.setValue(2,5,3);</span>
+<span class="fc" id="L191">        b.setValue(3,5,9);</span>
+<span class="fc" id="L192">        b.setValue(4,5,2);</span>
+<span class="fc" id="L193">        b.setValue(5,5,4);</span>
+<span class="fc" id="L194">        b.setValue(6,5,8);</span>
+<span class="fc" id="L195">        b.setValue(7,5,5);</span>
+<span class="fc" id="L196">        b.setValue(8,5,6);</span>
+<span class="fc" id="L197">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L200">        b.setValue(0,6,9);</span>
+<span class="fc" id="L201">        b.setValue(1,6,6);</span>
+<span class="fc" id="L202">        b.setValue(2,6,1);</span>
+<span class="fc" id="L203">        b.setValue(3,6,5);</span>
+<span class="fc" id="L204">        b.setValue(4,6,3);</span>
+<span class="fc" id="L205">        b.setValue(5,6,7);</span>
+<span class="fc" id="L206">        b.setValue(6,6,2);</span>
+<span class="fc" id="L207">        b.setValue(7,6,8);</span>
+<span class="fc" id="L208">        b.setValue(8,6,4);</span>
+<span class="fc" id="L209">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L212">        b.setValue(0,7,2);</span>
+<span class="fc" id="L213">        b.setValue(1,7,8);</span>
+<span class="fc" id="L214">        b.setValue(2,7,7);</span>
+<span class="fc" id="L215">        b.setValue(3,7,4);</span>
+<span class="fc" id="L216">        b.setValue(4,7,1);</span>
+<span class="fc" id="L217">        b.setValue(5,7,9);</span>
+<span class="fc" id="L218">        b.setValue(6,7,6);</span>
+<span class="fc" id="L219">        b.setValue(7,7,3);</span>
+<span class="fc" id="L220">        b.setValue(8,7,5);</span>
+<span class="fc" id="L221">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L224">        b.setValue(0,8,3);</span>
+<span class="fc" id="L225">        b.setValue(1,8,4);</span>
+<span class="fc" id="L226">        b.setValue(2,8,5);</span>
+<span class="fc" id="L227">        b.setValue(3,8,2);</span>
+<span class="fc" id="L228">        b.setValue(4,8,8);</span>
+<span class="fc" id="L229">        b.setValue(5,8,6);</span>
+<span class="fc" id="L230">        b.setValue(6,8,1);</span>
+<span class="fc" id="L231">        b.setValue(7,8,7);</span>
+<span class="fc" id="L232">        b.setValue(8,8,9);</span>
+<span class="fc" id="L233">        assertTrue(s.valid(b));</span>
+<span class="fc" id="L234">        assertTrue(s.validAndFull(b));</span>
+<span class="fc" id="L235">    }</span>
+
+    /**
+     * Test solve.
+     */
+    @Test
+    void testSolve() {
+<span class="fc" id="L242">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L243">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L244">        b.setValue(0, 0, 5);</span>
+<span class="fc" id="L245">        b.setValue(1, 0, 3);</span>
+<span class="fc" id="L246">        b.setValue(2, 0, 4);</span>
+<span class="fc" id="L247">        b.setValue(3, 0, 6);</span>
+<span class="fc" id="L248">        b.setValue(4, 0, 7);</span>
+<span class="fc" id="L249">        b.setValue(5, 0, 8);</span>
+<span class="fc" id="L250">        b.setValue(6, 0, 9);</span>
+<span class="fc" id="L251">        b.setValue(7, 0, 1);</span>
+<span class="fc" id="L252">        b.setValue(8, 0, 2);</span>
+<span class="fc" id="L253">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L254" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L256">        b.setValue(0, 1, 6);</span>
+<span class="fc" id="L257">        b.setValue(1, 1, 7);</span>
+<span class="fc" id="L258">        b.setValue(2, 1, 2);</span>
+<span class="fc" id="L259">        b.setValue(3, 1, 1);</span>
+<span class="fc" id="L260">        b.setValue(4, 1, 9);</span>
+<span class="fc" id="L261">        b.setValue(5, 1, 5);</span>
+<span class="fc" id="L262">        b.setValue(6, 1, 3);</span>
+<span class="fc" id="L263">        b.setValue(7, 1, 4);</span>
+<span class="fc" id="L264">        b.setValue(8, 1, 8);</span>
+<span class="fc" id="L265">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L266" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L268">        b.setValue(0, 2, 1);</span>
+<span class="fc" id="L269">        b.setValue(1, 2, 9);</span>
+<span class="fc" id="L270">        b.setValue(2, 2, 8);</span>
+<span class="fc" id="L271">        b.setValue(3, 2, 3);</span>
+<span class="fc" id="L272">        b.setValue(4, 2, 4);</span>
+<span class="fc" id="L273">        b.setValue(5, 2, 2);</span>
+<span class="fc" id="L274">        b.setValue(6, 2, 5);</span>
+<span class="fc" id="L275">        b.setValue(7, 2, 6);</span>
+<span class="fc" id="L276">        b.setValue(8, 2, 7);</span>
+<span class="fc" id="L277">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L278" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L280">        b.setValue(0, 3, 8);</span>
+<span class="fc" id="L281">        b.setValue(1, 3, 5);</span>
+<span class="fc" id="L282">        b.setValue(2, 3, 9);</span>
+<span class="fc" id="L283">        b.setValue(3, 3, 7);</span>
+<span class="fc" id="L284">        b.setValue(4, 3, 6);</span>
+<span class="fc" id="L285">        b.setValue(5, 3, 1);</span>
+<span class="fc" id="L286">        b.setValue(6, 3, 4);</span>
+<span class="fc" id="L287">        b.setValue(7, 3, 2);</span>
+<span class="fc" id="L288">        b.setValue(8, 3, 3);</span>
+<span class="fc" id="L289">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L290" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L292">        b.setValue(0, 4, 4);</span>
+<span class="fc" id="L293">        b.setValue(1, 4, 2);</span>
+<span class="fc" id="L294">        b.setValue(2, 4, 6);</span>
+<span class="fc" id="L295">        b.setValue(3, 4, 8);</span>
+<span class="fc" id="L296">        b.setValue(4, 4, 5);</span>
+<span class="fc" id="L297">        b.setValue(5, 4, 3);</span>
+<span class="fc" id="L298">        b.setValue(6, 4, 7);</span>
+<span class="fc" id="L299">        b.setValue(7, 4, 9);</span>
+<span class="fc" id="L300">        b.setValue(8, 4, 1);</span>
+<span class="fc" id="L301">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L302" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L304">        b.setValue(0, 5, 7);</span>
+<span class="fc" id="L305">        b.setValue(1, 5, 1);</span>
+<span class="fc" id="L306">        b.setValue(2, 5, 3);</span>
+<span class="fc" id="L307">        b.setValue(3, 5, 9);</span>
+<span class="fc" id="L308">        b.setValue(4, 5, 2);</span>
+<span class="fc" id="L309">        b.setValue(5, 5, 4);</span>
+<span class="fc" id="L310">        b.setValue(6, 5, 8);</span>
+<span class="fc" id="L311">        b.setValue(7, 5, 5);</span>
+<span class="fc" id="L312">        b.setValue(8, 5, 6);</span>
+<span class="fc" id="L313">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L314" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L316">        b.setValue(0, 6, 9);</span>
+<span class="fc" id="L317">        b.setValue(1, 6, 6);</span>
+<span class="fc" id="L318">        b.setValue(2, 6, 1);</span>
+<span class="fc" id="L319">        b.setValue(3, 6, 5);</span>
+<span class="fc" id="L320">        b.setValue(4, 6, 3);</span>
+<span class="fc" id="L321">        b.setValue(5, 6, 7);</span>
+<span class="fc" id="L322">        b.setValue(6, 6, 2);</span>
+<span class="fc" id="L323">        b.setValue(7, 6, 8);</span>
+<span class="fc" id="L324">        b.setValue(8, 6, 4);</span>
+<span class="fc" id="L325">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L326" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L328">        b.setValue(0, 7, 2);</span>
+<span class="fc" id="L329">        b.setValue(1, 7, 8);</span>
+<span class="fc" id="L330">        b.setValue(2, 7, 7);</span>
+<span class="fc" id="L331">        b.setValue(3, 7, 4);</span>
+<span class="fc" id="L332">        b.setValue(4, 7, 1);</span>
+<span class="fc" id="L333">        b.setValue(5, 7, 9);</span>
+<span class="fc" id="L334">        b.setValue(6, 7, 6);</span>
+<span class="fc" id="L335">        b.setValue(7, 7, 3);</span>
+<span class="fc" id="L336">        b.setValue(8, 7, 5);</span>
+<span class="fc" id="L337">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L338" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L340">        b.setValue(0, 8, 3);</span>
+<span class="fc" id="L341">        b.setValue(1, 8, 4);</span>
+<span class="fc" id="L342">        b.setValue(2, 8, 5);</span>
+<span class="fc" id="L343">        b.setValue(3, 8, 2);</span>
+<span class="fc" id="L344">        b.setValue(4, 8, 8);</span>
+<span class="fc" id="L345">        b.setValue(5, 8, 6);</span>
+<span class="fc" id="L346">        b.setValue(6, 8, 1);</span>
+<span class="fc" id="L347">        b.setValue(7, 8, 7);</span>
+<span class="fc" id="L348">        assertTrue(s.valid(b));</span>
+<span class="fc" id="L349">        assertFalse(s.validAndFull(b));</span>
+<span class="fc" id="L350">        SimpleBoard sol = s.solve(b);</span>
+<span class="fc" id="L351">        assertEquals(9, (int) sol.get(8, 8).getValue());</span>
+<span class="fc" id="L352">    }</span>
+
+    /**
+     * Test solve small.
+     */
+    @Test
+    void testSolveSmall(){
+<span class="fc" id="L359">            SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L360">            SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L361">            b.setValue(0,0,5);</span>
+<span class="fc" id="L362">            b.setValue(1,0,3);</span>
+<span class="fc" id="L363">            b.setValue(2,0,4);</span>
+<span class="fc" id="L364">            b.setValue(3,0,6);</span>
+<span class="fc" id="L365">            b.setValue(4,0,7);</span>
+<span class="fc" id="L366">            b.setValue(5,0,8);</span>
+<span class="fc" id="L367">            b.setValue(6,0,9);</span>
+<span class="fc" id="L368">            b.setValue(7,0,1);</span>
+<span class="fc" id="L369">            b.setValue(8,0,2);</span>
+<span class="fc" id="L370">            assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L371" title="1 of 2 branches missed.">            assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L373">            b.setValue(0,8,3);</span>
+<span class="fc" id="L374">            b.setValue(1,8,4);</span>
+<span class="fc" id="L375">            b.setValue(2,8,5);</span>
+<span class="fc" id="L376">            b.setValue(3,8,2);</span>
+<span class="fc" id="L377">            b.setValue(4,8,8);</span>
+<span class="fc" id="L378">            b.setValue(5,8,6);</span>
+<span class="fc" id="L379">            b.setValue(6,8,1);</span>
+<span class="fc" id="L380">            b.setValue(7,8,7);</span>
+<span class="fc" id="L381">            assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L382" title="1 of 2 branches missed.">            assertTrue(!s.validAndFull(b));</span>
+<span class="fc" id="L383">            SimpleBoard sol = s.solve(b);</span>
+<span class="pc bpc" id="L384" title="1 of 2 branches missed.">            assertTrue(sol.get(8,8).getValue() == 9);</span>
+<span class="fc" id="L385">    }</span>
+
+    /**
+     * Valid free form box.
+     */
+    @Test
+    void validFreeFormBox() {
+<span class="fc" id="L392">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L393">        SimpleBoard b = new SimpleBoard(9);</span>
+
+<span class="fc" id="L395">        b.setGroup(0,0,0);</span>
+<span class="fc" id="L396">        b.setGroup(1,0,0);</span>
+<span class="fc" id="L397">        b.setGroup(2,0,0);</span>
+<span class="fc" id="L398">        b.setGroup(2,1,0);</span>
+<span class="fc" id="L399">        b.setGroup(1,1,0);</span>
+<span class="fc" id="L400">        b.setGroup(0,1,0);</span>
+<span class="fc" id="L401">        b.setGroup(0,2,0);</span>
+<span class="fc" id="L402">        b.setGroup(1,2,0);</span>
+<span class="fc" id="L403">        b.setGroup(2,2,0);</span>
+<span class="fc" id="L404">        b.setGroup(3,0,1);</span>
+<span class="fc" id="L405">        b.setGroup(4,0,1);</span>
+<span class="fc" id="L406">        b.setGroup(5,0,1);</span>
+<span class="fc" id="L407">        b.setGroup(5,1,1);</span>
+<span class="fc" id="L408">        b.setGroup(4,1,1);</span>
+<span class="fc" id="L409">        b.setGroup(3,1,1);</span>
+<span class="fc" id="L410">        b.setGroup(3,2,1);</span>
+<span class="fc" id="L411">        b.setGroup(4,2,1);</span>
+<span class="fc" id="L412">        b.setGroup(5,2,1);</span>
+<span class="fc" id="L413">        b.setGroup(6,0,2);</span>
+<span class="fc" id="L414">        b.setGroup(7,0,2);</span>
+<span class="fc" id="L415">        b.setGroup(8,0,2);</span>
+<span class="fc" id="L416">        b.setGroup(8,1,2);</span>
+<span class="fc" id="L417">        b.setGroup(7,1,2);</span>
+<span class="fc" id="L418">        b.setGroup(6,1,2);</span>
+<span class="fc" id="L419">        b.setGroup(6,2,2);</span>
+<span class="fc" id="L420">        b.setGroup(7,2,2);</span>
+<span class="fc" id="L421">        b.setGroup(8,2,2);</span>
+<span class="fc" id="L422">        b.setGroup(0,3,3);</span>
+<span class="fc" id="L423">        b.setGroup(1,3,3);</span>
+<span class="fc" id="L424">        b.setGroup(2,3,3);</span>
+<span class="fc" id="L425">        b.setGroup(2,4,3);</span>
+<span class="fc" id="L426">        b.setGroup(1,4,3);</span>
+<span class="fc" id="L427">        b.setGroup(0,4,3);</span>
+<span class="fc" id="L428">        b.setGroup(0,5,3);</span>
+<span class="fc" id="L429">        b.setGroup(1,5,3);</span>
+<span class="fc" id="L430">        b.setGroup(2,5,3);</span>
+<span class="fc" id="L431">        b.setGroup(3,3,4);</span>
+<span class="fc" id="L432">        b.setGroup(4,3,4);</span>
+<span class="fc" id="L433">        b.setGroup(5,3,4);</span>
+<span class="fc" id="L434">        b.setGroup(5,4,4);</span>
+<span class="fc" id="L435">        b.setGroup(4,4,4);</span>
+<span class="fc" id="L436">        b.setGroup(3,4,4);</span>
+<span class="fc" id="L437">        b.setGroup(3,5,4);</span>
+<span class="fc" id="L438">        b.setGroup(4,5,4);</span>
+<span class="fc" id="L439">        b.setGroup(5,5,4);</span>
+<span class="fc" id="L440">        b.setGroup(6,3,5);</span>
+<span class="fc" id="L441">        b.setGroup(7,3,5);</span>
+<span class="fc" id="L442">        b.setGroup(8,3,5);</span>
+<span class="fc" id="L443">        b.setGroup(8,4,5);</span>
+<span class="fc" id="L444">        b.setGroup(7,4,5);</span>
+<span class="fc" id="L445">        b.setGroup(6,4,5);</span>
+<span class="fc" id="L446">        b.setGroup(6,5,5);</span>
+<span class="fc" id="L447">        b.setGroup(7,5,5);</span>
+<span class="fc" id="L448">        b.setGroup(8,5,5);</span>
+<span class="fc" id="L449">        b.setGroup(0,6,6);</span>
+<span class="fc" id="L450">        b.setGroup(1,6,6);</span>
+<span class="fc" id="L451">        b.setGroup(2,6,6);</span>
+<span class="fc" id="L452">        b.setGroup(2,7,6);</span>
+<span class="fc" id="L453">        b.setGroup(1,7,6);</span>
+<span class="fc" id="L454">        b.setGroup(0,7,6);</span>
+<span class="fc" id="L455">        b.setGroup(0,8,6);</span>
+<span class="fc" id="L456">        b.setGroup(1,8,6);</span>
+<span class="fc" id="L457">        b.setGroup(2,8,6);</span>
+<span class="fc" id="L458">        b.setGroup(3,6,7);</span>
+<span class="fc" id="L459">        b.setGroup(4,6,7);</span>
+<span class="fc" id="L460">        b.setGroup(5,6,7);</span>
+<span class="fc" id="L461">        b.setGroup(5,7,7);</span>
+<span class="fc" id="L462">        b.setGroup(4,7,7);</span>
+<span class="fc" id="L463">        b.setGroup(3,7,7);</span>
+<span class="fc" id="L464">        b.setGroup(3,8,7);</span>
+<span class="fc" id="L465">        b.setGroup(4,8,7);</span>
+<span class="fc" id="L466">        b.setGroup(5,8,7);</span>
+<span class="fc" id="L467">        b.setGroup(6,6,8);</span>
+<span class="fc" id="L468">        b.setGroup(7,6,8);</span>
+<span class="fc" id="L469">        b.setGroup(8,6,8);</span>
+<span class="fc" id="L470">        b.setGroup(8,7,8);</span>
+<span class="fc" id="L471">        b.setGroup(7,7,8);</span>
+<span class="fc" id="L472">        b.setGroup(6,7,8);</span>
+<span class="fc" id="L473">        b.setGroup(6,8,8);</span>
+<span class="fc" id="L474">        b.setGroup(7,8,8);</span>
+<span class="fc" id="L475">        b.setGroup(8,8,8);</span>
+<span class="fc bfc" id="L476" title="All 2 branches covered.">        for (int i = 0; i &lt; 9; i++){</span>
+<span class="fc" id="L477">            assertTrue(s.validBox(b,i));</span>
+        }
+<span class="fc" id="L479">        b.setValue(0, 0, 5);</span>
+<span class="fc" id="L480">        b.setValue(1, 0, 3);</span>
+<span class="fc" id="L481">        b.setValue(2, 0, 4);</span>
+<span class="fc" id="L482">        b.setValue(3, 0, 6);</span>
+        //b.setValue(4, 0, 7);
+        //b.setValue(5, 0, 8);
+<span class="fc" id="L485">        b.setValue(6, 0, 9);</span>
+<span class="fc" id="L486">        b.setValue(7, 0, 1);</span>
+<span class="fc" id="L487">        b.setValue(8, 0, 2);</span>
+<span class="fc" id="L488">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L489" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L491">        b.setValue(0, 1, 6);</span>
+<span class="fc" id="L492">        b.setValue(1, 1, 7);</span>
+<span class="fc" id="L493">        b.setValue(2, 1, 2);</span>
+<span class="fc" id="L494">        b.setValue(3, 1, 1);</span>
+<span class="fc" id="L495">        b.setValue(4, 1, 9);</span>
+<span class="fc" id="L496">        b.setValue(5, 1, 5);</span>
+<span class="fc" id="L497">        b.setValue(6, 1, 3);</span>
+<span class="fc" id="L498">        b.setValue(7, 1, 4);</span>
+<span class="fc" id="L499">        b.setValue(8, 1, 8);</span>
+<span class="fc" id="L500">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L501" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L503">        b.setValue(0, 2, 1);</span>
+<span class="fc" id="L504">        b.setValue(1, 2, 9);</span>
+<span class="fc" id="L505">        b.setValue(2, 2, 8);</span>
+<span class="fc" id="L506">        b.setValue(3, 2, 3);</span>
+<span class="fc" id="L507">        b.setValue(4, 2, 4);</span>
+<span class="fc" id="L508">        b.setValue(5, 2, 2);</span>
+<span class="fc" id="L509">        b.setValue(6, 2, 5);</span>
+<span class="fc" id="L510">        b.setValue(7, 2, 6);</span>
+<span class="fc" id="L511">        b.setValue(8, 2, 7);</span>
+<span class="fc" id="L512">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L513" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L515">        b.setValue(0, 3, 8);</span>
+<span class="fc" id="L516">        b.setValue(1, 3, 5);</span>
+<span class="fc" id="L517">        b.setValue(2, 3, 9);</span>
+<span class="fc" id="L518">        b.setValue(3, 3, 7);</span>
+        //b.setValue(4, 3, 6);
+        //b.setValue(5, 3, 1);
+<span class="fc" id="L521">        b.setValue(6, 3, 4);</span>
+<span class="fc" id="L522">        b.setValue(7, 3, 2);</span>
+<span class="fc" id="L523">        b.setValue(8, 3, 3);</span>
+<span class="fc" id="L524">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L525" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L527">        b.setValue(0, 4, 4);</span>
+<span class="fc" id="L528">        b.setValue(1, 4, 2);</span>
+<span class="fc" id="L529">        b.setValue(2, 4, 6);</span>
+<span class="fc" id="L530">        b.setValue(3, 4, 8);</span>
+<span class="fc" id="L531">        b.setValue(4, 4, 5);</span>
+<span class="fc" id="L532">        b.setValue(5, 4, 3);</span>
+<span class="fc" id="L533">        b.setValue(6, 4, 7);</span>
+<span class="fc" id="L534">        b.setValue(7, 4, 9);</span>
+<span class="fc" id="L535">        b.setValue(8, 4, 1);</span>
+<span class="fc" id="L536">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L537" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L539">        b.setValue(0, 5, 7);</span>
+<span class="fc" id="L540">        b.setValue(1, 5, 1);</span>
+<span class="fc" id="L541">        b.setValue(2, 5, 3);</span>
+<span class="fc" id="L542">        b.setValue(3, 5, 9);</span>
+<span class="fc" id="L543">        b.setValue(4, 5, 2);</span>
+<span class="fc" id="L544">        b.setValue(5, 5, 4);</span>
+<span class="fc" id="L545">        b.setValue(6, 5, 8);</span>
+<span class="fc" id="L546">        b.setValue(7, 5, 5);</span>
+<span class="fc" id="L547">        b.setValue(8, 5, 6);</span>
+<span class="fc" id="L548">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L549" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L551">        b.setValue(0, 6, 9);</span>
+<span class="fc" id="L552">        b.setValue(1, 6, 6);</span>
+<span class="fc" id="L553">        b.setValue(2, 6, 1);</span>
+<span class="fc" id="L554">        b.setValue(3, 6, 5);</span>
+       //b.setValue(4, 6, 3);
+       //b.setValue(5, 6, 7);
+<span class="fc" id="L557">        b.setValue(6, 6, 2);</span>
+<span class="fc" id="L558">        b.setValue(7, 6, 8);</span>
+<span class="fc" id="L559">        b.setValue(8, 6, 4);</span>
+<span class="fc" id="L560">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L561" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L563">        b.setValue(0, 7, 2);</span>
+<span class="fc" id="L564">        b.setValue(1, 7, 8);</span>
+<span class="fc" id="L565">        b.setValue(2, 7, 7);</span>
+<span class="fc" id="L566">        b.setValue(3, 7, 4);</span>
+<span class="fc" id="L567">        b.setValue(4, 7, 1);</span>
+<span class="fc" id="L568">        b.setValue(5, 7, 9);</span>
+<span class="fc" id="L569">        b.setValue(6, 7, 6);</span>
+<span class="fc" id="L570">        b.setValue(7, 7, 3);</span>
+<span class="fc" id="L571">        b.setValue(8, 7, 5);</span>
+<span class="fc" id="L572">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L573" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L575">        b.setValue(0, 8, 3);</span>
+<span class="fc" id="L576">        b.setValue(1, 8, 4);</span>
+<span class="fc" id="L577">        b.setValue(2, 8, 5);</span>
+<span class="fc" id="L578">        b.setValue(3, 8, 2);</span>
+        //b.setValue(4, 8, 8);
+<span class="fc" id="L580">        b.setValue(5, 8, 6);</span>
+<span class="fc" id="L581">        b.setValue(6, 8, 1);</span>
+<span class="fc" id="L582">        b.setValue(7, 8, 7);</span>
+<span class="fc" id="L583">        assertTrue(s.valid(b));</span>
+<span class="fc" id="L584">        SimpleBoard sol = s.solve(b);</span>
+<span class="pc bpc" id="L585" title="1 of 2 branches missed.">        assertTrue(sol != null);</span>
+<span class="pc bpc" id="L586" title="1 of 2 branches missed.">        assertTrue(sol.get(0,0).getValue() &gt; 0);</span>
+<span class="fc" id="L587">    }</span>
+
+    /**
+     * Valid free form box row.
+     */
+    @Test
+    void validFreeFormBoxRow() {
+<span class="fc" id="L594">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L595">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="fc" id="L596">        b.setGroup(0, 1, 2);</span>
+<span class="fc" id="L597">        b.setGroup(1, 1, 2);</span>
+<span class="fc" id="L598">        b.setGroup(2, 1, 2);</span>
+<span class="fc" id="L599">        b.setGroup(3, 1, 2);</span>
+<span class="fc" id="L600">        b.setGroup(4, 1, 2);</span>
+<span class="fc" id="L601">        b.setGroup(5, 1, 2);</span>
+<span class="fc" id="L602">        b.setGroup(6, 1, 2);</span>
+<span class="fc" id="L603">        b.setGroup(7, 1, 2);</span>
+<span class="fc" id="L604">        b.setGroup(8, 1, 2);</span>
+        //b.setValue(0, 1, 1);
+<span class="fc" id="L606">        b.setValue(1, 1, 1);</span>
+<span class="fc" id="L607">        b.setValue(2, 1, 2);</span>
+<span class="fc" id="L608">        b.setValue(3, 1, 3);</span>
+<span class="fc" id="L609">        b.setValue(4, 1, 4);</span>
+<span class="fc" id="L610">        b.setValue(5, 1, 5);</span>
+<span class="fc" id="L611">        b.setValue(6, 1, 6);</span>
+<span class="fc" id="L612">        b.setValue(7, 1, 7);</span>
+<span class="fc" id="L613">        b.setValue(8, 1, 8);</span>
+<span class="fc" id="L614">        assertTrue(s.validBox(b, 2));</span>
+
+<span class="fc" id="L616">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L617" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+<span class="fc" id="L618">    }</span>
+
+    /**
+     * Valid free form box empty.
+     */
+    @Test
+    void validFreeFormBoxEmpty() {
+<span class="fc" id="L625">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="fc" id="L626">        SimpleBoard b = new SimpleBoard(9);</span>
+
+<span class="fc" id="L628">        b.setGroup(0, 0, 0);</span>
+<span class="fc" id="L629">        b.setGroup(1, 0, 0);</span>
+<span class="fc" id="L630">        b.setGroup(2, 0, 0);</span>
+<span class="fc" id="L631">        b.setGroup(2, 1, 0);</span>
+<span class="fc" id="L632">        b.setGroup(1, 1, 0);</span>
+<span class="fc" id="L633">        b.setGroup(0, 1, 0);</span>
+<span class="fc" id="L634">        b.setGroup(0, 2, 0);</span>
+<span class="fc" id="L635">        b.setGroup(1, 2, 0);</span>
+<span class="fc" id="L636">        b.setGroup(2, 2, 0);</span>
+<span class="fc" id="L637">        b.setGroup(3, 0, 1);</span>
+<span class="fc" id="L638">        b.setGroup(4, 0, 1);</span>
+<span class="fc" id="L639">        b.setGroup(5, 0, 1);</span>
+<span class="fc" id="L640">        b.setGroup(5, 1, 1);</span>
+<span class="fc" id="L641">        b.setGroup(4, 1, 1);</span>
+<span class="fc" id="L642">        b.setGroup(3, 1, 1);</span>
+<span class="fc" id="L643">        b.setGroup(3, 2, 1);</span>
+<span class="fc" id="L644">        b.setGroup(4, 2, 1);</span>
+<span class="fc" id="L645">        b.setGroup(5, 2, 1);</span>
+<span class="fc" id="L646">        b.setGroup(6, 0, 2);</span>
+<span class="fc" id="L647">        b.setGroup(7, 0, 2);</span>
+<span class="fc" id="L648">        b.setGroup(8, 0, 2);</span>
+<span class="fc" id="L649">        b.setGroup(8, 1, 2);</span>
+<span class="fc" id="L650">        b.setGroup(7, 1, 2);</span>
+<span class="fc" id="L651">        b.setGroup(6, 1, 2);</span>
+<span class="fc" id="L652">        b.setGroup(6, 2, 2);</span>
+<span class="fc" id="L653">        b.setGroup(7, 2, 2);</span>
+<span class="fc" id="L654">        b.setGroup(8, 2, 2);</span>
+<span class="fc" id="L655">        b.setGroup(0, 3, 3);</span>
+<span class="fc" id="L656">        b.setGroup(1, 3, 3);</span>
+<span class="fc" id="L657">        b.setGroup(2, 3, 3);</span>
+<span class="fc" id="L658">        b.setGroup(2, 4, 3);</span>
+<span class="fc" id="L659">        b.setGroup(1, 4, 3);</span>
+<span class="fc" id="L660">        b.setGroup(0, 4, 3);</span>
+<span class="fc" id="L661">        b.setGroup(0, 5, 3);</span>
+<span class="fc" id="L662">        b.setGroup(1, 5, 3);</span>
+<span class="fc" id="L663">        b.setGroup(2, 5, 3);</span>
+<span class="fc" id="L664">        b.setGroup(3, 3, 4);</span>
+<span class="fc" id="L665">        b.setGroup(4, 3, 4);</span>
+<span class="fc" id="L666">        b.setGroup(5, 3, 4);</span>
+<span class="fc" id="L667">        b.setGroup(5, 4, 4);</span>
+<span class="fc" id="L668">        b.setGroup(4, 4, 4);</span>
+<span class="fc" id="L669">        b.setGroup(3, 4, 4);</span>
+<span class="fc" id="L670">        b.setGroup(3, 5, 4);</span>
+<span class="fc" id="L671">        b.setGroup(4, 5, 4);</span>
+<span class="fc" id="L672">        b.setGroup(5, 5, 4);</span>
+<span class="fc" id="L673">        b.setGroup(6, 3, 5);</span>
+<span class="fc" id="L674">        b.setGroup(7, 3, 5);</span>
+<span class="fc" id="L675">        b.setGroup(8, 3, 5);</span>
+<span class="fc" id="L676">        b.setGroup(8, 4, 5);</span>
+<span class="fc" id="L677">        b.setGroup(7, 4, 5);</span>
+<span class="fc" id="L678">        b.setGroup(6, 4, 5);</span>
+<span class="fc" id="L679">        b.setGroup(6, 5, 5);</span>
+<span class="fc" id="L680">        b.setGroup(7, 5, 5);</span>
+<span class="fc" id="L681">        b.setGroup(8, 5, 5);</span>
+<span class="fc" id="L682">        b.setGroup(0, 6, 6);</span>
+<span class="fc" id="L683">        b.setGroup(1, 6, 6);</span>
+<span class="fc" id="L684">        b.setGroup(2, 6, 6);</span>
+<span class="fc" id="L685">        b.setGroup(2, 7, 6);</span>
+<span class="fc" id="L686">        b.setGroup(1, 7, 6);</span>
+<span class="fc" id="L687">        b.setGroup(0, 7, 6);</span>
+<span class="fc" id="L688">        b.setGroup(0, 8, 6);</span>
+<span class="fc" id="L689">        b.setGroup(1, 8, 6);</span>
+<span class="fc" id="L690">        b.setGroup(2, 8, 6);</span>
+<span class="fc" id="L691">        b.setGroup(3, 6, 7);</span>
+<span class="fc" id="L692">        b.setGroup(4, 6, 7);</span>
+<span class="fc" id="L693">        b.setGroup(5, 6, 7);</span>
+<span class="fc" id="L694">        b.setGroup(5, 7, 7);</span>
+<span class="fc" id="L695">        b.setGroup(4, 7, 7);</span>
+<span class="fc" id="L696">        b.setGroup(3, 7, 7);</span>
+<span class="fc" id="L697">        b.setGroup(3, 8, 7);</span>
+<span class="fc" id="L698">        b.setGroup(4, 8, 7);</span>
+<span class="fc" id="L699">        b.setGroup(5, 8, 7);</span>
+<span class="fc" id="L700">        b.setGroup(6, 6, 8);</span>
+<span class="fc" id="L701">        b.setGroup(7, 6, 8);</span>
+<span class="fc" id="L702">        b.setGroup(8, 6, 8);</span>
+<span class="fc" id="L703">        b.setGroup(8, 7, 8);</span>
+<span class="fc" id="L704">        b.setGroup(7, 7, 8);</span>
+<span class="fc" id="L705">        b.setGroup(6, 7, 8);</span>
+<span class="fc" id="L706">        b.setGroup(6, 8, 8);</span>
+<span class="fc" id="L707">        b.setGroup(7, 8, 8);</span>
+<span class="fc" id="L708">        b.setGroup(8, 8, 8);</span>
+<span class="fc bfc" id="L709" title="All 2 branches covered.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="fc" id="L710">            assertTrue(s.validBox(b, i));</span>
+        }
+<span class="fc" id="L712">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L713" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+<span class="fc" id="L714">        b.setValue(0, 0, 5);</span>
+<span class="fc" id="L715">        b.setValue(1, 0, 3);</span>
+<span class="fc" id="L716">        b.setValue(2, 0, 4);</span>
+<span class="fc" id="L717">        b.setValue(3, 0, 6);</span>
+<span class="fc" id="L718">        b.setValue(4, 0, 7);</span>
+<span class="fc" id="L719">        b.setValue(5, 0, 8);</span>
+<span class="fc" id="L720">        b.setValue(6, 0, 9);</span>
+<span class="fc" id="L721">        b.setValue(7, 0, 1);</span>
+<span class="fc" id="L722">        b.setValue(8, 0, 2);</span>
+<span class="fc" id="L723">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L724" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L726">        b.setValue(0, 1, 6);</span>
+<span class="fc" id="L727">        b.setValue(1, 1, 7);</span>
+<span class="fc" id="L728">        b.setValue(2, 1, 2);</span>
+<span class="fc" id="L729">        b.setValue(3, 1, 1);</span>
+<span class="fc" id="L730">        b.setValue(4, 1, 9);</span>
+<span class="fc" id="L731">        b.setValue(5, 1, 5);</span>
+<span class="fc" id="L732">        b.setValue(6, 1, 3);</span>
+<span class="fc" id="L733">        b.setValue(7, 1, 4);</span>
+<span class="fc" id="L734">        b.setValue(8, 1, 8);</span>
+<span class="fc" id="L735">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L736" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L738">        b.setValue(0, 2, 1);</span>
+<span class="fc" id="L739">        b.setValue(1, 2, 9);</span>
+<span class="fc" id="L740">        b.setValue(2, 2, 8);</span>
+<span class="fc" id="L741">        b.setValue(3, 2, 3);</span>
+<span class="fc" id="L742">        b.setValue(4, 2, 4);</span>
+<span class="fc" id="L743">        b.setValue(5, 2, 2);</span>
+<span class="fc" id="L744">        b.setValue(6, 2, 5);</span>
+<span class="fc" id="L745">        b.setValue(7, 2, 6);</span>
+<span class="fc" id="L746">        b.setValue(8, 2, 7);</span>
+<span class="fc" id="L747">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L748" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="fc" id="L750">        b.setValue(0, 3, 8);</span>
+<span class="fc" id="L751">        b.setValue(1, 3, 5);</span>
+<span class="fc" id="L752">        b.setValue(2, 3, 9);</span>
+<span class="fc" id="L753">        b.setValue(3, 3, 7);</span>
+<span class="fc" id="L754">        b.setValue(4, 3, 6);</span>
+<span class="fc" id="L755">        b.setValue(5, 3, 1);</span>
+<span class="fc" id="L756">        b.setValue(6, 3, 4);</span>
+<span class="fc" id="L757">        b.setValue(7, 3, 2);</span>
+<span class="fc" id="L758">        b.setValue(8, 3, 3);</span>
+<span class="fc" id="L759">        assertTrue(s.valid(b));</span>
+<span class="pc bpc" id="L760" title="1 of 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+        //SimpleBoard sol = s.solve(b);
+        //assertTrue(sol != null);
+
+<span class="fc" id="L764">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleSolverTestFreeformGame.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">time_manager$SimpleSolverTest.exec</a> &gt; <a href="index.source.html" class="el_package">at.jku.se.sudokumaster</a> &gt; <span class="el_source">SimpleSolverTestFreeformGame.java</span></div><h1>SimpleSolverTestFreeformGame.java</h1><pre class="source lang-java linenums">package at.jku.se.sudokumaster;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+<span class="nc" id="L7">class SimpleSolverTestFreeformGame {</span>
+    /**
+     * Valid free form box.
+     */
+    @Test
+    void validFreeFormBox() {
+<span class="nc" id="L13">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L14">        SimpleBoard b = new SimpleBoard(9);</span>
+
+<span class="nc" id="L16">        b.setGroup(0,0,0);</span>
+<span class="nc" id="L17">        b.setGroup(1,0,0);</span>
+<span class="nc" id="L18">        b.setGroup(2,0,0);</span>
+<span class="nc" id="L19">        b.setGroup(2,1,0);</span>
+<span class="nc" id="L20">        b.setGroup(1,1,0);</span>
+<span class="nc" id="L21">        b.setGroup(0,1,0);</span>
+<span class="nc" id="L22">        b.setGroup(0,2,0);</span>
+<span class="nc" id="L23">        b.setGroup(1,2,0);</span>
+<span class="nc" id="L24">        b.setGroup(2,2,0);</span>
+<span class="nc" id="L25">        b.setGroup(3,0,1);</span>
+<span class="nc" id="L26">        b.setGroup(4,0,1);</span>
+<span class="nc" id="L27">        b.setGroup(5,0,1);</span>
+<span class="nc" id="L28">        b.setGroup(5,1,1);</span>
+<span class="nc" id="L29">        b.setGroup(4,1,1);</span>
+<span class="nc" id="L30">        b.setGroup(3,1,1);</span>
+<span class="nc" id="L31">        b.setGroup(3,2,1);</span>
+<span class="nc" id="L32">        b.setGroup(4,2,1);</span>
+<span class="nc" id="L33">        b.setGroup(5,2,1);</span>
+<span class="nc" id="L34">        b.setGroup(6,0,2);</span>
+<span class="nc" id="L35">        b.setGroup(7,0,2);</span>
+<span class="nc" id="L36">        b.setGroup(8,0,2);</span>
+<span class="nc" id="L37">        b.setGroup(8,1,2);</span>
+<span class="nc" id="L38">        b.setGroup(7,1,2);</span>
+<span class="nc" id="L39">        b.setGroup(6,1,2);</span>
+<span class="nc" id="L40">        b.setGroup(6,2,2);</span>
+<span class="nc" id="L41">        b.setGroup(7,2,2);</span>
+<span class="nc" id="L42">        b.setGroup(8,2,2);</span>
+<span class="nc" id="L43">        b.setGroup(0,3,3);</span>
+<span class="nc" id="L44">        b.setGroup(1,3,3);</span>
+<span class="nc" id="L45">        b.setGroup(2,3,3);</span>
+<span class="nc" id="L46">        b.setGroup(2,4,3);</span>
+<span class="nc" id="L47">        b.setGroup(1,4,3);</span>
+<span class="nc" id="L48">        b.setGroup(0,4,3);</span>
+<span class="nc" id="L49">        b.setGroup(0,5,3);</span>
+<span class="nc" id="L50">        b.setGroup(1,5,3);</span>
+<span class="nc" id="L51">        b.setGroup(2,5,3);</span>
+<span class="nc" id="L52">        b.setGroup(3,3,4);</span>
+<span class="nc" id="L53">        b.setGroup(4,3,4);</span>
+<span class="nc" id="L54">        b.setGroup(5,3,4);</span>
+<span class="nc" id="L55">        b.setGroup(5,4,4);</span>
+<span class="nc" id="L56">        b.setGroup(4,4,4);</span>
+<span class="nc" id="L57">        b.setGroup(3,4,4);</span>
+<span class="nc" id="L58">        b.setGroup(3,5,4);</span>
+<span class="nc" id="L59">        b.setGroup(4,5,4);</span>
+<span class="nc" id="L60">        b.setGroup(5,5,4);</span>
+<span class="nc" id="L61">        b.setGroup(6,3,5);</span>
+<span class="nc" id="L62">        b.setGroup(7,3,5);</span>
+<span class="nc" id="L63">        b.setGroup(8,3,5);</span>
+<span class="nc" id="L64">        b.setGroup(8,4,5);</span>
+<span class="nc" id="L65">        b.setGroup(7,4,5);</span>
+<span class="nc" id="L66">        b.setGroup(6,4,5);</span>
+<span class="nc" id="L67">        b.setGroup(6,5,5);</span>
+<span class="nc" id="L68">        b.setGroup(7,5,5);</span>
+<span class="nc" id="L69">        b.setGroup(8,5,5);</span>
+<span class="nc" id="L70">        b.setGroup(0,6,6);</span>
+<span class="nc" id="L71">        b.setGroup(1,6,6);</span>
+<span class="nc" id="L72">        b.setGroup(2,6,6);</span>
+<span class="nc" id="L73">        b.setGroup(2,7,6);</span>
+<span class="nc" id="L74">        b.setGroup(1,7,6);</span>
+<span class="nc" id="L75">        b.setGroup(0,7,6);</span>
+<span class="nc" id="L76">        b.setGroup(0,8,6);</span>
+<span class="nc" id="L77">        b.setGroup(1,8,6);</span>
+<span class="nc" id="L78">        b.setGroup(2,8,6);</span>
+<span class="nc" id="L79">        b.setGroup(3,6,7);</span>
+<span class="nc" id="L80">        b.setGroup(4,6,7);</span>
+<span class="nc" id="L81">        b.setGroup(5,6,7);</span>
+<span class="nc" id="L82">        b.setGroup(5,7,7);</span>
+<span class="nc" id="L83">        b.setGroup(4,7,7);</span>
+<span class="nc" id="L84">        b.setGroup(3,7,7);</span>
+<span class="nc" id="L85">        b.setGroup(3,8,7);</span>
+<span class="nc" id="L86">        b.setGroup(4,8,7);</span>
+<span class="nc" id="L87">        b.setGroup(5,8,7);</span>
+<span class="nc" id="L88">        b.setGroup(6,6,8);</span>
+<span class="nc" id="L89">        b.setGroup(7,6,8);</span>
+<span class="nc" id="L90">        b.setGroup(8,6,8);</span>
+<span class="nc" id="L91">        b.setGroup(8,7,8);</span>
+<span class="nc" id="L92">        b.setGroup(7,7,8);</span>
+<span class="nc" id="L93">        b.setGroup(6,7,8);</span>
+<span class="nc" id="L94">        b.setGroup(6,8,8);</span>
+<span class="nc" id="L95">        b.setGroup(7,8,8);</span>
+<span class="nc" id="L96">        b.setGroup(8,8,8);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        for (int i = 0; i &lt; 9; i++){</span>
+<span class="nc" id="L98">            assertTrue(s.validBox(b,i));</span>
+        }
+<span class="nc" id="L100">        b.setValue(0, 0, 5);</span>
+<span class="nc" id="L101">        b.setValue(1, 0, 3);</span>
+<span class="nc" id="L102">        b.setValue(2, 0, 4);</span>
+<span class="nc" id="L103">        b.setValue(3, 0, 6);</span>
+        //b.setValue(4, 0, 7);
+        //b.setValue(5, 0, 8);
+<span class="nc" id="L106">        b.setValue(6, 0, 9);</span>
+<span class="nc" id="L107">        b.setValue(7, 0, 1);</span>
+<span class="nc" id="L108">        b.setValue(8, 0, 2);</span>
+<span class="nc" id="L109">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L112">        b.setValue(0, 1, 6);</span>
+<span class="nc" id="L113">        b.setValue(1, 1, 7);</span>
+<span class="nc" id="L114">        b.setValue(2, 1, 2);</span>
+<span class="nc" id="L115">        b.setValue(3, 1, 1);</span>
+<span class="nc" id="L116">        b.setValue(4, 1, 9);</span>
+<span class="nc" id="L117">        b.setValue(5, 1, 5);</span>
+<span class="nc" id="L118">        b.setValue(6, 1, 3);</span>
+<span class="nc" id="L119">        b.setValue(7, 1, 4);</span>
+<span class="nc" id="L120">        b.setValue(8, 1, 8);</span>
+<span class="nc" id="L121">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L124">        b.setValue(0, 2, 1);</span>
+<span class="nc" id="L125">        b.setValue(1, 2, 9);</span>
+<span class="nc" id="L126">        b.setValue(2, 2, 8);</span>
+<span class="nc" id="L127">        b.setValue(3, 2, 3);</span>
+<span class="nc" id="L128">        b.setValue(4, 2, 4);</span>
+<span class="nc" id="L129">        b.setValue(5, 2, 2);</span>
+<span class="nc" id="L130">        b.setValue(6, 2, 5);</span>
+<span class="nc" id="L131">        b.setValue(7, 2, 6);</span>
+<span class="nc" id="L132">        b.setValue(8, 2, 7);</span>
+<span class="nc" id="L133">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L136">        b.setValue(0, 3, 8);</span>
+<span class="nc" id="L137">        b.setValue(1, 3, 5);</span>
+<span class="nc" id="L138">        b.setValue(2, 3, 9);</span>
+<span class="nc" id="L139">        b.setValue(3, 3, 7);</span>
+        //b.setValue(4, 3, 6);
+        //b.setValue(5, 3, 1);
+<span class="nc" id="L142">        b.setValue(6, 3, 4);</span>
+<span class="nc" id="L143">        b.setValue(7, 3, 2);</span>
+<span class="nc" id="L144">        b.setValue(8, 3, 3);</span>
+<span class="nc" id="L145">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L148">        b.setValue(0, 4, 4);</span>
+<span class="nc" id="L149">        b.setValue(1, 4, 2);</span>
+<span class="nc" id="L150">        b.setValue(2, 4, 6);</span>
+<span class="nc" id="L151">        b.setValue(3, 4, 8);</span>
+<span class="nc" id="L152">        b.setValue(4, 4, 5);</span>
+<span class="nc" id="L153">        b.setValue(5, 4, 3);</span>
+<span class="nc" id="L154">        b.setValue(6, 4, 7);</span>
+<span class="nc" id="L155">        b.setValue(7, 4, 9);</span>
+<span class="nc" id="L156">        b.setValue(8, 4, 1);</span>
+<span class="nc" id="L157">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L160">        b.setValue(0, 5, 7);</span>
+<span class="nc" id="L161">        b.setValue(1, 5, 1);</span>
+<span class="nc" id="L162">        b.setValue(2, 5, 3);</span>
+<span class="nc" id="L163">        b.setValue(3, 5, 9);</span>
+<span class="nc" id="L164">        b.setValue(4, 5, 2);</span>
+<span class="nc" id="L165">        b.setValue(5, 5, 4);</span>
+<span class="nc" id="L166">        b.setValue(6, 5, 8);</span>
+<span class="nc" id="L167">        b.setValue(7, 5, 5);</span>
+<span class="nc" id="L168">        b.setValue(8, 5, 6);</span>
+<span class="nc" id="L169">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L172">        b.setValue(0, 6, 9);</span>
+<span class="nc" id="L173">        b.setValue(1, 6, 6);</span>
+<span class="nc" id="L174">        b.setValue(2, 6, 1);</span>
+<span class="nc" id="L175">        b.setValue(3, 6, 5);</span>
+        //b.setValue(4, 6, 3);
+        //b.setValue(5, 6, 7);
+<span class="nc" id="L178">        b.setValue(6, 6, 2);</span>
+<span class="nc" id="L179">        b.setValue(7, 6, 8);</span>
+<span class="nc" id="L180">        b.setValue(8, 6, 4);</span>
+<span class="nc" id="L181">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L184">        b.setValue(0, 7, 2);</span>
+<span class="nc" id="L185">        b.setValue(1, 7, 8);</span>
+<span class="nc" id="L186">        b.setValue(2, 7, 7);</span>
+<span class="nc" id="L187">        b.setValue(3, 7, 4);</span>
+<span class="nc" id="L188">        b.setValue(4, 7, 1);</span>
+<span class="nc" id="L189">        b.setValue(5, 7, 9);</span>
+<span class="nc" id="L190">        b.setValue(6, 7, 6);</span>
+<span class="nc" id="L191">        b.setValue(7, 7, 3);</span>
+<span class="nc" id="L192">        b.setValue(8, 7, 5);</span>
+<span class="nc" id="L193">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L196">        b.setValue(0, 8, 3);</span>
+<span class="nc" id="L197">        b.setValue(1, 8, 4);</span>
+<span class="nc" id="L198">        b.setValue(2, 8, 5);</span>
+<span class="nc" id="L199">        b.setValue(3, 8, 2);</span>
+        //b.setValue(4, 8, 8);
+<span class="nc" id="L201">        b.setValue(5, 8, 6);</span>
+<span class="nc" id="L202">        b.setValue(6, 8, 1);</span>
+<span class="nc" id="L203">        b.setValue(7, 8, 7);</span>
+<span class="nc" id="L204">        assertTrue(s.valid(b));</span>
+<span class="nc" id="L205">        SimpleBoard sol = s.solve(b);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">        assertTrue(sol != null);</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">        assertTrue(sol.get(0,0).getValue() &gt; 0);</span>
+<span class="nc" id="L208">    }</span>
+
+    /**
+     * Valid free form box row.
+     */
+    @Test
+    void validFreeFormBoxRow() {
+<span class="nc" id="L215">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L216">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="nc" id="L217">        b.setGroup(0, 1, 2);</span>
+<span class="nc" id="L218">        b.setGroup(1, 1, 2);</span>
+<span class="nc" id="L219">        b.setGroup(2, 1, 2);</span>
+<span class="nc" id="L220">        b.setGroup(3, 1, 2);</span>
+<span class="nc" id="L221">        b.setGroup(4, 1, 2);</span>
+<span class="nc" id="L222">        b.setGroup(5, 1, 2);</span>
+<span class="nc" id="L223">        b.setGroup(6, 1, 2);</span>
+<span class="nc" id="L224">        b.setGroup(7, 1, 2);</span>
+<span class="nc" id="L225">        b.setGroup(8, 1, 2);</span>
+        //b.setValue(0, 1, 1);
+<span class="nc" id="L227">        b.setValue(1, 1, 1);</span>
+<span class="nc" id="L228">        b.setValue(2, 1, 2);</span>
+<span class="nc" id="L229">        b.setValue(3, 1, 3);</span>
+<span class="nc" id="L230">        b.setValue(4, 1, 4);</span>
+<span class="nc" id="L231">        b.setValue(5, 1, 5);</span>
+<span class="nc" id="L232">        b.setValue(6, 1, 6);</span>
+<span class="nc" id="L233">        b.setValue(7, 1, 7);</span>
+<span class="nc" id="L234">        b.setValue(8, 1, 8);</span>
+<span class="nc" id="L235">        assertTrue(s.validBox(b, 2));</span>
+
+<span class="nc" id="L237">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+<span class="nc" id="L239">    }</span>
+
+    /**
+     * Valid free form box empty.
+     */
+    @Test
+    void validFreeFormBoxEmpty() {
+<span class="nc" id="L246">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L247">        SimpleBoard b = new SimpleBoard(9);</span>
+
+<span class="nc" id="L249">        b.setGroup(0, 0, 0);</span>
+<span class="nc" id="L250">        b.setGroup(1, 0, 0);</span>
+<span class="nc" id="L251">        b.setGroup(2, 0, 0);</span>
+<span class="nc" id="L252">        b.setGroup(2, 1, 0);</span>
+<span class="nc" id="L253">        b.setGroup(1, 1, 0);</span>
+<span class="nc" id="L254">        b.setGroup(0, 1, 0);</span>
+<span class="nc" id="L255">        b.setGroup(0, 2, 0);</span>
+<span class="nc" id="L256">        b.setGroup(1, 2, 0);</span>
+<span class="nc" id="L257">        b.setGroup(2, 2, 0);</span>
+<span class="nc" id="L258">        b.setGroup(3, 0, 1);</span>
+<span class="nc" id="L259">        b.setGroup(4, 0, 1);</span>
+<span class="nc" id="L260">        b.setGroup(5, 0, 1);</span>
+<span class="nc" id="L261">        b.setGroup(5, 1, 1);</span>
+<span class="nc" id="L262">        b.setGroup(4, 1, 1);</span>
+<span class="nc" id="L263">        b.setGroup(3, 1, 1);</span>
+<span class="nc" id="L264">        b.setGroup(3, 2, 1);</span>
+<span class="nc" id="L265">        b.setGroup(4, 2, 1);</span>
+<span class="nc" id="L266">        b.setGroup(5, 2, 1);</span>
+<span class="nc" id="L267">        b.setGroup(6, 0, 2);</span>
+<span class="nc" id="L268">        b.setGroup(7, 0, 2);</span>
+<span class="nc" id="L269">        b.setGroup(8, 0, 2);</span>
+<span class="nc" id="L270">        b.setGroup(8, 1, 2);</span>
+<span class="nc" id="L271">        b.setGroup(7, 1, 2);</span>
+<span class="nc" id="L272">        b.setGroup(6, 1, 2);</span>
+<span class="nc" id="L273">        b.setGroup(6, 2, 2);</span>
+<span class="nc" id="L274">        b.setGroup(7, 2, 2);</span>
+<span class="nc" id="L275">        b.setGroup(8, 2, 2);</span>
+<span class="nc" id="L276">        b.setGroup(0, 3, 3);</span>
+<span class="nc" id="L277">        b.setGroup(1, 3, 3);</span>
+<span class="nc" id="L278">        b.setGroup(2, 3, 3);</span>
+<span class="nc" id="L279">        b.setGroup(2, 4, 3);</span>
+<span class="nc" id="L280">        b.setGroup(1, 4, 3);</span>
+<span class="nc" id="L281">        b.setGroup(0, 4, 3);</span>
+<span class="nc" id="L282">        b.setGroup(0, 5, 3);</span>
+<span class="nc" id="L283">        b.setGroup(1, 5, 3);</span>
+<span class="nc" id="L284">        b.setGroup(2, 5, 3);</span>
+<span class="nc" id="L285">        b.setGroup(3, 3, 4);</span>
+<span class="nc" id="L286">        b.setGroup(4, 3, 4);</span>
+<span class="nc" id="L287">        b.setGroup(5, 3, 4);</span>
+<span class="nc" id="L288">        b.setGroup(5, 4, 4);</span>
+<span class="nc" id="L289">        b.setGroup(4, 4, 4);</span>
+<span class="nc" id="L290">        b.setGroup(3, 4, 4);</span>
+<span class="nc" id="L291">        b.setGroup(3, 5, 4);</span>
+<span class="nc" id="L292">        b.setGroup(4, 5, 4);</span>
+<span class="nc" id="L293">        b.setGroup(5, 5, 4);</span>
+<span class="nc" id="L294">        b.setGroup(6, 3, 5);</span>
+<span class="nc" id="L295">        b.setGroup(7, 3, 5);</span>
+<span class="nc" id="L296">        b.setGroup(8, 3, 5);</span>
+<span class="nc" id="L297">        b.setGroup(8, 4, 5);</span>
+<span class="nc" id="L298">        b.setGroup(7, 4, 5);</span>
+<span class="nc" id="L299">        b.setGroup(6, 4, 5);</span>
+<span class="nc" id="L300">        b.setGroup(6, 5, 5);</span>
+<span class="nc" id="L301">        b.setGroup(7, 5, 5);</span>
+<span class="nc" id="L302">        b.setGroup(8, 5, 5);</span>
+<span class="nc" id="L303">        b.setGroup(0, 6, 6);</span>
+<span class="nc" id="L304">        b.setGroup(1, 6, 6);</span>
+<span class="nc" id="L305">        b.setGroup(2, 6, 6);</span>
+<span class="nc" id="L306">        b.setGroup(2, 7, 6);</span>
+<span class="nc" id="L307">        b.setGroup(1, 7, 6);</span>
+<span class="nc" id="L308">        b.setGroup(0, 7, 6);</span>
+<span class="nc" id="L309">        b.setGroup(0, 8, 6);</span>
+<span class="nc" id="L310">        b.setGroup(1, 8, 6);</span>
+<span class="nc" id="L311">        b.setGroup(2, 8, 6);</span>
+<span class="nc" id="L312">        b.setGroup(3, 6, 7);</span>
+<span class="nc" id="L313">        b.setGroup(4, 6, 7);</span>
+<span class="nc" id="L314">        b.setGroup(5, 6, 7);</span>
+<span class="nc" id="L315">        b.setGroup(5, 7, 7);</span>
+<span class="nc" id="L316">        b.setGroup(4, 7, 7);</span>
+<span class="nc" id="L317">        b.setGroup(3, 7, 7);</span>
+<span class="nc" id="L318">        b.setGroup(3, 8, 7);</span>
+<span class="nc" id="L319">        b.setGroup(4, 8, 7);</span>
+<span class="nc" id="L320">        b.setGroup(5, 8, 7);</span>
+<span class="nc" id="L321">        b.setGroup(6, 6, 8);</span>
+<span class="nc" id="L322">        b.setGroup(7, 6, 8);</span>
+<span class="nc" id="L323">        b.setGroup(8, 6, 8);</span>
+<span class="nc" id="L324">        b.setGroup(8, 7, 8);</span>
+<span class="nc" id="L325">        b.setGroup(7, 7, 8);</span>
+<span class="nc" id="L326">        b.setGroup(6, 7, 8);</span>
+<span class="nc" id="L327">        b.setGroup(6, 8, 8);</span>
+<span class="nc" id="L328">        b.setGroup(7, 8, 8);</span>
+<span class="nc" id="L329">        b.setGroup(8, 8, 8);</span>
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        for (int i = 0; i &lt; 9; i++) {</span>
+<span class="nc" id="L331">            assertTrue(s.validBox(b, i));</span>
+        }
+<span class="nc" id="L333">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L334" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+<span class="nc" id="L335">        b.setValue(0, 0, 5);</span>
+<span class="nc" id="L336">        b.setValue(1, 0, 3);</span>
+<span class="nc" id="L337">        b.setValue(2, 0, 4);</span>
+<span class="nc" id="L338">        b.setValue(3, 0, 6);</span>
+<span class="nc" id="L339">        b.setValue(4, 0, 7);</span>
+<span class="nc" id="L340">        b.setValue(5, 0, 8);</span>
+<span class="nc" id="L341">        b.setValue(6, 0, 9);</span>
+<span class="nc" id="L342">        b.setValue(7, 0, 1);</span>
+<span class="nc" id="L343">        b.setValue(8, 0, 2);</span>
+<span class="nc" id="L344">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L347">        b.setValue(0, 1, 6);</span>
+<span class="nc" id="L348">        b.setValue(1, 1, 7);</span>
+<span class="nc" id="L349">        b.setValue(2, 1, 2);</span>
+<span class="nc" id="L350">        b.setValue(3, 1, 1);</span>
+<span class="nc" id="L351">        b.setValue(4, 1, 9);</span>
+<span class="nc" id="L352">        b.setValue(5, 1, 5);</span>
+<span class="nc" id="L353">        b.setValue(6, 1, 3);</span>
+<span class="nc" id="L354">        b.setValue(7, 1, 4);</span>
+<span class="nc" id="L355">        b.setValue(8, 1, 8);</span>
+<span class="nc" id="L356">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L357" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L359">        b.setValue(0, 2, 1);</span>
+<span class="nc" id="L360">        b.setValue(1, 2, 9);</span>
+<span class="nc" id="L361">        b.setValue(2, 2, 8);</span>
+<span class="nc" id="L362">        b.setValue(3, 2, 3);</span>
+<span class="nc" id="L363">        b.setValue(4, 2, 4);</span>
+<span class="nc" id="L364">        b.setValue(5, 2, 2);</span>
+<span class="nc" id="L365">        b.setValue(6, 2, 5);</span>
+<span class="nc" id="L366">        b.setValue(7, 2, 6);</span>
+<span class="nc" id="L367">        b.setValue(8, 2, 7);</span>
+<span class="nc" id="L368">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L369" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+
+<span class="nc" id="L371">        b.setValue(0, 3, 8);</span>
+<span class="nc" id="L372">        b.setValue(1, 3, 5);</span>
+<span class="nc" id="L373">        b.setValue(2, 3, 9);</span>
+<span class="nc" id="L374">        b.setValue(3, 3, 7);</span>
+<span class="nc" id="L375">        b.setValue(4, 3, 6);</span>
+<span class="nc" id="L376">        b.setValue(5, 3, 1);</span>
+<span class="nc" id="L377">        b.setValue(6, 3, 4);</span>
+<span class="nc" id="L378">        b.setValue(7, 3, 2);</span>
+<span class="nc" id="L379">        b.setValue(8, 3, 3);</span>
+<span class="nc" id="L380">        assertTrue(s.valid(b));</span>
+<span class="nc bnc" id="L381" title="All 2 branches missed.">        assertTrue(!s.validAndFull(b));</span>
+        //SimpleBoard sol = s.solve(b);
+        //assertTrue(sol != null);
+
+<span class="nc" id="L385">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

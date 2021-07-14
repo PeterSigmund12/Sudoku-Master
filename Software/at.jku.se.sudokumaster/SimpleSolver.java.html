@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleSolver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">time_manager$SimpleSolverTest.exec</a> &gt; <a href="index.source.html" class="el_package">at.jku.se.sudokumaster</a> &gt; <span class="el_source">SimpleSolver.java</span></div><h1>SimpleSolver.java</h1><pre class="source lang-java linenums">package at.jku.se.sudokumaster;
+
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Random;
+
+/**
+ * The Simple solver class.
+ */
+public class SimpleSolver {
+    private Set&lt;Integer&gt; numbers;
+    private Set&lt;AnchorPoint&gt; anchorpoints;
+<span class="fc" id="L14">    private int cnt = 0;</span>
+    /**
+     * The Sudoku Field size.
+     */
+    public int fieldSize;
+
+    /**
+     * Instantiates a new Simple solver.
+     *
+     * @param size the size of the Sudoku Array
+     *             eg. Normal Sudoku. Size = 9
+     *                 Samurai Sudoku. Size = 21
+     */
+<span class="fc" id="L27">    public SimpleSolver(int size){</span>
+<span class="fc" id="L28">        numbers = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L29">        numbers.add(1);</span>
+<span class="fc" id="L30">        numbers.add(2);</span>
+<span class="fc" id="L31">        numbers.add(3);</span>
+<span class="fc" id="L32">        numbers.add(4);</span>
+<span class="fc" id="L33">        numbers.add(5);</span>
+<span class="fc" id="L34">        numbers.add(6);</span>
+<span class="fc" id="L35">        numbers.add(7);</span>
+<span class="fc" id="L36">        numbers.add(8);</span>
+<span class="fc" id="L37">        numbers.add(9);</span>
+<span class="fc" id="L38">        anchorpoints = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L39">        fieldSize = size;</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (size == 9){</span>
+<span class="fc" id="L41">            anchorpoints.add(new AnchorPoint(0,0));</span>
+        }else {
+<span class="nc" id="L43">            anchorpoints.add(new AnchorPoint(0,0));</span>
+<span class="nc" id="L44">            anchorpoints.add(new AnchorPoint(12,0));</span>
+<span class="nc" id="L45">            anchorpoints.add(new AnchorPoint(0,12));</span>
+<span class="nc" id="L46">            anchorpoints.add(new AnchorPoint(6,6));</span>
+<span class="nc" id="L47">            anchorpoints.add(new AnchorPoint(12,12));</span>
+
+        }
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * Get all valid anchorpoints.
+     *
+     * @return the anchor point [ ]
+     */
+    public AnchorPoint[] getAnchorpoints(){
+<span class="nc" id="L58">        return anchorpoints.toArray(new AnchorPoint[anchorpoints.size()]);</span>
+    }
+
+    /**
+     * Valid row boolean.
+     *
+     * @param b       the current Board
+     * @param r       the row to check
+     * @param anchorC the anchor column
+     * @param anchorR the anchor row
+     * @return the boolean
+     */
+    boolean validRow(SimpleBoard b, int r,int anchorC, int anchorR){
+<span class="fc" id="L71">        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (int c = 0; c&lt;9;c++){</span>
+<span class="fc" id="L73">            int i = 0;</span>
+            try{
+<span class="fc" id="L75">                i = b.get(c+anchorC,r+anchorR).getValue();</span>
+<span class="fc" id="L76">            }catch (NullPointerException e){}</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">            if (i &gt; 0){</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">                if (!num.contains(i)){</span>
+<span class="fc" id="L79">                    return false;</span>
+                }else {
+<span class="fc" id="L81">                    num.remove(i);</span>
+                }
+            }
+        }
+<span class="fc" id="L85">        return true;</span>
+    }
+
+    /**
+     * Check if all rows are valid. Return boolean.
+     *
+     * @param b the current Board
+     * @return the boolean
+     */
+    boolean allRowsValid(SimpleBoard b){
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        for (AnchorPoint ap : anchorpoints) {</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            for (int r = 0; r &lt; 9; r++) {</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">                if (!validRow(b, r, ap.getCol(), ap.getRow())) {</span>
+<span class="fc" id="L98">                    return false;</span>
+                }
+            }
+<span class="fc" id="L101">        }</span>
+<span class="fc" id="L102">        return true;</span>
+    }
+
+
+    /**
+     * Check if a single column is valid. Return boolean.
+     *
+     * @param b       the current Board
+     * @param c       the column to check
+     * @param anchorC the anchor column
+     * @param anchorR the anchor row
+     * @return the boolean
+     */
+    boolean validColumn(SimpleBoard b, int c,int anchorC, int anchorR){
+<span class="fc" id="L116">        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        for (int r= 0; r&lt;9;r++){</span>
+<span class="fc" id="L118">            int i = -1;</span>
+            try{
+<span class="fc" id="L120">                i = b.get(c+anchorC,r+anchorR).getValue();</span>
+<span class="fc" id="L121">            }catch (NullPointerException e){}</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">            if (i &gt; 0){</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">                if (!num.contains(i)){</span>
+<span class="fc" id="L124">                    return false;</span>
+                }else {
+<span class="fc" id="L126">                    num.remove(i);</span>
+                }
+            }
+    }
+<span class="fc" id="L130">        return true;</span>
+    }
+
+    /**
+     * Check if all columns are valid. Return boolean.
+     *
+     * @param b the current board
+     * @return the boolean
+     */
+    boolean allColumnsValid(SimpleBoard b){
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        for (AnchorPoint ap : anchorpoints) {</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">            for (int c = 0; c &lt; 9; c++) {</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">                if (!validColumn(b, c, ap.getCol(), ap.getRow())) {</span>
+<span class="fc" id="L143">                    return false;</span>
+                }
+            }
+<span class="fc" id="L146">        }</span>
+<span class="fc" id="L147">        return true;</span>
+    }
+
+    /**
+     * Check if a default 3x3 box is valid. Return boolean.
+     *
+     * @param b       the current Board
+     * @param anchorC the anchor column
+     * @param anchorR the anchor row
+     * @return the boolean
+     */
+    boolean validBox(SimpleBoard b, int anchorC, int anchorR){
+<span class="fc" id="L159">        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        for (int r = 0; r&lt;3;r++){</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">            for (int c=0;c&lt;3;c++){</span>
+<span class="fc" id="L162">                int i = -1;</span>
+                try{
+<span class="fc" id="L164">                    i = b.get(c+anchorC,r+anchorR).getValue();</span>
+<span class="fc" id="L165">                }catch (NullPointerException e){}</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">                if (i &gt; 0){</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">                    if (!num.contains(i)){</span>
+<span class="fc" id="L168">                        return false;</span>
+                    }else {
+<span class="fc" id="L170">                        num.remove(i);</span>
+                    }
+                }
+        }
+        }
+<span class="fc" id="L175">        return true;</span>
+    }
+
+    /**
+     * Check if a freeform Sudoku Group is valid. Return boolean.
+     *
+     * @param b       the current Board
+     * @param groupId the group id
+     * @return the boolean
+     */
+    boolean validBox(SimpleBoard b, int groupId){
+<span class="fc" id="L186">        Set&lt;Integer&gt;num = new HashSet&lt;&gt;(numbers);</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">        for (int r = 0; r&lt;fieldSize;r++){</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">            for (int c=0;c&lt;fieldSize;c++){</span>
+<span class="fc" id="L189">                int val = 0;</span>
+<span class="fc" id="L190">                int group = -1;</span>
+                try{
+<span class="fc" id="L192">                    val = b.get(c,r).getValue();</span>
+<span class="fc" id="L193">                    group = b.get(c,r).getGroupId();</span>
+<span class="fc" id="L194">                }catch (NullPointerException e){}</span>
+<span class="fc bfc" id="L195" title="All 4 branches covered.">                if (val &gt; 0 &amp;&amp; group == groupId){</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">                    if (!num.contains(val)){</span>
+<span class="fc" id="L197">                        return false;</span>
+                    }else {
+<span class="fc" id="L199">                        num.remove(val);</span>
+                    }
+                }
+            }
+        }
+<span class="fc" id="L204">        return true;</span>
+    }
+
+    /**
+     * Check if all boxes are valid. Return boolean.
+     *
+     * Differentiate between normal Sudokus (Normal, Samurai) and Freeform Sudokus.
+     * To do so get the groupID of three Random Positions from the board.
+     *
+     * @param b the b
+     * @return the boolean
+     */
+    boolean allBoxesValid(SimpleBoard b){
+<span class="fc" id="L217">        Random rand = new Random();</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        for (AnchorPoint ap : anchorpoints) {</span>
+<span class="fc" id="L219">            int i = -1;</span>
+            try{
+<span class="fc" id="L221">                i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();</span>
+<span class="fc" id="L222">                i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();</span>
+<span class="fc" id="L223">                i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();</span>
+<span class="fc" id="L224">            }catch (NullPointerException e){}</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">            if(i&lt;0) {</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">                for (int r = 0; r &lt; 9; r += 3) {</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">                    for (int c = 0; c &lt; 9; c += 3) {</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">                        if (!validBox(b, c + ap.getCol(), r + ap.getRow())) return false;</span>
+                    }
+                }
+            }else {
+<span class="fc bfc" id="L232" title="All 2 branches covered.">                for (int j = 0; j &lt; 9; j++){</span>
+<span class="fc bfc" id="L233" title="All 2 branches covered.">                    if (!validBox(b,j))return false;</span>
+                }
+            }
+<span class="fc" id="L236">        }</span>
+<span class="fc" id="L237">        return true;</span>
+    }
+
+    /**
+     * Check if a board is valid. Return boolean.
+     *
+     * @param b the current Board.
+     * @return the boolean
+     */
+    public boolean valid(SimpleBoard b){
+<span class="fc bfc" id="L247" title="All 6 branches covered.">        return  allBoxesValid(b) &amp;&amp; allColumnsValid(b) &amp;&amp; allRowsValid(b) ;</span>
+    }
+
+    /**
+     * Check if the current board is full. Return boolean.
+     *
+     * @param b the current board
+     * @return the boolean
+     */
+    boolean full(SimpleBoard b){
+<span class="fc bfc" id="L257" title="All 2 branches covered.">        for (AnchorPoint ap : anchorpoints) {</span>
+<span class="fc bfc" id="L258" title="All 2 branches covered.">            for (int r = 0; r &lt; 9; r++) {</span>
+<span class="fc bfc" id="L259" title="All 2 branches covered.">                for (int c = 0; c &lt; 9; c++) {</span>
+<span class="fc" id="L260">                    int val = 0;</span>
+                    try{
+<span class="fc" id="L262">                        val = b.get(c+ap.getCol(), r+ap.getRow()).getValue();</span>
+<span class="fc" id="L263">                    }catch (NullPointerException e){}</span>
+<span class="fc bfc" id="L264" title="All 4 branches covered.">                    if (b.get(c+ap.getCol(), r+ap.getRow()) == null || val == 0) return false;</span>
+                }
+            }
+<span class="fc" id="L267">        }</span>
+<span class="fc" id="L268">        return true;</span>
+    }
+
+    /**
+     * Check if the current board is valid and full (Game is completed and valid). Return boolean.
+     *
+     * @param b the current board
+     * @return the boolean
+     */
+    public boolean validAndFull(SimpleBoard b){
+<span class="pc bpc" id="L278" title="1 of 4 branches missed.">        return valid(b) &amp;&amp; full(b);</span>
+    }
+
+    /**
+     * Solver for all boards.
+     *  1. Use a counter to stop in case of an endless loop.
+     *  2. Return null if the current board isn't valid.
+     *  3. Return the board if the current board is valid and full.
+     *  4. Enter the solve algorithm.
+     *     Brute force attempt.
+     *     If a cell is empty add numbers from 1-9 and start recursion with the added cell.
+     *  TODO: Problem with Freeform Sudokus with a low number input. Solver cannot solve Freeform with less than ~40% of the cells filled.
+     * @param part the current board
+     * @return the simple board
+     */
+    public SimpleBoard solve(SimpleBoard part){
+<span class="fc" id="L294">        cnt++;</span>
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">        if (cnt &gt; 150000){</span>
+<span class="nc" id="L296">            cnt=0;</span>
+<span class="nc" id="L297">            return null;</span>
+        }
+
+<span class="fc bfc" id="L300" title="All 2 branches covered.">        if (!valid(part)){</span>
+<span class="fc" id="L301">            return null;</span>
+
+        }
+<span class="fc bfc" id="L304" title="All 2 branches covered.">        if (validAndFull(part)){</span>
+<span class="fc" id="L305">            return part;</span>
+        }
+<span class="fc" id="L307">        SimpleBoard b = new SimpleBoard(part,fieldSize);</span>
+<span class="pc bpc" id="L308" title="1 of 2 branches missed.">        if(cnt &lt; 100000){</span>
+<span class="pc bpc" id="L309" title="1 of 2 branches missed.">            for (AnchorPoint ap : anchorpoints) {</span>
+<span class="fc" id="L310">                int apC = ap.getCol();</span>
+<span class="fc" id="L311">                int apR = ap.getRow();</span>
+<span class="pc bpc" id="L312" title="1 of 2 branches missed.">                for (int r = 0; r &lt; 9; r++) {</span>
+<span class="fc bfc" id="L313" title="All 2 branches covered.">                    for (int c = 0; c &lt; 9; c++) {</span>
+<span class="fc" id="L314">                        Cell cell = b.get(c+apC, r+apR);</span>
+<span class="fc bfc" id="L315" title="All 4 branches covered.">                        if (cell == null || cell.getValue() == 0) {</span>
+<span class="fc" id="L316">                            Set&lt;Integer&gt; num = new HashSet&lt;&gt;(numbers);</span>
+<span class="fc bfc" id="L317" title="All 2 branches covered.">                            for (Integer number : num) {</span>
+<span class="fc" id="L318">                                b.setValue(c+apC, r+apR, number);</span>
+<span class="fc" id="L319">                                SimpleBoard solution = solve(b);</span>
+<span class="fc bfc" id="L320" title="All 2 branches covered.">                                if (solution != null) {</span>
+<span class="fc" id="L321">                                    return solution;</span>
+                                }
+<span class="fc" id="L323">                            }</span>
+<span class="fc" id="L324">                            return null;</span>
+                        }
+                    }
+                }
+<span class="nc" id="L328">            }</span>
+        }
+<span class="nc" id="L330">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

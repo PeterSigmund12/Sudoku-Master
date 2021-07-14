@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AnchorPoint.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">time_manager$SimpleSolverTest.exec</a> &gt; <a href="index.source.html" class="el_package">at.jku.se.sudokumaster</a> &gt; <span class="el_source">AnchorPoint.java</span></div><h1>AnchorPoint.java</h1><pre class="source lang-java linenums">package at.jku.se.sudokumaster;
+
+/**
+ * The type Anchor point.
+ */
+public class AnchorPoint{
+
+    private int col;
+    private int row;
+
+    /**
+     * Instantiates a new Anchor point.
+     * Anchor points are used for non standard Sudoku sizes.
+     * e.g Normal Sudoku has 1 Anchor Point, starting on the top left corner
+     *     Samurai Sudoku has 5 Anchor Points, each showing a 9x9 Sudoku field
+     *
+     * @param col the col
+     * @param row the row
+     */
+<span class="fc" id="L20">    public AnchorPoint(int col, int row) {</span>
+<span class="fc" id="L21">        this.col = col;</span>
+<span class="fc" id="L22">        this.row = row;</span>
+<span class="fc" id="L23">    }</span>
+
+    /**
+     * Gets col.
+     *
+     * @return the col
+     */
+    public int getCol() {
+<span class="fc" id="L31">        return col;</span>
+    }
+
+    /**
+     * Sets col.
+     *
+     * @param col the col
+     */
+    public void setCol(int col) {
+<span class="nc" id="L40">        this.col = col;</span>
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * Gets row.
+     *
+     * @return the row
+     */
+    public int getRow() {
+<span class="fc" id="L49">        return row;</span>
+    }
+
+    /**
+     * Sets row.
+     *
+     * @param row the row
+     */
+    public void setRow(int row) {
+<span class="nc" id="L58">        this.row = row;</span>
+<span class="nc" id="L59">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

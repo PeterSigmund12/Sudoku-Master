@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleSolverTestMainMethods.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">time_manager$SimpleSolverTest.exec</a> &gt; <a href="index.source.html" class="el_package">at.jku.se.sudokumaster</a> &gt; <span class="el_source">SimpleSolverTestMainMethods.java</span></div><h1>SimpleSolverTestMainMethods.java</h1><pre class="source lang-java linenums">package at.jku.se.sudokumaster;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+<span class="nc" id="L7">class SimpleSolverTestMainMethods {</span>
+
+    @Test
+    void validRow() {
+<span class="nc" id="L11">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L12">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="nc" id="L13">        b.setValue(0,0,9);</span>
+<span class="nc" id="L14">        assertTrue(s.validRow(b,0,0,0));</span>
+
+<span class="nc" id="L16">        b.setValue(0,1,9);</span>
+<span class="nc" id="L17">        b.setValue(1,1,9);</span>
+<span class="nc" id="L18">        assertFalse(s.validRow(b, 1, 0, 0));</span>
+<span class="nc" id="L19">    }</span>
+
+    @Test
+    void validColumn() {
+<span class="nc" id="L23">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L24">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="nc" id="L25">        b.setValue(0,0,9);</span>
+<span class="nc" id="L26">        assertTrue(s.validColumn(b,0,0,0));</span>
+
+<span class="nc" id="L28">        b.setValue(1,0,9);</span>
+<span class="nc" id="L29">        b.setValue(1,1,9);</span>
+<span class="nc" id="L30">        assertFalse(s.validColumn(b, 1, 0, 0));</span>
+<span class="nc" id="L31">    }</span>
+
+    @Test
+    void validBox() {
+<span class="nc" id="L35">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L36">        SimpleBoard b = new SimpleBoard(9);</span>
+<span class="nc" id="L37">        b.setValue(0,0,9);</span>
+<span class="nc" id="L38">        assertTrue(s.validBox(b,0,0));</span>
+<span class="nc" id="L39">        b.setValue(1,1,9);</span>
+<span class="nc" id="L40">        assertFalse(s.validBox(b, 0, 0));</span>
+<span class="nc" id="L41">    }</span>
+
+    @Test
+    void validFreefromBox() {
+<span class="nc" id="L45">        SimpleSolver s = new SimpleSolver(9);</span>
+<span class="nc" id="L46">        SimpleBoard b = new SimpleBoard(9);</span>
+
+<span class="nc" id="L48">        b.setGroup(0,0,0);</span>
+<span class="nc" id="L49">        b.setGroup(1,0,0);</span>
+<span class="nc" id="L50">        b.setGroup(2,0,0);</span>
+<span class="nc" id="L51">        b.setGroup(2,1,0);</span>
+<span class="nc" id="L52">        b.setGroup(1,1,0);</span>
+<span class="nc" id="L53">        b.setGroup(0,1,0);</span>
+<span class="nc" id="L54">        b.setGroup(0,2,0);</span>
+<span class="nc" id="L55">        b.setGroup(1,2,0);</span>
+<span class="nc" id="L56">        b.setGroup(2,2,0);</span>
+<span class="nc" id="L57">        assertTrue(s.validBox(b,0));</span>
+<span class="nc" id="L58">        b.setValue(0, 0, 5);</span>
+<span class="nc" id="L59">        b.setValue(1, 0, 3);</span>
+<span class="nc" id="L60">        b.setValue(2, 0, 4);</span>
+<span class="nc" id="L61">        b.setValue(3, 0, 6);</span>
+<span class="nc" id="L62">        assertTrue(s.validBox(b,0));</span>
+<span class="nc" id="L63">        b.setValue(4, 0, 6);</span>
+<span class="nc" id="L64">        assertFalse(s.validBox(b, 0));</span>
+
+<span class="nc" id="L66">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
