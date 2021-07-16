@@ -24,8 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/img/SudokuMainMenue.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/img/SudokuMainMenue.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +48,7 @@
         <option value="module-info" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -70,6 +72,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -78,11 +82,19 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se" />
       <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources\fxml" />
       <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="at.jku.se.controller.HighScore" />
+      <recent name="at.jku.se.controller" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.CalculateScoreTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -107,8 +119,72 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CalculateScoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.jku.se.controller.HighScore.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.jku.se.controller.HighScore" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.HighScore.CalculateScoreTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayfieldControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.jku.se.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.jku.se.controller" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.PlayfieldControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Playfield_Controller_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.jku.se.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.jku.se.test" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.test.Playfield_Controller_Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleSolverTestFreeformGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.jku.se.sudokumaster.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.jku.se.sudokumaster" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.sudokumaster.SimpleSolverTestFreeformGame" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CalculateScoreTest" />
+        <item itemvalue="JUnit.PlayfieldControllerTest" />
+        <item itemvalue="JUnit.Playfield_Controller_Test" />
+        <item itemvalue="JUnit.SimpleSolverTestFreeformGame" />
         <item itemvalue="Application.SudokuMaster" />
       </list>
     </recent_temporary>
