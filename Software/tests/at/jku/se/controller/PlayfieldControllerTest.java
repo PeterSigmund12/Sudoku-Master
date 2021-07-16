@@ -20,4 +20,8 @@ public abstract class PlayfieldControllerTest {
     @Test
     public void stopTimer() {
     }
+
+    @Test
+    public void initData() {
+    }
 }
