@@ -9,7 +9,6 @@ public class CreateHighScoreObject {
 
     public static HighScoreObject fillListView(JSONObject gameinfos) {
 
-
         Long highScore;
         String gameName;
         Long zeit;
@@ -80,6 +79,15 @@ public class CreateHighScoreObject {
 
         highScore = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
 
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Jacoc");
+        System.out.println(zeit + "   " + clicks + "   " +  hints + "   " +   difficulty + "   " +  version);
+
+        System.out.println(CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version));
+        System.out.println("Jacoc");
         HighScoreObject hSO = new HighScoreObject( highScore,  gameName ,  zeit,  clicks,  hints,  difficulty, version, player);
         return hSO;
 
