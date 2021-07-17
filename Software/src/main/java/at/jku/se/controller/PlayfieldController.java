@@ -603,6 +603,11 @@ public class PlayfieldController {
         saveGame.put("difficulty",diffculty);
         saveGame.put("player", playerName);
         saveGame.put("time","" + (longtimer*-1));
+        SimpleBoard simpleBoard = h.getCurrentBoard(textFields);
+        SimpleSolver simpleSolver = new SimpleSolver(textFields.length);
+        if(simpleSolver.validAndFull(simpleBoard)){
+            saveGame.put("solved","");
+        }
         startTimer();
 
         for (int r = 0; r<fieldSize;r++){
