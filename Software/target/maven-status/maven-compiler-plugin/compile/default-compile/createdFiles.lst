@@ -2,7 +2,6 @@ at/jku/se/controller/NewGameController$2.class
 at/jku/se/controller/HighScoreBoardControllerT.class
 at/jku/se/controller/PlayfieldController$2.class
 at/jku/se/sudokumaster/SimpleSolver.class
-at/jku/se/sudokumaster/SimpleSolverTest.class
 at/jku/se/utility/HighScoreObject$1.class
 at/jku/se/sudokumaster/SimpleBoard.class
 at/jku/se/controller/PlayfieldController$5.class
