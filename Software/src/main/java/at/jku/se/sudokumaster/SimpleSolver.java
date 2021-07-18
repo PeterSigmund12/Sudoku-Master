@@ -4,13 +4,11 @@ package at.jku.se.sudokumaster;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
-import java.util.logging.Logger;
 
 /**
  * The Simple solver class.
  */
 public class SimpleSolver {
-    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private Set<Integer> numbers;
     private Set<AnchorPoint> anchorpoints;
     private int cnt = 0;
@@ -75,7 +73,7 @@ public class SimpleSolver {
             int i = 0;
             try{
                 i = b.get(c+anchorC,r+anchorR).getValue();
-            }catch (NullPointerException e){logger.warning(""+e);}
+            }catch (NullPointerException e){}
             if (i > 0){
                 if (!num.contains(i)){
                     return false;
@@ -120,7 +118,7 @@ public class SimpleSolver {
             int i = -1;
             try{
                 i = b.get(c+anchorC,r+anchorR).getValue();
-            }catch (NullPointerException e){logger.warning(""+e);}
+            }catch (NullPointerException e){}
             if (i > 0){
                 if (!num.contains(i)){
                     return false;
@@ -164,7 +162,7 @@ public class SimpleSolver {
                 int i = -1;
                 try{
                     i = b.get(c+anchorC,r+anchorR).getValue();
-                }catch (NullPointerException e){logger.warning(""+e);}
+                }catch (NullPointerException e){}
                 if (i > 0){
                     if (!num.contains(i)){
                         return false;
@@ -193,7 +191,7 @@ public class SimpleSolver {
                 try{
                     val = b.get(c,r).getValue();
                     group = b.get(c,r).getGroupId();
-                }catch (NullPointerException e){logger.warning(""+e);}
+                }catch (NullPointerException e){}
                 if (val > 0 && group == groupId){
                     if (!num.contains(val)){
                         return false;
@@ -223,7 +221,7 @@ public class SimpleSolver {
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
                 i += b.get(rand.nextInt(9),rand.nextInt(9)).getGroupId();
-            }catch (NullPointerException e){logger.warning(""+e);}
+            }catch (NullPointerException e){}
             if(i<0) {
                 for (int r = 0; r < 9; r += 3) {
                     for (int c = 0; c < 9; c += 3) {
@@ -262,7 +260,7 @@ public class SimpleSolver {
                     int val = 0;
                     try{
                         val = b.get(c+ap.getCol(), r+ap.getRow()).getValue();
-                    }catch (NullPointerException e){logger.warning(""+e);}
+                    }catch (NullPointerException e){}
                     if (b.get(c+ap.getCol(), r+ap.getRow()) == null || val == 0) return false;
                 }
             }

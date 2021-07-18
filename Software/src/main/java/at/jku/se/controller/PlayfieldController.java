@@ -128,7 +128,7 @@ public class PlayfieldController {
     /**
      * The Sudoku Helper Object
      */
-    SudokuHelper h = new SudokuHelper();
+    static SudokuHelper h = new SudokuHelper();
     /**
      * The Colors used for Freeform Sudokus.
      */
