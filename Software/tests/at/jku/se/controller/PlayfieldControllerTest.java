@@ -1,27 +1,41 @@
 package at.jku.se.controller;
 
-import org.junit.Before;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseButton;
+import javafx.stage.Stage;
+import org.junit.After;
 import org.junit.Test;
+import org.testfx.api.FxToolkit;
+import org.testfx.framework.junit.ApplicationTest;
 
-public abstract class PlayfieldControllerTest {
+public class PlayfieldControllerTest extends ApplicationTest{
 
 
-    @Before
-    public static void setUp() {
-
+    @Override
+    public void start(Stage stage) throws Exception {
+        //System.out.println(new File("src/main/resources/fxml/mainmenue.fxml").getAbsolutePath());
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/newGame.fxml"));
+        stage.setTitle("Sudoku Test");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
 
-    @Test
-    public void startTimer() {
-
+    @After
+    public void tearDown() throws Exception {
+        FxToolkit.hideStage();
+        release(new KeyCode[]{});
+        release(new MouseButton[]{});
     }
 
     @Test
-    public void stopTimer() {
-    }
+    public void clickNewGameTest() {
+        clickOn("#rbSaRegulaer");
+        clickOn("#rbSgAuto");
+        //FxAssert.verifyThat(".selected", (RadioButton b) -> b.getId());
 
-    @Test
-    public void initData() {
     }
 }
