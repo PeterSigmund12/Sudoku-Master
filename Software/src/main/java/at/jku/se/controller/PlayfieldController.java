@@ -675,6 +675,8 @@ public class PlayfieldController {
         } catch (InterruptedException e) {
             logger.warning(""+e);
             Thread.currentThread().interrupt();
+        } catch (AWTException e) {
+            logger.warning(""+e);
         }
 
     }
