@@ -289,7 +289,7 @@ public class PlayfieldController {
      *     After clicking the button the listview will be hidden and the current background colors will be locked.
      */
     private void initFreiformField() {
-            String emptyStyle = "-fx-background-color: ";
+            String emptyStyle = "-fx-background-color:";
             groupCount = new int[9];
             textFields = new TextField[fieldSize][fieldSize];
             colorList.setItems(colors);
