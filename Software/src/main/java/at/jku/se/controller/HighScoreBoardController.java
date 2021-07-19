@@ -3,9 +3,6 @@ package at.jku.se.controller;
 import at.jku.se.controller.HighScore.CreateHighScoreObject;
 import at.jku.se.utility.HighScoreObject;
 import at.jku.se.utility.NewScreen;
-import at.jku.se.utility.NewScreenDropDown;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,10 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -26,7 +21,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.ResourceBundle;
 
 
 public class HighScoreBoardController implements Initializable {
@@ -82,10 +80,10 @@ public class HighScoreBoardController implements Initializable {
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
 
-        Stage oldStage = (Stage) menuBar.getScene().getWindow();
+       // Stage oldStage = (Stage) menuBar.getScene().getWindow();
 
-        NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
-
+        //NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
+        NewScreen.openNewScreen(event,"/fxml/mainmenue.fxml");
     }
 
 

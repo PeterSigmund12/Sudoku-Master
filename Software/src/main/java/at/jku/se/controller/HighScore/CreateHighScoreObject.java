@@ -28,8 +28,6 @@ public class CreateHighScoreObject {
             clicks = 0;
             System.out.println("does not exist c");
         }
-
-
         if(gameinfos.containsKey("time")){
             //wenn existiert
             zeit =   Long.valueOf(String.valueOf(gameinfos.get("time")));
@@ -39,7 +37,6 @@ public class CreateHighScoreObject {
             System.out.println("doesnt exist t");
         }
 
-
         if(gameinfos.containsKey("hints")){
             //wenn existiert
             hints =   Integer.parseInt(String.valueOf(gameinfos.get("hints")));
@@ -48,7 +45,6 @@ public class CreateHighScoreObject {
             hints = 0;
             System.out.println("doesnt exist h");
         }
-
 
         if(gameinfos.containsKey("difficulty")){
             //wenn existiert
@@ -78,16 +74,6 @@ public class CreateHighScoreObject {
 
 
         highScore = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
-
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("Jacoc");
-        System.out.println(zeit + "   " + clicks + "   " +  hints + "   " +   difficulty + "   " +  version);
-
-        System.out.println(CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version));
-        System.out.println("Jacoc");
         HighScoreObject hSO = new HighScoreObject( highScore,  gameName ,  zeit,  clicks,  hints,  difficulty, version, player);
         return hSO;
 

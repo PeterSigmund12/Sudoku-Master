@@ -55,7 +55,7 @@ public class MainMenueController implements Initializable {
      */
     @FXML
     public void handleButtonMainHighScores(ActionEvent event) throws IOException {
-        NewScreen.openNewScreen(event,"/fxml/highScoreT.fxml");
+        NewScreen.openNewScreen(event,"/fxml/highScore.fxml");
     }
 
 

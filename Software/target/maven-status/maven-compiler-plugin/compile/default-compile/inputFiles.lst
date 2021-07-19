@@ -1,23 +1,22 @@
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\AnchorPoint.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\HighScoreBoardController.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\SimpleBoard.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\SimpleSolver.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\utility\HighScoreObject.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\SimpleSolverTestMainMethods.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\HighScore\CalculateScore.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\MainMenueController.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\SimpleSolverTestNormalGame.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\test\Playfield_Controller_Test.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\LoadGameController.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\NewGameController.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\Cell.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\utility\NewScreenDropDown.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\PlayfieldController.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\SimpleSolverTestFreeformGame.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\HighScore\CreateHighScoreObject.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\SudokuMaster.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\CalculateScoreTest.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\HighScoreBoardControllerT.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\sudokumaster\SimpleSolverTestSamuraiGame.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\utility\NewScreen.java
-C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se\controller\SudokuHelper.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/AnchorPoint.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/MainMenueController.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SimpleSolver.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/Cell.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/LoadGameController.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestMainMethods.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestSamuraiGame.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/HighScoreBoardControllerT.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestFreeformGame.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/utility/NewScreen.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/CalculateScoreTest.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/HighScore/CalculateScore.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/HighScoreBoardController.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SimpleBoard.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestNormalGame.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/utility/HighScoreObject.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/NewGameController.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/PlayfieldController.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/utility/NewScreenDropDown.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/HighScore/CreateHighScoreObject.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/sudokumaster/SudokuMaster.java
+/Users/fh-hagenbergvinzenz/Documents/GitHub/Sudoku-Master/Software/src/main/java/at/jku/se/controller/SudokuHelper.java

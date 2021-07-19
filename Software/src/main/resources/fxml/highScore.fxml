@@ -1,70 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="368.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.HighScoreBoardController">
+<AnchorPane prefHeight="368.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.jku.se.controller.HighScoreBoardControllerT">
    <children>
-      <SplitPane dividerPositions="0.5" prefHeight="363.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <items>
-            <AnchorPane prefHeight="364.0" prefWidth="376.0">
-               <children>
-                  <ListView fx:id="lvHighScoreGames" prefHeight="283.0" prefWidth="325.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="49.0" AnchorPane.topAnchor="60.0" />
-                  <Label layoutX="124.0" layoutY="1.0" prefHeight="57.0" prefWidth="117.0" text="High Score" AnchorPane.leftAnchor="124.0" AnchorPane.rightAnchor="0.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="highScore" layoutX="14.0" layoutY="58.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn fx:id="scoreColumn" prefWidth="75.0" text="Score" />
-                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Game Name" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
-                  <Label fx:id="lable" layoutX="199.0" layoutY="284.0" text="Label" />
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="ivSavegame" fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="31.0" />
-                  <Label layoutX="42.0" layoutY="225.0" text="Version:" AnchorPane.topAnchor="225.0" />
-                  <Label text="Schwierigkeit:" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="275.0" />
-                  <Label layoutX="43.0" layoutY="252.0" text="Generierrungstyp:" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="250.0" />
-                  <Label fx:id="lbVersion" layoutX="100.0" layoutY="225.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="225.0" />
-                  <Label fx:id="lbGen" layoutX="100.0" layoutY="250.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="250.0" />
-                  <Label layoutX="43.0" layoutY="301.0" text="Punkte:" AnchorPane.topAnchor="300.0" />
-                  <Label layoutX="44.0" layoutY="325.0" text="Zeit:" AnchorPane.topAnchor="325.0" />
-                  <Label fx:id="lbScore" layoutX="149.0" layoutY="300.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0" />
-                  <Label fx:id="lbDiff" layoutX="150.0" layoutY="275.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="275.0" />
-                  <Label fx:id="lbTime" layoutX="150.0" layoutY="325.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="325.0" />
-                  <Label layoutX="42.0" layoutY="201.0" text="Player:" AnchorPane.topAnchor="200.0" />
-                  <Label fx:id="lbPlayer" layoutX="150.0" layoutY="200.0" prefWidth="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0" />
-               </children>
-            </AnchorPane>
-         </items>
-      </SplitPane>
+      <TableView fx:id="highScore" layoutX="10.0" layoutY="120.0" onMouseClicked="#displaySelected" prefHeight="200.0" prefWidth="581.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
+         <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name of Game" />
+            <TableColumn fx:id="playerColumn" prefWidth="75.0" text="Player" />
+            <TableColumn fx:id="scoreColumn" prefWidth="75.0" text="Points" />
+            <TableColumn fx:id="timeplayed" prefWidth="75.0" text="Time Played" />
+            <TableColumn fx:id="gameVersion" prefWidth="75.0" text="Type of Playfield" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="170.0" layoutY="42.0" prefHeight="57.0" prefWidth="261.0" text="Sudoku High Score Board" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
       <MenuBar fx:id="menuBar">
          <menus>
             <Menu mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Menu">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleButtonBacktoMain" text="Main Menue" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="Main Menu" />
                </items>
             </Menu>
          </menus>

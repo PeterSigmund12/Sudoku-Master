@@ -14,24 +14,20 @@ public class HighScoreObject {
     String versionReadable;
     String player;
 
-
-
     public HighScoreObject(Long highScore, String gameName, Long zeit, int clicks, int hints, String difficulty, String version, String player) {
         this.highScore = highScore;
         this.gameName = gameName;
-
         this.zeit = zeit;
         this.clicks = clicks;
         this.hints = hints;
         this.difficulty = difficulty;
         this.version = version;
         this.player = player;
-
-String tt;
+        String tt;
         switch(version)
         {
             case "rbSaRegulaer":
-System.out.println("hellohello why");
+
                 tt =  "Regulaer";
                 break;
             case "rbSaFreiform":
@@ -64,7 +60,16 @@ System.out.println("hellohello why");
     }
 
     public void setTime(String time) {
+
         this.time = time;
+    }
+
+    public String getVersionReadable() {
+        return versionReadable;
+    }
+
+    public void setVersionReadable(String versionReadable) {
+        this.versionReadable = versionReadable;
     }
 
     public Long getZeit() {
@@ -109,15 +114,6 @@ System.out.println("hellohello why");
 
     public Long getHighScore() {
         return highScore;
-    }
-
-
-    public String getVersionReadable() {
-        return versionReadable;
-    }
-
-    public void setVersionReadable(String versionReadable) {
-        this.versionReadable = versionReadable;
     }
 
     public String getPlayer() {

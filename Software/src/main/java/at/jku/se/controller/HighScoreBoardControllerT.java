@@ -52,9 +52,8 @@ public class HighScoreBoardControllerT implements Initializable {
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
 
-        Stage oldStage = (Stage) menuBar.getScene().getWindow();
-
-        NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
+        Stage oldStage = (Stage)menuBar.getScene().getWindow();
+        NewScreenDropDown.handleButtonBacktoMain(event,"/fxml/mainmenue.fxml", oldStage);
 
     }
 
@@ -78,8 +77,6 @@ public class HighScoreBoardControllerT implements Initializable {
             for (File f : files) {
                 newValue = f.getName().substring(0, f.getName().length() - 5);
                 try {
-
-
                     // get values string and get points,
                     //read in the current document
                     Object obj = jsonparser.parse(new FileReader("./savegames/JSON/" + newValue + ".json"));
@@ -98,7 +95,6 @@ public class HighScoreBoardControllerT implements Initializable {
                      If (gamefinisehd != 0){
                      */
 
-
                     HighScoreObject hSO = CreateHighScoreObject.fillListView(gameinfos);
                     if (hSO == null) {
                     } else {
@@ -113,13 +109,12 @@ public class HighScoreBoardControllerT implements Initializable {
             }
         }
         //Sort with the help of implementet comparator
+
         Collections.sort(higScoreList, HighScoreObject.aHighScore);
         for (HighScoreObject str : higScoreList) {
             System.out.println(str.getHighScore());
             highScoreGameList.add(str.getGameName()); //+ ": " + str.getHighScore());
         }
-
-
 
         ObservableList<HighScoreObject> higScore = FXCollections.observableArrayList(higScoreList); //FXCollections.observableArrayList(higScoreList);
 
