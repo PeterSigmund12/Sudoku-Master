@@ -1,9 +1,9 @@
 package at.jku.se.sudokumaster;
 
 
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Random;
 
 /**
  * The Simple solver class.
@@ -214,7 +214,7 @@ public class SimpleSolver {
      * @return the boolean
      */
     boolean allBoxesValid(SimpleBoard b){
-        Random rand = new Random();
+        SecureRandom rand = new SecureRandom();
         for (AnchorPoint ap : anchorpoints) {
             int i = -1;
             try{

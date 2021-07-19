@@ -568,7 +568,7 @@ public class PlayfieldController {
      * @throws IOException tritt auf wenn ein Error beim schreiben entsteht
      */
     @FXML
-    public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
+    public void handleButtonSaveGame(ActionEvent event)  {
 
         JSONObject saveGame = new JSONObject();
         JSONObject newFreiform = new JSONObject();
@@ -576,8 +576,14 @@ public class PlayfieldController {
         String playerName="";
         Pair<String,String> dialogResult = SaveDialog();
 
-        file = dialogResult.getKey();
-        playerName = dialogResult.getValue();
+        if(dialogResult.getKey() != null){
+            file = dialogResult.getKey();
+            playerName = dialogResult.getValue();
+        }else{
+            file ="";
+            playerName ="";
+        }
+
         String row="";
         SimpleBoard board = h.getCurrentBoard(textFields);
         if(generateType.equals("manuell") && version.equals(BTN_FREIFORM) && isNew) {
@@ -606,6 +612,8 @@ public class PlayfieldController {
             FileWriter saveFreiform = new FileWriter("freiform/Freiformtyp" + random.nextInt(100) + ".json");
             ){
                 saveFreiform.write(newFreiform.toJSONString());
+            } catch (IOException e) {
+                logger.warning(""+e);
             }
 
         }
