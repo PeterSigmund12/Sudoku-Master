@@ -387,6 +387,7 @@ public class PlayfieldController {
             String row = "";
             JSONParser jsonparser = new JSONParser();
             String[] splitRow;
+            String[] splitCell;
             try {
                 Object obj =   jsonparser.parse(new FileReader(files[random]));
                 JSONObject gameinfos = (JSONObject) obj;
@@ -396,11 +397,16 @@ public class PlayfieldController {
                     logger.info(row);
                     splitRow =row.split(";");
                     for(int j = 0; j<splitRow.length;j++){
-                            currentColor = colors.get(Integer.parseInt(splitRow[j]));
-                            textFields[j][i].setStyle("-fx-background-color: " + currentColor+";");
-                            textFields[j][i].setId(splitRow[j]);
+                        splitCell =row.split(",");
+                        if (splitCell[0].equals(" ")){
+                            textFields[j][i].setEditable(true);
                         }
+                        currentColor = colors.get(Integer.parseInt(splitCell[1]));
+                        textFields[j][i].setStyle("-fx-background-color: " + currentColor+";");
+                        textFields[j][i].setText(splitCell[0]);
+                        textFields[j][i].setId(splitRow[j]);
                     }
+                }
                 startTimer();
             } catch (IOException| ParseException e) {
                 logger.warning(""+e);
@@ -578,7 +584,16 @@ public class PlayfieldController {
                 for (int col = 0; col < fieldSize; col++) {
                     logger.info(""+board.get(col, rows).getGroupId());
 
-                    row += textFields[col][rows].getId() +";";
+                    try{
+                        Integer i = Integer.valueOf(textFields[col][rows].getText());
+                        row+= i.toString()+ "," + textFields[col][rows].getId() + ";";
+                    }catch (NumberFormatException e){
+                        row+= " ," + textFields[col][rows].getId() + ";";
+
+                    }
+                    //row+= Integer.valueOf(textFields[col][rows].getText()).toString()+ "," + textFields[col][rows].getId() + ";";
+                    // row += textFields[col][rows].getId() +";";
+
 
                 }
                 newFreiform.put("" + rows, row);
