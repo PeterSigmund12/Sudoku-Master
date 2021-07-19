@@ -397,7 +397,7 @@ public class PlayfieldController {
                     logger.info(row);
                     splitRow =row.split(";");
                     for(int j = 0; j<splitRow.length;j++){
-                        splitCell =row.split(",");
+                        splitCell =splitRow[j].split(",");
                         if (splitCell[0].equals(" ")){
                             textFields[j][i].setEditable(true);
                         }
@@ -407,6 +407,7 @@ public class PlayfieldController {
                         textFields[j][i].setId(splitRow[j]);
                     }
                 }
+                colorList.setVisible(false);
                 startTimer();
             } catch (IOException| ParseException e) {
                 logger.warning(""+e);
