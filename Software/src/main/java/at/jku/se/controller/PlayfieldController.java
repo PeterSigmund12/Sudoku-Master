@@ -42,6 +42,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -383,7 +384,7 @@ public class PlayfieldController {
         if(generateType.equals("automatisch")) {
             File file = new File(Paths.get("./freiform").toString());
             File[] files = file.listFiles();
-            int random = new Random().nextInt(files.length);
+            int random = new SecureRandom().nextInt(files.length);
             String row = "";
             JSONParser jsonparser = new JSONParser();
             String[] splitRow;
@@ -600,7 +601,7 @@ public class PlayfieldController {
                 newFreiform.put("" + rows, row);
             }
 
-            Random random = new Random();
+            SecureRandom  random = new SecureRandom();
             try(
             FileWriter saveFreiform = new FileWriter("freiform/Freiformtyp" + random.nextInt(100) + ".json");
             ){
