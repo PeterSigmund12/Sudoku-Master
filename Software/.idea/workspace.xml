@@ -29,15 +29,10 @@
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestFreeformGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestFreeformGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestMainMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestMainMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestNormalGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestNormalGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestSamuraiGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestSamuraiGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CreateHighScoreObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CreateHighScoreObjectTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/HighScoreObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/HighScoreObjectTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CalculateScoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CalculateScoreTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/at/jku/se/controller/PlayfieldControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/PlayfieldControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScore/CreateHighScoreObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScore/CreateHighScoreObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScoreBoardControllerT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/HighScoreBoardControllerT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/utility/NewScreenDropDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/utility/NewScreenDropDown.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +60,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
@@ -96,35 +98,27 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se" />
-      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources\fxml" />
-      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="at.jku.se.controller.HighScore" />
+      <recent name="at.jku.se.controller" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="at.jku.se.controller.HighScore" />
       <recent name="at.jku.se.controller" />
     </key>
-    <key name="CreateTestDialog.RecentsKey">
+    <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="at.jku.se.controller.HighScore" />
-      <recent name="at.jku.se.controller" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\java\at\jku\se" />
+      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources\fxml" />
+      <recent name="C:\Uni\SE\SE Praktikum\Sudoku-Master\Software\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.HighScoreObjectTest">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="CreateHighScoreObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Software" />
       <extension name="coverage">
@@ -220,6 +214,7 @@
       <updated>1617210152628</updated>
       <workItem from="1624871972280" duration="1755000" />
       <workItem from="1624878359566" duration="779000" />
+      <workItem from="1626708125656" duration="4952000" />
     </task>
     <servers />
   </component>
@@ -237,6 +232,36 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="577" y="308" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1626709733613">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="577" y="308" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1626709733613" />
+    <state x="610" y="401" width="460" height="256" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1626713798422">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="610" y="401" width="460" height="256" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1680.1050@0.0.1680.1050" timestamp="1626713798422" />
+    <state width="1638" height="70" key="GridCell.Tab.0.bottom" timestamp="1626714306445">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="70" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1626714306445" />
+    <state width="1638" height="70" key="GridCell.Tab.0.center" timestamp="1626714306443">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="70" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1626714306443" />
+    <state width="1638" height="70" key="GridCell.Tab.0.left" timestamp="1626714306442">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="70" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1626714306442" />
+    <state width="1638" height="70" key="GridCell.Tab.0.right" timestamp="1626714306444">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state width="1638" height="70" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1626714306444" />
+    <state x="626" y="310" key="chooseDestDirectoryDialog" timestamp="1626709722378">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="626" y="310" key="chooseDestDirectoryDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1626709722378" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

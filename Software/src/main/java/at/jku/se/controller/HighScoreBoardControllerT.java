@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,9 +24,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class HighScoreBoardControllerT implements Initializable {
-
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     public TextField screen;
     @FXML
@@ -37,10 +37,10 @@ public class HighScoreBoardControllerT implements Initializable {
     @FXML
     TableColumn<HighScoreObject, Long> scoreColumn;
     @FXML
-    TableColumn<HighScoreObject,String> nameColumn;
+    TableColumn<HighScoreObject, String> nameColumn;
 
     @FXML
-    TableColumn<HighScoreObject,String> playerColumn;
+    TableColumn<HighScoreObject, String> playerColumn;
     @FXML
     TableColumn<HighScoreObject, String> timeplayed;
     @FXML
@@ -49,16 +49,25 @@ public class HighScoreBoardControllerT implements Initializable {
     @FXML
     private MenuBar menuBar;
 
+    /**
+     * If the users selects the back to main menue button, the event triggers handleButtonBacktoMain
+     * which in turn returns the user back to the main menue
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void handleButtonBacktoMain(ActionEvent event) throws IOException {
 
-        Stage oldStage = (Stage)menuBar.getScene().getWindow();
-        NewScreenDropDown.handleButtonBacktoMain(event,"/fxml/mainmenue.fxml", oldStage);
-
+        Stage oldStage = (Stage) menuBar.getScene().getWindow();
+        NewScreenDropDown.handleButtonBacktoMain(event, "/fxml/mainmenue.fxml", oldStage);
     }
 
+    /**
+     *
+     * @return returns an Observable List with highScore Objects that is then used to fill the List in the Java FX Controller
+     */
     //gets all the highscores
-    public ObservableList<HighScoreObject> getHighscorer(){
+    public ObservableList<HighScoreObject> getHighscorer() {
         ObservableList<String> highScoreGameList = FXCollections.observableArrayList();
 
         //get all the files on that path
@@ -66,7 +75,6 @@ public class HighScoreBoardControllerT implements Initializable {
         File[] files = file.listFiles();
 
         List<HighScoreObject> higScoreList = new ArrayList<>();
-
 
         String newValue;
         //use this to get values out of json file
@@ -81,48 +89,45 @@ public class HighScoreBoardControllerT implements Initializable {
                     //read in the current document
                     Object obj = jsonparser.parse(new FileReader("./savegames/JSON/" + newValue + ".json"));
                     JSONObject gameinfos = (JSONObject) obj;
-
                     //decide if game is already finished
-                    /*
-                    Strinng gameFinished;
-                    if(gameinfos.containsKey("GameFinished")){
+                    boolean gameFinished = false;
+                    if (gameinfos.containsKey("solved")) {
                         //wenn existiert
-                        gameFinished =   Integer.parseInt(String.valueOf(gameinfos.get("GameFinished")));
+                        gameFinished = true;
                     } else {
                         // If doesn't exist, do nothing
                         //defnine in accordance with collegues
-                        gameFinished = 0;}
-                     If (gamefinisehd != 0){
-                     */
-
-                    HighScoreObject hSO = CreateHighScoreObject.fillListView(gameinfos);
-                    if (hSO == null) {
-                    } else {
-                        higScoreList.add(hSO);
+                        gameFinished = false;
                     }
+                    if (gameFinished == true) {
 
+                        HighScoreObject hSO = CreateHighScoreObject.fillListView(gameinfos);
+                        if (hSO == null) {
+                        } else {
+                            higScoreList.add(hSO);
+                        }
+                    }
                 } catch (IOException | ParseException e) {
-                    e.printStackTrace();
-
+                    logger.warning("" + e);
                 }
 
             }
         }
-        //Sort with the help of implementet comparator
-
+        //Sort with the help of implemented comparator
         Collections.sort(higScoreList, HighScoreObject.aHighScore);
         for (HighScoreObject str : higScoreList) {
             System.out.println(str.getHighScore());
             highScoreGameList.add(str.getGameName()); //+ ": " + str.getHighScore());
         }
-
         ObservableList<HighScoreObject> higScore = FXCollections.observableArrayList(higScoreList); //FXCollections.observableArrayList(higScoreList);
-
 
         return higScore;
     }
 
-
+    /**
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameColumn.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("gameName"));
@@ -130,36 +135,26 @@ public class HighScoreBoardControllerT implements Initializable {
         timeplayed.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("time"));
         gameVersion.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("versionReadable"));
         playerColumn.setCellValueFactory(new PropertyValueFactory<HighScoreObject, String>("player"));
-
         highScore.setItems(getHighscorer());
     }
 
     /**
-     *
+     * Fills the List view in JavaFX file highScore with the values in the observable list
      */
     public void fillListView() {
         //Highscorre column
-        TableColumn<HighScoreObject,Long> scoreColumn= new TableColumn<>("Points");
-        //minimum with scoreColumn.setMinWidth(229)
+        TableColumn<HighScoreObject, Long> scoreColumn = new TableColumn<>("Points");
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("highScore"));
         //Name column
-        TableColumn<HighScoreObject,Long> nameColumn= new TableColumn<>("gameName");
-        //minimum with scoreColumn.setMinWidth(229)
+        TableColumn<HighScoreObject, Long> nameColumn = new TableColumn<>("gameName");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("gameName"));
 
-
-        TableColumn<HighScoreObject,Long> timeplayed= new TableColumn<>("Time Played");
-        //minimum with scoreColumn.setMinWidth(229)
+        TableColumn<HighScoreObject, Long> timeplayed = new TableColumn<>("Time Played");
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("zeit"));
-        TableColumn<HighScoreObject,Long> gameVersion= new TableColumn<>("Type of Playfield");
-        //minimum with scoreColumn.setMinWidth(229)
+        TableColumn<HighScoreObject, Long> gameVersion = new TableColumn<>("Type of Playfield");
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("versionReadable"));
-        TableColumn<HighScoreObject,Long> playerColumn= new TableColumn<>("Player");
-        //minimum with scoreColumn.setMinWidth(229)
+        TableColumn<HighScoreObject, Long> playerColumn = new TableColumn<>("Player");
         scoreColumn.setCellValueFactory(new PropertyValueFactory<>("player"));
-
-
-
 
         highScore = new TableView<>();
         highScore.setItems(getHighscorer());
@@ -167,18 +162,4 @@ public class HighScoreBoardControllerT implements Initializable {
 
     }
 
-
-    public void displaySelected(MouseEvent mouseEvent) {
-        HighScoreObject hSO = highScore.getSelectionModel().getSelectedItem();
-        if(hSO==null){
-            screen.setText("nothinng selected");
-        }else {
-            System.out.println(hSO.getGameName());
-            screen.setText(hSO.getGameName());
-
-
-            label.setText(hSO.getGameName());
-            System.out.println(hSO.getHints());
-        }
-    }
 }

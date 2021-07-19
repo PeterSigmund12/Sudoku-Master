@@ -7,8 +7,12 @@ import org.json.simple.JSONObject;
 
 public class CreateHighScoreObject {
 
+    /**
+     * This method is responsible for taking the individual JSONObjects that have been read in and creating a high
+     * @param gameinfos Contains a JSONObject that was crerated frorm a JSON game File.
+     * @return returns a HighScoreObject
+     */
     public static HighScoreObject fillListView(JSONObject gameinfos) {
-
         Long highScore;
         String gameName;
         Long zeit;
@@ -26,7 +30,6 @@ public class CreateHighScoreObject {
         } else {
             // If doesn't exist, do nothing
             clicks = 0;
-            System.out.println("does not exist c");
         }
         if(gameinfos.containsKey("time")){
             //wenn existiert
@@ -34,7 +37,6 @@ public class CreateHighScoreObject {
         } else {
             // If doesn't exist, do nothing
             zeit = Long.valueOf(0);
-            System.out.println("doesnt exist t");
         }
 
         if(gameinfos.containsKey("hints")){
@@ -43,7 +45,6 @@ public class CreateHighScoreObject {
         } else {
             // If doesn't exist, do nothing
             hints = 0;
-            System.out.println("doesnt exist h");
         }
 
         if(gameinfos.containsKey("difficulty")){
@@ -52,7 +53,6 @@ public class CreateHighScoreObject {
         } else {
             // If doesn't exist, do nothing
             difficulty = "na";
-            System.out.println("doesnt exist d");
         }
 
         if(gameinfos.containsKey("version")){
@@ -61,7 +61,6 @@ public class CreateHighScoreObject {
         } else {
             // If doesn't exist, do nothing
             version = "na";
-            System.out.println("doesnt exist v");
         }
         if(gameinfos.containsKey("player")){
             //wenn existiert
@@ -69,9 +68,7 @@ public class CreateHighScoreObject {
         } else {
             // If doesn't exist, do nothing
             player = "na";
-            System.out.println("player doesnt exist");
         }
-
 
         highScore = CalculateScore.calculateScore( zeit,  clicks,  hints,  difficulty, version);
         HighScoreObject hSO = new HighScoreObject( highScore,  gameName ,  zeit,  clicks,  hints,  difficulty, version, player);
