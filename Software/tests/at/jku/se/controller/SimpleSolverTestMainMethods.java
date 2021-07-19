@@ -1,4 +1,4 @@
-package at.jku.se.controller;
+package at.jku.se.sudokumaster;
 
 import at.jku.se.sudokumaster.SimpleBoard;
 import at.jku.se.sudokumaster.SimpleSolver;

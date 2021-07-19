@@ -31,7 +31,7 @@ public class NewScreenDropDown {
                 logger.warning("" + ex);
             }
             Stage stage = new Stage();
-            stage.setTitle("Load game");
+
             stage.setScene(new Scene(root2));
 
             stage.show();

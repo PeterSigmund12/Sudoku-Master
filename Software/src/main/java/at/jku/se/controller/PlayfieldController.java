@@ -42,6 +42,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -383,7 +384,7 @@ public class PlayfieldController {
         if(generateType.equals("automatisch")) {
             File file = new File(Paths.get("./freiform").toString());
             File[] files = file.listFiles();
-            int random = new Random().nextInt(files.length);
+            int random = new SecureRandom().nextInt(files.length);
             String row = "";
             JSONParser jsonparser = new JSONParser();
             String[] splitRow;
@@ -471,7 +472,7 @@ public class PlayfieldController {
         if (initPerc==0)return textFields;
         int anchorC = 0;
         int anchorR = 0;
-        double size = textFields.length * textFields.length;
+        double size = (double) textFields.length * textFields.length;
         size=(size*(initPerc+new Random().nextInt(9)))/100;
         int value = Math.toIntExact(Math.round(size));
         SimpleBoard solution = initFirstNumbers(textFields);
@@ -567,7 +568,7 @@ public class PlayfieldController {
      * @throws IOException tritt auf wenn ein Error beim schreiben entsteht
      */
     @FXML
-    public void handleButtonSaveGame(ActionEvent event) throws AWTException, IOException {
+    public void handleButtonSaveGame(ActionEvent event)  {
 
         JSONObject saveGame = new JSONObject();
         JSONObject newFreiform = new JSONObject();
@@ -575,8 +576,14 @@ public class PlayfieldController {
         String playerName="";
         Pair<String,String> dialogResult = SaveDialog();
 
-        file = dialogResult.getKey();
-        playerName = dialogResult.getValue();
+        if(dialogResult.getKey() != null){
+            file = dialogResult.getKey();
+            playerName = dialogResult.getValue();
+        }else{
+            file ="";
+            playerName ="";
+        }
+
         String row="";
         SimpleBoard board = h.getCurrentBoard(textFields);
         if(generateType.equals("manuell") && version.equals(BTN_FREIFORM) && isNew) {
@@ -600,11 +607,13 @@ public class PlayfieldController {
                 newFreiform.put("" + rows, row);
             }
 
-            Random random = new Random();
+            SecureRandom  random = new SecureRandom();
             try(
             FileWriter saveFreiform = new FileWriter("freiform/Freiformtyp" + random.nextInt(100) + ".json");
             ){
                 saveFreiform.write(newFreiform.toJSONString());
+            } catch (IOException e) {
+                logger.warning(""+e);
             }
 
         }
@@ -666,6 +675,8 @@ public class PlayfieldController {
         } catch (InterruptedException e) {
             logger.warning(""+e);
             Thread.currentThread().interrupt();
+        } catch (AWTException e) {
+            logger.warning(""+e);
         }
 
     }
@@ -744,6 +755,7 @@ public class PlayfieldController {
                     Thread.sleep(1000); //1 second
                 } catch (InterruptedException e) {
                     logger.warning(""+e);
+                    Thread.currentThread().interrupt();
                 }
                  longtimer = new Date().getTime() - cal.getTime().getTime()-timertesten.getTime();
                 time = simpleDateFormat.format(longtimer);
