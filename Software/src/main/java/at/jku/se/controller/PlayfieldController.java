@@ -471,7 +471,7 @@ public class PlayfieldController {
         if (initPerc==0)return textFields;
         int anchorC = 0;
         int anchorR = 0;
-        double size = textFields.length * textFields.length;
+        double size = (double) textFields.length * textFields.length;
         size=(size*(initPerc+new Random().nextInt(9)))/100;
         int value = Math.toIntExact(Math.round(size));
         SimpleBoard solution = initFirstNumbers(textFields);
@@ -744,6 +744,7 @@ public class PlayfieldController {
                     Thread.sleep(1000); //1 second
                 } catch (InterruptedException e) {
                     logger.warning(""+e);
+                    Thread.currentThread().interrupt();
                 }
                  longtimer = new Date().getTime() - cal.getTime().getTime()-timertesten.getTime();
                 time = simpleDateFormat.format(longtimer);
