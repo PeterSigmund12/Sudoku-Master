@@ -1,4 +1,5 @@
-import at.jku.se.controller.HighScore.CalculateScore;
+package at.jku.se.controller.HighScore;
+
 import at.jku.se.utility.HighScoreObject;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

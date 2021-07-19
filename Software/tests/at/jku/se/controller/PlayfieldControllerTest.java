@@ -16,7 +16,7 @@ public class PlayfieldControllerTest extends ApplicationTest{
 
     @Override
     public void start(Stage stage) throws Exception {
-        //System.out.println(new File("src/main/resources/fxml/mainmenue.fxml").getAbsolutePath());
+
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/newGame.fxml"));
         stage.setTitle("Sudoku Test");
         stage.setScene(new Scene(root));

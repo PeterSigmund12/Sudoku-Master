@@ -67,7 +67,7 @@ public class SimpleSolver {
      * @param anchorR the anchor row
      * @return the boolean
      */
-    boolean validRow(SimpleBoard b, int r,int anchorC, int anchorR){
+    public boolean validRow(SimpleBoard b, int r, int anchorC, int anchorR){
         Set<Integer>num = new HashSet<>(numbers);
         for (int c = 0; c<9;c++){
             int i = 0;
@@ -112,7 +112,7 @@ public class SimpleSolver {
      * @param anchorR the anchor row
      * @return the boolean
      */
-    boolean validColumn(SimpleBoard b, int c,int anchorC, int anchorR){
+    public boolean validColumn(SimpleBoard b, int c, int anchorC, int anchorR){
         Set<Integer>num = new HashSet<>(numbers);
         for (int r= 0; r<9;r++){
             int i = -1;
@@ -155,7 +155,7 @@ public class SimpleSolver {
      * @param anchorR the anchor row
      * @return the boolean
      */
-    boolean validBox(SimpleBoard b, int anchorC, int anchorR){
+    public boolean validBox(SimpleBoard b, int anchorC, int anchorR){
         Set<Integer>num = new HashSet<>(numbers);
         for (int r = 0; r<3;r++){
             for (int c=0;c<3;c++){
@@ -182,7 +182,7 @@ public class SimpleSolver {
      * @param groupId the group id
      * @return the boolean
      */
-    boolean validBox(SimpleBoard b, int groupId){
+    public boolean validBox(SimpleBoard b, int groupId){
         Set<Integer>num = new HashSet<>(numbers);
         for (int r = 0; r<fieldSize;r++){
             for (int c=0;c<fieldSize;c++){

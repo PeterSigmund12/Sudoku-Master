@@ -1,5 +1,7 @@
-package at.jku.se.sudokumaster;
+package at.jku.se.controller;
 
+import at.jku.se.sudokumaster.SimpleBoard;
+import at.jku.se.sudokumaster.SimpleSolver;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

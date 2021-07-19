@@ -29,8 +29,15 @@
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/JSON/test11.json" beforeDir="false" afterPath="$PROJECT_DIR$/savegames/JSON/test11.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegames/img/test11.png" beforeDir="false" afterPath="$PROJECT_DIR$/savegames/img/test11.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestFreeformGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestFreeformGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestMainMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestMainMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestNormalGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestNormalGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestSamuraiGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestSamuraiGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CreateHighScoreObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CreateHighScoreObjectTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/HighScoreObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/HighScoreObjectTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CalculateScoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CalculateScoreTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/at/jku/se/controller/PlayfieldControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/PlayfieldControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,12 +104,16 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.jku.se.controller.HighScore" />
+      <recent name="at.jku.se.controller" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="at.jku.se.controller.HighScore" />
       <recent name="at.jku.se.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PlayfieldControllerTest">
+  <component name="RunManager" selected="JUnit.HighScoreObjectTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -114,20 +125,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SudokuMaster" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="at.jku.se.sudokuMaster.SudokuMaster" />
-      <module name="Sudoku_Master" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.jku.se.sudokuMaster.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CalculateScoreTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CreateHighScoreObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Software" />
       <extension name="coverage">
         <pattern>
@@ -136,37 +134,22 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="at.jku.se.controller.HighScore" />
-      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.HighScore.CalculateScoreTest" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.HighScore.CreateHighScoreObjectTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayfieldControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HighScoreObjectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Software" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.jku.se.controller.*" />
+          <option name="PATTERN" value="at.jku.se.controller.HighScore.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.jku.se.controller" />
-      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.PlayfieldControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Playfield_Controller_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.jku.se.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.jku.se.test" />
-      <option name="MAIN_CLASS_NAME" value="at.jku.se.test.Playfield_Controller_Test" />
+      <option name="PACKAGE_NAME" value="at.jku.se.controller.HighScore" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.HighScore.HighScoreObjectTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -176,12 +159,42 @@
       <module name="Software" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.jku.se.sudokumaster.*" />
+          <option name="PATTERN" value="at.jku.se.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.jku.se.sudokumaster" />
-      <option name="MAIN_CLASS_NAME" value="at.jku.se.sudokumaster.SimpleSolverTestFreeformGame" />
+      <option name="PACKAGE_NAME" value="at.jku.se.controller" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.SimpleSolverTestFreeformGame" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleSolverTestMainMethods" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.jku.se.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.jku.se.controller" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.SimpleSolverTestMainMethods" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleSolverTestNormalGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.jku.se.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.jku.se.controller" />
+      <option name="MAIN_CLASS_NAME" value="at.jku.se.controller.SimpleSolverTestNormalGame" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -189,11 +202,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PlayfieldControllerTest" />
-        <item itemvalue="JUnit.CalculateScoreTest" />
-        <item itemvalue="JUnit.Playfield_Controller_Test" />
+        <item itemvalue="JUnit.HighScoreObjectTest" />
+        <item itemvalue="JUnit.CreateHighScoreObjectTest" />
         <item itemvalue="JUnit.SimpleSolverTestFreeformGame" />
-        <item itemvalue="Application.SudokuMaster" />
+        <item itemvalue="JUnit.SimpleSolverTestMainMethods" />
+        <item itemvalue="JUnit.SimpleSolverTestNormalGame" />
       </list>
     </recent_temporary>
   </component>

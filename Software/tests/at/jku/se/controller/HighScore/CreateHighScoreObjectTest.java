@@ -1,4 +1,5 @@
-import at.jku.se.controller.HighScore.CreateHighScoreObject;
+package at.jku.se.controller.HighScore;
+
 import at.jku.se.utility.HighScoreObject;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
