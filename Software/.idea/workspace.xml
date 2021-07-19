@@ -28,16 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34c09449-f796-4751-b86c-3cdb4534f84e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestFreeformGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestFreeformGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestMainMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestMainMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestNormalGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestNormalGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/sudokumaster/SimpleSolverTestSamuraiGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/SimpleSolverTestSamuraiGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CreateHighScoreObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CreateHighScoreObjectTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/HighScoreObjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/HighScoreObjectTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CalculateScoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/HighScore/CalculateScoreTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/at/jku/se/controller/PlayfieldControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/at/jku/se/controller/PlayfieldControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/controller/LoadGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/jku/se/utility/NewScreenDropDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/jku/se/utility/NewScreenDropDown.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

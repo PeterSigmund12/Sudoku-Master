@@ -30,6 +30,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class LoadGameController implements Initializable {
 
@@ -43,6 +44,8 @@ public class LoadGameController implements Initializable {
     @FXML
     ListView lvSaveGames;
 
+
+    Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     ObservableList<String> saveGameList;
 
     String selected;
@@ -128,9 +131,9 @@ public class LoadGameController implements Initializable {
                 alert.setHeaderText("Eine Datei mit diesem Namen wurde bereits hinzugefügt");
                 alert.showAndWait();
 
-                e.printStackTrace();
+                logger.warning(""+e);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                logger.warning(""+ex);
             }
 
 
@@ -272,7 +275,7 @@ public class LoadGameController implements Initializable {
 
                         fileReader.close();
                     } catch (IOException|ParseException e) {
-                        e.printStackTrace();
+                        logger.warning(""+e);
                     }
             }
         });
