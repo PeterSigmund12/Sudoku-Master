@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"at.jku.se.controller"},{"l":"at.jku.se.controller.HighScore"},{"l":"at.jku.se.sudokumaster"},{"l":"at.jku.se.utility"}]
